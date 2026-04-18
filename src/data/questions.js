@@ -2,7 +2,7 @@ export const questions = [
   {
     id: 1,
     topic: "Privacy Policy",
-    question: "Do you have a privacy policy on your website, Beacons page, or wherever you collect data?",
+    question: "Do you have a privacy policy on your website, link-in-bio page, or wherever you collect data?",
     options: [
       { text: "Yes, and I've reviewed it in the last 12 months", score: 2, color: "green" },
       { text: "Yes, but I haven't reviewed it recently / I used a free generator", score: 1, color: "amber" },

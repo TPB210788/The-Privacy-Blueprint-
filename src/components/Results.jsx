@@ -54,14 +54,16 @@ function getAllFixes(answers) {
 function EmailCapture() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [consent, setConsent] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
   async function handleSubmit(e) {
     e.preventDefault()
-    if (!name.trim() || !email.trim()) { setError('Please fill in both fields.'); return }
+    if (!name.trim() || !email.trim()) { setError('Please fill in your name and email.'); return }
     if (!/\S+@\S+\.\S+/.test(email)) { setError('Please enter a valid email address.'); return }
+    if (!consent) { setError('Please tick the consent box to continue.'); return }
 
     setLoading(true)
     try {
@@ -69,11 +71,15 @@ function EmailCapture() {
         const res = await fetch(FORMSPREE_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ name: name.trim(), email: email.trim() }),
+          body: JSON.stringify({
+            name: name.trim(),
+            email: email.trim(),
+            consent: 'Yes — consented to follow-up guidance',
+          }),
         })
         if (!res.ok) throw new Error('Submission failed')
       } else {
-        console.log('Privacy Health Check lead:', { name: name.trim(), email: email.trim(), timestamp: new Date().toISOString() })
+        console.log('Privacy Health Check lead:', { name: name.trim(), email: email.trim(), consent: true, timestamp: new Date().toISOString() })
       }
       setSubmitted(true)
     } catch {
@@ -106,7 +112,7 @@ function EmailCapture() {
         Want personalised guidance on your results?
       </h3>
       <p className="font-inter text-sm text-charcoal/55 mb-5 leading-relaxed">
-        Leave your details and we'll follow up with tailored next steps for your business — no spam, ever.
+        Leave your details and we'll follow up with tailored next steps for your business.
       </p>
       <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3">
         <div>
@@ -137,16 +143,32 @@ function EmailCapture() {
             className="w-full px-4 py-3 rounded-xl border border-black/15 bg-cream font-inter text-sm text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:ring-2 focus:ring-warm-brown focus:border-transparent transition-all"
           />
         </div>
+
+        {/* Consent checkbox */}
+        <label className="flex items-start gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={consent}
+            onChange={e => { setConsent(e.target.checked); setError('') }}
+            className="mt-0.5 flex-shrink-0 w-4 h-4 rounded border-black/20 accent-warm-brown cursor-pointer"
+          />
+          <span className="font-inter text-xs text-charcoal/60 leading-relaxed">
+            I agree to be contacted by The Privacy Blueprint with personalised guidance based on my results. See our{' '}
+            <a
+              href="https://drive.google.com/file/d/1w9OWxT0R9PaZyOdhVCf1FvXelNLB5Ls6/view?usp=drivesdk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-charcoal/80 transition-colors"
+            >
+              privacy policy
+            </a>.
+          </span>
+        </label>
+
         {error && <p className="font-inter text-xs text-rag-red" role="alert">{error}</p>}
         <button type="submit" disabled={loading} className="btn-primary mt-1">
           {loading ? 'Sending…' : 'Get Follow-Up Guidance →'}
         </button>
-        <p className="font-inter text-xs text-charcoal/35 text-center leading-relaxed">
-          We process your data under UK GDPR — see our{' '}
-          <a href="https://theprivacyblueprint.co.uk/privacy-policy" target="_blank" rel="noopener noreferrer" className="underline hover:text-charcoal/60 transition-colors">
-            privacy policy
-          </a>.
-        </p>
       </form>
     </div>
   )
@@ -155,13 +177,24 @@ function EmailCapture() {
 function BookCTA() {
   return (
     <div className="bg-cream rounded-xl p-5 border border-warm-brown/20">
-      <p className="font-inter text-sm font-semibold text-warm-brown mb-1">Ready to fix this properly?</p>
-      <p className="font-inter text-sm text-charcoal/70 mb-4 leading-relaxed">
-        Book a 60-minute Gap Analysis — a structured review of your compliance position with a clear, prioritised action plan.
+      <p className="font-inter text-sm font-semibold text-warm-brown mb-1">Not sure what actually needs fixing?</p>
+      <p className="font-inter text-sm text-charcoal/70 mb-3 leading-relaxed">
+        I'll review your privacy setup and show you exactly where your risks are and what to fix first.
       </p>
+      <ul className="flex flex-col gap-1 mb-4">
+        {['Personalised feedback', 'Clear next steps', 'No legal jargon'].map(item => (
+          <li key={item} className="flex items-center gap-2 font-inter text-xs text-charcoal/70">
+            <svg className="w-3.5 h-3.5 text-rag-green flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            {item}
+          </li>
+        ))}
+      </ul>
+      <p className="font-inter text-xs text-charcoal/50 mb-4">Results delivered within 48 hours.</p>
       <p className="font-playfair text-3xl font-700 text-charcoal mb-4">£75</p>
       <a
-        href="https://theprivacyblueprint.co.uk/gap-analysis"
+        href="https://shop.beacons.ai/theprivacyblueprint/107a12ce-2d3d-4edd-ae25-ed67a79b2ab6"
         target="_blank"
         rel="noopener noreferrer"
         className="btn-primary inline-block text-sm"
@@ -276,9 +309,9 @@ export default function Results({ answers }) {
 
         {/* Print CTA */}
         <div className="hidden print-show mb-5 p-5 border border-warm-brown/20 rounded-xl">
-          <p className="font-inter text-sm font-semibold text-warm-brown mb-1">Ready to fix this properly?</p>
+          <p className="font-inter text-sm font-semibold text-warm-brown mb-1">Not sure what actually needs fixing?</p>
           <p className="font-inter text-sm text-charcoal/70 leading-relaxed">
-            Book a 60-minute Gap Analysis at theprivacyblueprint.co.uk/gap-analysis — £75
+            Book a GDPR Gap Analysis — personalised feedback, clear next steps, results within 48 hours. £75 at shop.beacons.ai/theprivacyblueprint
           </p>
         </div>
 
