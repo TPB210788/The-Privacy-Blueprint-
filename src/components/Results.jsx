@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { getRagRating, questions } from '../data/questions.js'
 
-// Add your Formspree endpoint here when ready: https://formspree.io/f/xxxxxxxx
-const FORMSPREE_URL = ''
+const FORMSPREE_URL = 'https://formspree.io/f/xqewblbe'
 
 const ragStyles = {
   green: {
