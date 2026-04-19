@@ -6,6 +6,12 @@ export default function Footer() {
       <div className="max-w-xl mx-auto text-center">
         <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center mb-5">
           <Link
+            to="/services"
+            className="font-inter text-xs text-charcoal/50 hover:text-charcoal/70 underline transition-colors"
+          >
+            Services
+          </Link>
+          <Link
             to="/privacy-policy"
             className="font-inter text-xs text-charcoal/50 hover:text-charcoal/70 underline transition-colors"
           >
