@@ -222,12 +222,16 @@ function EmailCapture() {
 function BookCTA() {
   return (
     <div className="bg-cream rounded-xl p-5 border border-warm-brown/20">
-      <p className="font-inter text-sm font-semibold text-warm-brown mb-1">Not sure what actually needs fixing?</p>
+      <p className="font-inter text-sm font-semibold text-warm-brown mb-1">Want a personalised action plan?</p>
       <p className="font-inter text-sm text-charcoal/70 mb-3 leading-relaxed">
-        I'll review your privacy setup and show you exactly where your risks are and what to fix first.
+        The Health Check shows you where you stand. I'll personally review your actual setup and send you a prioritised plan built for your business — so you know exactly what to fix, in what order.
       </p>
       <ul className="flex flex-col gap-1 mb-4">
-        {['Personalised feedback', 'Clear next steps', 'No legal jargon'].map(item => (
+        {[
+          'Manual review of your actual setup',
+          'Prioritised 30/60/90-day action plan',
+          '15-min follow-up call included',
+        ].map(item => (
           <li key={item} className="flex items-center gap-2 font-inter text-xs text-charcoal/70">
             <svg className="w-3.5 h-3.5 text-rag-green flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -236,7 +240,7 @@ function BookCTA() {
           </li>
         ))}
       </ul>
-      <p className="font-inter text-xs text-charcoal/50 mb-4">Results delivered within 48 hours.</p>
+      <p className="font-inter text-xs text-charcoal/50 mb-4">Delivered within 5 working days.</p>
       <p className="font-playfair text-3xl font-700 text-charcoal mb-4">£75</p>
       <a
         href="https://shop.beacons.ai/theprivacyblueprint/107a12ce-2d3d-4edd-ae25-ed67a79b2ab6"
@@ -244,7 +248,7 @@ function BookCTA() {
         rel="noopener noreferrer"
         className="btn-primary inline-block text-sm"
       >
-        Book Your Gap Analysis →
+        Get Your Action Plan — £75 →
       </a>
     </div>
   )
@@ -357,7 +361,7 @@ export default function Results({ answers }) {
         <div className="hidden print-show mb-5 p-5 border border-warm-brown/20 rounded-xl">
           <p className="font-inter text-sm font-semibold text-warm-brown mb-1">Not sure what actually needs fixing?</p>
           <p className="font-inter text-sm text-charcoal/70 leading-relaxed">
-            Book a GDPR Gap Analysis — personalised feedback, clear next steps, results within 48 hours. £75 at shop.beacons.ai/theprivacyblueprint
+            Get a personalised Action Plan — manual review, 30/60/90-day priorities, 15-min call included. £75 at shop.beacons.ai/theprivacyblueprint
           </p>
         </div>
 
