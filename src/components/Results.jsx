@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { getRagRating, questions } from '../data/questions.js'
+import Footer from './Footer.jsx'
 
 const FORMSPREE_URL = 'https://formspree.io/f/xqewblbe'
 
@@ -55,6 +57,7 @@ function EmailCapture() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [consent, setConsent] = useState(false)
+  const [infoOpen, setInfoOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -91,16 +94,26 @@ function EmailCapture() {
 
   if (submitted) {
     return (
-      <div className="card text-center no-print">
-        <div className="w-12 h-12 rounded-full bg-rag-green-bg flex items-center justify-center mx-auto mb-4">
-          <svg className="w-6 h-6 text-rag-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
+      <div className="card no-print">
+        <div className="text-center mb-6">
+          <div className="w-12 h-12 rounded-full bg-rag-green-bg flex items-center justify-center mx-auto mb-4">
+            <svg className="w-6 h-6 text-rag-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h3 className="font-playfair text-xl text-charcoal mb-3">Got it — we'll be in touch!</h3>
+          <div className="bg-cream rounded-xl p-4 border border-black/8 text-left space-y-2">
+            <p className="font-inter text-sm text-charcoal/70 leading-relaxed">
+              You've agreed to be contacted by The Privacy Blueprint based on your privacy health check results.
+            </p>
+            <p className="font-inter text-xs text-charcoal/50 leading-relaxed">
+              You can withdraw consent at any time by emailing{' '}
+              <a href="mailto:hello@theprivacyblueprint.co.uk" className="text-warm-brown underline">
+                hello@theprivacyblueprint.co.uk
+              </a>.
+            </p>
+          </div>
         </div>
-        <h3 className="font-playfair text-xl text-charcoal mb-2">Got it — we'll be in touch!</h3>
-        <p className="font-inter text-sm text-charcoal/60 mb-6 leading-relaxed">
-          Thanks for completing the check. We'll follow up with personalised next steps shortly.
-        </p>
         <BookCTA />
       </div>
     )
@@ -154,16 +167,48 @@ function EmailCapture() {
           />
           <span className="font-inter text-xs text-charcoal/60 leading-relaxed">
             I agree to be contacted by The Privacy Blueprint with personalised guidance based on my results. See our{' '}
-            <a
-              href="https://drive.google.com/file/d/1w9OWxT0R9PaZyOdhVCf1FvXelNLB5Ls6/view?usp=drivesdk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-charcoal/80 transition-colors"
-            >
+            <Link to="/privacy-policy" className="underline hover:text-charcoal/80 transition-colors">
               privacy policy
-            </a>.
+            </Link>.
           </span>
         </label>
+
+        {/* Expandable data usage info */}
+        <button
+          type="button"
+          onClick={() => setInfoOpen(o => !o)}
+          className="flex items-center gap-1.5 font-inter text-xs text-warm-brown hover:text-warm-brown-dark transition-colors"
+        >
+          <span>How we'll use your data</span>
+          <svg
+            className={`w-3 h-3 transition-transform duration-200 ${infoOpen ? 'rotate-180' : ''}`}
+            fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        {infoOpen && (
+          <div className="bg-cream rounded-xl p-4 border border-black/10 space-y-2">
+            {[
+              ['Controller', 'The Privacy Blueprint'],
+              ['Purpose', 'To provide personalised privacy guidance based on your results'],
+              ['Lawful basis', 'Consent'],
+              ['Retention', 'We\'ll keep your details for 12 months unless you ask us to delete them'],
+              ['Your rights', 'You can access, correct, delete your data or withdraw consent at any time by emailing hello@theprivacyblueprint.co.uk'],
+            ].map(([label, value]) => (
+              <p key={label} className="font-inter text-xs text-charcoal/65 leading-relaxed">
+                <span className="font-semibold text-charcoal/80">{label}:</span> {value}
+              </p>
+            ))}
+            <p className="font-inter text-xs text-charcoal/65 leading-relaxed">
+              You have the right to complain to the ICO at{' '}
+              <a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer" className="underline text-warm-brown">
+                ico.org.uk
+              </a>.
+            </p>
+          </div>
+        )}
 
         {error && <p className="font-inter text-xs text-rag-red" role="alert">{error}</p>}
         <button type="submit" disabled={loading} className="btn-primary mt-1">
@@ -214,7 +259,8 @@ export default function Results({ answers }) {
   const reportDate = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
 
   return (
-    <div className="min-h-screen flex flex-col items-center px-4 py-12">
+    <>
+    <div className="min-h-screen flex flex-col items-center px-4 py-12 bg-cream">
       <div className="w-full max-w-xl">
 
         {/* Print header — only visible when printing */}
@@ -333,5 +379,7 @@ export default function Results({ answers }) {
 
       </div>
     </div>
+    <Footer />
+    </>
   )
 }
