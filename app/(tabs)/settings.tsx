@@ -20,7 +20,7 @@ async function scheduleWeeklyReminder(hour: number, minute: number) {
   await Notifications.cancelAllScheduledNotificationsAsync();
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: 'Time for your Sunday Reset 🌿',
+      title: 'Time for your Weekly Reset 🌿',
       body: 'Take 15 minutes to close out the week and step into the next one with clarity.',
     },
     trigger: {
@@ -186,7 +186,7 @@ export default function SettingsScreen() {
         </View>
         <Card style={styles.card}>
           <View style={styles.row}>
-            <Text style={styles.rowTitle}>Ritual: Sunday Reset</Text>
+            <Text style={styles.rowTitle}>Ritual: Weekly Reset</Text>
             <Text style={styles.rowSub}>Version 1.0.0</Text>
           </View>
           <Text style={styles.aboutText}>

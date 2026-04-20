@@ -117,7 +117,7 @@ export default function HomeScreen() {
       >
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.appName}>Ritual: Sunday Reset</Text>
+          <Text style={styles.appName}>Ritual: Weekly Reset</Text>
           <Text style={styles.greeting}>{getGreeting()}</Text>
         </View>
 
