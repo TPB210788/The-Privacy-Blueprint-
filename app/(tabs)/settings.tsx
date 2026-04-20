@@ -186,7 +186,7 @@ export default function SettingsScreen() {
         </View>
         <Card style={styles.card}>
           <View style={styles.row}>
-            <Text style={styles.rowTitle}>Ritual</Text>
+            <Text style={styles.rowTitle}>Ritual: Sunday Reset</Text>
             <Text style={styles.rowSub}>Version 1.0.0</Text>
           </View>
           <Text style={styles.aboutText}>
