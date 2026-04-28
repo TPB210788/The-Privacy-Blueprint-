@@ -73,7 +73,7 @@ function EmailCapture({ answers }) {
     const rag = getRagRating(total)
     const breakdown = Object.fromEntries(
       answers.map((score, i) => [
-        `Q${i + 1} — ${questions[i].topic}`,
+        `Q${i + 1}: ${questions[i].topic}`,
         `${scoreToLabel(score)} (${score}/2)`,
       ])
     )
@@ -87,7 +87,7 @@ function EmailCapture({ answers }) {
           body: JSON.stringify({
             name: name.trim(),
             email: email.trim(),
-            consent: 'Yes — consented to follow-up guidance',
+            consent: 'Yes, consented to follow-up guidance',
             'Overall Score': `${total}/${maxScore}`,
             'Overall Rating': `${rag.label}`,
             ...breakdown,
@@ -99,7 +99,7 @@ function EmailCapture({ answers }) {
       }
       setSubmitted(true)
     } catch {
-      setError('Something went wrong — please try again.')
+      setError('Something went wrong. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -114,7 +114,7 @@ function EmailCapture({ answers }) {
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h3 className="font-playfair text-xl text-charcoal mb-3">Got it — we'll be in touch!</h3>
+          <h3 className="font-playfair text-xl text-charcoal mb-3">Got it! We'll be in touch.</h3>
           <div className="bg-cream rounded-xl p-4 border border-black/8 text-left space-y-2">
             <p className="font-inter text-sm text-charcoal/70 leading-relaxed">
               You've agreed to be contacted by The Privacy Blueprint based on your privacy health check results.
@@ -237,7 +237,7 @@ function BookCTA() {
     <div className="bg-cream rounded-xl p-5 border border-warm-brown/20">
       <p className="font-inter text-sm font-semibold text-warm-brown mb-1">Want a personalised action plan?</p>
       <p className="font-inter text-sm text-charcoal/70 mb-3 leading-relaxed">
-        The Health Check shows you where you stand. I'll personally review your actual setup and send you a prioritised plan built for your business — so you know exactly what to fix, in what order.
+        The Health Check shows you where you stand. I'll personally review your actual setup and send you a prioritised plan built for your business, so you know exactly what to fix and in what order.
       </p>
       <ul className="flex flex-col gap-1 mb-4">
         {[
@@ -261,7 +261,7 @@ function BookCTA() {
         rel="noopener noreferrer"
         className="btn-primary inline-block text-sm"
       >
-        Get Your Action Plan — £75 →
+        Get Your Action Plan for £75 →
       </a>
     </div>
   )
@@ -337,7 +337,7 @@ export default function Results({ answers }) {
           <div className="card mb-5">
             <h3 className="font-playfair text-xl text-charcoal mb-1">Your Action Plan</h3>
             <p className="font-inter text-xs text-charcoal/45 mb-4">
-              {allFixes.length} area{allFixes.length !== 1 ? 's' : ''} to address — red items are highest priority
+              {allFixes.length} area{allFixes.length !== 1 ? 's' : ''} to address. Red items are highest priority.
             </p>
             <div className="flex flex-col gap-3">
               {allFixes.map((fix, i) => (
@@ -358,7 +358,7 @@ export default function Results({ answers }) {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="font-playfair text-xl text-charcoal mb-2">Excellent — no critical gaps found</h3>
+            <h3 className="font-playfair text-xl text-charcoal mb-2">Excellent. No critical gaps found.</h3>
             <p className="font-inter text-sm text-charcoal/60 leading-relaxed">
               You've scored full marks across all areas. Keep reviewing your policies annually to stay compliant.
             </p>
@@ -374,7 +374,7 @@ export default function Results({ answers }) {
         <div className="hidden print-show mb-5 p-5 border border-warm-brown/20 rounded-xl">
           <p className="font-inter text-sm font-semibold text-warm-brown mb-1">Not sure what actually needs fixing?</p>
           <p className="font-inter text-sm text-charcoal/70 leading-relaxed">
-            Get a personalised Action Plan — manual review, 30/60/90-day priorities, 15-min call included. £75 at shop.beacons.ai/theprivacyblueprint
+            Get a personalised Action Plan: manual review, 30/60/90-day priorities, 15-min call included. £75 at shop.beacons.ai/theprivacyblueprint
           </p>
         </div>
 

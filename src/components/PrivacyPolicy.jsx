@@ -145,25 +145,25 @@ export default function PrivacyPolicy() {
           {/* 5 ── Our Lawful Basis for Processing (NEW) */}
           <Section title="Our Lawful Basis for Processing">
             <P>
-              Under UK GDPR, we must have a valid legal reason — known as a "lawful basis" — for processing your personal data. Below we explain the lawful basis we rely on for each activity:
+              Under UK GDPR, we must have a valid legal reason (known as a "lawful basis") for processing your personal data. Below we explain the lawful basis we rely on for each activity:
             </P>
             <div className="space-y-2">
-              <Bold label="Delivering products and services you have purchased — Contract">
+              <Bold label="Delivering products and services you have purchased (Contract)">
                 We need to process your data to fulfil our agreement with you.
               </Bold>
-              <Bold label="Processing payments — Contract and Legal Obligation">
+              <Bold label="Processing payments (Contract and Legal Obligation)">
                 We need to process your payment to deliver your purchase, and we are legally required to retain transactional records for tax and accounting purposes.
               </Bold>
-              <Bold label="Responding to enquiries — Legitimate Interests">
+              <Bold label="Responding to enquiries (Legitimate Interests)">
                 It is in our legitimate interest to respond to people who contact us about our services. We have considered your rights and interests and do not believe this processing overrides them.
               </Bold>
-              <Bold label="Sending marketing communications — Consent">
+              <Bold label="Sending marketing communications (Consent)">
                 We only send marketing emails to people who have given us their explicit, opt-in consent. You can withdraw this consent at any time by clicking "unsubscribe" in any email or contacting us directly.
               </Bold>
-              <Bold label="Improving our services and understanding how our platforms are used — Legitimate Interests">
+              <Bold label="Improving our services and understanding how our platforms are used (Legitimate Interests)">
                 It is in our legitimate interest to understand how visitors use our platforms so we can improve our services. We use privacy-respectful analytics and do not build individual profiles.
               </Bold>
-              <Bold label="Complying with legal obligations — Legal Obligation">
+              <Bold label="Complying with legal obligations (Legal Obligation)">
                 We may need to process and retain certain data to meet our legal and regulatory obligations, including tax, accounting, and responding to lawful requests from authorities.
               </Bold>
             </div>
@@ -229,7 +229,7 @@ export default function PrivacyPolicy() {
               />
               <Processor
                 name="PayPal"
-                description="Payment processor used to take payments for our products and services. When you purchase from us, PayPal processes your payment details directly — we do not see or store your card information."
+                description="Payment processor used to take payments for our products and services. When you purchase from us, PayPal processes your payment details directly. We do not see or store your card information."
                 location="Luxembourg (for UK/EU customers)"
                 policyUrl="https://www.paypal.com/uk/legalhub/privacy-full"
               />
@@ -304,9 +304,9 @@ export default function PrivacyPolicy() {
               <Bold label="The Right to Erasure">Also known as the Right to be Forgotten. You have the right to request that we delete your personal data, subject to certain legal exceptions.</Bold>
               <Bold label="The Right to Restrict Processing">You have the right to ask us to pause or restrict the processing of your personal data in certain circumstances.</Bold>
               <Bold label="The Right to Data Portability">You have the right to request that we provide your personal data in a structured, commonly used, machine-readable format so you can transfer it to another service provider.</Bold>
-              <Bold label="The Right to Object">You have the right to object to the processing of your personal data at any time where we rely on legitimate interests as our legal basis. You have an absolute right to object to your data being used for direct marketing purposes — we must stop immediately upon receiving your objection.</Bold>
+              <Bold label="The Right to Object">You have the right to object to the processing of your personal data at any time where we rely on legitimate interests as our legal basis. You have an absolute right to object to your data being used for direct marketing purposes. We must stop immediately upon receiving your objection.</Bold>
               <Bold label="The Right to Withdraw Consent">
-                Where we process your personal data based on your consent — for example, to send you marketing communications — you have the right to withdraw that consent at any time. Withdrawing consent is as easy as giving it. You can do this by clicking unsubscribe in any marketing email or by contacting us at{' '}
+                Where we process your personal data based on your consent (for example, to send you marketing communications), you have the right to withdraw that consent at any time. Withdrawing consent is as easy as giving it. You can do this by clicking unsubscribe in any marketing email or by contacting us at{' '}
                 <ExtLink href="mailto:hello@theprivacyblueprint.co.uk">hello@theprivacyblueprint.co.uk</ExtLink>.
                 {' '}Withdrawing consent does not affect the lawfulness of any processing we carried out before you withdrew it.
               </Bold>
@@ -329,7 +329,7 @@ export default function PrivacyPolicy() {
             ]} />
             <P>Most small businesses are not legally required to appoint a DPO.</P>
             <P>We have not appointed a formal Data Protection Officer as this is not currently required for our scale of processing. All data protection queries should be directed to:</P>
-            <P>The Privacy Blueprint — <ExtLink href="mailto:hello@theprivacyblueprint.co.uk">hello@theprivacyblueprint.co.uk</ExtLink></P>
+            <P>The Privacy Blueprint: <ExtLink href="mailto:hello@theprivacyblueprint.co.uk">hello@theprivacyblueprint.co.uk</ExtLink></P>
           </Section>
 
           {/* 13 ── Your Right to Lodge a Complaint */}

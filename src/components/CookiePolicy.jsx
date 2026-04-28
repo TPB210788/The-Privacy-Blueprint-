@@ -74,8 +74,8 @@ export default function CookiePolicy() {
             <div className="space-y-3">
               <CookieRow
                 name="No first-party cookies"
-                purpose="This app stores your quiz answers in React memory only — it is cleared when you close or refresh the page. No cookies, localStorage, or sessionStorage are written by the app itself."
-                duration="N/A — in-memory only"
+                purpose="This app stores your quiz answers in React memory only. It is cleared when you close or refresh the page. No cookies, localStorage, or sessionStorage are written by the app itself."
+                duration="N/A (in-memory only)"
                 type="Strictly Necessary"
               />
               <CookieRow
@@ -93,7 +93,7 @@ export default function CookiePolicy() {
               <CookieRow
                 name="Formspree"
                 purpose="When you submit the contact form, your name and email are sent to Formspree via a secure API call. Formspree does not set any cookies in your browser. Your data is processed by Formspree in accordance with their privacy policy."
-                duration="N/A — no cookie set"
+                duration="N/A (no cookie set)"
                 type="Strictly Necessary"
               />
             </div>
@@ -101,7 +101,7 @@ export default function CookiePolicy() {
             <div className="bg-rag-green-bg border border-rag-green/20 rounded-xl p-4 mt-2">
               <p className="font-inter text-sm font-semibold text-rag-green mb-1">Summary</p>
               <p className="font-inter text-sm text-charcoal/70 leading-relaxed">
-                This app sets <strong>no first-party cookies</strong>. The only third-party data transfer is Google Fonts. If you wish to eliminate this entirely, fonts can be self-hosted — contact us if you'd like this change made.
+                This app sets <strong>no first-party cookies</strong>. The only third-party data transfer is Google Fonts. If you wish to eliminate this entirely, fonts can be self-hosted. Contact us if you would like this change made.
               </p>
             </div>
           </Section>

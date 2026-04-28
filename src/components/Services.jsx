@@ -112,7 +112,7 @@ export default function Services() {
               Clear, practical GDPR support for online businesses, creators, and agencies.
             </p>
             <p className="font-inter text-sm text-charcoal/65 leading-relaxed">
-              Whether you're setting up your data protection foundations for the first time, or you need ongoing expert support as your business grows — there's a package built for where you are right now. Every engagement starts with a free 20-minute discovery call.
+              Whether you're setting up your data protection foundations for the first time, or you need ongoing expert support as your business grows, there's a package built for where you are right now. Every engagement starts with a free 20-minute discovery call.
             </p>
           </div>
 
@@ -122,10 +122,10 @@ export default function Services() {
               tag="Package 01"
               title="GDPR Setup & Foundation"
               bestFor="Early-stage and growing businesses building structured GDPR foundations from day one."
-              overview="A streamlined package designed to help emerging online businesses, creators, and agencies establish a strong, practical foundation for data protection compliance — without the legal jargon or the big-agency price tag."
+              overview="A streamlined package designed to help emerging online businesses, creators, and agencies establish a strong, practical foundation for data protection compliance, without the legal jargon or the big-agency price tag."
               included={[
                 'GDPR Gap Assessment',
-                'Core Policy Development — Privacy Policy, Cookie Policy, Internal Data Handling Policy',
+                'Core Policy Development: Privacy Policy, Cookie Policy, and Internal Data Handling Policy',
                 'ICO Registration Support',
                 'Basic Record of Processing Activities (ROPA)',
                 'One follow-up call to walk through everything',
@@ -139,7 +139,7 @@ export default function Services() {
               tag="Package 02"
               title="Fractional Privacy Partner"
               bestFor="Growing businesses that need ongoing data protection support without hiring in-house."
-              overview="A flexible, continuous support package providing expert oversight and strategic guidance as your data operations evolve. Think of it as having a privacy lead on your team — without the full-time cost."
+              overview="A flexible, continuous support package providing expert oversight and strategic guidance as your data operations evolve. Think of it as having a privacy lead on your team, without the full-time cost."
               included={[
                 'Monthly Data Protection Oversight',
                 'DPIA Review and ROPA Maintenance',
@@ -147,7 +147,7 @@ export default function Services() {
                 'Dedicated support for DSARs and data incidents',
                 'Flexible retainer from 3 hours per month',
               ]}
-              outcome="Stay compliant as you grow — without the cost and commitment of hiring in-house."
+              outcome="Stay compliant as you grow, without the cost and commitment of hiring in-house."
               delivery="Ongoing monthly retainer (3-month minimum)"
               investment="From £450/month"
             />
@@ -159,7 +159,7 @@ export default function Services() {
               Not sure which one is right for you?
             </h2>
             <p className="font-inter text-sm text-charcoal/65 leading-relaxed mb-6 max-w-lg mx-auto">
-              Every engagement starts with a free 20-minute discovery call. We'll talk through your business, your current setup, and the best path forward — no pressure, no sales pitch.
+              Every engagement starts with a free 20-minute discovery call. We'll talk through your business, your current setup, and the best path forward. No pressure, no sales pitch.
             </p>
             <BookingLink className="btn-primary inline-block">
               Book Your Free Call →

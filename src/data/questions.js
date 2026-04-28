@@ -10,7 +10,7 @@ export const questions = [
     ],
     fixes: {
       red: "You need a privacy policy. It's a legal requirement under UK GDPR if you collect any personal data.",
-      amber: "Review and update your privacy policy — outdated or generic policies often miss key requirements.",
+      amber: "Review and update your privacy policy. Outdated or generic policies often miss key requirements.",
     },
   },
   {
@@ -24,7 +24,7 @@ export const questions = [
     ],
     fixes: {
       red: "Add a compliant cookie banner to your website with both accept and decline options.",
-      amber: "Your banner needs a clear 'decline' option — consent must be as easy to refuse as to give.",
+      amber: "Your banner needs a clear 'decline' option. Consent must be as easy to refuse as to give.",
     },
   },
   {
@@ -37,7 +37,7 @@ export const questions = [
       { text: "No", score: 0, color: "red" },
     ],
     fixes: {
-      red: "Map your data — you can't protect what you haven't identified. Start with a simple audit.",
+      red: "Map your data. You can't protect what you haven't identified. Start with a simple audit.",
       amber: "Document your data flows properly. Informal knowledge doesn't meet UK GDPR's accountability requirement.",
     },
   },
@@ -51,7 +51,7 @@ export const questions = [
       { text: "I don't know what a lawful basis is", score: 0, color: "red" },
     ],
     fixes: {
-      red: "Identify a lawful basis for every type of data you process — this is a core UK GDPR requirement.",
+      red: "Identify a lawful basis for every type of data you process. This is a core UK GDPR requirement.",
       amber: "Complete your lawful basis mapping across all data types, not just some.",
     },
   },
@@ -66,7 +66,7 @@ export const questions = [
     ],
     fixes: {
       red: "Stop emailing contacts who didn't opt in. Clean your list and rebuild with proper consent.",
-      amber: "Audit your email list — remove any contacts who didn't actively opt in to marketing.",
+      amber: "Audit your email list and remove any contacts who didn't actively opt in to marketing.",
     },
   },
   {
@@ -80,7 +80,7 @@ export const questions = [
     ],
     fixes: {
       red: "You need Data Processing Agreements with every tool that handles your customers' data.",
-      amber: "Complete your DPA coverage — partial compliance leaves you exposed if a processor has a breach.",
+      amber: "Complete your DPA coverage. Partial compliance leaves you exposed if a processor has a breach.",
     },
   },
   {
@@ -93,7 +93,7 @@ export const questions = [
       { text: "No", score: 0, color: "red" },
     ],
     fixes: {
-      red: "Build a DSAR process now. You have 30 days to respond — not enough time to figure it out under pressure.",
+      red: "Build a DSAR process now. You have 30 days to respond and you won't have time to figure it out under pressure.",
       amber: "Document your DSAR process. 'Figuring it out' fails under the 30-day deadline.",
     },
   },
@@ -107,7 +107,7 @@ export const questions = [
       { text: "No", score: 0, color: "red" },
     ],
     fixes: {
-      red: "Register with the ICO and pay your data protection fee — it's a legal requirement and non-registration is publicly searchable.",
+      red: "Register with the ICO and pay your data protection fee. It's a legal requirement and non-registration is publicly searchable.",
       amber: "Check if you need to register on the ICO's website. Most businesses handling personal data do.",
     },
   },
@@ -136,15 +136,15 @@ export const questions = [
     ],
     fixes: {
       red: "Set retention periods for each data type. Holding data indefinitely is a UK GDPR breach.",
-      amber: "Document your retention policy formally — informal rules don't meet accountability standards.",
+      amber: "Document your retention policy formally. Informal rules don't meet accountability standards.",
     },
   },
 ]
 
 export function getRagRating(score) {
-  if (score >= 15) return { label: "Green", color: "green", message: "Strong foundations — you're doing well on the basics. A few gaps remain worth addressing to stay fully compliant." }
+  if (score >= 15) return { label: "Green", color: "green", message: "Strong foundations. You're doing well on the basics. A few gaps remain worth addressing to stay fully compliant." }
   if (score >= 8) return { label: "Amber", color: "amber", message: "Some compliance in place, but meaningful gaps remain. Addressing these now is far less costly than an ICO complaint later." }
-  return { label: "Red", color: "red", message: "Significant compliance gaps identified. These are legal risks, not just best practice — prioritise action as soon as possible." }
+  return { label: "Red", color: "red", message: "Significant compliance gaps identified. These are legal risks, not just best practice. Prioritise action as soon as possible." }
 }
 
 export function getPriorityFixes(answers) {

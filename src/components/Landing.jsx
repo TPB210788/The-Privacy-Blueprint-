@@ -14,7 +14,7 @@ export default function Landing({ onStart }) {
           </h1>
 
           <p className="font-inter text-base sm:text-lg text-charcoal/70 leading-relaxed mb-10 max-w-md mx-auto">
-            Find out how well your business is protecting personal data under UK GDPR — in under 5 minutes.
+            Find out how well your business is protecting personal data under UK GDPR. Takes under 5 minutes.
           </p>
 
           <button onClick={onStart} className="btn-primary text-base sm:text-lg w-full sm:w-auto">
