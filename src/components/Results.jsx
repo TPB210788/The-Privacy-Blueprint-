@@ -53,7 +53,7 @@ function getAllFixes(answers) {
     }))
 }
 
-function EmailCapture() {
+function EmailCapture({ answers }) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [consent, setConsent] = useState(false)
@@ -68,6 +68,16 @@ function EmailCapture() {
     if (!/\S+@\S+\.\S+/.test(email)) { setError('Please enter a valid email address.'); return }
     if (!consent) { setError('Please tick the consent box to continue.'); return }
 
+    const total = answers.reduce((sum, s) => sum + s, 0)
+    const maxScore = answers.length * 2
+    const rag = getRagRating(total)
+    const breakdown = Object.fromEntries(
+      answers.map((score, i) => [
+        `Q${i + 1} — ${questions[i].topic}`,
+        `${scoreToLabel(score)} (${score}/2)`,
+      ])
+    )
+
     setLoading(true)
     try {
       if (FORMSPREE_URL) {
@@ -78,11 +88,14 @@ function EmailCapture() {
             name: name.trim(),
             email: email.trim(),
             consent: 'Yes — consented to follow-up guidance',
+            'Overall Score': `${total}/${maxScore}`,
+            'Overall Rating': `${rag.label}`,
+            ...breakdown,
           }),
         })
         if (!res.ok) throw new Error('Submission failed')
       } else {
-        console.log('Privacy Health Check lead:', { name: name.trim(), email: email.trim(), consent: true, timestamp: new Date().toISOString() })
+        console.log('Privacy Health Check lead:', { name: name.trim(), email: email.trim(), total, rating: rag.label, breakdown })
       }
       setSubmitted(true)
     } catch {
@@ -379,7 +392,7 @@ export default function Results({ answers }) {
         </div>
 
         {/* ── Section 5: Email capture ── */}
-        <EmailCapture />
+        <EmailCapture answers={answers} />
 
       </div>
     </div>

@@ -30,9 +30,6 @@ export default function Footer() {
             hello@theprivacyblueprint.co.uk
           </a>
         </div>
-        <p className="font-inter text-xs text-charcoal/35 mb-1">
-          The Privacy Blueprint is a trading name of Ines Carlitos
-        </p>
         <p className="font-inter text-xs text-charcoal/35 mb-3">
           ICO Registration: C1883894
         </p>
