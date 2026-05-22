@@ -1,0 +1,522 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ─── Enums ────────────────────────────────────────────────
+
+enum OrgType {
+  AGENCY
+  BUSINESS
+}
+
+enum OrgRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum WorkspaceStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+enum WorkspaceRole {
+  ADMIN
+  VIEWER
+}
+
+enum PlanTier {
+  BUSINESS_STARTER
+  AGENCY_STARTER
+  AGENCY_GROWTH
+  AGENCY_SCALE
+}
+
+enum SubStatus {
+  TRIALING
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  UNPAID
+}
+
+enum LegalBasis {
+  CONSENT
+  CONTRACT
+  LEGAL_OBLIGATION
+  VITAL_INTERESTS
+  PUBLIC_TASK
+  LEGITIMATE_INTERESTS
+}
+
+enum ControllerRole {
+  CONTROLLER
+  PROCESSOR
+  JOINT_CONTROLLER
+}
+
+enum ActivityStatus {
+  ACTIVE
+  ARCHIVED
+  NEEDS_REVIEW
+}
+
+enum DpiaStatus {
+  DRAFT
+  IN_REVIEW
+  COMPLETED
+  ARCHIVED
+}
+
+enum ScreeningResult {
+  REQUIRED
+  RECOMMENDED
+  NOT_REQUIRED
+}
+
+enum SecurityClass {
+  PUBLIC
+  INTERNAL
+  CONFIDENTIAL
+  RESTRICTED
+}
+
+enum AssetStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+enum VendorRole {
+  PROCESSOR
+  JOINT_CONTROLLER
+  INDEPENDENT_CONTROLLER
+}
+
+enum DpaStatus {
+  IN_PLACE
+  PENDING
+  NOT_IN_PLACE
+}
+
+enum TransferSafeguard {
+  SCC
+  ADEQUACY_DECISION
+  BCR
+  DEROGATION
+  NONE
+}
+
+enum AssessmentStatus {
+  APPROVED
+  APPROVED_WITH_CONDITIONS
+  NOT_APPROVED
+  PENDING
+}
+
+enum PolicyType {
+  PRIVACY_POLICY
+  COOKIE_POLICY
+  TERMS_OF_SERVICE
+  DPA
+  NDA
+}
+
+enum DocStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum DsrType {
+  ACCESS
+  DELETION
+  RECTIFICATION
+  PORTABILITY
+  OBJECTION
+}
+
+enum DsrStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  REJECTED
+}
+
+enum OnboardingStatus {
+  IN_PROGRESS
+  COMPLETED
+}
+
+// ─── Identity & Access ────────────────────────────────────
+
+model User {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique
+  email     String   @unique
+  name      String?
+  avatarUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orgMemberships       OrganizationMembership[]
+  workspaceMemberships WorkspaceMembership[]
+  handledDsrs          DsrRequest[]             @relation("HandledBy")
+  approvedDpias        Dpia[]                   @relation("ApprovedBy")
+}
+
+model Organization {
+  id              String   @id @default(cuid())
+  clerkOrgId      String   @unique
+  name            String
+  type            OrgType  @default(AGENCY)
+  logoUrl         String?
+  agencyBrandName String?
+  websiteUrl      String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  billing     Subscription?
+  memberships OrganizationMembership[]
+  workspaces  Workspace[]
+  agencyDpas  AgencyDpa[]
+}
+
+model OrganizationMembership {
+  id             String   @id @default(cuid())
+  userId         String
+  organizationId String
+  role           OrgRole  @default(MEMBER)
+  createdAt      DateTime @default(now())
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId])
+  @@index([organizationId])
+}
+
+model Workspace {
+  id              String          @id @default(cuid())
+  organizationId  String
+  name            String
+  slug            String          @unique
+  isAgencyOwn     Boolean         @default(false)
+  clientEmail     String?
+  businessType    String?
+  jurisdiction    String[]        @default([])
+  websiteUrl      String?
+  status          WorkspaceStatus @default(ACTIVE)
+  complianceScore Int?
+  scoreUpdatedAt  DateTime?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  organization         Organization          @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  memberships          WorkspaceMembership[]
+  processingActivities ProcessingActivity[]
+  dpias                Dpia[]
+  dsrRequests          DsrRequest[]
+  vendors              Vendor[]
+  dataAssets           DataAsset[]
+  policyDocuments      PolicyDocument[]
+  cookieBanner         CookieBanner?
+  complianceChecklist  ComplianceChecklist?
+  complianceReports    ComplianceReport[]
+  agencyDpa            AgencyDpa?
+  onboardingSession    OnboardingSession?
+
+  @@index([organizationId])
+  @@index([slug])
+}
+
+model WorkspaceMembership {
+  id          String        @id @default(cuid())
+  userId      String
+  workspaceId String
+  role        WorkspaceRole @default(VIEWER)
+  createdAt   DateTime      @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, workspaceId])
+  @@index([workspaceId])
+}
+
+// ─── Billing ──────────────────────────────────────────────
+
+model Subscription {
+  id                   String    @id @default(cuid())
+  organizationId       String    @unique
+  stripeCustomerId     String    @unique
+  stripeSubscriptionId String?   @unique
+  planTier             PlanTier  @default(AGENCY_STARTER)
+  status               SubStatus @default(TRIALING)
+  workspaceLimit       Int       @default(5)
+  currentPeriodStart   DateTime?
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean   @default(false)
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+}
+
+// ─── ROPA — Processing Activities ─────────────────────────
+
+model ProcessingActivity {
+  id                       String          @id @default(cuid())
+  workspaceId              String
+  name                     String
+  description              String?
+  purpose                  String?
+  legalBasis               LegalBasis?
+  legalBasisNotes          String?
+  dataSubjectCategories    String[]        @default([])
+  personalDataCategories   String[]        @default([])
+  sensitiveDataCategories  String[]        @default([])
+  recipients               String[]        @default([])
+  internationalTransfers   Boolean         @default(false)
+  transferCountries        String[]        @default([])
+  transferSafeguards       String?
+  retentionPeriod          String?
+  deletionProcess          String?
+  securityMeasures         String?
+  controllerDesignation    ControllerRole?
+  status                   ActivityStatus  @default(ACTIVE)
+  autoSuggested            Boolean         @default(false)
+  sourceVendorId           String?
+  lastReviewedAt           DateTime?
+  nextReviewAt             DateTime?
+  createdAt                DateTime        @default(now())
+  updatedAt                DateTime        @updatedAt
+
+  workspace  Workspace   @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  dpias      Dpia[]
+  dataAssets DataAsset[]
+
+  @@index([workspaceId])
+}
+
+// ─── DPIA ─────────────────────────────────────────────────
+
+model Dpia {
+  id                      String           @id @default(cuid())
+  workspaceId             String
+  processingActivityId    String?
+  title                   String
+  status                  DpiaStatus       @default(DRAFT)
+  screeningAnswers        Json?
+  screeningResult         ScreeningResult?
+  screeningCompletedAt    DateTime?
+  processingDescription   String?
+  dataInvolved            String?
+  systemsInvolved         String?
+  purposeDescription      String?
+  necessityAssessment     String?
+  proportionalityNotes    String?
+  risks                   Json?
+  dpoConsultationRequired Boolean          @default(false)
+  dpoConsultationNotes    String?
+  icoReferralRequired     Boolean          @default(false)
+  approvedById            String?
+  approvedAt              DateTime?
+  approvalNotes           String?
+  nextReviewAt            DateTime?
+  pdfUrl                  String?
+  createdAt               DateTime         @default(now())
+  updatedAt               DateTime         @updatedAt
+
+  workspace          Workspace           @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  processingActivity ProcessingActivity? @relation(fields: [processingActivityId], references: [id])
+  approvedBy         User?               @relation("ApprovedBy", fields: [approvedById], references: [id])
+
+  @@index([workspaceId])
+}
+
+// ─── Data Asset Register ──────────────────────────────────
+
+model DataAsset {
+  id                      String         @id @default(cuid())
+  workspaceId             String
+  name                    String
+  description             String?
+  personalDataTypes       String[]       @default([])
+  sensitiveDataCategories String[]       @default([])
+  storageSystem           String?
+  cloudProvider           String?
+  storageCountry          String?
+  internalOwner           String?
+  accessControls          Json?
+  sharingMethods          String[]       @default([])
+  retentionPeriod         String?
+  deletionProcess         String?
+  securityClassification  SecurityClass?
+  processingActivityId    String?
+  linkedVendorIds         String[]       @default([])
+  status                  AssetStatus    @default(ACTIVE)
+  createdAt               DateTime       @default(now())
+  updatedAt               DateTime       @updatedAt
+
+  workspace          Workspace           @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  processingActivity ProcessingActivity? @relation(fields: [processingActivityId], references: [id])
+
+  @@index([workspaceId])
+}
+
+// ─── Vendor Register ──────────────────────────────────────
+
+model Vendor {
+  id                     String             @id @default(cuid())
+  workspaceId            String?
+  libraryVendorId        String?
+  name                   String
+  category               String
+  description            String?
+  websiteUrl             String?
+  privacyPolicyUrl       String?
+  termsUrl               String?
+  logoUrl                String?
+  role                   VendorRole?
+  personalDataAccessed   String[]           @default([])
+  storageCountries       String[]           @default([])
+  dpaStatus              DpaStatus          @default(NOT_IN_PLACE)
+  dpaDocumentUrl         String?
+  dpaSignedAt            DateTime?
+  transferSafeguard      TransferSafeguard?
+  securityCertifications String[]           @default([])
+  assessmentStatus       AssessmentStatus   @default(PENDING)
+  assessmentNotes        String?
+  lastAssessedAt         DateTime?
+  nextReviewAt           DateTime?
+  isLibraryEntry         Boolean            @default(false)
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+
+  workspace Workspace? @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@index([isLibraryEntry])
+}
+
+// ─── Policies, Cookie Banner, DSR ─────────────────────────
+
+model PolicyDocument {
+  id          String     @id @default(cuid())
+  workspaceId String
+  type        PolicyType
+  version     Int        @default(1)
+  content     Json
+  status      DocStatus  @default(DRAFT)
+  publishedAt DateTime?
+  fileUrl     String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+}
+
+model CookieBanner {
+  id            String   @id @default(cuid())
+  workspaceId   String   @unique
+  configuration Json
+  scriptCode    String
+  domains       String[] @default([])
+  isActive      Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+}
+
+model DsrRequest {
+  id               String    @id @default(cuid())
+  workspaceId      String
+  type             DsrType
+  jurisdiction     String
+  dataSubjectName  String
+  dataSubjectEmail String
+  status           DsrStatus @default(PENDING)
+  receivedAt       DateTime  @default(now())
+  dueAt            DateTime
+  completedAt      DateTime?
+  handledById      String?
+  notes            String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  handledBy User?     @relation("HandledBy", fields: [handledById], references: [id])
+
+  @@index([workspaceId])
+}
+
+model ComplianceChecklist {
+  id           String    @id @default(cuid())
+  workspaceId  String    @unique
+  items        Json
+  score        Int       @default(0)
+  calculatedAt DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+}
+
+// ─── Agency-Specific ──────────────────────────────────────
+
+model AgencyDpa {
+  id             String    @id @default(cuid())
+  organizationId String
+  workspaceId    String    @unique
+  status         DpaStatus @default(NOT_IN_PLACE)
+  content        Json
+  agencySignedAt DateTime?
+  clientSignedAt DateTime?
+  fileUrl        String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace    Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+}
+
+model ComplianceReport {
+  id            String   @id @default(cuid())
+  workspaceId   String
+  reportMonth   Int
+  reportYear    Int
+  generatedAt   DateTime @default(now())
+  data          Json
+  fileUrl       String?
+  agencyBranded Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, reportMonth, reportYear])
+  @@index([workspaceId])
+}
+
+model OnboardingSession {
+  id             String           @id @default(cuid())
+  workspaceId    String           @unique
+  currentStep    Int              @default(1)
+  completedSteps Int[]            @default([])
+  auditAnswers   Json?
+  status         OnboardingStatus @default(IN_PROGRESS)
+  completedAt    DateTime?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+}
