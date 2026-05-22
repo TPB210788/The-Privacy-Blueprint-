@@ -204,7 +204,23 @@ export default function Home() {
               </h1>
               <div className="flex items-center gap-2">
                 <button
-                  onClick={() => exportToCSV(activities)}
+                  onClick={() => exportToCSV(
+                    activities.map(a => ({
+                      'Activity Name': a.name,
+                      'Purpose': a.purpose,
+                      'Lawful Basis': a.lawfulBasis,
+                      'Categories of Data Subjects': a.dataSubjects,
+                      'Categories of Personal Data': a.personalData,
+                      'Recipients / Third Parties': a.recipients,
+                      'International Transfers': a.internationalTransfers ? 'Yes' : 'No',
+                      'Transfer Details': a.transferDetails,
+                      'Retention Period': a.retentionPeriod,
+                      'Security Measures': a.securityMeasures,
+                      'Date Added': a.dateAdded,
+                      'Last Reviewed': a.lastReviewed,
+                    })),
+                    `ropa-export-${new Date().toISOString().split('T')[0]}.csv`,
+                  )}
                   className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded border transition-colors"
                   style={{
                     borderColor: 'rgba(139,115,85,0.25)',
