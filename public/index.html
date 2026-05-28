@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Life Dashboard ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">✨</div>
+    <div class="user-greeting">
+      <div class="greeting-text" id="greetingText">Good morning!</div>
+      <div class="greeting-date" id="greetingDate"></div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-group">
+      <div class="nav-label">TODAY</div>
+      <button class="nav-item active" data-section="today">🌅 <span>Today's Overview</span></button>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">MY SYSTEMS</div>
+      <button class="nav-item" data-section="selfcare">💆 <span>Self Care</span></button>
+      <button class="nav-item" data-section="privacy">🔒 <span>Privacy Blueprint</span></button>
+      <button class="nav-item" data-section="content">📸 <span>Content Studio</span></button>
+      <button class="nav-item" data-section="cipm">📚 <span>CIPM Study</span></button>
+      <button class="nav-item" data-section="running">🏃 <span>Running</span></button>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">LIFE</div>
+      <button class="nav-item" data-section="vision">🌟 <span>Vision Board</span></button>
+      <button class="nav-item" data-section="bucket">✈️ <span>Bucket List</span></button>
+      <button class="nav-item" data-section="notion">📓 <span>Notion Goals</span></button>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">PLANNING</div>
+      <button class="nav-item" data-section="home">🏠 <span>Home Base</span></button>
+      <button class="nav-item" data-section="email">📧 <span>Email Hub</span></button>
+      <button class="nav-item" data-section="dates">💑 <span>Date Nights</span></button>
+      <button class="nav-item" data-section="family">👨‍👩‍👧‍👦 <span>Family Days</span></button>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">TRACKING</div>
+      <button class="nav-item" data-section="tracker">📊 <span>Life Tracker</span></button>
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <button class="brain-dump-btn" id="openBrainDump">💭 Brain Dump</button>
+    <button class="focus-btn" id="openFocus">🎯 Focus Mode</button>
+    <button class="logout-btn" id="logoutBtn" title="Sign out">↩ Sign out</button>
+  </div>
+</aside>
+
+<!-- MOBILE MENU -->
+<div class="mobile-header">
+  <button id="mobileMenuBtn">☰</button>
+  <span class="mobile-logo">✨ My Life</span>
+  <button id="mobileBrainDump">💭</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<main id="main">
+
+  <!-- ============ TODAY ============ -->
+  <section class="page-section" id="section-today">
+    <div class="page-header">
+      <h1 class="page-title" id="todayTitle">Today</h1>
+      <div class="header-actions">
+        <button class="btn-primary" onclick="openModal('task')">+ Add Task</button>
+        <button class="btn-secondary" onclick="openModal('event')">+ Event</button>
+      </div>
+    </div>
+
+    <!-- Mood Check-In -->
+    <div class="card mood-card" id="moodCard">
+      <h2 class="card-title">How are you feeling right now?</h2>
+      <div class="mood-grid">
+        <div class="mood-section">
+          <p class="mood-label">Mood</p>
+          <div class="emoji-scale" id="moodScale">
+            <button class="emoji-btn" data-val="1" title="Really bad">😢</button>
+            <button class="emoji-btn" data-val="2" title="Meh">😕</button>
+            <button class="emoji-btn" data-val="3" title="Okay">😐</button>
+            <button class="emoji-btn" data-val="4" title="Good">🙂</button>
+            <button class="emoji-btn" data-val="5" title="Amazing">😄</button>
+          </div>
+        </div>
+        <div class="mood-section">
+          <p class="mood-label">Energy</p>
+          <div class="emoji-scale" id="energyScale">
+            <button class="emoji-btn" data-val="1" title="Drained">🪫</button>
+            <button class="emoji-btn" data-val="2" title="Low">😴</button>
+            <button class="emoji-btn" data-val="3" title="Okay">⚡</button>
+            <button class="emoji-btn" data-val="4" title="Good">🔋</button>
+            <button class="emoji-btn" data-val="5" title="Energized">🚀</button>
+          </div>
+        </div>
+      </div>
+      <div class="mood-note-row">
+        <input type="text" class="mood-note-input" id="moodNote" placeholder="Anything on your mind? (optional)">
+        <button class="btn-soft" onclick="saveMood()">Save ✓</button>
+      </div>
+      <div class="mood-saved" id="moodSaved" style="display:none">✨ Check-in saved!</div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="stats-row" id="todayStats">
+      <div class="stat-card">
+        <div class="stat-num" id="statTasks">—</div>
+        <div class="stat-label">Tasks Today</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="statEvents">—</div>
+        <div class="stat-label">Events</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="statHabits">—</div>
+        <div class="stat-label">Habits Done</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="statEmails">—</div>
+        <div class="stat-label">Emails Pending</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <!-- Today's Habits -->
+      <div class="card">
+        <h2 class="card-title">💫 Today's Habits</h2>
+        <div id="todayHabits" class="habit-quick-list"></div>
+        <button class="btn-ghost" onclick="navigate('selfcare')">Manage habits →</button>
+      </div>
+
+      <!-- Today's Events -->
+      <div class="card">
+        <h2 class="card-title">📅 Today's Events</h2>
+        <div id="todayEvents" class="event-list-small"></div>
+        <button class="btn-ghost" onclick="openModal('event')">+ Add event</button>
+      </div>
+    </div>
+
+    <!-- Top 3 Priorities -->
+    <div class="card">
+      <div class="card-header-row">
+        <h2 class="card-title">🎯 Top Priorities Today</h2>
+        <button class="btn-soft" onclick="openModal('task', 'high')">+ Add Priority</button>
+      </div>
+      <div id="todayPriorities" class="task-list"></div>
+    </div>
+
+    <!-- All Tasks Today -->
+    <div class="card">
+      <div class="card-header-row">
+        <h2 class="card-title">📋 All Tasks</h2>
+        <button class="btn-soft" onclick="openModal('task')">+ New Task</button>
+      </div>
+      <div id="todayTasks" class="task-list"></div>
+    </div>
+
+    <!-- Recent Wins -->
+    <div class="card wins-card">
+      <h2 class="card-title">🏆 Recent Wins</h2>
+      <div id="recentWins" class="wins-list"></div>
+      <button class="btn-ghost" onclick="openModal('win')">+ Log a win</button>
+    </div>
+
+    <!-- Home Tasks Due -->
+    <div id="houseDueCard" class="card" style="display:none">
+      <h2 class="card-title">🏠 Home Tasks Due</h2>
+      <div id="houseDueList" class="task-list"></div>
+      <button class="btn-ghost" onclick="navigate('home')">View all home tasks →</button>
+    </div>
+  </section>
+
+  <!-- ============ SELF CARE ============ -->
+  <section class="page-section hidden" id="section-selfcare">
+    <div class="page-header">
+      <h1 class="page-title">💆 Self Care</h1>
+      <div class="header-actions">
+        <button class="btn-primary" onclick="openModal('habit')">+ Add Habit</button>
+      </div>
+    </div>
+
+    <!-- Affirmation -->
+    <div class="card affirmation-card">
+      <div class="affirmation-text" id="affirmationText">"Loading your affirmation..."</div>
+      <button class="btn-ghost" onclick="loadAffirmation()">New affirmation ↻</button>
+    </div>
+
+    <!-- Habit Tracker -->
+    <div class="card">
+      <h2 class="card-title">🌿 Your Habits</h2>
+      <div id="habitTracker" class="habits-grid"></div>
+    </div>
+
+    <!-- 7-Day Habit Grid -->
+    <div class="card">
+      <h2 class="card-title">📅 This Week at a Glance</h2>
+      <div id="habitWeekGrid" class="week-habit-grid"></div>
+    </div>
+
+    <!-- Self Care Tasks -->
+    <div class="card">
+      <div class="card-header-row">
+        <h2 class="card-title">📝 Self Care Tasks</h2>
+        <button class="btn-soft" onclick="openModal('task', null, 'selfcare')">+ Add</button>
+      </div>
+      <div id="selfcareTasks" class="task-list"></div>
+    </div>
+  </section>
+
+  <!-- ============ PRIVACY BLUEPRINT ============ -->
+  <section class="page-section hidden" id="section-privacy">
+    <div class="page-header">
+      <h1 class="page-title">🔒 Privacy Blueprint</h1>
+      <div class="header-actions">
+        <button class="btn-primary" onclick="openModal('task', null, 'privacy')">+ Add Task</button>
+      </div>
+    </div>
+    <div class="card info-card">
+      <p>🛡️ Your privacy work in one place — tasks, projects, and progress tracking for your Privacy Blueprint system.</p>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-header-row">
+          <h2 class="card-title">⏳ In Progress</h2>
+        </div>
+        <div id="privacyInProgress" class="task-list"></div>
+      </div>
+      <div class="card">
+        <div class="card-header-row">
+          <h2 class="card-title">📋 Upcoming</h2>
+        </div>
+        <div id="privacyUpcoming" class="task-list"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header-row">
+        <h2 class="card-title">✅ Recently Completed</h2>
+      </div>
+      <div id="privacyCompleted" class="task-list"></div>
+    </div>
+  </section>
+
+  <!-- ============ CONTENT STUDIO ============ -->
+  <section class="page-section hidden" id="section-content">
+    <div class="page-header">
+      <h1 class="page-title">📸 Content Studio</h1>
+      <div class="header-actions">
+        <button class="btn-primary" onclick="openModal('task', null, 'content')">+ Add Task</button>
+      </div>
+    </div>
+    <div class="card info-card">
+      <p>✨ Your content pipeline — ideas, scheduling, and tasks all in one place.</p>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-header-row">
+          <h2 class="card-title">💡 Content Ideas</h2>
+          <button class="btn-soft" onclick="openModal('task', null, 'content-idea')">+ Idea</button>
+        </div>
+        <div id="contentIdeas" class="task-list"></div>
+      </div>
+      <div class="card">
+        <div class="card-header-row">
+          <h2 class="card-title">📅 Scheduled / In Progress</h2>
+        </div>
+        <div id="contentScheduled" class="task-list"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2 class="card-title">✅ Published</h2>
+      <div id="contentPublished" class="task-list"></div>
+    </div>
+  </section>
+
+  <!-- ============ CIPM STUDY ============ -->
+  <section class="page-section hidden" id="section-cipm">
+    <div class="page-header">
+      <h1 class="page-title">📚 CIPM Study</h1>
+      <div class="header-actions">
+        <button class="btn-primary" onclick="openModal('study')">+ Log Study Session</button>
+      </div>
+    </div>
+
+    <!-- Exam Countdown -->
+    <div class="card countdown-card" id="examCountdownCard">
+      <div class="countdown-content">
+        <div class="countdown-num" id="examCountdownNum">—</div>
+        <div class="countdown-label">days until your CIPM exam</div>
+        <div id="examDateDisplay" style="font-size:13px;color:#9B8099;margin-top:4px"></div>
+      </div>
+      <button class="btn-soft" onclick="setExamDate()">Set Exam Date</button>
+    </div>
+
+    <!-- Study Stats -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num" id="studyMinsWeek">—</div>
+        <div class="stat-label">Min This Week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="studySessionsWeek">—</div>
+        <div class="stat-label">Sessions This Week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="studyTopicsCount">—</div>
+        <div class="stat-label">Topics Covered</div>
+      </div>
+    </div>
+
+    <!-- CIPM Domains Progress -->
+    <div class="card">
+      <h2 class="card-title">📖 CIPM Domains</h2>
+      <div class="cipm-domains">
+        <div class="domain-item" data-topic="Introduction to Privacy">
+          <div class="domain-label">Introduction to Privacy</div>
+          <div class="domain-bar"><div class="domain-fill" style="width:0%"></div></div>
+        </div>
+        <div class="domain-item" data-topic="Privacy Frameworks & Programs">
+          <div class="domain-label">Privacy Frameworks & Programs</div>
+          <div class="domain-bar"><div class="domain-fill" style="width:0%"></div></div>
+        </div>
+        <div class="domain-item" data-topic="Information Risk">
+          <div class="domain-label">Information Risk</div>
+          <div class="domain-bar"><div class="domain-fill" style="width:0%"></div></div>
+        </div>
+        <div class="domain-item" data-topic="Privacy in Information Management">
+          <div class="domain-label">Privacy in Information Management</div>
+          <div class="domain-bar"><div class="domain-fill" style="width:0%"></div></div>
+        </div>
+        <div class="domain-item" data-topic="Privacy Operational Lifecycle">
+          <div class="domain-label">Privacy Operational Lifecycle</div>
+          <div class="domain-bar"><div class="domain-fill" style="width:0%"></div></div>
+        </div>
+        <div class="domain-item" data-topic="Technologies & Privacy Engineering">
+          <div class="domain-label">Technologies & Privacy Engineering</div>
+          <div class="domain-bar"><div class="domain-fill" style="width:0%"></div></div>
+        </div>
+        <div class="domain-item" data-topic="Privacy Law & Regulations">
+          <div class="domain-label">Privacy Law & Regulations</div>
+          <div class="domain-bar"><div class="domain-fill" style="width:0%"></div></div>
+        </div>
+      </div>
+      <p style="font-size:12px;color:#9B8099;margin-top:12px">Bars fill automatically as you log study sessions by topic.</p>
+    </div>
+
+    <!-- Study Log -->
+    <div class="card">
+      <h2 class="card-title">📝 Recent Study Sessions</h2>
+      <div id="studyLog" class="study-list"></div>
+    </div>
+
+    <!-- Study Tasks -->
+    <div class="card">
+      <div class="card-header-row">
+        <h2 class="card-title">✅ CIPM Tasks</h2>
+        <button class="btn-soft" onclick="openModal('task', null, 'cipm')">+ Add</button>
+      </div>
+      <div id="cipmTasks" class="task-list"></div>
+    </div>
+  </section>
+
+  <!-- ============ RUNNING ============ -->
+  <section class="page-section hidden" id="section-running">
+    <div class="page-header">
+      <h1 class="page-title">🏃 Running</h1>
+      <div class="header-actions">
+        <button class="btn-primary" onclick="openModal('run')">+ Log Run</button>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num" id="runMilesWeek">—</div>
+        <div class="stat-label">Miles This Week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="runGoalWeek">—</div>
+        <div class="stat-label">Weekly Goal</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="runCountWeek">—</div>
+        <div class="stat-label">Runs This Week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="runMilesMonth">—</div>
+        <div class="stat-label">Miles This Month</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title">📈 Weekly Progress</h2>
+      <div class="progress-container">
+        <div class="run-progress-bar">
+          <div class="run-progress-fill" id="runProgressFill" style="width:0%"></div>
+        </div>
+        <div id="runProgressLabel" class="progress-label">Loading...</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title">👟 Run Log</h2>
+      <div id="runLog" class="run-list"></div>
+    </div>
+  </section>
+
+  <!-- ============ VISION BOARD ============ -->
+  <section class="page-section hidden" id="section-vision">
+    <div class="page-header">
+      <h1 class="page-title">🌟 Vision Board</h1>
+      <div class="header-actions">
+        <button class="btn-primary" onclick="openModal('vision')">+ Add to Board</button>
+      </div>
+    </div>
+    <div class="card info-card">
+      <p>🌸 Your dream life, beautifully visualized. Add images, affirmations, and goals that inspire you.</p>
+    </div>
+    <div class="vision-filter-bar">
+      <button class="filter-chip active" data-filter="all">All</button>
+      <button class="filter-chip" data-filter="career">Career</button>
+      <button class="filter-chip" data-filter="health">Health</button>
+      <button class="filter-chip" data-filter="travel">Travel</button>
+      <button class="filter-chip" data-filter="family">Family</button>
+      <button class="filter-chip" data-filter="lifestyle">Lifestyle</button>
+      <button class="filter-chip" data-filter="mindset">Mindset</button>
+    </div>
+    <div id="visionBoard" class="vision-grid"></div>
+    <div class="empty-state" id="visionEmpty" style="display:none">
+      <div class="empty-icon">🌟</div>
+      <p>Your vision board is waiting to be filled!</p>
+      <button class="btn-primary" onclick="openModal('vision')">Add your first vision</button>
+    </div>
+  </section>
+
+  <!-- ============ BUCKET LIST ============ -->
+  <section class="page-section hidden" id="section-bucket">
+    <div class="page-header">
+      <h1 class="page-title">✈️ Bucket List</h1>
+      <div class="header-actions">
+        <button class="btn-primary" onclick="openModal('bucket')">+ Add to List</button>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num" id="bucketTotal">—</div>
+        <div class="stat-label">Total Dreams</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="bucketDone">—</div>
+        <div class="stat-label">Accomplished</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="bucketPercent">—</div>
+        <div class="stat-label">% Complete</div>
+      </div>
+    </div>
+
+    <div class="bucket-filter-bar">
+      <button class="filter-chip active" data-filter="all">All</button>
+      <button class="filter-chip" data-filter="adventure">🗺️ Adventure</button>
+      <button class="filter-chip" data-filter="travel">✈️ Travel</button>
+      <button class="filter-chip" data-filter="family">👨‍👩‍👧‍👦 Family</button>
+      <button class="filter-chip" data-filter="learning">📚 Learning</button>
+      <button class="filter-chip" data-filter="health">💪 Health</button>
+      <button class="filter-chip" data-filter="career">💼 Career</button>
+      <button class="filter-chip" data-filter="creative">🎨 Creative</button>
+      <button class="filter-chip completed-filter" data-filter="completed">✅ Done</button>
+    </div>
+
+    <div id="bucketList" class="bucket-grid"></div>
+  </section>
+
+  <!-- ============ NOTION GOALS ============ -->
+  <section class="page-section hidden" id="section-notion">
+    <div class="page-header">
+      <h1 class="page-title">📓 Notion Goals</h1>
+      <div class="header-actions">
+        <button class="btn-secondary" onclick="syncNotion()">↻ Sync Notion</button>
+      </div>
+    </div>
+    <div class="card info-card" id="notionSetupCard">
+      <p>🔗 Connect your Notion Productivity Planner to see your goals here.</p>
+      <p style="margin-top:8px;font-size:13px;color:#9B8099">Add your NOTION_TOKEN and NOTION_DATABASE_ID to your .env file to enable sync.</p>
+    </div>
+    <div id="notionStatus" class="notion-status"></div>
+    <div id="notionGoals" class="notion-grid"></div>
+  </section>
+
+  <!-- ============ HOME BASE ============ -->
+  <section class="page-section hidden" id="section-home">
+    <div class="page-header">
+      <h1 class="page-title">🏠 Home Base</h1>
+      <div class="header-actions">
+        <button class="btn-primary" onclick="openModal('house')">+ Add Task</button>
+      </div>
+    </div>
+
+    <div class="room-filter-bar">
+      <button class="filter-chip active" data-filter="all">All Rooms</button>
+      <button class="filter-chip" data-filter="Kitchen">🍳 Kitchen</button>
+      <button class="filter-chip" data-filter="Living Room">🛋️ Living Room</button>
+      <button class="filter-chip" data-filter="Bedroom">🛏️ Bedroom</button>
+      <button class="filter-chip" data-filter="Bathroom">🚿 Bathroom</button>
+      <button class="filter-chip" data-filter="General">🏡 General</button>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h2 class="card-title">⚠️ Due Now / Overdue</h2>
+        <div id="houseDueNow" class="task-list"></div>
+      </div>
+      <div class="card">
+        <h2 class="card-title">📅 Coming Up</h2>
+        <div id="houseSoon" class="task-list"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title">🏠 All Home Tasks</h2>
+      <div id="houseAllTasks" class="task-list"></div>
+    </div>
+  </section>
+
+  <!-- ============ EMAIL HUB ============ -->
+  <section class="page-section hidden" id="section-email">
+    <div class="page-header">
+      <h1 class="page-title">📧 Email Hub</h1>
+      <div class="header-actions">
+        <button class="btn-primary" onclick="openModal('email')">+ Add Email Task</button>
+      </div>
+    </div>
+    <div class="card info-card">
+      <p>📬 Track emails that need action, follow-ups, and responses in one organized place.</p>
+    </div>
+    <div class="email-filter-bar">
+      <button class="filter-chip active" data-filter="all">All Pending</button>
+      <button class="filter-chip" data-filter="high">🔴 High Priority</button>
+      <button class="filter-chip" data-filter="medium">🟡 Medium</button>
+      <button class="filter-chip" data-filter="low">🟢 Low</button>
+    </div>
+    <div id="emailTasks" class="email-list"></div>
+  </section>
+
+  <!-- ============ DATE NIGHTS ============ -->
+  <section class="page-section hidden" id="section-dates">
+    <div class="page-header">
+      <h1 class="page-title">💑 Date Nights</h1>
+      <div class="header-actions">
+        <button class="btn-primary" onclick="openModal('event', null, 'date_night')">+ Plan a Date</button>
+      </div>
+    </div>
+    <div class="card info-card romantic-card">
+      <p>💕 Keep the romance alive! Plan dates, save memories, and never run out of ideas.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h2 class="card-title">💡 Date Night Ideas</h2>
+        <div class="date-ideas-grid" id="dateIdeas">
+          <div class="idea-chip">🍽️ Try a new restaurant</div>
+          <div class="idea-chip">🎭 See a show or concert</div>
+          <div class="idea-chip">🌅 Sunrise or sunset picnic</div>
+          <div class="idea-chip">🎨 Paint night or art class</div>
+          <div class="idea-chip">🎬 Movie marathon at home</div>
+          <div class="idea-chip">🛁 Spa night at home</div>
+          <div class="idea-chip">🌃 Drive-in movie</div>
+          <div class="idea-chip">🎲 Game night</div>
+          <div class="idea-chip">🚣 Kayaking or canoeing</div>
+          <div class="idea-chip">📸 Photo walk in the city</div>
+          <div class="idea-chip">🍳 Cook a new recipe together</div>
+          <div class="idea-chip">🎡 Visit a fair or festival</div>
+        </div>
+        <button class="btn-ghost" style="margin-top:12px" onclick="openModal('task', null, 'date-idea')">+ Add your own idea</button>
+      </div>
+      <div class="card">
+        <h2 class="card-title">📅 Planned Dates</h2>
+        <div id="plannedDates" class="event-list-small"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title">🌸 Past Date Memories</h2>
+      <div id="pastDates" class="event-list-small"></div>
+    </div>
+  </section>
+
+  <!-- ============ FAMILY DAYS ============ -->
+  <section class="page-section hidden" id="section-family">
+    <div class="page-header">
+      <h1 class="page-title">👨‍👩‍👧‍👦 Family Days</h1>
+      <div class="header-actions">
+        <button class="btn-primary" onclick="openModal('event', null, 'family_day')">+ Plan Outing</button>
+      </div>
+    </div>
+    <div class="card info-card family-card">
+      <p>🌈 Creating beautiful memories together — plan adventures, track ideas, and celebrate family time.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h2 class="card-title">💡 Activity Ideas</h2>
+        <div class="date-ideas-grid" id="familyIdeas">
+          <div class="idea-chip">🎪 Visit a theme park</div>
+          <div class="idea-chip">🏖️ Beach or lake day</div>
+          <div class="idea-chip">🎠 Local carnival</div>
+          <div class="idea-chip">🏞️ Nature hike</div>
+          <div class="idea-chip">🎳 Bowling night</div>
+          <div class="idea-chip">🎬 Movie night in</div>
+          <div class="idea-chip">🍕 Pizza making</div>
+          <div class="idea-chip">🎨 Art project together</div>
+          <div class="idea-chip">🚴 Bike ride</div>
+          <div class="idea-chip">🌿 Garden day</div>
+          <div class="idea-chip">🏊 Swimming</div>
+          <div class="idea-chip">🎮 Game tournament</div>
+        </div>
+        <button class="btn-ghost" style="margin-top:12px" onclick="openModal('task', null, 'family-idea')">+ Add your own idea</button>
+      </div>
+      <div class="card">
+        <h2 class="card-title">📅 Planned Outings</h2>
+        <div id="plannedFamily" class="event-list-small"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title">🌟 Family Memories</h2>
+      <div id="pastFamily" class="event-list-small"></div>
+    </div>
+  </section>
+
+  <!-- ============ TRACKER ============ -->
+  <section class="page-section hidden" id="section-tracker">
+    <div class="page-header">
+      <h1 class="page-title">📊 Life Tracker</h1>
+    </div>
+
+    <!-- Time range tabs -->
+    <div class="tracker-tabs">
+      <button class="tracker-tab active" data-period="week">This Week</button>
+      <button class="tracker-tab" data-period="month">This Month</button>
+      <button class="tracker-tab" data-period="quarter">This Quarter</button>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card rose">
+        <div class="stat-num" id="trackerTasks">—</div>
+        <div class="stat-label">Tasks Completed</div>
+      </div>
+      <div class="stat-card lavender">
+        <div class="stat-num" id="trackerHabits">—</div>
+        <div class="stat-label">Habit Check-ins</div>
+      </div>
+      <div class="stat-card sage">
+        <div class="stat-num" id="trackerMiles">—</div>
+        <div class="stat-label">Miles Run</div>
+      </div>
+      <div class="stat-card sky">
+        <div class="stat-num" id="trackerStudy">—</div>
+        <div class="stat-label">Study Minutes</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <!-- Mood Chart -->
+      <div class="card">
+        <h2 class="card-title">😊 Mood History</h2>
+        <div id="moodChart" class="mood-chart-container"></div>
+      </div>
+
+      <!-- Bucket List Progress -->
+      <div class="card">
+        <h2 class="card-title">✈️ Bucket List Progress</h2>
+        <div class="bucket-progress-visual">
+          <div class="ring-container">
+            <svg class="progress-ring" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="48" fill="none" stroke="#F5EEF8" stroke-width="12"/>
+              <circle class="ring-fill" id="bucketRingFill" cx="60" cy="60" r="48" fill="none" stroke="#C4B5D4" stroke-width="12"
+                stroke-dasharray="301.6" stroke-dashoffset="301.6" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="ring-label">
+              <div class="ring-num" id="bucketRingNum">0%</div>
+              <div class="ring-sub">done</div>
+            </div>
+          </div>
+          <div class="ring-stats">
+            <div><strong id="trackerBucketDone">0</strong> accomplished</div>
+            <div><strong id="trackerBucketLeft">0</strong> remaining</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wins Wall -->
+    <div class="card wins-card">
+      <h2 class="card-title">🏆 Wins This Week</h2>
+      <div id="trackerWins" class="wins-list"></div>
+      <button class="btn-ghost" onclick="openModal('win')">+ Add a win</button>
+    </div>
+  </section>
+
+</main><!-- end #main -->
+
+<!-- ============ MODALS ============ -->
+<div id="modalOverlay" class="modal-overlay hidden" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h2 class="modal-title" id="modalTitle">Add</h2>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<!-- BRAIN DUMP PANEL -->
+<div id="brainDumpPanel" class="brain-dump-panel hidden">
+  <div class="brain-dump-header">
+    <h3>💭 Brain Dump</h3>
+    <button onclick="closeBrainDump()">×</button>
+  </div>
+  <textarea id="brainDumpInput" placeholder="Just type whatever is on your mind... no filtering, no judgment." rows="4"></textarea>
+  <div class="brain-dump-actions">
+    <button class="btn-primary" onclick="saveBrainDump()">Capture ✓</button>
+    <button class="btn-ghost" onclick="closeBrainDump()">Done</button>
+  </div>
+  <div id="brainDumpList" class="brain-dump-items"></div>
+</div>
+
+<!-- FOCUS MODE OVERLAY -->
+<div id="focusOverlay" class="focus-overlay hidden">
+  <div class="focus-content">
+    <button class="focus-close" onclick="closeFocus()">×</button>
+    <div class="focus-emoji">🎯</div>
+    <h2 class="focus-task-title" id="focusTaskTitle">Loading your top task...</h2>
+    <p class="focus-instruction">Focus on just this one thing.</p>
+    <div class="focus-timer">
+      <div class="focus-time" id="focusTime">25:00</div>
+      <div class="focus-timer-btns">
+        <button class="btn-primary" id="focusStartBtn" onclick="toggleFocusTimer()">Start</button>
+        <button class="btn-ghost" onclick="resetFocusTimer()">Reset</button>
+      </div>
+    </div>
+    <button class="btn-soft" onclick="markFocusTaskDone()" id="focusDoneBtn" style="margin-top:20px">Mark Done ✓</button>
+    <button class="btn-ghost" onclick="nextFocusTask()" style="margin-top:8px">Next Task →</button>
+  </div>
+</div>
+
+<!-- TOAST NOTIFICATION -->
+<div id="toast" class="toast hidden"></div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
