@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Life Dashboard — Sign In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #FFF0E8 0%, #F0E8FF 50%, #E8F4FF 100%);
+      padding: 24px;
+    }
+    .card {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(20px);
+      border-radius: 28px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 60px rgba(74,68,88,0.15), 0 0 0 1px rgba(255,255,255,0.8);
+      text-align: center;
+    }
+    .logo { font-size: 40px; margin-bottom: 12px; }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      color: #4A4458;
+      margin-bottom: 6px;
+    }
+    p.sub { color: #9B8099; font-size: 14px; margin-bottom: 36px; }
+    .field { margin-bottom: 16px; text-align: left; }
+    label { display: block; font-size: 13px; font-weight: 600; color: #6B6079; margin-bottom: 6px; letter-spacing: 0.4px; }
+    input[type="password"] {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #EDE8F5;
+      border-radius: 14px;
+      font-size: 16px;
+      font-family: 'Nunito', sans-serif;
+      background: #FDF9FF;
+      color: #4A4458;
+      outline: none;
+      transition: border-color 0.2s;
+      letter-spacing: 2px;
+    }
+    input[type="password"]:focus { border-color: #C4B5D4; background: white; }
+    button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #E8A598, #C4B5D4);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-size: 16px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      margin-top: 8px;
+    }
+    button:hover { opacity: 0.92; transform: translateY(-1px); }
+    button:active { transform: translateY(0); }
+    .error {
+      background: #FFF0EE;
+      border: 1px solid #F5C5C0;
+      color: #C85A4A;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-top: 12px;
+      display: none;
+    }
+    .note { margin-top: 20px; font-size: 12px; color: #B8A8BC; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">✨</div>
+    <h1>Welcome back</h1>
+    <p class="sub">Your personal life dashboard — private & just for you</p>
+    <form id="loginForm">
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter your password" autofocus>
+      </div>
+      <button type="submit" id="submitBtn">Sign In</button>
+      <div class="error" id="errorMsg"></div>
+    </form>
+    <p class="note">🔒 This dashboard is password protected and only accessible by you</p>
+  </div>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const err = document.getElementById('errorMsg');
+      const pw = document.getElementById('password').value;
+      btn.textContent = 'Signing in...';
+      btn.disabled = true;
+      err.style.display = 'none';
+      try {
+        const res = await fetch('/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pw })
+        });
+        const data = await res.json();
+        if (data.success) {
+          window.location.href = '/';
+        } else {
+          err.textContent = data.error || 'Incorrect password';
+          err.style.display = 'block';
+          btn.textContent = 'Sign In';
+          btn.disabled = false;
+        }
+      } catch {
+        err.textContent = 'Connection error. Please try again.';
+        err.style.display = 'block';
+        btn.textContent = 'Sign In';
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
