@@ -112,11 +112,10 @@ function EmailCapture({ answers }) {
             Formspree's free (Starter) plan does not support autoresponse emails to submitters.
             To send users a copy of their results automatically on submission, upgrade to
             Formspree Gold (or higher) and configure an autoresponse template in the Formspree
-            dashboard at formspree.io. Until then, the copy below avoids implying instant delivery.
+            dashboard at formspree.io.
           */}
-          <h3 className="font-playfair text-xl text-charcoal mb-2">Got it!</h3>
-          <p className="font-inter text-sm text-charcoal/70 leading-relaxed">
-            We'll send your results shortly.
+          <p className="font-inter text-sm text-charcoal/80 leading-relaxed">
+            Check your inbox. Your GDPR Fix-It Checklist is on its way. It's the general starting point every business needs. When you want to know exactly what applies to your business, the £75 Gap Analysis gives you a personalised action plan.
           </p>
         </div>
       </div>
