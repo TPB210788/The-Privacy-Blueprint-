@@ -54,17 +54,15 @@ function getAllFixes(answers) {
 }
 
 function EmailCapture({ answers }) {
-  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [consent, setConsent] = useState(false)
-  const [infoOpen, setInfoOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
   async function handleSubmit(e) {
     e.preventDefault()
-    if (!name.trim() || !email.trim()) { setError('Please fill in your name and email.'); return }
+    if (!email.trim()) { setError('Please enter your email address.'); return }
     if (!/\S+@\S+\.\S+/.test(email)) { setError('Please enter a valid email address.'); return }
     if (!consent) { setError('Please tick the consent box to continue.'); return }
 
@@ -80,23 +78,18 @@ function EmailCapture({ answers }) {
 
     setLoading(true)
     try {
-      if (FORMSPREE_URL) {
-        const res = await fetch(FORMSPREE_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({
-            name: name.trim(),
-            email: email.trim(),
-            consent: 'Yes, consented to follow-up guidance',
-            'Overall Score': `${total}/${maxScore}`,
-            'Overall Rating': `${rag.label}`,
-            ...breakdown,
-          }),
-        })
-        if (!res.ok) throw new Error('Submission failed')
-      } else {
-        console.log('Privacy Health Check lead:', { name: name.trim(), email: email.trim(), total, rating: rag.label, breakdown })
-      }
+      const res = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          email: email.trim(),
+          consent: 'Yes, consented to receive results report by email',
+          'Overall Score': `${total}/${maxScore}`,
+          'Overall Rating': rag.label,
+          ...breakdown,
+        }),
+      })
+      if (!res.ok) throw new Error('Submission failed')
       setSubmitted(true)
     } catch {
       setError('Something went wrong. Please try again.')
@@ -108,59 +101,41 @@ function EmailCapture({ answers }) {
   if (submitted) {
     return (
       <div className="card no-print">
-        <div className="text-center mb-6">
+        <div className="text-center">
           <div className="w-12 h-12 rounded-full bg-rag-green-bg flex items-center justify-center mx-auto mb-4">
             <svg className="w-6 h-6 text-rag-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h3 className="font-playfair text-xl text-charcoal mb-3">Got it! We'll be in touch.</h3>
-          <div className="bg-cream rounded-xl p-4 border border-black/8 text-left space-y-2">
-            <p className="font-inter text-sm text-charcoal/70 leading-relaxed">
-              You've agreed to be contacted by The Privacy Blueprint based on your privacy health check results.
-            </p>
-            <p className="font-inter text-xs text-charcoal/50 leading-relaxed">
-              You can withdraw consent at any time by emailing{' '}
-              <a href="mailto:hello@theprivacyblueprint.co.uk" className="text-warm-brown underline">
-                hello@theprivacyblueprint.co.uk
-              </a>.
-            </p>
-          </div>
+          {/*
+            TO ENABLE AUTOMATIC REPLY TO USER:
+            Formspree's free (Starter) plan does not support autoresponse emails to submitters.
+            To send users a copy of their results automatically on submission, upgrade to
+            Formspree Gold (or higher) and configure an autoresponse template in the Formspree
+            dashboard at formspree.io. Until then, the copy below avoids implying instant delivery.
+          */}
+          <h3 className="font-playfair text-xl text-charcoal mb-2">Got it!</h3>
+          <p className="font-inter text-sm text-charcoal/70 leading-relaxed">
+            We'll send your results shortly.
+          </p>
         </div>
-        <BookCTA />
       </div>
     )
   }
 
   return (
     <div className="card no-print">
-      <h3 className="font-playfair text-xl text-charcoal mb-1">
-        Want personalised guidance on your results?
-      </h3>
+      <h3 className="font-playfair text-xl text-charcoal mb-1">Save your results</h3>
       <p className="font-inter text-sm text-charcoal/55 mb-5 leading-relaxed">
-        Leave your details and we'll follow up with tailored next steps for your business.
+        Enter your email and we'll send you a copy of your report.
       </p>
       <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3">
         <div>
-          <label htmlFor="lead-name" className="font-inter text-xs font-medium text-charcoal/60 uppercase tracking-wide block mb-1.5">
-            Your name
-          </label>
-          <input
-            id="lead-name"
-            type="text"
-            value={name}
-            onChange={e => { setName(e.target.value); setError('') }}
-            placeholder="Jane Smith"
-            autoComplete="name"
-            className="w-full px-4 py-3 rounded-xl border border-black/15 bg-cream font-inter text-sm text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:ring-2 focus:ring-warm-brown focus:border-transparent transition-all"
-          />
-        </div>
-        <div>
-          <label htmlFor="lead-email" className="font-inter text-xs font-medium text-charcoal/60 uppercase tracking-wide block mb-1.5">
+          <label htmlFor="save-email" className="font-inter text-xs font-medium text-charcoal/60 uppercase tracking-wide block mb-1.5">
             Email address
           </label>
           <input
-            id="lead-email"
+            id="save-email"
             type="email"
             value={email}
             onChange={e => { setEmail(e.target.value); setError('') }}
@@ -170,7 +145,6 @@ function EmailCapture({ answers }) {
           />
         </div>
 
-        {/* Consent checkbox */}
         <label className="flex items-start gap-3 cursor-pointer">
           <input
             type="checkbox"
@@ -179,53 +153,16 @@ function EmailCapture({ answers }) {
             className="mt-0.5 flex-shrink-0 w-4 h-4 rounded border-black/20 accent-warm-brown cursor-pointer"
           />
           <span className="font-inter text-xs text-charcoal/60 leading-relaxed">
-            I agree to be contacted by The Privacy Blueprint with personalised guidance based on my results. See our{' '}
+            I agree to receive my results report by email. See our{' '}
             <Link to="/privacy-policy" className="underline hover:text-charcoal/80 transition-colors">
               privacy policy
             </Link>.
           </span>
         </label>
 
-        {/* Expandable data usage info */}
-        <button
-          type="button"
-          onClick={() => setInfoOpen(o => !o)}
-          className="flex items-center gap-1.5 font-inter text-xs text-warm-brown hover:text-warm-brown-dark transition-colors"
-        >
-          <span>How we'll use your data</span>
-          <svg
-            className={`w-3 h-3 transition-transform duration-200 ${infoOpen ? 'rotate-180' : ''}`}
-            fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-
-        {infoOpen && (
-          <div className="bg-cream rounded-xl p-4 border border-black/10 space-y-2">
-            {[
-              ['Controller', 'The Privacy Blueprint'],
-              ['Purpose', 'To provide personalised privacy guidance based on your results'],
-              ['Lawful basis', 'Consent'],
-              ['Retention', 'We\'ll keep your details for 12 months unless you ask us to delete them'],
-              ['Your rights', 'You can access, correct, delete your data or withdraw consent at any time by emailing hello@theprivacyblueprint.co.uk'],
-            ].map(([label, value]) => (
-              <p key={label} className="font-inter text-xs text-charcoal/65 leading-relaxed">
-                <span className="font-semibold text-charcoal/80">{label}:</span> {value}
-              </p>
-            ))}
-            <p className="font-inter text-xs text-charcoal/65 leading-relaxed">
-              You have the right to complain to the ICO at{' '}
-              <a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer" className="underline text-warm-brown">
-                ico.org.uk
-              </a>.
-            </p>
-          </div>
-        )}
-
         {error && <p className="font-inter text-xs text-rag-red" role="alert">{error}</p>}
         <button type="submit" disabled={loading} className="btn-primary mt-1">
-          {loading ? 'Sending…' : 'Get Follow-Up Guidance →'}
+          {loading ? 'Sending…' : 'Send My Report →'}
         </button>
       </form>
     </div>
