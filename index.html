@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TomorrowKit — School admin, off your mental load</title>
+<meta name="description" content="TomorrowKit turns school, nursery and activity admin into clear actions for each child. Forward the email, share the screenshot, upload the newsletter. Free beta waitlist now open.">
+<meta name="theme-color" content="#F7F6F2">
+<meta property="og:title" content="TomorrowKit — School admin, off your mental load">
+<meta property="og:description" content="Know what they need tomorrow. TomorrowKit turns school admin into exactly what you need to do, pack, pay, sign and remember.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23526C7A'/%3E%3Cpath d='M9 12h14M16 12v11' stroke='%23F7F6F2' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ============ HEADER / NAVIGATION ============ -->
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="wordmark" href="#top">
+      <span class="wordmark-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="28" height="28" focusable="false"><rect width="32" height="32" rx="7" fill="#526C7A"/><path d="M9 12h14M16 12v11" stroke="#F7F6F2" stroke-width="2.6" stroke-linecap="round"/></svg>
+      </span>
+      <span class="wordmark-text">TomorrowKit</span>
+    </a>
+
+    <button class="nav-toggle" type="button" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+      <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
+      <span class="nav-toggle-label">Menu</span>
+    </button>
+
+    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+      <ul>
+        <li><a href="#message-to-action">How it works</a></li>
+        <li><a href="#privacy">Privacy</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a class="btn btn-primary btn-sm" href="#waitlist">Join the free beta</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">The school-admin assistant for busy families</p>
+        <h1>Never find out at 8:15am that it was PE day.</h1>
+        <p class="lede">Forward the email. Share the screenshot. Upload the newsletter. TomorrowKit turns school admin into exactly what you need to do, pack, pay, sign and remember — for each child.</p>
+        <p class="hero-actions"><a class="btn btn-primary" href="#waitlist">Join the free beta</a></p>
+        <p class="support-text">Free beta · No card required · Privacy-first by design</p>
+      </div>
+
+      <figure class="hero-figure shot">
+        <picture>
+          <source type="image/webp"
+                  srcset="assets/mockups/tomorrowkit-tomorrow-view-640.webp 640w, assets/mockups/tomorrowkit-tomorrow-view.webp 1122w"
+                  sizes="(min-width: 980px) 480px, (min-width: 640px) 70vw, 92vw">
+          <img src="assets/mockups/tomorrowkit-tomorrow-view.png" alt="TomorrowKit Tomorrow view for Tuesday 15 September, showing Maya with two things left to pack and Leo marked as ready."
+               width="1122" height="1402" loading="eager" fetchpriority="high" decoding="async">
+        </picture>
+        <figcaption>Everything they need. Before the morning rush.</figcaption>
+      </figure>
+    </div>
+    <p class="wrap disclosure">Concept preview — TomorrowKit is currently in development. Final features and design may change.</p>
+  </section>
+
+  <!-- ============ THE PROBLEM ============ -->
+  <section class="section section-problem" id="problem">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Because the information isn't really the problem. Remembering what to do with it is.</h2>
+        <p class="lede">School information arrives everywhere — emails, newsletters, PDFs, school apps, WhatsApp messages and paper letters. TomorrowKit brings the important actions together, so parents don't have to keep everything in their head.</p>
+      </div>
+
+      <div class="flow">
+        <div class="flow-col">
+          <h3 class="flow-title">What arrives</h3>
+          <ul class="card-list" role="list">
+            <li class="card card-input">
+              <p class="card-label">Email</p>
+              <p class="card-body">“Year 5 swimming begins Tuesday…”</p>
+            </li>
+            <li class="card card-input">
+              <p class="card-label">PDF</p>
+              <p class="card-body">“Autumn Term Newsletter”</p>
+            </li>
+            <li class="card card-input">
+              <p class="card-label">Message</p>
+              <p class="card-body">“Reminder: children may wear non-uniform Friday…”</p>
+            </li>
+            <li class="card card-input">
+              <p class="card-label">Letter</p>
+              <p class="card-body">“Please return consent forms by Monday.”</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="flow-arrow" aria-hidden="true">
+          <svg viewBox="0 0 48 24" width="48" height="24" focusable="false"><path d="M2 12h40M34 4l8 8-8 8" fill="none" stroke="#526C7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <div class="flow-col">
+          <h3 class="flow-title">What you actually do</h3>
+          <ul class="card-list" role="list">
+            <li class="card card-action action-event">
+              <p class="card-label">Event</p>
+              <p class="card-body">Swimming — Tuesday</p>
+            </li>
+            <li class="card card-action action-bring">
+              <p class="card-label">Bring</p>
+              <p class="card-body">Swimming costume<br>Towel</p>
+            </li>
+            <li class="card card-action action-sign">
+              <p class="card-label">Sign</p>
+              <p class="card-body">Consent form — due Monday</p>
+            </li>
+            <li class="card card-action action-wear">
+              <p class="card-label">Wear</p>
+              <p class="card-body">Non-uniform — Friday</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="flow-caption">From scattered school messages to one clear plan.</p>
+    </div>
+  </section>
+
+  <!-- ============ MESSAGE TO ACTION ============ -->
+  <section class="section section-split" id="message-to-action">
+    <div class="wrap split">
+      <div class="split-copy">
+        <p class="eyebrow">How it works</p>
+        <h2>Send us the school message. We'll work out what actually matters.</h2>
+        <p class="lede">Instead of summarising everything, TomorrowKit separates school information into the things parents actually need to act on — events, things to bring, forms to sign, payments, pickups and deadlines.</p>
+      </div>
+      <figure class="split-figure shot">
+        <picture>
+          <source type="image/webp"
+                  srcset="assets/mockups/tomorrowkit-school-message-to-actions-640.webp 640w, assets/mockups/tomorrowkit-school-message-to-actions.webp 1122w"
+                  sizes="(min-width: 980px) 480px, (min-width: 640px) 70vw, 92vw">
+          <img src="assets/mockups/tomorrowkit-school-message-to-actions.png" alt="TomorrowKit turning a school email about Year 5 swimming into five actions: an event, things to bring, a consent form to sign and a £6 voluntary contribution."
+               width="1122" height="1402" loading="lazy" decoding="async">
+        </picture>
+        <figcaption class="disclosure">Concept preview — features and design may change.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ TONIGHT / TOMORROW ============ -->
+  <section class="section section-split section-tinted" id="tonight">
+    <div class="wrap split split-reverse">
+      <div class="split-copy">
+        <p class="eyebrow">Less to remember</p>
+        <h2>Know what needs sorting before the morning rush.</h2>
+        <p class="lede">TomorrowKit gives you a simple evening and morning briefing, so you don't need to remember everything yourself.</p>
+      </div>
+      <figure class="split-figure shot">
+        <picture>
+          <source type="image/webp"
+                  srcset="assets/mockups/tomorrowkit-tonight-briefing-640.webp 640w, assets/mockups/tomorrowkit-tonight-briefing.webp 1122w"
+                  sizes="(min-width: 980px) 480px, (min-width: 640px) 70vw, 92vw">
+          <img src="assets/mockups/tomorrowkit-tonight-briefing.png" alt="TomorrowKit Tonight briefing for Monday 14 September listing four things to sort, including packing a swimming bag and signing a trip form."
+               width="1122" height="1402" loading="lazy" decoding="async">
+        </picture>
+        <figcaption class="disclosure">Concept preview — features and design may change.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ MENTAL LOAD ============ -->
+  <section class="section section-split" id="mental-load">
+    <div class="wrap split">
+      <div class="split-copy">
+        <p class="eyebrow">Share the load</p>
+        <h2>School admin shouldn't live in one person's head.</h2>
+        <p class="lede">Turn invisible family admin into visible actions and share responsibility with the people helping to make family life work.</p>
+      </div>
+      <figure class="split-figure shot">
+        <picture>
+          <source type="image/webp"
+                  srcset="assets/mockups/tomorrowkit-share-the-load-640.webp 640w, assets/mockups/tomorrowkit-share-the-load.webp 1149w"
+                  sizes="(min-width: 980px) 480px, (min-width: 640px) 70vw, 92vw">
+          <img src="assets/mockups/tomorrowkit-share-the-load.png" alt="TomorrowKit World Book Day screen with costume, donation and favourite book tasks assigned to different family members, and pickup still unassigned."
+               width="1149" height="1368" loading="lazy" decoding="async">
+        </picture>
+        <figcaption class="disclosure">Concept preview — features and design may change.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ CALENDAR ============ -->
+  <section class="section section-split section-tinted" id="calendar">
+    <div class="wrap split split-reverse">
+      <div class="split-copy">
+        <p class="eyebrow">Your calendar, your way</p>
+        <h2>Works with the calendar you already use.</h2>
+        <p class="lede">TomorrowKit isn't trying to replace your calendar. Add the events that belong there while keeping packing lists, payments, forms and reminders where they're actually useful.</p>
+        <ul class="chip-list" role="list">
+          <li class="chip">Google Calendar</li>
+          <li class="chip">Apple Calendar</li>
+          <li class="chip">Outlook</li>
+        </ul>
+        <p class="note">Calendar integrations are planned.</p>
+      </div>
+      <figure class="split-figure shot">
+        <picture>
+          <source type="image/webp"
+                  srcset="assets/mockups/tomorrowkit-calendar-integration-640.webp 640w, assets/mockups/tomorrowkit-calendar-integration.webp 1122w"
+                  sizes="(min-width: 980px) 480px, (min-width: 640px) 70vw, 92vw">
+          <img src="assets/mockups/tomorrowkit-calendar-integration.png" alt="TomorrowKit calendar settings showing which items are added to your calendar, with Google Calendar connected and Apple Calendar and Outlook available to connect."
+               width="1122" height="1402" loading="lazy" decoding="async">
+        </picture>
+        <figcaption class="disclosure">Concept preview — features and design may change.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ PRIVACY BY DESIGN (dark) ============ -->
+  <section class="section section-dark" id="privacy">
+    <div class="wrap split">
+      <div class="split-copy">
+        <p class="eyebrow">Privacy by design</p>
+        <h2>Your family's information isn't the product.</h2>
+        <p class="lede">TomorrowKit is being designed from the beginning around data minimisation, meaningful control and privacy by default.</p>
+
+        <ul class="privacy-list" role="list">
+          <li>
+            <h3>Minimum data</h3>
+            <p>We only want the information needed to make the service work.</p>
+          </li>
+          <li>
+            <h3>You choose what to share</h3>
+            <p>Forward a message, upload a document or connect only the services you choose.</p>
+          </li>
+          <li>
+            <h3>No advertising business model</h3>
+            <p>Your child's schedule should not become advertising data.</p>
+          </li>
+          <li>
+            <h3>Control</h3>
+            <p>See what's stored, manage access and delete your information.</p>
+          </li>
+        </ul>
+
+        <p class="note note-dark">TomorrowKit is currently in development. Our privacy and security design will continue to be assessed before beta release.</p>
+      </div>
+
+      <figure class="split-figure shot shot-dark">
+        <picture>
+          <source type="image/webp"
+                  srcset="assets/mockups/tomorrowkit-privacy-and-data-640.webp 640w, assets/mockups/tomorrowkit-privacy-and-data.webp 1122w"
+                  sizes="(min-width: 980px) 480px, (min-width: 640px) 70vw, 92vw">
+          <img src="assets/mockups/tomorrowkit-privacy-and-data.png" alt="TomorrowKit Privacy and Data screen showing connected services, school information settings and options to view, download or delete your data."
+               width="1122" height="1402" loading="lazy" decoding="async">
+        </picture>
+        <figcaption class="disclosure">Concept preview — features and design may change.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section" id="how-it-works">
+    <div class="wrap">
+      <div class="section-head section-head-centred">
+        <h2>From school message to sorted.</h2>
+      </div>
+      <ol class="steps" role="list">
+        <li class="step">
+          <p class="step-number">01</p>
+          <h3>Send it</h3>
+          <p>Forward an email, share a screenshot, upload a PDF or photograph a letter.</p>
+        </li>
+        <li class="step">
+          <p class="step-number">02</p>
+          <h3>TomorrowKit sorts it</h3>
+          <p>Important information becomes events, things to bring, payments, forms, pickups and deadlines.</p>
+        </li>
+        <li class="step">
+          <p class="step-number">03</p>
+          <h3>Get ready</h3>
+          <p>Check Tomorrow, sync the events you want and share responsibilities with your family.</p>
+        </li>
+      </ol>
+
+      <figure class="overview-figure shot">
+        <picture>
+          <source type="image/webp"
+                  srcset="assets/mockups/tomorrowkit-product-overview-640.webp 640w, assets/mockups/tomorrowkit-product-overview.webp 1024w"
+                  sizes="(min-width: 980px) 620px, 92vw">
+          <img src="assets/mockups/tomorrowkit-product-overview.png"
+               alt="Six TomorrowKit screens side by side: Tomorrow view, school message turned into actions, Tonight briefing, Share the load, calendar integration and Privacy and Data."
+               width="1024" height="1536" loading="lazy" decoding="async">
+        </picture>
+        <figcaption class="disclosure">Concept preview — TomorrowKit is currently in development. Final features and design may change.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ FREE BETA WAITLIST ============ -->
+  <section class="section section-tinted" id="waitlist">
+    <div class="wrap waitlist">
+      <div class="waitlist-copy">
+        <p class="eyebrow">Help shape TomorrowKit</p>
+        <h2>Help us make school admin a little lighter.</h2>
+        <p class="lede">TomorrowKit is still in development. We're inviting parents to help shape the first version around real family life.</p>
+        <p class="note">We don't ask for children's names, school names, dates of birth, addresses or phone numbers. An email address is enough to keep you posted.</p>
+      </div>
+
+      <!--
+        FORM ENDPOINT
+        =============
+        This form is not connected to anything yet.
+
+        To connect it:
+        1. Create a form with Tally (https://tally.so), Formspree (https://formspree.io),
+           Netlify Forms, Buttondown or any other provider you trust.
+        2. Replace the action value below with the endpoint that provider gives you, e.g.
+              action="https://formspree.io/f/xxxxxxx"
+           or  action="https://tally.so/r/xxxxxxx"
+        3. Check the provider's own privacy and cookie behaviour before launch, and update
+           privacy.html and cookies.html to match.
+
+        Until the placeholder below is replaced, script.js blocks submission and shows a
+        clear on-page message instead of sending data anywhere.
+      -->
+      <form class="waitlist-form" id="waitlistForm" method="POST"
+            action="REPLACE_WITH_FORM_ENDPOINT" novalidate>
+
+        <div class="field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" autocomplete="email"
+                 inputmode="email" required aria-describedby="emailHelp">
+          <p class="field-help" id="emailHelp">We only need an email address to get in touch about the beta.</p>
+        </div>
+
+        <fieldset class="field">
+          <legend>Number of children</legend>
+          <div class="option-row">
+            <label class="option"><input type="radio" name="children" value="1"><span>1</span></label>
+            <label class="option"><input type="radio" name="children" value="2"><span>2</span></label>
+            <label class="option"><input type="radio" name="children" value="3+"><span>3+</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Stages</legend>
+          <div class="option-row option-row-wrap">
+            <label class="option"><input type="checkbox" name="stages" value="Nursery"><span>Nursery</span></label>
+            <label class="option"><input type="checkbox" name="stages" value="Preschool"><span>Preschool</span></label>
+            <label class="option"><input type="checkbox" name="stages" value="Primary"><span>Primary</span></label>
+            <label class="option"><input type="checkbox" name="stages" value="Secondary"><span>Secondary</span></label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="stress">What causes you the most school-admin stress? <span class="optional">(optional)</span></label>
+          <textarea id="stress" name="stress" rows="4"
+                    placeholder="Anything you'd like us to fix first."></textarea>
+        </div>
+
+        <button class="btn btn-primary btn-block" type="submit">Join the free beta</button>
+
+        <p class="form-privacy">We'll use your email to contact you about TomorrowKit beta access, testing and launch. We won't sell your details or use them to market unrelated services. Read our <a href="privacy.html">Privacy Notice</a>.</p>
+
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section" id="faq">
+    <div class="wrap wrap-narrow">
+      <div class="section-head">
+        <h2>Questions, answered plainly.</h2>
+      </div>
+
+      <div class="faq">
+        <details class="faq-item">
+          <summary><span>Is TomorrowKit available yet?</span></summary>
+          <div class="faq-answer"><p>TomorrowKit is currently in development. The beta waitlist is helping us decide what to build first.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>Will TomorrowKit be free?</span></summary>
+          <div class="faq-answer"><p>We plan to offer a genuinely useful free version. Beta access will be free.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>Will I have to give TomorrowKit access to my entire inbox?</span></summary>
+          <div class="faq-answer"><p>No. Privacy and data minimisation are central to the product. We are designing ways for parents to choose exactly what information they share.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>Will it work with Google Calendar?</span></summary>
+          <div class="faq-answer"><p>Google Calendar integration is planned. Apple Calendar and Outlook support are also being explored.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>Is TomorrowKit only for school?</span></summary>
+          <div class="faq-answer"><p>The first version is focused on school, nursery and children's activities.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>Do you sell family information to advertisers?</span></summary>
+          <div class="faq-answer"><p>No. TomorrowKit is not being designed around selling family information or behavioural advertising.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="section section-final">
+    <div class="wrap wrap-narrow final-cta">
+      <h2>Tomorrow morning doesn't need another surprise.</h2>
+      <p class="lede">Join the free beta and help us build a simpler way to stay ahead of school life.</p>
+      <p><a class="btn btn-primary" href="#waitlist">Join the free beta</a></p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <p class="footer-name">TomorrowKit</p>
+      <p class="footer-tagline">School admin, off your mental load.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <ul>
+        <li><a href="privacy.html">Privacy Notice</a></li>
+        <li><a href="cookies.html">Cookie Notice</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+        <li><a href="mailto:hello@tomorrowkit.co.uk">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap footer-legal">
+    <p>TomorrowKit is currently a product concept in development. Features shown are illustrative and may change before release.</p>
+    <p class="footer-small">A privacy-first product experiment from The Privacy Blueprint. © <span id="year">2026</span> TomorrowKit.</p>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
