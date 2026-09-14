@@ -12,9 +12,9 @@
 <meta property="og:locale" content="en_GB">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23526C7A'/%3E%3Cpath d='M9 12h14M16 12v11' stroke='%23F7F6F2' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23202725'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='21' font-weight='700' fill='%23F7F6F2' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -22,12 +22,7 @@
 <!-- ============ HEADER / NAVIGATION ============ -->
 <header class="site-header" id="top">
   <div class="wrap header-inner">
-    <a class="wordmark" href="#top">
-      <span class="wordmark-mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" width="28" height="28" focusable="false"><rect width="32" height="32" rx="7" fill="#526C7A"/><path d="M9 12h14M16 12v11" stroke="#F7F6F2" stroke-width="2.6" stroke-linecap="round"/></svg>
-      </span>
-      <span class="wordmark-text">TomorrowKit</span>
-    </a>
+    <a class="wordmark" href="#top">TomorrowKit</a>
 
     <button class="nav-toggle" type="button" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
       <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
@@ -69,7 +64,9 @@
         <figcaption>Everything they need. Before the morning rush.</figcaption>
       </figure>
     </div>
-    <p class="wrap disclosure">Concept preview — TomorrowKit is currently in development. Final features and design may change.</p>
+    <div class="wrap">
+      <p class="disclosure hero-disclosure">Concept preview — TomorrowKit is currently in development. Final features and design may change.</p>
+    </div>
   </section>
 
   <!-- ============ THE PROBLEM ============ -->
@@ -80,52 +77,24 @@
         <p class="lede">School information arrives everywhere — emails, newsletters, PDFs, school apps, WhatsApp messages and paper letters. TomorrowKit brings the important actions together, so parents don't have to keep everything in their head.</p>
       </div>
 
-      <div class="flow">
-        <div class="flow-col">
-          <h3 class="flow-title">What arrives</h3>
-          <ul class="card-list" role="list">
-            <li class="card card-input">
-              <p class="card-label">Email</p>
-              <p class="card-body">“Year 5 swimming begins Tuesday…”</p>
-            </li>
-            <li class="card card-input">
-              <p class="card-label">PDF</p>
-              <p class="card-body">“Autumn Term Newsletter”</p>
-            </li>
-            <li class="card card-input">
-              <p class="card-label">Message</p>
-              <p class="card-body">“Reminder: children may wear non-uniform Friday…”</p>
-            </li>
-            <li class="card card-input">
-              <p class="card-label">Letter</p>
-              <p class="card-body">“Please return consent forms by Monday.”</p>
-            </li>
+      <div class="ledger">
+        <div class="ledger-col">
+          <h3 class="ledger-title">What arrives</h3>
+          <ul class="ledger-list ledger-list-in" role="list">
+            <li><span class="ledger-label">Email</span><span class="ledger-text">“Year 5 swimming begins Tuesday…”</span></li>
+            <li><span class="ledger-label">PDF</span><span class="ledger-text">“Autumn Term Newsletter”</span></li>
+            <li><span class="ledger-label">Message</span><span class="ledger-text">“Reminder: children may wear non-uniform Friday…”</span></li>
+            <li><span class="ledger-label">Letter</span><span class="ledger-text">“Please return consent forms by Monday.”</span></li>
           </ul>
         </div>
 
-        <div class="flow-arrow" aria-hidden="true">
-          <svg viewBox="0 0 48 24" width="48" height="24" focusable="false"><path d="M2 12h40M34 4l8 8-8 8" fill="none" stroke="#526C7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-
-        <div class="flow-col">
-          <h3 class="flow-title">What you actually do</h3>
-          <ul class="card-list" role="list">
-            <li class="card card-action action-event">
-              <p class="card-label">Event</p>
-              <p class="card-body">Swimming — Tuesday</p>
-            </li>
-            <li class="card card-action action-bring">
-              <p class="card-label">Bring</p>
-              <p class="card-body">Swimming costume<br>Towel</p>
-            </li>
-            <li class="card card-action action-sign">
-              <p class="card-label">Sign</p>
-              <p class="card-body">Consent form — due Monday</p>
-            </li>
-            <li class="card card-action action-wear">
-              <p class="card-label">Wear</p>
-              <p class="card-body">Non-uniform — Friday</p>
-            </li>
+        <div class="ledger-col">
+          <h3 class="ledger-title">What you actually do</h3>
+          <ul class="ledger-list ledger-list-out" role="list">
+            <li><span class="ledger-label">Event</span><span class="ledger-text">Swimming — Tuesday</span></li>
+            <li><span class="ledger-label">Bring</span><span class="ledger-text">Swimming costume<br>Towel</span></li>
+            <li><span class="ledger-label">Sign</span><span class="ledger-text">Consent form — due Monday</span></li>
+            <li><span class="ledger-label">Wear</span><span class="ledger-text">Non-uniform — Friday</span></li>
           </ul>
         </div>
       </div>
@@ -136,7 +105,7 @@
 
   <!-- ============ MESSAGE TO ACTION ============ -->
   <section class="section section-split" id="message-to-action">
-    <div class="wrap split">
+    <div class="wrap split comp-a">
       <div class="split-copy">
         <p class="eyebrow">How it works</p>
         <h2>Send us the school message. We'll work out what actually matters.</h2>
@@ -157,7 +126,7 @@
 
   <!-- ============ TONIGHT / TOMORROW ============ -->
   <section class="section section-split section-tinted" id="tonight">
-    <div class="wrap split split-reverse">
+    <div class="wrap split comp-b">
       <div class="split-copy">
         <p class="eyebrow">Less to remember</p>
         <h2>Know what needs sorting before the morning rush.</h2>
@@ -178,7 +147,7 @@
 
   <!-- ============ MENTAL LOAD ============ -->
   <section class="section section-split" id="mental-load">
-    <div class="wrap split">
+    <div class="wrap split comp-c">
       <div class="split-copy">
         <p class="eyebrow">Share the load</p>
         <h2>School admin shouldn't live in one person's head.</h2>
@@ -199,15 +168,15 @@
 
   <!-- ============ CALENDAR ============ -->
   <section class="section section-split section-tinted" id="calendar">
-    <div class="wrap split split-reverse">
+    <div class="wrap split comp-d">
       <div class="split-copy">
         <p class="eyebrow">Your calendar, your way</p>
         <h2>Works with the calendar you already use.</h2>
         <p class="lede">TomorrowKit isn't trying to replace your calendar. Add the events that belong there while keeping packing lists, payments, forms and reminders where they're actually useful.</p>
-        <ul class="chip-list" role="list">
-          <li class="chip">Google Calendar</li>
-          <li class="chip">Apple Calendar</li>
-          <li class="chip">Outlook</li>
+        <ul class="rule-list" role="list">
+          <li>Google Calendar</li>
+          <li>Apple Calendar</li>
+          <li>Outlook</li>
         </ul>
         <p class="note">Calendar integrations are planned.</p>
       </div>
@@ -226,7 +195,7 @@
 
   <!-- ============ PRIVACY BY DESIGN (dark) ============ -->
   <section class="section section-dark" id="privacy">
-    <div class="wrap split">
+    <div class="wrap split comp-e">
       <div class="split-copy">
         <p class="eyebrow">Privacy by design</p>
         <h2>Your family's information isn't the product.</h2>
