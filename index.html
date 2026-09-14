@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TomorrowKit — School admin, off your mental load</title>
+<meta name="description" content="TomorrowKit turns school emails, newsletters, letters and screenshots into exactly what each child needs to do, pack, pay, sign and remember. Privacy-first by design. Join the free beta.">
+<meta name="colour-scheme" content="light">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F7F3EC">
+
+<!-- Open Graph / social. No third-party scripts, pixels or trackers are loaded anywhere on this site. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TomorrowKit">
+<meta property="og:title" content="TomorrowKit — School admin, off your mental load">
+<meta property="og:description" content="Know what they need tomorrow. TomorrowKit turns school admin into clear actions for each child.">
+<meta property="og:locale" content="en_GB">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231E3A31'/><path d='M9 17.5l4.5 4.5L23 12' stroke='%23F7F3EC' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="wordmark" href="/" aria-label="TomorrowKit home">
+      <span class="wordmark__mark" aria-hidden="true">TK</span>
+      TomorrowKit
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="#how-it-works">How it works</a></li>
+        <li><a class="nav__link" href="#privacy">Privacy</a></li>
+        <li><a class="nav__link" href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+
+    <a class="btn btn--primary header__cta" href="#beta">Join the free beta</a>
+
+    <button class="nav-toggle" type="button" id="navToggle" aria-expanded="false" aria-controls="mobileNav">
+      <span class="nav-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      Menu
+    </button>
+  </div>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="Main, mobile" hidden>
+    <ul class="mobile-nav__list">
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="#privacy">Privacy</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn btn--primary btn--full" href="#beta">Join the free beta</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- ====================================================================
+       1. HERO
+       ==================================================================== -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero__grid">
+      <div>
+        <p class="eyebrow">The school-admin assistant for busy families</p>
+        <h1 class="hero__title" id="hero-title">Never find out at 8:15am that it was PE day.</h1>
+        <p class="lede hero__copy">
+          Forward the email. Share the screenshot. Upload the newsletter. TomorrowKit turns
+          school admin into exactly what you need to do, pack, pay, sign and remember — for each child.
+        </p>
+
+        <div class="btn-row hero__cta">
+          <a class="btn btn--primary" href="#beta">Join the free beta</a>
+          <a class="btn btn--ghost" href="#how-it-works">See how it works</a>
+        </div>
+
+        <ul class="hero__note">
+          <li>Free beta</li>
+          <li>No card required</li>
+          <li>Privacy-first by design</li>
+        </ul>
+      </div>
+
+      <div class="hero__mock">
+        <figure class="phone" style="margin:0">
+          <figcaption class="visually-hidden">
+            Illustration of the TomorrowKit Tomorrow screen on a phone. It shows the heading
+            Tomorrow, Monday 21 September, followed by a card for each child listing what they
+            need and what is already done.
+          </figcaption>
+          <div class="phone__screen">
+            <div class="phone__status" aria-hidden="true">
+              <span>21:40</span>
+              <span class="phone__status-icons"><i></i><i></i><i></i></span>
+            </div>
+
+            <div class="phone__body">
+              <div class="phone__head">
+                <p class="phone__title">Tomorrow</p>
+                <p class="phone__date">Monday 21 September</p>
+              </div>
+
+              <div class="child-card">
+                <div class="child-card__head">
+                  <span class="child-card__name">Soraiyah</span>
+                  <span class="child-card__status child-card__status--open">2 things left</span>
+                </div>
+                <ul class="tasks">
+                  <li><span class="box" aria-hidden="true"></span> Pack swimming bag</li>
+                  <li><span class="box" aria-hidden="true"></span> £2 for cake sale</li>
+                  <li class="is-done"><span class="box" aria-hidden="true">✓</span> Reading book <span class="visually-hidden">(done)</span></li>
+                  <li class="is-done"><span class="box" aria-hidden="true">✓</span> Water bottle <span class="visually-hidden">(done)</span></li>
+                </ul>
+              </div>
+
+              <div class="child-card child-card--done">
+                <div class="child-card__head">
+                  <span class="child-card__name">Mira</span>
+                  <span class="child-card__status child-card__status--done">Ready ✓</span>
+                </div>
+                <ul class="tasks">
+                  <li class="is-done"><span class="box" aria-hidden="true">✓</span> Nursery bag <span class="visually-hidden">(done)</span></li>
+                  <li class="is-done"><span class="box" aria-hidden="true">✓</span> Spare clothes <span class="visually-hidden">(done)</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="phone__nav" aria-hidden="true">
+              <span>Today</span>
+              <span>To Do</span>
+              <span class="is-add">Add</span>
+              <span class="is-active">Coming Up</span>
+              <span>Children</span>
+            </div>
+          </div>
+        </figure>
+        <p class="mock-caption">Everything they need. Before the morning rush.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       2. PROBLEM
+       ==================================================================== -->
+  <section class="section section--paper" aria-labelledby="problem-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="problem-title">Because the information isn't really the problem. Remembering what to do with it is.</h2>
+      </div>
+
+      <ul class="scatter" style="list-style:none">
+        <li class="note">
+          <span class="note__kind">Email</span>
+          <p class="note__text">“Year 5 swimming begins Tuesday…”</p>
+        </li>
+        <li class="note">
+          <span class="note__kind">PDF</span>
+          <p class="note__text">“Autumn Term Newsletter”</p>
+        </li>
+        <li class="note">
+          <span class="note__kind">Message</span>
+          <p class="note__text">“Reminder: children may wear non-uniform Friday…”</p>
+        </li>
+        <li class="note">
+          <span class="note__kind">Letter</span>
+          <p class="note__text">“Please return consent forms by Monday.”</p>
+        </li>
+      </ul>
+
+      <div class="funnel">
+        <span class="funnel__line" aria-hidden="true"></span>
+        <span class="funnel__dot" aria-hidden="true"></span>
+        <p style="margin:0">All of it, in one place</p>
+      </div>
+
+      <div class="resolved">
+        <div class="resolved__head">
+          <span class="resolved__title">Tomorrow</span>
+          <span class="resolved__meta">2 children · 4 actions</span>
+        </div>
+        <ul class="tasks">
+          <li><span class="box" aria-hidden="true"></span> Swimming bag — Soraiyah</li>
+          <li><span class="box" aria-hidden="true"></span> Consent form to sign — due Monday</li>
+          <li><span class="box" aria-hidden="true"></span> Non-uniform day — Friday</li>
+          <li><span class="box" aria-hidden="true"></span> £2 cake sale donation</li>
+        </ul>
+      </div>
+
+      <p class="lede" style="margin-top:36px">
+        School information arrives everywhere. TomorrowKit brings the actions together without
+        asking you to manually rebuild your life in another calendar.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       3. CORE TRANSFORMATION
+       ==================================================================== -->
+  <section class="section" aria-labelledby="transform-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="transform-title">Send us the school message. We'll work out what actually matters.</h2>
+      </div>
+
+      <div class="ba">
+        <div class="ba__panel">
+          <p class="ba__label">Before — the email you were sent</p>
+          <div class="letter">
+            <p>Dear Parents,</p>
+            <p>
+              Year 5 swimming lessons begin next Tuesday. Children should bring a swimming
+              costume, towel and swimming cap. Please return the consent form no later than
+              Monday. The voluntary contribution is £6.
+            </p>
+          </div>
+        </div>
+
+        <div class="ba__panel ba__panel--after">
+          <p class="ba__label">After — in TomorrowKit</p>
+          <p class="found">TomorrowKit found:</p>
+
+          <ul class="chips">
+            <li class="chip">
+              <span class="chip__kind"><span aria-hidden="true">🏊</span> Event</span>
+              <span class="chip__value">Swimming — Tuesday</span>
+            </li>
+            <li class="chip">
+              <span class="chip__kind"><span aria-hidden="true">🎒</span> Bring</span>
+              <span class="chip__value">
+                <span>Swimming costume</span>
+                <span>Towel</span>
+                <span>Swimming cap</span>
+              </span>
+            </li>
+            <li class="chip">
+              <span class="chip__kind"><span aria-hidden="true">📄</span> Sign</span>
+              <span class="chip__value">Consent form</span>
+              <span class="chip__note">Due Monday</span>
+            </li>
+            <li class="chip">
+              <span class="chip__kind"><span aria-hidden="true">💷</span> Pay</span>
+              <span class="chip__value">£6 voluntary contribution</span>
+            </li>
+          </ul>
+
+          <div class="ba__actions">
+            <span class="btn btn--light">Add event to Google Calendar</span>
+            <span class="btn btn--outline-light">Save to TomorrowKit</span>
+          </div>
+
+          <p class="ba__source"><span aria-hidden="true">🔎</span> <span style="text-decoration:underline;text-underline-offset:3px">View original source</span></p>
+        </div>
+      </div>
+
+      <p class="microcopy">
+        Every action keeps a link back to the message it came from, so you can always check the original wording.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       4. TOMORROW VIEW
+       ==================================================================== -->
+  <section class="section section--beige" aria-labelledby="tomorrow-title">
+    <div class="wrap tomorrow__grid">
+      <div>
+        <h2 class="h2--quiet" id="tomorrow-title">One question. One screen.</h2>
+        <p class="big-question">What do they need tomorrow?</p>
+        <p class="lede">
+          Rather than asking you to maintain another complex planner, TomorrowKit builds two short
+          briefings: one in the evening while there is still time to act, and one in the morning
+          before everyone leaves the house.
+        </p>
+        <p class="lede" style="margin-top:1em">
+          Open TomorrowKit at night or in the morning and see only what matters next.
+        </p>
+      </div>
+
+      <div class="brief-grid">
+        <div class="brief">
+          <p class="brief__label">Tonight</p>
+          <p class="brief__count">4 things to prepare</p>
+          <ul class="brief__list">
+            <li><span class="ico" aria-hidden="true">🎒</span> Swimming bag</li>
+            <li><span class="ico" aria-hidden="true">📄</span> Sign reading diary</li>
+            <li><span class="ico" aria-hidden="true">👕</span> Non-uniform tomorrow</li>
+            <li><span class="ico" aria-hidden="true">💷</span> £2 donation</li>
+          </ul>
+        </div>
+
+        <div class="brief brief--morning">
+          <p class="brief__label">Tomorrow morning</p>
+          <p class="brief__count">Don't forget</p>
+          <ul class="brief__list">
+            <li><span class="ico" aria-hidden="true">🎒</span> Swimming bag</li>
+            <li><span class="ico" aria-hidden="true">💷</span> £2</li>
+            <li><span class="ico" aria-hidden="true">☔</span> Waterproof coat</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       5. MENTAL LOAD
+       ==================================================================== -->
+  <section class="section section--paper" aria-labelledby="load-title">
+    <div class="wrap load__grid">
+      <div>
+        <h2 id="load-title">Get school admin out of your head.</h2>
+        <p class="lede">
+          Remembering is work. Remembering PE days, forms, collections, clubs, dress-up days,
+          payments and school trips is work too. TomorrowKit helps turn invisible family admin
+          into visible, manageable actions.
+        </p>
+        <p class="lede" style="margin-top:1em">
+          <strong>Share the load without having to remind everyone yourself.</strong>
+        </p>
+      </div>
+
+      <div class="assign" style="margin-top:36px">
+        <div class="assign__head">
+          <h3 class="assign__title">World Book Day</h3>
+          <p class="assign__meta">Thursday · 4 things to sort between you</p>
+        </div>
+        <ul class="assign__list">
+          <li>
+            <span class="assign__task">Costume</span>
+            <span class="assign__who"><span aria-hidden="true">✓</span> Assigned to Ciaran</span>
+          </li>
+          <li>
+            <span class="assign__task">£1 donation</span>
+            <span class="assign__who"><span aria-hidden="true">✓</span> Assigned to Inês</span>
+          </li>
+          <li>
+            <span class="assign__task">Book</span>
+            <span class="assign__who"><span aria-hidden="true">✓</span> Assigned to Soraiyah</span>
+          </li>
+          <li>
+            <span class="assign__task">Pickup</span>
+            <span class="assign__who assign__who--open"><span aria-hidden="true">⚠️</span> Unassigned</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       6. CALENDAR INTEGRATION
+       ==================================================================== -->
+  <section class="section" aria-labelledby="cal-title">
+    <div class="wrap cal__grid">
+      <div>
+        <h2 id="cal-title">Works with the calendar you already use.</h2>
+
+        <ul class="cal-list">
+          <li><span class="dot" aria-hidden="true"></span> Google Calendar</li>
+          <li><span class="dot" aria-hidden="true"></span> Apple Calendar</li>
+          <li><span class="dot" aria-hidden="true"></span> Outlook</li>
+        </ul>
+
+        <p class="lede">
+          TomorrowKit isn't trying to replace your calendar. Events can be added to the calendar
+          your family already uses, while packing lists, payments, forms and reminders stay where
+          they're actually useful.
+        </p>
+      </div>
+
+      <div class="prefs" style="margin-top:34px">
+        <h3 class="prefs__title">Calendar preferences</h3>
+        <ul class="prefs__list">
+          <li>
+            Add school events
+            <span class="prefs__state">On</span>
+            <span class="toggle toggle--on" aria-hidden="true"></span>
+          </li>
+          <li>
+            Add appointments
+            <span class="prefs__state">On</span>
+            <span class="toggle toggle--on" aria-hidden="true"></span>
+          </li>
+          <li>
+            Add packing reminders
+            <span class="prefs__state">Off</span>
+            <span class="toggle" aria-hidden="true"></span>
+          </li>
+          <li>
+            Add FYI notices
+            <span class="prefs__state">Off</span>
+            <span class="toggle" aria-hidden="true"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       7. PRIVACY
+       ==================================================================== -->
+  <section class="section section--forest" id="privacy" aria-labelledby="privacy-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Privacy by design</p>
+        <h2 id="privacy-title">Your family's information isn't the product.</h2>
+        <p class="lede">
+          TomorrowKit is being designed from the beginning around data minimisation, meaningful
+          control and privacy by default.
+        </p>
+      </div>
+
+      <div class="principles">
+        <div class="principle">
+          <p class="principle__num">01</p>
+          <h3>Minimum data</h3>
+          <p>We only want the information needed to make the service work.</p>
+        </div>
+        <div class="principle">
+          <p class="principle__num">02</p>
+          <h3>You choose what to share</h3>
+          <p>
+            Forward a message, upload a document or connect services you choose.
+            Whole-inbox access should never be the default.
+          </p>
+        </div>
+        <div class="principle">
+          <p class="principle__num">03</p>
+          <h3>No advertising business model</h3>
+          <p>Your child's schedule should not become advertising data.</p>
+        </div>
+        <div class="principle">
+          <p class="principle__num">04</p>
+          <h3>Control</h3>
+          <p>See what's stored, manage connected services and delete your information.</p>
+        </div>
+      </div>
+
+      <p class="dev-note">
+        TomorrowKit is currently in development. Our privacy and security design will continue to
+        be assessed before beta release.
+      </p>
+
+      <div class="btn-row" style="margin-top:28px">
+        <a class="btn btn--light" href="privacy/">Read the Privacy Notice</a>
+        <a class="btn btn--outline-light" href="cookies/">How we handle cookies</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       8. HOW IT WORKS
+       ==================================================================== -->
+  <section class="section" id="how-it-works" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="how-title">How it works</h2>
+        <p class="lede">Three steps, and none of them involve typing your life into a new app.</p>
+      </div>
+
+      <ol class="steps">
+        <li class="step">
+          <span class="step__num" aria-hidden="true">1</span>
+          <h3>Send it</h3>
+          <p>Forward an email, share a screenshot, upload a PDF or photograph a letter.</p>
+        </li>
+        <li class="step">
+          <span class="step__num" aria-hidden="true">2</span>
+          <h3>TomorrowKit sorts it</h3>
+          <p>Important information becomes events, things to bring, payments, forms, pickups and deadlines.</p>
+        </li>
+        <li class="step">
+          <span class="step__num" aria-hidden="true">3</span>
+          <h3>Get ready</h3>
+          <p>Check Tomorrow, sync the events you want and share responsibilities with your family.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       9. FREE BETA WAITLIST
+       ==================================================================== -->
+  <section class="section section--paper" id="beta" aria-labelledby="beta-title">
+    <div class="wrap waitlist__grid">
+      <div>
+        <h2 id="beta-title">Help us build TomorrowKit for real family life.</h2>
+        <p class="lede">
+          We're inviting parents to help shape the first version. Join the free beta waitlist and
+          tell us what currently causes the most school-admin stress.
+        </p>
+
+        <ul class="no-ask">
+          <li><span class="tick" aria-hidden="true">✓</span> We don't ask for your children's names or dates of birth.</li>
+          <li><span class="tick" aria-hidden="true">✓</span> We don't ask which school they attend.</li>
+          <li><span class="tick" aria-hidden="true">✓</span> We don't ask for your address or phone number.</li>
+        </ul>
+      </div>
+
+      <div class="form-card">
+        <!--
+          TALLY FORM EMBED PLACEHOLDER
+          ---------------------------------------------------------------
+          The markup below is a styled placeholder that matches the final field set.
+          To go live, replace everything inside #tally-embed with the Tally embed
+          (iframe or Tally's own embed snippet) for the TomorrowKit beta waitlist form.
+          Keep the field set identical and keep the consent note below the form.
+          Do not add analytics, pixels or marketing tags alongside the embed.
+        -->
+        <div id="tally-embed" data-embed="tally-placeholder">
+          <form id="betaForm" novalidate>
+            <div class="field">
+              <label class="field__label" for="email">Email address <span class="req">(required)</span></label>
+              <span class="field__hint" id="email-hint">So we can send you beta access.</span>
+              <input class="input" type="email" id="email" name="email" autocomplete="email"
+                     required aria-describedby="email-hint" placeholder="you@example.com">
+            </div>
+
+            <fieldset class="field" style="border:0;padding:0;margin-inline:0">
+              <legend class="legend">How many children are you organising for?</legend>
+              <div class="choices">
+                <label class="choice"><input type="radio" name="children" value="1"><span>1</span></label>
+                <label class="choice"><input type="radio" name="children" value="2"><span>2</span></label>
+                <label class="choice"><input type="radio" name="children" value="3+"><span>3+</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="field" style="border:0;padding:0;margin-inline:0">
+              <legend class="legend">What stages are they at?</legend>
+              <span class="field__hint">Choose as many as apply.</span>
+              <div class="choices">
+                <label class="choice"><input type="checkbox" name="stage" value="nursery"><span>Nursery / Preschool</span></label>
+                <label class="choice"><input type="checkbox" name="stage" value="primary"><span>Primary</span></label>
+                <label class="choice"><input type="checkbox" name="stage" value="secondary"><span>Secondary</span></label>
+                <label class="choice"><input type="checkbox" name="stage" value="other"><span>Other</span></label>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label class="field__label" for="stress">What causes you the most school-admin stress?</label>
+              <span class="field__hint" id="stress-hint">Optional. Please leave out names, schools and anything else that identifies your family.</span>
+              <textarea class="textarea" id="stress" name="stress" aria-describedby="stress-hint"
+                        placeholder="The bit that always catches us out is…"></textarea>
+            </div>
+
+            <button class="btn btn--primary btn--full" type="submit">Join the free beta</button>
+
+            <p class="consent-note">
+              We'll use your email to contact you about TomorrowKit beta access, testing and
+              launch. We won't sell your details or use them to market unrelated Privacy Blueprint
+              services. <a href="privacy/">Read our Privacy Notice</a>.
+            </p>
+          </form>
+
+          <div class="form-success" id="betaSuccess" role="status" hidden>
+            <span class="tick" aria-hidden="true">✓</span>
+            <span>You're on the list. Thanks for helping us make school admin a little lighter.</span>
+          </div>
+        </div>
+
+        <p class="embed-note">
+          Placeholder form. Before launch this is replaced by the Tally waitlist form, which
+          collects the same fields and nothing more.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       10. FAQ
+       ==================================================================== -->
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="faq-title">Questions parents ask us</h2>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>Is TomorrowKit available yet?</summary>
+          <div class="faq__answer">
+            <p>TomorrowKit is currently in development. The beta waitlist is helping us decide what to build first.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Will TomorrowKit be free?</summary>
+          <div class="faq__answer">
+            <p>We plan to offer a genuinely useful free version. Beta access will be free.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Will I have to give TomorrowKit access to my entire inbox?</summary>
+          <div class="faq__answer">
+            <p>
+              No. Privacy and data minimisation are central to the product. We are designing ways
+              for parents to choose exactly what information they share.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Will it work with Google Calendar?</summary>
+          <div class="faq__answer">
+            <p>
+              Calendar integration is planned, including Google Calendar. Apple and Outlook support
+              are also being explored.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Is this only for school?</summary>
+          <div class="faq__answer">
+            <p>
+              The first version is focused on school, nursery and children's activities because
+              that is where parents tell us the mental load is greatest.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Do you sell family information to advertisers?</summary>
+          <div class="faq__answer">
+            <p>
+              No. TomorrowKit is not being designed around selling family information or
+              behavioural advertising.
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       11. FINAL CTA
+       ==================================================================== -->
+  <section class="section section--beige final" aria-labelledby="final-title">
+    <div class="wrap wrap--narrow">
+      <h2 id="final-title">Tomorrow morning doesn't need another surprise.</h2>
+      <p class="lede">
+        Join the free beta and help us build a simpler way to stay ahead of school life.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="#beta">Join the free beta</a>
+      </div>
+      <p class="microcopy">Free beta · No card required · Privacy-first by design</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <a class="wordmark" href="/" style="font-size:1.25rem">
+          <span class="wordmark__mark" aria-hidden="true">TK</span>
+          TomorrowKit
+        </a>
+        <p class="footer__tagline">School admin, off your mental load.</p>
+      </div>
+
+      <nav aria-label="Footer">
+        <ul class="footer__links">
+          <li><a href="privacy/">Privacy Notice</a></li>
+          <li><a href="cookies/">Cookie Notice</a></li>
+          <li><a href="mailto:hello@tomorrowkit.co.uk">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__small">
+        TomorrowKit is currently a product concept in development. Features shown are illustrative
+        and may change before release.
+      </p>
+      <p class="footer__small">
+        A privacy-first product experiment from The Privacy Blueprint.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
