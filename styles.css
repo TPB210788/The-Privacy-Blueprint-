@@ -231,10 +231,110 @@ section[id], main[id] { scroll-margin-top: 4.5rem; }
 .shot img { width: 100%; border-radius: var(--radius-sm); }
 .shot figcaption { margin-top: 1rem; }
 
+
+/* --- Planner devices ----------------------------------------------------
+   Ruled lines, date tabs, checklist ticks, admin labels, marker strips and
+   paper slips. Used sparingly: each appears two or three times on the page.
+   ---------------------------------------------------------------------- */
+
+/* A date tab, as on a planner divider */
+.tab {
+  display: inline-block;
+  margin: 0 0 1.25rem;
+  padding: .375rem .75rem;
+  background: var(--butter);
+  border: 1px solid #E0C55C;
+  border-bottom: 0;
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #4A3A0F;
+}
+.tab-dark {
+  background: #C97E45;
+  border-color: #B36C36;
+  color: #24140A;
+}
+
+/* A marker strip behind a word */
+.mark {
+  position: relative;
+  z-index: 0;
+  white-space: nowrap;
+}
+.mark::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -.08em;
+  right: -.08em;
+  bottom: .04em;
+  height: .42em;
+  background: var(--butter);
+}
+
+/* Ruled paper, behind a mockup column only */
+.ruled {
+  padding: clamp(1.25rem, 3vw, 2rem) 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(2rem - 1px),
+    #E6DECB calc(2rem - 1px),
+    #E6DECB 2rem
+  );
+  background-position: 0 .5rem;
+}
+
+/* Checklist tick */
+.tick {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  margin-top: .3125rem;
+  border: 1px solid var(--green);
+  border-radius: 1px;
+}
+.tick::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 0px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--green);
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
+
+/* Paper slips: school notices as they arrive */
+.slips li {
+  padding: .875rem 1rem;
+  background: var(--white);
+  border: 1px solid var(--rule-firm);
+  border-top: 1px solid var(--rule-firm);
+  border-radius: 1px;
+}
+.slips li + li { margin-top: .625rem; }
+.slips li:nth-child(2) { margin-left: clamp(0px, 2vw, 1.25rem); }
+.slips li:nth-child(4) { margin-left: clamp(0px, 1.2vw, .75rem); }
+
+/* An early-access note */
+.note-strip {
+  height: 6px;
+  margin: 0 0 1.75rem;
+  background: var(--butter);
+}
+
 /* --- 8. Hero ------------------------------------------------------------- */
-.hero { padding-block: clamp(3rem, 7vw, 5.5rem) clamp(2.5rem, 5vw, 4rem); }
+.hero { padding-block: clamp(2rem, 4vw, 3rem) clamp(2.5rem, 5vw, 4rem); }
+.hero .wrap > .hero-grid { padding-top: clamp(1.75rem, 4vw, 2.75rem); border-top: 1px solid var(--ink); }
 .hero-grid { display: grid; gap: clamp(2.5rem, 5vw, 4rem); align-items: center; }
 .hero h1 { max-width: 13ch; margin-bottom: .55em; }
+.hero-figure.ruled { width: 100%; max-width: none; }
+.hero-figure.ruled picture { margin-left: auto; max-width: 22rem; }
+.hero-figure.ruled figcaption { margin-top: 1.25rem; text-align: right; }
 .hero .lede { margin-bottom: 2.25rem; font-size: clamp(1.0625rem, 1rem + .35vw, 1.1875rem); }
 .hero-actions { margin-bottom: .875rem; }
 .support-text { margin: 0; font-size: .8125rem; color: var(--ink-muted); }
@@ -253,11 +353,11 @@ section[id], main[id] { scroll-margin-top: 4.5rem; }
 }
 
 /* --- 9. The problem: an editorial before / after ------------------------- */
-.ledger { display: grid; gap: 0; border-top: 1px solid var(--ink); }
+.ledger { display: grid; gap: 2rem; border-top: 1px solid var(--ink); }
 .ledger-col { padding: 0; background: none; border: 0; border-radius: 0; }
 .ledger-title {
   margin: 0;
-  padding: 1rem 0 .875rem;
+  padding: 1rem 0 1.125rem;
   border: 0;
   font-size: .6875rem;
   font-weight: 600;
@@ -272,6 +372,20 @@ section[id], main[id] { scroll-margin-top: 4.5rem; }
   gap: .125rem .75rem;
   padding-block: 1.125rem;
   border-top: 1px solid var(--rule);
+}
+.ledger-list-in li { border-top: 0; padding-block: 0; }
+.ledger-list-out li { grid-template-columns: 14px 1fr; align-items: start; }
+.ledger-list-out .ledger-label { grid-column: 2; }
+.ledger-list-out .ledger-text { grid-column: 2; }
+.ledger-list-out .tick { grid-row: span 2; }
+.ledger-col-out .ledger-label {
+  display: inline-block;
+  justify-self: start;
+  margin-bottom: .1875rem;
+  padding: .1875rem .4375rem;
+  background: var(--blush);
+  border-radius: 1px;
+  color: #7C3113;
 }
 .ledger-label {
   font-size: .625rem;
@@ -292,7 +406,7 @@ section[id], main[id] { scroll-margin-top: 4.5rem; }
 }
 
 @media (min-width: 44rem) {
-  .ledger-list li { grid-template-columns: 5.5rem 1fr; align-items: baseline; }
+  .ledger-list-in li { grid-template-columns: 5.5rem 1fr; align-items: baseline; }
 }
 @media (min-width: 62rem) {
   .ledger { grid-template-columns: 1fr 1fr; column-gap: clamp(2.5rem, 6vw, 5rem); }
@@ -310,6 +424,7 @@ section[id], main[id] { scroll-margin-top: 4.5rem; }
 /* --- 10. Product sections ------------------------------------------------ */
 .split { display: grid; gap: clamp(2.25rem, 5vw, 3.5rem); }
 .split-copy > :last-child { margin-bottom: 0; }
+.split-copy.rule-top { padding-top: 1.5rem; border-top: 2px solid var(--ink); }
 .split-figure { max-width: 26rem; }
 
 @media (min-width: 62rem) {
@@ -333,6 +448,9 @@ section[id], main[id] { scroll-margin-top: 4.5rem; }
 
 /* Tonight: the one warm band */
 .section-apricot { color: #2B1A10; }
+.section-apricot { padding-block: clamp(3rem, 6vw, 5rem); }
+.section-apricot .split-figure { max-width: 22rem; }
+.section-apricot .split-copy h2 { max-width: 15ch; }
 .section-apricot h2 { color: #22150C; }
 .section-apricot .lede { color: #3A2417; }
 .section-apricot .disclosure { color: #4A3123; }
@@ -341,21 +459,15 @@ section[id], main[id] { scroll-margin-top: 4.5rem; }
 .integrations {
   display: flex;
   flex-wrap: wrap;
-  gap: 0;
-  max-width: 30rem;
-  margin: 2rem 0 1.25rem;
-  border-top: 1px solid var(--rule);
-}
-.integrations li {
-  flex: 1 1 8rem;
-  padding: .875rem 0;
-  border-bottom: 1px solid var(--rule);
-  font-size: .875rem;
+  align-items: center;
+  gap: .5rem 1.25rem;
+  margin: 1.75rem 0 1.25rem;
+  font-size: .9375rem;
   font-weight: 500;
-  color: var(--ink);
 }
-@media (min-width: 34rem) {
-  .integrations li + li { padding-left: 1.25rem; }
+.integrations li + li {
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--rule-firm);
 }
 
 /* --- 11. Privacy: a 2 x 2 ruled grid ------------------------------------ */
@@ -428,13 +540,11 @@ section[id], main[id] { scroll-margin-top: 4.5rem; }
 }
 
 /* --- 13. Waitlist -------------------------------------------------------- */
-.section-butter { color: var(--ink); }
-.section-butter .eyebrow { color: #6B5417; }
-.section-butter .lede { color: #3F3A22; }
-.section-butter .note { color: #56502F; }
+#waitlist { border-top: 1px solid var(--rule); }
+#waitlist .eyebrow { color: #7C3113; }
 
 .waitlist { display: grid; gap: clamp(2.25rem, 5vw, 3.5rem); align-items: start; }
-.waitlist-copy .note { margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid rgba(32, 53, 45, .22); }
+.waitlist-copy .note { margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
 
 @media (min-width: 62rem) {
   .waitlist { grid-template-columns: repeat(12, 1fr); column-gap: clamp(2.5rem, 5vw, 4rem); }
@@ -442,13 +552,23 @@ section[id], main[id] { scroll-margin-top: 4.5rem; }
   .waitlist-form { grid-column: 7 / span 6; }
 }
 
-.waitlist-form {
+.waitlist-form.note {
+  max-width: none;
   color: var(--ink);
-  padding: clamp(1.5rem, 3.5vw, 2.25rem);
-  background: var(--canvas);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  padding-top: 0;
+  background: var(--white);
   border: 1px solid var(--rule-firm);
-  border-radius: var(--radius);
+  border-radius: 1px;
   box-shadow: none;
+  overflow: hidden;
+}
+.waitlist-form.note::before {
+  content: "";
+  display: block;
+  height: 6px;
+  margin: 0 calc(clamp(1.25rem, 3vw, 2rem) * -1) clamp(1.5rem, 3vw, 2rem);
+  background: var(--butter);
 }
 
 .field { margin: 0 0 1.5rem; padding: 0; border: 0; }

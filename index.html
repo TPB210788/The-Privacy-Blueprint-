@@ -47,13 +47,14 @@
     <div class="wrap">
       <div class="hero-grid">
       <div class="hero-copy">
-        <h1>Never find out at 8:15am that it was PE day.</h1>
+        <p class="tab">Tomorrow · Tue 15 Sep</p>
+        <h1>Never find out at <span class="mark">8:15am</span> that it was PE day.</h1>
         <p class="lede">Forward the email. Share the screenshot. Upload the newsletter. TomorrowKit turns school admin into exactly what you need to do, pack, pay, sign and remember — for each child.</p>
         <p class="hero-actions"><a class="btn btn-primary" href="#waitlist">Join the free beta</a></p>
         <p class="support-text">Free beta · No card required · Privacy-first by design</p>
       </div>
 
-      <figure class="hero-figure shot">
+      <figure class="hero-figure shot ruled">
         <picture>
           <source type="image/webp"
                   srcset="assets/mockups/tomorrowkit-tomorrow-view-640.webp 640w, assets/mockups/tomorrowkit-tomorrow-view.webp 1122w"
@@ -79,7 +80,7 @@
       <div class="ledger">
         <div class="ledger-col ledger-col-in">
           <h3 class="ledger-title">What arrives</h3>
-          <ul class="ledger-list ledger-list-in" role="list">
+          <ul class="ledger-list ledger-list-in slips" role="list">
             <li><span class="ledger-label">Email</span><span class="ledger-text">“Year 5 swimming begins Tuesday…”</span></li>
             <li><span class="ledger-label">PDF</span><span class="ledger-text">“Autumn Term Newsletter”</span></li>
             <li><span class="ledger-label">Message</span><span class="ledger-text">“Reminder: children may wear non-uniform Friday…”</span></li>
@@ -90,10 +91,10 @@
         <div class="ledger-col ledger-col-out">
           <h3 class="ledger-title">What you actually do</h3>
           <ul class="ledger-list ledger-list-out" role="list">
-            <li><span class="ledger-label">Event</span><span class="ledger-text">Swimming — Tuesday</span></li>
-            <li><span class="ledger-label">Bring</span><span class="ledger-text">Swimming costume<br>Towel</span></li>
-            <li><span class="ledger-label">Sign</span><span class="ledger-text">Consent form — due Monday</span></li>
-            <li><span class="ledger-label">Wear</span><span class="ledger-text">Non-uniform — Friday</span></li>
+            <li><span class="tick" aria-hidden="true"></span><span class="ledger-label">Event</span><span class="ledger-text">Swimming — Tuesday</span></li>
+            <li><span class="tick" aria-hidden="true"></span><span class="ledger-label">Bring</span><span class="ledger-text">Swimming costume<br>Towel</span></li>
+            <li><span class="tick" aria-hidden="true"></span><span class="ledger-label">Sign</span><span class="ledger-text">Consent form — due Monday</span></li>
+            <li><span class="tick" aria-hidden="true"></span><span class="ledger-label">Wear</span><span class="ledger-text">Non-uniform — Friday</span></li>
           </ul>
         </div>
       </div>
@@ -106,7 +107,6 @@
   <section class="section section-sky" id="message-to-action">
     <div class="wrap split comp-a">
       <div class="split-copy">
-        <p class="eyebrow">How it works</p>
         <h2>Send us the school message. We'll work out what actually matters.</h2>
         <p class="lede">Instead of summarising everything, TomorrowKit separates school information into the things parents actually need to act on — events, things to bring, forms to sign, payments, pickups and deadlines.</p>
       </div>
@@ -127,6 +127,7 @@
   <section class="section section-apricot" id="tonight">
     <div class="wrap split comp-b">
       <div class="split-copy">
+        <p class="tab tab-dark">Tonight</p>
         <h2>Know what needs sorting before the morning rush.</h2>
         <p class="lede">TomorrowKit gives you a simple evening and morning briefing, so you don't need to remember everything yourself.</p>
       </div>
@@ -146,7 +147,7 @@
   <!-- ============ MENTAL LOAD ============ -->
   <section class="section" id="mental-load">
     <div class="wrap split comp-c">
-      <div class="split-copy">
+      <div class="split-copy rule-top">
         <h2>School admin shouldn't live in one person's head.</h2>
         <p class="lede">Turn invisible family admin into visible actions and share responsibility with the people helping to make family life work.</p>
       </div>
@@ -167,7 +168,7 @@
   <!-- ============ CALENDAR ============ -->
   <section class="section" id="calendar">
     <div class="wrap split comp-d">
-      <div class="split-copy">
+      <div class="split-copy rule-top">
         <h2>Works with the calendar you already use.</h2>
         <p class="lede">TomorrowKit isn't trying to replace your calendar. Add the events that belong there while keeping packing lists, payments, forms and reminders where they're actually useful.</p>
         <ul class="integrations" role="list">
@@ -278,7 +279,7 @@
   </section>
 
   <!-- ============ FREE BETA WAITLIST ============ -->
-  <section class="section section-butter" id="waitlist">
+  <section class="section" id="waitlist">
     <div class="wrap waitlist">
       <div class="waitlist-copy">
         <p class="eyebrow">Help shape TomorrowKit</p>
@@ -304,7 +305,7 @@
         Until the placeholder below is replaced, script.js blocks submission and shows a
         clear on-page message instead of sending data anywhere.
       -->
-      <form class="waitlist-form" id="waitlistForm" method="POST"
+      <form class="waitlist-form note" id="waitlistForm" method="POST"
             action="REPLACE_WITH_FORM_ENDPOINT" novalidate>
 
         <div class="field">
