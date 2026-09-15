@@ -7,19 +7,19 @@
   'use strict';
 
   /* ======================================================================
-     >>> THE ONLY LINE YOU NEED TO EDIT <<<
+     WAITLIST FORM — connected to Netlify Forms
 
-     Paste the endpoint your form provider gives you between the quotes.
+     Nothing to configure. The form in index.html carries
+     data-netlify="true", so Netlify picks it up on deploy and stores
+     submissions under Forms → "waitlist" in your site dashboard.
 
-       Formspree   FORM_ENDPOINT = 'https://formspree.io/f/abcdwxyz';
-       Tally       FORM_ENDPOINT = 'https://tally.so/r/abcdwxyz';
-       Buttondown  FORM_ENDPOINT = 'https://buttondown.email/api/emails/embed-subscribe/yourname';
+     The code below posts it in the background so the page does not navigate
+     away, then swaps the form for a confirmation message. With JavaScript
+     switched off the browser posts the form normally and Netlify shows its
+     own confirmation page, so sign-ups still work either way.
 
-     Using Netlify Forms instead? Leave this empty and follow the note in
-     index.html above the form tag.
-
-     While this is empty the form refuses to submit and says so on the page,
-     so no sign-up is ever sent to a broken or unintended address.
+     Moving to a different provider later? Put its endpoint in FORM_ENDPOINT
+     and remove data-netlify from the form tag.
      ====================================================================== */
   var FORM_ENDPOINT = '';
 
@@ -102,29 +102,34 @@
       email.removeAttribute('aria-invalid');
 
       var action = form.getAttribute('action');
-      var connected = action && action.indexOf('REPLACE_WITH_FORM_ENDPOINT') === -1;
+      var connected = form.hasAttribute('data-netlify') || Boolean(action);
 
       if (!connected) {
         event.preventDefault();
         say('The waitlist is not connected to a provider yet, so nothing has been sent. ' +
-            'Add your form endpoint in script.js to start collecting sign-ups.', 'info');
+            'Deploy the site to Netlify, or add an endpoint in script.js, to start collecting sign-ups.', 'info');
         return;
       }
 
-      // Netlify Forms posts the page itself, so let the browser handle it.
-      if (form.hasAttribute('data-netlify')) { return; }
-
-      // Everyone else: post in the background so the page does not navigate away.
       event.preventDefault();
       var button = form.querySelector('button[type="submit"]');
       if (button) { button.disabled = true; }
       say('Sending…', 'info');
 
-      fetch(action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { Accept: 'application/json' }
-      }).then(function (response) {
+      var netlify = form.hasAttribute('data-netlify');
+      var request = netlify
+        ? fetch(window.location.pathname, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(new FormData(form)).toString()
+          })
+        : fetch(action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { Accept: 'application/json' }
+          });
+
+      request.then(function (response) {
         if (response.ok) { showSuccess(); return; }
         throw new Error('Request failed');
       }).catch(function () {

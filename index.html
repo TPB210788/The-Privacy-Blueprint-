@@ -286,21 +286,28 @@
       </div>
 
       <!--
-        WAITLIST FORM
-        =============
-        To connect this form, open script.js and paste your endpoint into the
-        FORM_ENDPOINT line near the top. That is the only edit needed.
+        WAITLIST FORM — connected to Netlify Forms
+        ==========================================
+        Submissions go to your own Netlify site: Netlify dashboard →
+        your site → Forms → "waitlist". No third-party service is involved
+        and no cookie is set.
 
-        Using Netlify Forms instead? Add these two attributes to the form tag
-        below:  netlify  data-netlify="true"  name="waitlist"
-        and remove the action attribute. Netlify then collects submissions in
-        your site dashboard with no third-party service involved.
+        Netlify finds this form by scanning the deployed HTML for
+        data-netlify="true", so it starts working on the next deploy. There
+        is nothing to paste and no API key.
 
-        Until an endpoint is set the form refuses to submit and says so on the
-        page, so nothing is ever sent to a broken or unintended address.
+        Turn on notifications at: Forms → Settings and usage → Form
+        notifications → add an email notification, so new sign-ups reach you.
+
+        The _gotcha field below is the spam trap; netlify-honeypot tells
+        Netlify to silently drop anything that fills it in.
       -->
-      <form class="waitlist-form note" id="waitlistForm" method="POST"
-            action="REPLACE_WITH_FORM_ENDPOINT" novalidate>
+      <form class="waitlist-form note" id="waitlistForm"
+            name="waitlist" method="POST"
+            data-netlify="true" netlify-honeypot="_gotcha" novalidate>
+
+        <!-- Netlify needs this to know which form a submission belongs to. -->
+        <input type="hidden" name="form-name" value="waitlist">
 
         <p class="trap" aria-hidden="true">
           <label for="company">Company</label>

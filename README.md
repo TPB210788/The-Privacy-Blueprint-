@@ -18,46 +18,40 @@ step, no analytics, no trackers, no cookies.
 | `cookies.html` | Plain-English cookie notice (pre-launch placeholder) |
 | `assets/mockups/` | The supplied TomorrowKit product mockups, plus WebP versions for speed |
 
-## Connect the waitlist form
+## The waitlist form
 
-The form is not wired to anything yet. Until it is, submitting shows a message
-on the page and sends nothing anywhere.
+**Already connected — to Netlify Forms.** There is no endpoint to paste and no
+API key. The form carries `data-netlify="true"`, so Netlify detects it when the
+site deploys and stores sign-ups under **Forms → waitlist** in your site
+dashboard. No third-party form company is involved and no cookie is set.
 
-**The whole job is one line.** Open `script.js`, find `FORM_ENDPOINT` near the
-top, and paste your endpoint between the quotes:
+What you still need to do, once:
 
-```js
-var FORM_ENDPOINT = 'https://formspree.io/f/xxxxxxx';
-```
+1. Deploy the site to Netlify (see below). The form is detected on that deploy.
+2. In Netlify: **Forms → Settings and usage → Form notifications → Add
+   notification → Email notification**, so new sign-ups reach your inbox.
+3. Submit a test sign-up on the live site and check it appears in Forms.
+4. Netlify stores submissions in the United States. Confirm the transfer
+   safeguard you rely on and record it in `privacy.html`, where a callout marks
+   the spot.
 
-Where to get that endpoint:
+How it behaves: the form posts in the background and swaps itself for a
+confirmation message, so the page never navigates away. With JavaScript off the
+browser posts normally and Netlify shows its own confirmation page, so sign-ups
+work either way. A hidden `_gotcha` field is the spam trap, declared to Netlify
+with `netlify-honeypot`.
 
-| Provider | What you do | Free tier |
-| --- | --- | --- |
-| **Netlify Forms** | Only if you host on Netlify. Add `netlify data-netlify="true" name="waitlist"` to the `<form>` tag in `index.html` and delete its `action`. Leave `FORM_ENDPOINT` empty. Submissions appear in your Netlify dashboard | 100 a month |
-| **Formspree** | Sign up, create a form, copy the URL it gives you | 50 a month |
-| **Tally** | Build a form, publish it, use its endpoint | Unlimited |
-| **Buttondown** | Good if you want the list to be a mailing list from day one | 100 subscribers |
-
-Netlify Forms keeps the data with your host and adds no third party, so it is
-the best fit for a privacy-first site if you are hosting there.
-
-After connecting it:
-
-1. Send yourself a test sign-up and check it arrives.
-2. Turn on email notifications in the provider so you hear about new sign-ups.
-3. Fill in the `Placeholder:` callouts in `privacy.html` and `cookies.html`
-   with the provider's name, where it stores data, and whether it sets cookies.
-
-The form already includes a hidden honeypot field named `_gotcha`, which most
-providers understand as a spam trap and which real people never fill in.
+Free tier is 100 submissions a month. Moving to another provider later means
+putting its endpoint in `FORM_ENDPOINT` in `script.js` and removing
+`data-netlify` from the form tag.
 
 ## Deploy
 
 No build step. Upload the folder, or point the host at the repository.
 
-- **Netlify** — drag the folder into Netlify Drop, or connect the repo. Build command:
-  none. Publish directory: `/`. The optional `_headers` file adds security headers.
+- **Netlify** (what this site is set up for) — connect the repository, or drag the
+  folder into Netlify Drop. `netlify.toml` sets the publish directory, security
+  headers and font caching, so there is nothing to configure in the UI.
 - **Vercel** — import the repo as a static project. Framework preset: Other. Root: `/`.
 - **GitHub Pages** — Settings → Pages → deploy from a branch, root folder.
 
