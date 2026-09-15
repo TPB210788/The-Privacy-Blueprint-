@@ -7,6 +7,54 @@
    are almost absent, and nothing is wrapped in a container it does not need.
    ========================================================================== */
 
+/* --- 0. Self-hosted typefaces ----------------------------------------
+   Both faces are served from this site rather than from Google Fonts, so
+   they cannot silently fall back if the font host is slow or blocked, and
+   the site makes no third-party requests at all.
+   ---------------------------------------------------------------------- */
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/instrument-sans-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/instrument-sans-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/instrument-sans-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/instrument-sans-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/fraunces-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/fraunces-700.woff2") format("woff2");
+}
+
 /* --- 1. Tokens ----------------------------------------------------------- */
 :root {
   --canvas:    #F7F3EA;
