@@ -226,6 +226,7 @@ section[id], main[id] { scroll-margin-top: 4.5rem; }
 .wordmark {
   display: inline-flex;
   align-items: center;
+  gap: .625rem;
   min-height: 2.75rem;
   font-size: 1.125rem;
   font-weight: 700;
@@ -234,6 +235,7 @@ section[id], main[id] { scroll-margin-top: 4.5rem; }
   text-decoration: none;
 }
 .wordmark:hover { color: var(--green); }
+.wordmark-logo { width: 2.125rem; height: 2.125rem; border-radius: 50%; }
 
 .nav-toggle {
   display: inline-flex;
@@ -779,6 +781,7 @@ input[type="email"][aria-invalid="true"] { border-color: var(--terracotta); }
 /* --- 16. Footer ---------------------------------------------------------- */
 .site-footer { padding-block: clamp(2.5rem, 5vw, 3.5rem) 2.5rem; border-top: 1px solid var(--rule); }
 .footer-inner { display: grid; gap: 1.5rem; padding-bottom: 2rem; }
+.footer-logo { width: 4rem; height: 4rem; margin-bottom: 1rem; border-radius: 50%; }
 .footer-name { margin: 0 0 .25rem; font-size: 1.125rem; font-weight: 700; letter-spacing: -.04em; }
 .footer-tagline { margin: 0; font-size: .9375rem; color: var(--ink-muted); }
 .footer-nav ul { display: flex; flex-wrap: wrap; gap: .25rem 1.75rem; }
