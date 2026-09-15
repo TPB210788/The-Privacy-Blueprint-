@@ -6,6 +6,23 @@
 (function () {
   'use strict';
 
+  /* ======================================================================
+     >>> THE ONLY LINE YOU NEED TO EDIT <<<
+
+     Paste the endpoint your form provider gives you between the quotes.
+
+       Formspree   FORM_ENDPOINT = 'https://formspree.io/f/abcdwxyz';
+       Tally       FORM_ENDPOINT = 'https://tally.so/r/abcdwxyz';
+       Buttondown  FORM_ENDPOINT = 'https://buttondown.email/api/emails/embed-subscribe/yourname';
+
+     Using Netlify Forms instead? Leave this empty and follow the note in
+     index.html above the form tag.
+
+     While this is empty the form refuses to submit and says so on the page,
+     so no sign-up is ever sent to a broken or unintended address.
+     ====================================================================== */
+  var FORM_ENDPOINT = '';
+
   /* ---- Mobile navigation ------------------------------------------------ */
   var toggle = document.getElementById('navToggle');
   var nav = document.getElementById('primaryNav');
@@ -20,12 +37,10 @@
       setNav(toggle.getAttribute('aria-expanded') !== 'true');
     });
 
-    // Close after choosing a link on small screens.
     nav.addEventListener('click', function (event) {
       if (event.target.closest('a')) { setNav(false); }
     });
 
-    // Escape closes the menu and returns focus to the button.
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
         setNav(false);
@@ -33,7 +48,6 @@
       }
     });
 
-    // Reset state when the layout moves back to the desktop navigation.
     var wide = window.matchMedia('(min-width: 60rem)');
     var onChange = function (event) { if (event.matches) { setNav(false); } };
     if (wide.addEventListener) { wide.addEventListener('change', onChange); }
@@ -44,29 +58,14 @@
   var year = document.getElementById('year');
   if (year) { year.textContent = String(new Date().getFullYear()); }
 
-  /* ---- Waitlist form ----------------------------------------------------
-     The form posts straight to whatever endpoint is set in the HTML action
-     attribute, so it also works with JavaScript switched off.
-
-     >>> TO CONNECT THE FORM <<<
-     Open index.html, find the form with id="waitlistForm" and replace
-         action="REPLACE_WITH_FORM_ENDPOINT"
-     with the endpoint from your provider, for example:
-         action="https://formspree.io/f/xxxxxxx"     (Formspree)
-         action="https://tally.so/r/xxxxxxx"         (Tally)
-     Netlify Forms users: add  netlify  and  name="waitlist"  to the form tag
-     instead, and remove the action attribute.
-
-     While the placeholder is still in place, the code below blocks submission
-     so that no data is ever sent to a broken or unintended endpoint.
-     --------------------------------------------------------------------- */
-  var PLACEHOLDER_ACTION = 'REPLACE_WITH_FORM_ENDPOINT';
-
+  /* ---- Waitlist form ---------------------------------------------------- */
   var form = document.getElementById('waitlistForm');
   var status = document.getElementById('formStatus');
   var email = document.getElementById('email');
 
   if (form && status && email) {
+    if (FORM_ENDPOINT) { form.setAttribute('action', FORM_ENDPOINT); }
+
     var say = function (message, state) {
       status.textContent = message;
       status.className = 'form-status is-' + state;
@@ -76,8 +75,22 @@
       return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim());
     };
 
+    var showSuccess = function () {
+      var done = document.createElement('div');
+      done.className = 'form-done';
+      done.setAttribute('role', 'status');
+      done.innerHTML =
+        '<p class="form-done-title">Thanks — you are on the list.</p>' +
+        '<p>We will email you about beta access, testing and launch. ' +
+        'Nothing else, and you can leave the list from any email we send.</p>';
+      form.replaceWith(done);
+      done.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    };
+
     form.addEventListener('submit', function (event) {
-      var notConnected = form.getAttribute('action') === PLACEHOLDER_ACTION;
+      // Honeypot: real people leave this empty, most bots fill it in.
+      var trap = form.querySelector('input[name="_gotcha"]');
+      if (trap && trap.value) { event.preventDefault(); return; }
 
       if (!emailLooksValid(email.value)) {
         event.preventDefault();
@@ -86,16 +99,38 @@
         say('Please enter an email address we can reach you on.', 'error');
         return;
       }
-
       email.removeAttribute('aria-invalid');
 
-      if (notConnected) {
+      var action = form.getAttribute('action');
+      var connected = action && action.indexOf('REPLACE_WITH_FORM_ENDPOINT') === -1;
+
+      if (!connected) {
         event.preventDefault();
-        say('Thanks — the waitlist form is not connected to a provider yet, so nothing has been sent. Add your form endpoint in index.html to start collecting sign-ups.', 'info');
+        say('The waitlist is not connected to a provider yet, so nothing has been sent. ' +
+            'Add your form endpoint in script.js to start collecting sign-ups.', 'info');
         return;
       }
 
+      // Netlify Forms posts the page itself, so let the browser handle it.
+      if (form.hasAttribute('data-netlify')) { return; }
+
+      // Everyone else: post in the background so the page does not navigate away.
+      event.preventDefault();
+      var button = form.querySelector('button[type="submit"]');
+      if (button) { button.disabled = true; }
       say('Sending…', 'info');
+
+      fetch(action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      }).then(function (response) {
+        if (response.ok) { showSuccess(); return; }
+        throw new Error('Request failed');
+      }).catch(function () {
+        if (button) { button.disabled = false; }
+        say('Something went wrong sending that. Please try again, or email hello@tomorrowkit.co.uk.', 'error');
+      });
     });
 
     email.addEventListener('input', function () {
