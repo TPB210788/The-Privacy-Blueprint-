@@ -2,9 +2,10 @@
 
 Three scheduled Claude routines keep the Daybook dashboard up to date.
 Dashboard: https://claude.ai/artifact/MGr9BYuXF3CzkK2gdJfdHq
-All times are London time. Each routine starts a fresh session with the
-Gmail, Google Calendar and Notion connectors, and writes to the dashboard's
-database with the ArtifactData tool.
+All times are London time. Each routine wakes the original Claude Code
+session that set Daybook up, because that session holds the Gmail, Google
+Calendar and Notion connectors. It writes to the dashboard's database with
+the ArtifactData tool. Archiving that session stops the routines.
 
 | Routine | When | Writes |
 | --- | --- | --- |
