@@ -177,6 +177,53 @@ fieldset{border:0;padding:0;margin:0}
 .tri{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 @media (max-width:720px){.tri{grid-template-columns:1fr}}
 .foot{font-size:12.5px;color:var(--faint);text-align:center}
+
+/* school */
+.school{border-top:4px solid var(--good)}
+.sch-list{list-style:none;margin:0;padding:0;display:grid}
+.sch-list li{display:grid;grid-template-columns:62px 1fr;gap:12px;padding:9px 0;border-top:1px solid var(--line);align-items:start}
+.sch-list li:first-child{border-top:0}
+.sch-list .when{font-family:var(--mono);font-size:12.5px;color:var(--good);font-weight:500;padding-top:2px}
+.sch-list small{display:block;color:var(--muted);font-size:12.5px}
+.sch-todo li{grid-template-columns:22px 1fr}
+.drop{display:grid;gap:8px;padding:12px 14px;border:1px dashed var(--line);border-radius:10px;background:var(--bg)}
+.drop-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.filepick{font-size:13px;color:var(--muted);display:flex;gap:6px;align-items:center;cursor:pointer}
+.filepick input{max-width:190px;font-size:12.5px}
+
+/* goals */
+.goals{border-top:4px solid var(--dusk)}
+.cyc{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;justify-content:space-between}
+.score{display:flex;align-items:baseline;gap:8px}
+.score b{font-family:var(--display);font-size:34px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.weeks{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;min-width:0;flex:1;max-width:420px}
+.weeks span{height:26px;border-radius:5px;background:var(--surface-2);display:grid;place-items:center;font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.weeks span.hit{background:var(--good);color:var(--surface)}
+.weeks span.near{background:var(--warn-soft);color:var(--warn)}
+.weeks span.low{background:var(--bad-soft);color:var(--bad)}
+.weeks span.cur{outline:2px solid var(--dusk);outline-offset:1px}
+.gcards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.gcards{grid-template-columns:minmax(0,1fr)}}
+.gcard{border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:10px;align-content:start}
+.gcard .area{font-size:11.5px;text-transform:uppercase;letter-spacing:.09em;font-weight:600;color:var(--dusk)}
+.gcard h3{font-family:var(--display);font-size:17px;font-weight:700;line-height:1.25}
+.gcard .smart{font-size:13.5px;color:var(--muted)}
+.outc{display:grid;gap:5px}
+.outc-top{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+.outc .progress i{background:var(--dusk)}
+.acts{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.acts li{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;font-size:14px}
+.ctr{display:flex;align-items:center;gap:4px}
+.ctr button{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:var(--bg);cursor:pointer;font-size:15px;line-height:1;display:grid;place-items:center}
+.ctr button:hover{border-color:var(--dusk)}
+.ctr output{min-width:44px;text-align:center;font-family:var(--mono);font-size:13px}
+.ctr output.met{color:var(--good);font-weight:500}
+.ifthen{font-size:13.5px;padding:9px 12px;background:var(--dusk-soft);border-radius:9px}
+.ifthen b{color:var(--dusk)}
+.miles{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:13px}
+.miles li{display:flex;gap:8px;align-items:baseline}
+.miles li.done{color:var(--faint);text-decoration:line-through}
+.miles .d{font-family:var(--mono);font-size:12px;color:var(--muted);min-width:52px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
@@ -211,6 +258,24 @@ fieldset{border:0;padding:0;margin:0}
       <section class="panel" id="inbox">
         <div class="panel-head"><h2>Inbox: needs you</h2><span class="label">Gmail</span></div>
         <div id="mail"><p class="empty">Emails that need a reply or action show here each morning. Newsletters and receipts are left out.</p></div>
+      </section>
+
+      <section class="panel school" id="school">
+        <div class="panel-head"><h2>School and nursery</h2><span class="label">Next 3 weeks</span></div>
+        <div id="sch-dates"><p class="empty">Dates from school emails and app messages appear here and go straight into your Family calendar.</p></div>
+        <div class="review">
+          <span class="label">School to-dos</span>
+          <ul class="tasks sch-todo" id="sch-todos"></ul>
+        </div>
+        <form class="drop" id="drop-form" autocomplete="off">
+          <label class="label" for="drop-text">Drop in a school app message</label>
+          <textarea id="drop-text" placeholder="Paste a message from My Child at School, or attach a screenshot. Daybook picks out the dates, forms, payments and kit."></textarea>
+          <div class="drop-row">
+            <label class="filepick" id="pick-wrap">Screenshot <input type="file" id="drop-file" accept="image/*"></label>
+            <button class="btn" type="submit" id="drop-send">Send to Daybook</button>
+          </div>
+          <p class="status" id="drop-status"></p>
+        </form>
       </section>
     </div>
 
@@ -252,13 +317,23 @@ fieldset{border:0;padding:0;margin:0}
     </div>
   </div>
 
+  <section class="panel goals" id="goals">
+    <div class="panel-head"><h2>12 week goals</h2><span class="label mono" id="cyc-range"></span></div>
+    <div class="cyc">
+      <div class="score"><b id="wk-score">–</b><div><div class="label" id="wk-label">This week</div><div class="muted" style="font-size:13px">of weekly actions done · aim for 85%</div></div></div>
+      <div class="weeks" id="cyc-weeks" aria-label="Weekly scores for the cycle"></div>
+    </div>
+    <div class="gcards" id="gcards"><p class="empty">Your goals load here.</p></div>
+    <p class="status" id="goal-status"></p>
+  </section>
+
   <section class="panel week" id="week">
     <div class="panel-head"><h2>This week</h2><span class="label">Day score out of 5, energy bar underneath</span></div>
     <div class="days" id="days"></div>
     <div id="wk-body"><p class="empty">Every Sunday evening your check-ins and nightly reviews roll up into a weekly analysis with the three changes that will help most next week.</p></div>
   </section>
 
-  <p class="foot" id="foot">Brief at 6:46 · Check-in reminder at 9:28pm · Weekly review Sunday 6:46pm · London time</p>
+  <p class="foot" id="foot">Brief at 6:46 · Check-in reminder at 9:28pm · Weekly review and goal score Sunday 6:46pm · London time</p>
 </div>
 
 <script>
@@ -310,6 +385,7 @@ fieldset{border:0;padding:0;margin:0}
         ${b.headline ? `<p class="headline">${esc(b.headline)}</p>` : ""}
         ${b.summary ? `<p class="summary">${esc(b.summary)}</p>` : ""}
         ${list(b.priorities).length ? `<div class="review"><span class="label">Top priorities</span><ol class="prio">${list(b.priorities).map(p=>`<li><span>${esc(p)}</span></li>`).join("")}</ol></div>` : ""}
+        ${list(b.goalFocus).length ? `<div class="ifthen"><b>Goal actions today:</b> ${list(b.goalFocus).map(esc).join(" · ")}</div>` : ""}
         ${heads.length ? `<div class="headsup"><span class="label" style="color:var(--warn)">Heads up</span><ul>${heads.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>` : ""}
       </div>`;
     // schedule
@@ -460,6 +536,115 @@ fieldset{border:0;padding:0;margin:0}
 
   function fmtDay(k){ if(!k) return ""; const d = new Date(k+"T12:00:00"); return isNaN(d) ? k : d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"}); }
 
+  // ---------- School ----------
+  state.school = []; state.drops = [];
+  function renderSchool(){
+    const soon = new Date(now); soon.setDate(soon.getDate()+21); const until = ymd(soon);
+    const dates = state.school.filter(x => x.type === "date" && x.date && x.date >= TODAY && x.date <= until).sort((a,b)=> (a.date+(a.time||"")).localeCompare(b.date+(b.time||"")));
+    $("sch-dates").innerHTML = dates.length ? `<ul class="sch-list">${dates.map(x=>`<li><span class="when">${esc(fmtShort(x.date))}${x.time?`<br>${esc(x.time)}`:""}</span>
+        <div>${safeUrl(x.url)?`<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>`:esc(x.title)}<small>${esc([x.child, x.note].filter(Boolean).join(" · "))}</small></div></li>`).join("")}</ul>`
+      : `<p class="empty">No school dates in the next 3 weeks.</p>`;
+    const todos = state.school.filter(x => x.type === "todo" && (!x.done || String(x.doneAt||"").slice(0,10) === TODAY)).sort((a,b)=> (a.done-b.done) || String(a.due||"9999").localeCompare(String(b.due||"9999")));
+    $("sch-todos").innerHTML = todos.length ? todos.map(x=>{
+      const overdue = !x.done && x.due && x.due < TODAY;
+      const meta = [x.child, x.due ? (x.due===TODAY?"Due today":overdue?"Overdue · "+fmtDay(x.due):"Due "+fmtDay(x.due)) : "", x.source==="app"?"From the school app":""].filter(Boolean).join(" · ");
+      return `<li class="${x.done?"done":""}"><input type="checkbox" id="sc-${esc(x.id)}" data-sid="${esc(x.id)}" ${x.done?"checked":""} aria-label="Mark ${esc(x.title)} done">
+        <div><div class="tt">${safeUrl(x.url)?`<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>`:esc(x.title)}</div>${meta?`<div class="meta ${overdue?"overdue":""}">${esc(meta)}</div>`:""}</div></li>`;
+    }).join("") : `<li style="display:block"><p class="empty">Nothing to sign, pay or pack right now.</p></li>`;
+    const pending = state.drops.filter(d => !d.processed).length;
+    if (pending && !$("drop-status").dataset.busy) $("drop-status").textContent = `${pending} message${pending===1?"":"s"} waiting. Daybook reads ${pending===1?"it":"them"} at the next brief or review.`;
+  }
+  $("sch-todos").addEventListener("change", async e=>{
+    const id = e.target.dataset.sid; if (!id || !state.db) return;
+    const done = e.target.checked;
+    try { await state.db.doc("school/"+id).update({done, doneAt: done ? new Date().toISOString() : null}); }
+    catch(err){ e.target.checked = !done; }
+  });
+  $("drop-form").addEventListener("submit", async e=>{
+    e.preventDefault();
+    const text = $("drop-text").value.trim(); const file = $("drop-file").files[0];
+    if (!text && !file){ $("drop-status").textContent = "Paste the message text or choose a screenshot first."; return; }
+    if (!state.db){ $("drop-status").textContent = "Sending is available when you open this page on claude.ai."; return; }
+    $("drop-send").disabled = true; $("drop-status").dataset.busy = "1"; $("drop-status").textContent = "Sending…";
+    try {
+      let assetId = null, assetUrl = null;
+      if (file){
+        const assets = await window.claude.use("assets");
+        if (!assets) throw new Error("no-assets");
+        const up = await assets.upload(file); assetId = up.id; assetUrl = up.url;
+      }
+      await state.db.collection("schoolinbox").add({text, assetId, assetUrl, createdAt:new Date().toISOString(), processed:false});
+      $("drop-text").value = ""; $("drop-file").value = "";
+      $("drop-status").textContent = "Sent. Daybook will add any dates to your Family calendar and list the to-dos here.";
+    } catch(err){
+      $("drop-status").textContent = err && err.message === "no-assets" ? "Screenshots can't be sent from this view. Paste the text instead." : "Could not send that. Your text is still here, so try again.";
+    }
+    delete $("drop-status").dataset.busy; $("drop-send").disabled = false;
+  });
+
+  // ---------- Goals ----------
+  state.goals = []; state.cycle = null; state.gweeks = {};
+  const DAY = 864e5;
+  function weekNo(){ const c = state.cycle; if (!c) return 1; const s = new Date(c.start+"T00:00:00"); const n = Math.floor((new Date(TODAY+"T00:00:00") - s)/(7*DAY)) + 1; return Math.max(1, Math.min(c.weeks||12, n)); }
+  const ckey = (g,a) => "c_"+g+"_"+a;
+  function weekScore(w){
+    const doc = state.gweeks["w"+w] || {}; let got = 0, need = 0;
+    state.goals.forEach(g => list(g.actions).forEach(a => { const t = +a.target||0; need += t; got += Math.min(+doc[ckey(g.id,a.id)]||0, t); }));
+    return need ? Math.round(got/need*100) : null;
+  }
+  function sumAction(gid, aid){ let s = 0; Object.values(state.gweeks).forEach(d => { s += +d[ckey(gid,aid)]||0; }); return s; }
+  function renderGoals(){
+    const c = state.cycle; const W = weekNo(); const total = (c && c.weeks) || 12;
+    if (c){
+      const started = TODAY >= c.start;
+      $("cyc-range").textContent = `${started ? "Week "+W+" of "+total : "Starts "+fmtDay(c.start)} · ends ${fmtShort(c.end)}`;
+      $("wk-label").textContent = `Week ${W}`;
+    }
+    const sc = weekScore(W); $("wk-score").textContent = sc==null ? "–" : sc+"%";
+    let cells = "";
+    for (let i=1;i<=total;i++){ const s = i < W ? weekScore(i) : (i===W ? sc : null);
+      const cls = s==null || i>W ? "" : s>=85 ? "hit" : s>=60 ? "near" : "low";
+      cells += `<span class="${cls} ${i===W?"cur":""}" title="Week ${i}${s!=null&&i<=W?": "+s+"%":""}">${i}</span>`; }
+    $("cyc-weeks").innerHTML = cells;
+    if (!state.goals.length) return;
+    const wk = state.gweeks["w"+W] || {};
+    $("gcards").innerHTML = state.goals.slice().sort((a,b)=>(a.order||0)-(b.order||0)).map(g=>{
+      const o = g.outcome || {};
+      const cur = o.source && o.source.startsWith("sum:") ? sumAction(g.id, o.source.slice(4)) : o.source === "weeks" ? Array.from({length:W-1},(_,i)=>i+1).filter(i=>{ const d=state.gweeks["w"+i]||{}; return list(g.actions).every(a=>(+d[ckey(g.id,a.id)]||0)>=(+a.target||0)); }).length : (+o.current||0);
+      const pct = o.target ? Math.min(100, Math.round(cur/o.target*100)) : 0;
+      const nextM = list(g.milestones).filter(m=>!m.done).sort((a,b)=>String(a.due).localeCompare(String(b.due)));
+      return `<article class="gcard">
+        <span class="area">${esc(g.area)}</span>
+        <h3>${esc(g.title)}</h3>
+        ${g.smart?`<p class="smart">${esc(g.smart)}</p>`:""}
+        ${o.target?`<div class="outc"><div class="outc-top"><span>${esc(o.label||"Progress")}</span><span class="mono">${cur} / ${esc(o.target)}${o.source==="manual"?` <span class="ctr" style="display:inline-flex"><button type="button" data-out="${esc(g.id)}" data-d="1" aria-label="Add one to ${esc(o.label)}">+</button></span>`:""}</span></div><div class="progress"><i style="width:${pct}%"></i></div></div>`:""}
+        <div class="review" style="gap:6px"><span class="label">Week ${W} actions</span>
+          <ul class="acts">${list(g.actions).map(a=>{ const n = +wk[ckey(g.id,a.id)]||0; const t = +a.target||0;
+            return `<li><span>${esc(a.label)}</span><span class="ctr"><button type="button" data-g="${esc(g.id)}" data-a="${esc(a.id)}" data-d="-1" aria-label="Remove one ${esc(a.label)}">−</button><output class="${n>=t&&t?"met":""}">${n}/${t}</output><button type="button" data-g="${esc(g.id)}" data-a="${esc(a.id)}" data-d="1" aria-label="Add one ${esc(a.label)}">+</button></span></li>`; }).join("")}</ul></div>
+        ${g.ifThen?`<p class="ifthen"><b>If–then plan:</b> ${esc(g.ifThen)}</p>`:""}
+        ${nextM.length?`<ul class="miles">${nextM.slice(0,2).map(m=>`<li><span class="d">${esc(fmtShort(m.due))}</span><span>${esc(m.label)}</span></li>`).join("")}</ul>`:""}
+      </article>`;
+    }).join("");
+  }
+  $("gcards").addEventListener("click", async e=>{
+    const b = e.target.closest("button"); if (!b || !state.db) return;
+    const d = +b.dataset.d;
+    try {
+      if (b.dataset.out){
+        const g = state.goals.find(x=>x.id===b.dataset.out); if (!g) return;
+        const o = Object.assign({}, g.outcome); o.current = Math.max(0,(+o.current||0)+d);
+        await state.db.doc("goals/"+g.id).update({outcome:o});
+      } else if (b.dataset.g){
+        const W = weekNo(); const k = ckey(b.dataset.g, b.dataset.a);
+        const cur = +((state.gweeks["w"+W]||{})[k])||0; const next = Math.max(0, cur + d);
+        await state.db.doc("goalweeks/w"+W).set(Object.assign({}, state.gweeks["w"+W] || {week:W}, {[k]:next, week:W, updatedAt:new Date().toISOString()}));
+      }
+      $("goal-status").textContent = "";
+    } catch(err){ $("goal-status").textContent = "Could not save that. Try again in a moment."; }
+  });
+
+  function fmtShort(k){ if(!k) return ""; const d = new Date(k+"T12:00:00"); return isNaN(d) ? k : d.toLocaleDateString("en-GB",{day:"numeric",month:"short"}); }
+
   renderTasks(); renderDays(); chips();
 
   // ---------- Data ----------
@@ -468,12 +653,18 @@ fieldset{border:0;padding:0;margin:0}
     try { db = await window.claude?.use?.("db"); } catch(e){ db = null; }
     if (!db){ $("foot").textContent = "Open this page on claude.ai to see your live data."; return; }
     state.db = db;
+    window.claude.use("assets").then(a=>{ if (!a) $("pick-wrap").hidden = true; }, ()=>{ $("pick-wrap").hidden = true; });
     const weekAgo = new Date(mondayOf(now)); weekAgo.setDate(weekAgo.getDate()-7); const since = ymd(weekAgo);
     db.collection("briefs").orderBy("date","desc").limit(1).onSnapshot(s=>{ state.brief = s.docs[0] ? s.docs[0].data() : null; renderBrief(); chips(); }, ()=>{});
     db.collection("tasks").onSnapshot(s=>{ state.tasks = s.docs.map(d=>Object.assign({id:d.id}, d.data())); renderTasks(); }, ()=>{ $("task-status").textContent = "Tasks could not load. Refresh the page to retry."; });
     db.collection("checkins").where("date",">=",since).onSnapshot(s=>{ state.checkins = {}; s.docs.forEach(d=>{ const v=d.data(); state.checkins[v.date||d.id]=v; }); fillCheckin(); renderDays(); chips(); }, ()=>{});
     db.collection("reviews").where("date",">=",since).onSnapshot(s=>{ state.reviews = {}; s.docs.forEach(d=>{ const v=d.data(); state.reviews[v.date||d.id]=v; }); renderReview(); renderDays(); }, ()=>{});
     db.collection("weekly").orderBy("generatedAt","desc").limit(1).onSnapshot(s=>{ state.weekly = s.docs[0] ? s.docs[0].data() : null; renderWeekly(); }, ()=>{});
+    db.collection("school").onSnapshot(s=>{ state.school = s.docs.map(d=>Object.assign({id:d.id}, d.data())); renderSchool(); }, ()=>{});
+    db.collection("schoolinbox").where("processed","==",false).onSnapshot(s=>{ state.drops = s.docs.map(d=>d.data()); renderSchool(); }, ()=>{});
+    db.doc("cycles/current").onSnapshot(s=>{ state.cycle = s.exists ? s.data() : null; renderGoals(); }, ()=>{});
+    db.collection("goals").onSnapshot(s=>{ state.goals = s.docs.map(d=>Object.assign({id:d.id}, d.data())); renderGoals(); }, ()=>{});
+    db.collection("goalweeks").onSnapshot(s=>{ state.gweeks = {}; s.docs.forEach(d=>{ state.gweeks[d.id] = d.data(); }); renderGoals(); }, ()=>{});
   })();
 })();
 </script>
