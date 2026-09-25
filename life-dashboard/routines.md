@@ -16,7 +16,7 @@ the ArtifactData tool. Archiving that session stops the routines.
 ## Database shape
 
 - `briefs/{date}`: `date, generatedAt, headline, summary, priorities[], schedule[{start,end,title,calendar,location,prep}], allDay[], emails[{from,subject,why,action,url}], headsUp[], stats{meetings,freeHours,emailsNeedingReply,tasksDue}`
-- `tasks/{id}`: `title, done, due, source ("dashboard" | "notion"), url, createdAt, doneAt`
+- `tasks/{id}`: `title, done, due, source ("dashboard" | "notion" | "email" | "dump"), url, createdAt, doneAt, steps[{t, done}]` (steps come from Make it smaller)
 - `checkins/{date}`: filled in by you on the page: `wentWell, didnt, dayScore (1-5), energy (1-5), tomorrow, savedAt`
 - `reviews/{date}`: `date, generatedAt, score (1-10), summary, wins[], misses[], tomorrowFix, stats{meetings,tasksDone,tasksOpen,emailsWaiting}`
 - `school/{id}`: `type ("date" | "todo"), child, title, date, time, due, done, note, source ("email" | "app"), url, calendarAdded`
@@ -24,6 +24,10 @@ the ArtifactData tool. Archiving that session stops the routines.
 - `cycles/current`: the 12 week goal cycle: `name, start, end, weeks, targetScore`
 - `goals/{id}`: `area, title, smart, outcome{label,target,current,source}, actions[{id,label,target}], ifThen, woop{wish,outcome,obstacle,plan}, milestones[{label,due,done}]`
 - `goalweeks/w{N}`: counts per action as `c_<goal>_<action>`, plus `score, goalScores` after the Sunday review
+- `steps/{date}`: `date, steps, updatedAt` (typed from Garmin on the page or in the check-in)
+- `focus/{date}`: `date, sessions[{label, minutes, end}]` from the Now card focus timer
+- `dumps/{id}`: brain dump text: `text, createdAt, processed, sortedInto[]`; the morning brief sorts it into `tasks/`, `school/` or `someday/`
+- `someday/{id}`: `title, note, createdAt`
 - `weekly/{week}`: `week, range, generatedAt, summary, averages{dayScore,energy,completion}, whatWorked[], whatDidnt[], patterns[], improvements[{title,why,how}], focus`
 
 The full routine prompts live in the routines themselves (claude.ai, Routines list).

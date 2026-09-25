@@ -41,6 +41,7 @@
   --shadow:0 1px 2px rgba(0,0,0,.3);
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;padding-inline:16px;padding-block:20px 48px}
 .wrap{max-width:1180px;margin:0 auto;display:grid;gap:20px}
 h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
@@ -178,6 +179,87 @@ fieldset{border:0;padding:0;margin:0}
 @media (max-width:720px){.tri{grid-template-columns:1fr}}
 .foot{font-size:12.5px;color:var(--faint);text-align:center}
 
+/* time */
+.clockbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 24px;align-items:end;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 18px}
+@media (max-width:640px){.clockbar{grid-template-columns:minmax(0,1fr)}}
+.nextup{display:grid;gap:1px}
+.nextup strong{font-size:16px;font-weight:600;overflow-wrap:anywhere}
+.countdown{color:var(--dawn);font-size:14px;font-weight:500}
+.daybar{display:grid;gap:6px}
+.daybar-top{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+.progress.big{height:10px}
+#day-fill{background:var(--dawn)}
+
+/* tabs and folding */
+.tabs{display:flex;gap:4px;padding:4px;background:var(--surface-2);border-radius:12px;width:max-content;max-width:100%}
+.tabs button{border:0;background:none;padding:8px 22px;border-radius:9px;font-weight:600;cursor:pointer;color:var(--muted)}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.pane{display:grid;gap:20px}
+.panel-head:has(.fold){flex-wrap:nowrap;align-items:center}
+.panel-head:has(.fold) > h2{flex:1;min-width:0}
+.panel-head:has(.fold) > .label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.fold{border:0;background:none;color:var(--faint);cursor:pointer;font-size:12px;font-weight:600;padding:2px 6px;border-radius:6px;flex:none}
+.fold:hover{color:var(--ink);background:var(--surface-2)}
+.panel.folded{gap:0}
+.panel.folded > :not(.panel-head){display:none!important}
+
+/* now */
+.now{border:2px solid var(--dawn);gap:12px}
+.now-live{font-size:13.5px;padding:7px 11px;border-radius:9px;background:var(--warn-soft);color:var(--ink)}
+.now-body{display:grid;gap:4px}
+.now-parent{font-size:13px;color:var(--muted)}
+.now-title{font-size:clamp(22px,3.4vw,30px);line-height:1.2}
+.now-meta{font-size:13.5px;color:var(--muted)}
+.now-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn.dawn{background:var(--dawn);color:#fff}
+.btn.ghost{background:var(--surface-2);color:var(--ink)}
+:root[data-theme="dark"] .btn.dawn{color:#10141C}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.dawn{color:#10141C}}
+.seg{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.seg button{border:0;background:var(--bg);padding:8px 11px;font-family:var(--mono);font-size:13px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--dawn-soft);color:var(--dawn);font-weight:600}
+.focus{display:grid;gap:10px}
+.focus-time{font-size:clamp(44px,9vw,64px);font-weight:500;line-height:1;color:var(--dawn)}
+#focus-fill{background:var(--dawn);transition:width 1s linear}
+.finish{display:grid;gap:8px;padding:12px 14px;background:var(--good-soft);border-radius:10px}
+.substeps{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:3px;font-size:13.5px}
+.substeps label{display:flex;gap:8px;align-items:flex-start;cursor:pointer}
+.substeps input{width:15px;height:15px;margin:3px 0 0;accent-color:var(--good)}
+.substeps .sdone{color:var(--faint);text-decoration:line-through}
+.mini{border:0;background:none;color:var(--dusk);cursor:pointer;font-size:12px;font-weight:600;padding:2px 4px}
+
+/* steps */
+.steps-row{display:flex;gap:16px;align-items:center}
+.ring{width:96px;height:96px;flex:none;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:12}
+.ring-bg{stroke:var(--surface-2)}
+.ring-fg{stroke:var(--good);stroke-linecap:round;stroke-dasharray:314.16;stroke-dashoffset:314.16;transition:stroke-dashoffset .6s}
+.steps-num{display:grid;gap:2px}
+.steps-num b{font-size:28px;font-weight:500;line-height:1.1}
+.minibars{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;align-items:end}
+.mb{display:grid;gap:3px;justify-items:center;font-size:11px;color:var(--muted)}
+.mb .col-bar{width:100%;height:44px;display:flex;align-items:flex-end;background:var(--surface-2);border-radius:5px;overflow:hidden;position:relative}
+.mb .col-bar i{display:block;width:100%;background:var(--good);opacity:.55}
+.mb .col-bar i.hit{opacity:1}
+.mb .col-bar::after{content:"";position:absolute;left:0;right:0;bottom:calc(100% * 10000 / 14000);border-top:1px dashed var(--faint)}
+.mb.today span{color:var(--ink);font-weight:600}
+
+/* wins */
+.streaks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.streak{display:grid;gap:1px;padding:10px;border-radius:10px;background:var(--surface-2);text-align:center}
+.streak b{font-family:var(--display);font-size:24px;line-height:1.1;font-variant-numeric:tabular-nums}
+.streak span{font-size:11.5px;color:var(--muted)}
+.streak.on{background:var(--good-soft)}
+.streak.on b{color:var(--good)}
+.winlist{list-style:none;margin:0;padding:0;display:grid;gap:5px;font-size:14px}
+.winlist li{display:flex;gap:8px;align-items:baseline}
+.winlist li::before{content:"✓";color:var(--good);font-weight:700}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom, 0px));transform:translate(-50%,20px);background:var(--ink);color:var(--surface);padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:10;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
+.pop{animation:pop .35s ease-out}
+@media (prefers-reduced-motion:reduce){.pop{animation:none}.toast{transition:none}}
+
 /* school */
 .school{border-top:4px solid var(--good)}
 .sch-list{list-style:none;margin:0;padding:0;display:grid}
@@ -235,31 +317,132 @@ fieldset{border:0;padding:0;margin:0}
     <div class="chips" id="chips"></div>
   </header>
 
-  <section class="stats" aria-label="Today in numbers">
-    <div class="stat"><b id="st-meet">–</b><span>Events today</span></div>
-    <div class="stat"><b id="st-free">–</b><span>Free hours (8am to 6pm)</span></div>
-    <div class="stat"><b id="st-mail">–</b><span>Emails needing you</span></div>
-    <div class="stat"><b id="st-task">–</b><span>Tasks done today</span></div>
+  <section class="clockbar" id="clockbar" aria-label="Time">
+    <div class="nextup"><span class="label">Next up</span><strong id="next-ev">Nothing else on the calendar today</strong><span class="mono countdown" id="next-in"></span></div>
+    <div class="daybar"><div class="daybar-top"><span class="label" id="day-label">School hours left</span><span class="mono" id="day-left"></span></div><div class="progress big"><i id="day-fill" style="width:0"></i></div></div>
   </section>
 
-  <div class="grid">
-    <div class="col">
-      <section class="panel brief" id="brief">
+  <nav class="tabs" role="tablist" aria-label="Views">
+    <button type="button" role="tab" id="tab-btn-today" aria-selected="true" aria-controls="tab-today">Today</button>
+    <button type="button" role="tab" id="tab-btn-plan" aria-selected="false" aria-controls="tab-plan">Plan</button>
+  </nav>
+
+  <div id="tab-today" role="tabpanel" class="pane">
+    <section class="panel now" id="now">
+      <div class="panel-head"><span class="label" style="color:var(--dawn)">Now</span><span class="label mono" id="now-count"></span></div>
+      <p class="now-live" id="now-live" hidden></p>
+      <div class="now-body">
+        <p class="now-parent" id="now-parent" hidden></p>
+        <h2 class="now-title" id="now-title">Loading your next step…</h2>
+        <p class="now-meta" id="now-meta"></p>
+      </div>
+      <div class="focus" id="focus" hidden>
+        <div class="focus-time mono" id="focus-time">25:00</div>
+        <div class="progress big"><i id="focus-fill" style="width:100%"></i></div>
+        <div class="now-actions"><button type="button" class="btn ghost" id="focus-stop">Stop</button></div>
+      </div>
+      <div class="now-actions" id="now-actions">
+        <div class="seg" role="group" aria-label="Focus length">
+          <button type="button" data-min="15" aria-pressed="false">15</button><button type="button" data-min="25" aria-pressed="true">25</button><button type="button" data-min="45" aria-pressed="false">45</button>
+        </div>
+        <button type="button" class="btn dawn" id="now-start">Start focus</button>
+        <button type="button" class="btn" id="now-done">Done</button>
+        <button type="button" class="btn ghost" id="now-smaller">Make it smaller</button>
+        <button type="button" class="btn ghost" id="now-skip">Skip</button>
+      </div>
+      <div class="finish" id="finish" hidden>
+        <p><strong>Focus session done.</strong> <span id="finish-q">Did you finish it?</span></p>
+        <div class="now-actions"><button type="button" class="btn" id="finish-yes">Yes, done</button><button type="button" class="btn ghost" id="finish-no">Not yet</button></div>
+      </div>
+      <p class="status" id="now-status"></p>
+    </section>
+
+    <div class="grid">
+      <div class="col">
+        <section data-fold="brief" class="panel brief" id="brief">
         <div class="panel-head"><h2>Morning brief</h2><span class="label mono" id="brief-time"></span></div>
         <div id="brief-body"><p class="empty">Your first brief lands tomorrow morning at 6:46. It pulls your calendars, inbox and Notion tasks into one plan for the day.</p></div>
       </section>
 
-      <section class="panel" id="today">
+        <section data-fold="today" class="panel" id="today">
         <div class="panel-head"><h2>Today's schedule</h2><span class="label">All calendars</span></div>
         <div id="sched"><p class="empty">Your schedule appears here with each morning brief.</p></div>
       </section>
 
-      <section class="panel" id="inbox">
+        <section data-fold="todo" class="panel" id="todo">
+        <div class="panel-head"><h2>To do</h2><span class="label mono" id="task-count"></span></div>
+        <div class="progress" aria-hidden="true"><i id="task-bar" style="width:0"></i></div>
+        <ul class="tasks" id="tasks"></ul>
+        <form class="addrow" id="add-form" autocomplete="off">
+          <input type="text" id="add-title" placeholder="Add a task" aria-label="New task">
+          <button class="btn" type="submit">Add</button>
+        </form>
+        <p class="status" id="task-status"></p>
+      </section>
+
+        <section class="panel" id="gquick-panel" data-fold="gquick">
+          <div class="panel-head"><h2>Goal actions this week</h2><span class="label mono" id="gquick-score"></span></div>
+          <ul class="acts" id="gquick"></ul>
+          <p class="status" id="gquick-status"></p>
+        </section>
+
+        <section data-fold="inbox" class="panel" id="inbox">
         <div class="panel-head"><h2>Inbox: needs you</h2><span class="label">Gmail</span></div>
         <div id="mail"><p class="empty">Emails that need a reply or action show here each morning. Newsletters and receipts are left out.</p></div>
       </section>
+      </div>
 
-      <section class="panel school" id="school">
+      <div class="col">
+        <section class="panel steps" id="steps" data-fold="steps">
+          <div class="panel-head"><h2>Steps</h2><span class="label">Goal 10,000 a day</span></div>
+          <div class="steps-row">
+            <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="50" class="ring-bg"></circle><circle cx="60" cy="60" r="50" class="ring-fg" id="ring-fg"></circle></svg>
+            <div class="steps-num"><b class="mono" id="steps-today">–</b><span class="muted" id="steps-left">Log today's steps from Garmin</span></div>
+          </div>
+          <form class="addrow" id="steps-form" autocomplete="off">
+            <input type="number" id="steps-input" inputmode="numeric" min="0" step="1" placeholder="Steps so far" aria-label="Steps so far today">
+            <button class="btn" type="submit">Update</button>
+          </form>
+          <div class="minibars" id="steps-week" aria-label="Steps over the last 7 days"></div>
+          <p class="status" id="steps-status"></p>
+        </section>
+
+        <section class="panel dump" id="dump" data-fold="dump">
+          <div class="panel-head"><h2>Brain dump</h2><span class="label" id="dump-count"></span></div>
+          <form id="dump-form" class="review" autocomplete="off">
+            <textarea id="dump-text" placeholder="Anything on your mind. Tap the microphone and say it. Daybook sorts it into tasks, school, goals or someday each morning."></textarea>
+            <div class="addrow"><button class="btn" type="submit" id="dump-send">Get it out of my head</button></div>
+            <p class="status" id="dump-status"></p>
+          </form>
+        </section>
+
+        <section class="panel wins" id="wins" data-fold="wins">
+          <div class="panel-head"><h2>Done today</h2><span class="label mono" id="wins-count"></span></div>
+          <div class="streaks" id="streaks"></div>
+          <ul class="winlist" id="winlist"></ul>
+        </section>
+
+        <section data-fold="checkin" class="panel checkin" id="checkin">
+        <div class="panel-head"><h2>Evening check-in</h2><span class="label" id="ci-when">Takes 2 minutes</span></div>
+        <form id="ci-form" class="review" autocomplete="off">
+          <div class="field"><label for="ci-well">What went well today?</label><textarea id="ci-well" placeholder="Finished the proposal before lunch. Walked the kids to school."></textarea></div>
+          <div class="field"><label for="ci-didnt">What didn't go well?</label><textarea id="ci-didnt" placeholder="Got pulled into email after 3pm and lost the afternoon."></textarea></div>
+          <fieldset class="field"><legend>How was the day overall?</legend>
+            <div class="scale" id="ci-score"></div>
+            <div class="scale-hint"><span>Rough</span><span>Great</span></div>
+          </fieldset>
+          <fieldset class="field"><legend>Energy level</legend>
+            <div class="scale" id="ci-energy"></div>
+            <div class="scale-hint"><span>Drained</span><span>Full</span></div>
+          </fieldset>
+          <div class="field"><label for="ci-steps">Steps today (from Garmin)</label><input type="number" id="ci-steps" inputmode="numeric" min="0" step="1" placeholder="e.g. 8450"></div>
+          <div class="field"><label for="ci-tomorrow">The one thing that matters tomorrow</label><input type="text" id="ci-tomorrow" placeholder="Send the invoice to Hayes Ltd"></div>
+          <div class="addrow"><button class="btn dusk" type="submit" id="ci-save">Save check-in</button></div>
+          <p class="status" id="ci-status"></p>
+        </form>
+      </section>
+
+        <section data-fold="school" class="panel school" id="school">
         <div class="panel-head"><h2>School and nursery</h2><span class="label">Next 3 weeks</span></div>
         <div id="sch-dates"><p class="empty">Dates from school emails and app messages appear here and go straight into your Family calendar.</p></div>
         <div class="review">
@@ -282,47 +465,19 @@ fieldset{border:0;padding:0;margin:0}
           <p class="status" id="drop-status"></p>
         </form>
       </section>
-    </div>
-
-    <div class="col">
-      <section class="panel" id="todo">
-        <div class="panel-head"><h2>To do</h2><span class="label mono" id="task-count"></span></div>
-        <div class="progress" aria-hidden="true"><i id="task-bar" style="width:0"></i></div>
-        <ul class="tasks" id="tasks"></ul>
-        <form class="addrow" id="add-form" autocomplete="off">
-          <input type="text" id="add-title" placeholder="Add a task" aria-label="New task">
-          <button class="btn" type="submit">Add</button>
-        </form>
-        <p class="status" id="task-status"></p>
-      </section>
-
-      <section class="panel checkin" id="checkin">
-        <div class="panel-head"><h2>Evening check-in</h2><span class="label" id="ci-when">Takes 2 minutes</span></div>
-        <form id="ci-form" class="review" autocomplete="off">
-          <div class="field"><label for="ci-well">What went well today?</label><textarea id="ci-well" placeholder="Finished the proposal before lunch. Walked the kids to school."></textarea></div>
-          <div class="field"><label for="ci-didnt">What didn't go well?</label><textarea id="ci-didnt" placeholder="Got pulled into email after 3pm and lost the afternoon."></textarea></div>
-          <fieldset class="field"><legend>How was the day overall?</legend>
-            <div class="scale" id="ci-score"></div>
-            <div class="scale-hint"><span>Rough</span><span>Great</span></div>
-          </fieldset>
-          <fieldset class="field"><legend>Energy level</legend>
-            <div class="scale" id="ci-energy"></div>
-            <div class="scale-hint"><span>Drained</span><span>Full</span></div>
-          </fieldset>
-          <div class="field"><label for="ci-tomorrow">The one thing that matters tomorrow</label><input type="text" id="ci-tomorrow" placeholder="Send the invoice to Hayes Ltd"></div>
-          <div class="addrow"><button class="btn dusk" type="submit" id="ci-save">Save check-in</button></div>
-          <p class="status" id="ci-status"></p>
-        </form>
-      </section>
-
-      <section class="panel" id="review">
-        <div class="panel-head"><h2>Last night's review</h2><span class="label mono" id="rv-date"></span></div>
-        <div id="rv-body"><p class="empty">Each night at 9:28 Claude reviews your day: what you planned, what got done, and what slipped. The review appears here.</p></div>
-      </section>
+      </div>
     </div>
   </div>
 
-  <section class="panel goals" id="goals">
+  <div id="tab-plan" role="tabpanel" class="pane" hidden>
+    <section class="stats" aria-label="Today in numbers">
+    <div class="stat"><b id="st-meet">–</b><span>Events today</span></div>
+    <div class="stat"><b id="st-free">–</b><span>Free hours (8am to 6pm)</span></div>
+    <div class="stat"><b id="st-mail">–</b><span>Emails needing you</span></div>
+    <div class="stat"><b id="st-task">–</b><span>Tasks done today</span></div>
+  </section>
+
+    <section class="panel goals" id="goals">
     <div class="panel-head"><h2>12 week goals</h2><span class="label mono" id="cyc-range"></span></div>
     <div class="cyc">
       <div class="score"><b id="wk-score">–</b><div><div class="label" id="wk-label">This week</div><div class="muted" style="font-size:13px">of weekly actions done · aim for 85%</div></div></div>
@@ -332,12 +487,29 @@ fieldset{border:0;padding:0;margin:0}
     <p class="status" id="goal-status"></p>
   </section>
 
-  <section class="panel week" id="week">
+    <section data-fold="week" class="panel week" id="week">
     <div class="panel-head"><h2>This week</h2><span class="label">Day score out of 5, energy bar underneath</span></div>
     <div class="days" id="days"></div>
     <div id="wk-body"><p class="empty">Every Sunday evening your check-ins and nightly reviews roll up into a weekly analysis with the three changes that will help most next week.</p></div>
   </section>
 
+    <div class="grid">
+      <div class="col">
+        <section data-fold="review" class="panel" id="review">
+        <div class="panel-head"><h2>Last night's review</h2><span class="label mono" id="rv-date"></span></div>
+        <div id="rv-body"><p class="empty">Each night at 9:28 Claude reviews your day: what you planned, what got done, and what slipped. The review appears here.</p></div>
+      </section>
+      </div>
+      <div class="col">
+        <section class="panel" id="someday" data-fold="someday">
+          <div class="panel-head"><h2>Someday</h2><span class="label">Sorted from your brain dump</span></div>
+          <ul class="tasks" id="someday-list"><li style="display:block"><p class="empty">Ideas that aren't for this week land here, so they stop taking up headspace.</p></li></ul>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <p class="foot" id="foot">Brief at 6:46 · Check-in reminder at 9:28pm · Weekly review and goal score Sunday 6:46pm · London time</p>
 </div>
 
@@ -436,18 +608,35 @@ fieldset{border:0;padding:0;margin:0}
       const meta = [x.due ? (x.due===TODAY?"Due today":overdue?"Overdue · "+fmtDay(x.due):"Due "+fmtDay(x.due)) : "", x.source && x.source!=="dashboard" ? "From "+x.source : ""].filter(Boolean).join(" · ");
       const title = safeUrl(x.url) ? `<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>` : esc(x.title);
       return `<li class="${x.done?"done":""}"><input type="checkbox" id="tk-${esc(x.id)}" data-id="${esc(x.id)}" ${x.done?"checked":""} aria-label="Mark ${esc(x.title)} done">
-        <div><div class="tt">${title}</div>${meta?`<div class="meta ${overdue?"overdue":""}">${esc(meta)}</div>`:""}</div>
-        <button class="x" type="button" data-del="${esc(x.id)}" aria-label="Remove ${esc(x.title)}">×</button></li>`;
+        <div><div class="tt">${title}</div>${meta?`<div class="meta ${overdue?"overdue":""}">${esc(meta)}</div>`:""}${subSteps(x)}</div>
+        <span>${!x.done && !list(x.steps).length ? `<button class="mini" type="button" data-split="${esc(x.id)}">Split</button>` : ""}<button class="x" type="button" data-del="${esc(x.id)}" aria-label="Remove ${esc(x.title)}">×</button></span></li>`;
     }).join("");
-    chips();
+    chips(); renderNow(); renderWins();
+  }
+  function subSteps(x){
+    const st = list(x.steps); if (!st.length || x.done) return "";
+    return `<ul class="substeps">${st.map((s,i)=>`<li><label><input type="checkbox" data-step="${esc(x.id)}" data-i="${i}" ${s.done?"checked":""}><span class="${s.done?"sdone":""}">${esc(s.t)}</span></label></li>`).join("")}</ul>`;
+  }
+  async function setStep(id, i, done){
+    const t = state.tasks.find(x=>x.id===id); if (!t) return;
+    const steps = list(t.steps).map((s,j)=> j===i ? Object.assign({}, s, {done}) : s);
+    const all = steps.every(s=>s.done);
+    await state.db.doc("tasks/"+id).update(all ? {steps, done:true, doneAt:new Date().toISOString()} : {steps});
+    if (done) celebrate(all ? "Task finished" : "Step done");
+  }
+  async function markTask(id, done){
+    await state.db.doc("tasks/"+id).update({done, doneAt: done ? new Date().toISOString() : null});
+    if (done) celebrate("Done");
   }
   $("tasks").addEventListener("change", async e=>{
+    if (e.target.dataset.step){ try { await setStep(e.target.dataset.step, +e.target.dataset.i, e.target.checked); } catch(err){ e.target.checked = !e.target.checked; } return; }
     const id = e.target.dataset.id; if (!id || !state.db) return;
     const done = e.target.checked;
-    try { await state.db.doc("tasks/"+id).update({done, doneAt: done ? new Date().toISOString() : null}); }
+    try { await markTask(id, done); }
     catch(err){ $("task-status").textContent = "Could not save that change. Check your connection and try again."; e.target.checked = !done; }
   });
   $("tasks").addEventListener("click", async e=>{
+    if (e.target.dataset && e.target.dataset.split){ splitTask(e.target.dataset.split, $("task-status")); return; }
     const id = e.target.dataset && e.target.dataset.del; if (!id || !state.db) return;
     try { await state.db.doc("tasks/"+id).delete(); } catch(err){ $("task-status").textContent = "Could not remove that task."; }
   });
@@ -467,6 +656,7 @@ fieldset{border:0;padding:0;margin:0}
     if (!c) return;
     if (document.activeElement && $("ci-form").contains(document.activeElement)) return;
     $("ci-well").value = c.wentWell || ""; $("ci-didnt").value = c.didnt || ""; $("ci-tomorrow").value = c.tomorrow || "";
+    if (c.steps != null) $("ci-steps").value = c.steps;
     if (c.dayScore) { const r = $("score-"+c.dayScore); if (r) r.checked = true; }
     if (c.energy) { const r = $("energy-"+c.energy); if (r) r.checked = true; }
     $("ci-when").textContent = "Saved " + (c.savedAt ? new Date(c.savedAt).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"}) : "");
@@ -475,11 +665,15 @@ fieldset{border:0;padding:0;margin:0}
   $("ci-form").addEventListener("submit", async e=>{
     e.preventDefault();
     const val = n => { const r = document.querySelector(`input[name="${n}"]:checked`); return r ? +r.value : null; };
-    const data = {date:TODAY, wentWell:$("ci-well").value.trim(), didnt:$("ci-didnt").value.trim(), dayScore:val("score"), energy:val("energy"), tomorrow:$("ci-tomorrow").value.trim(), savedAt:new Date().toISOString()};
+    const data = {date:TODAY, wentWell:$("ci-well").value.trim(), didnt:$("ci-didnt").value.trim(), dayScore:val("score"), energy:val("energy"), tomorrow:$("ci-tomorrow").value.trim(), steps: $("ci-steps").value === "" ? null : Math.max(0, Math.round(+$("ci-steps").value)), savedAt:new Date().toISOString()};
     if (!data.wentWell && !data.didnt && !data.dayScore){ $("ci-status").textContent = "Add at least one line or a score, then save."; return; }
     if (!state.db){ $("ci-status").textContent = "Saving is available when you open this page on claude.ai."; return; }
     $("ci-save").disabled = true;
-    try { await state.db.doc("checkins/"+TODAY).set(data); $("ci-status").textContent = "Saved. Tonight's review and Sunday's analysis will use it."; }
+    try {
+      await state.db.doc("checkins/"+TODAY).set(data);
+      if (data.steps != null) await saveSteps(data.steps);
+      $("ci-status").textContent = "Saved. Tonight's review and Sunday's analysis will use it."; celebrate("Check-in saved");
+    }
     catch(err){ $("ci-status").textContent = "Could not save your check-in. Your text is still here, so try again."; }
     $("ci-save").disabled = false;
   });
@@ -562,7 +756,7 @@ fieldset{border:0;padding:0;margin:0}
   $("sch-todos").addEventListener("change", async e=>{
     const id = e.target.dataset.sid; if (!id || !state.db) return;
     const done = e.target.checked;
-    try { await state.db.doc("school/"+id).update({done, doneAt: done ? new Date().toISOString() : null}); }
+    try { await state.db.doc("school/"+id).update({done, doneAt: done ? new Date().toISOString() : null}); if (done) celebrate("School job done"); }
     catch(err){ e.target.checked = !done; }
   });
   $("drop-form").addEventListener("submit", async e=>{
@@ -586,9 +780,14 @@ fieldset{border:0;padding:0;margin:0}
   const DAY = 864e5;
   function weekNo(){ const c = state.cycle; if (!c) return 1; const s = new Date(c.start+"T00:00:00"); const n = Math.floor((new Date(TODAY+"T00:00:00") - s)/(7*DAY)) + 1; return Math.max(1, Math.min(c.weeks||12, n)); }
   const ckey = (g,a) => "c_"+g+"_"+a;
+  function weekDates(w){ const c = state.cycle; if (!c) return []; const s = new Date(c.start+"T12:00:00"); s.setDate(s.getDate()+(w-1)*7); return Array.from({length:7},(_,i)=>{ const d = new Date(s); d.setDate(s.getDate()+i); return ymd(d); }); }
+  function actCount(g, a, w){
+    if (a.auto === "steps10k") return weekDates(w).filter(k => (+((state.steps[k]||{}).steps)||0) >= 10000).length;
+    return +((state.gweeks["w"+w]||{})[ckey(g.id,a.id)])||0;
+  }
   function weekScore(w){
-    const doc = state.gweeks["w"+w] || {}; let got = 0, need = 0;
-    state.goals.forEach(g => list(g.actions).forEach(a => { const t = +a.target||0; need += t; got += Math.min(+doc[ckey(g.id,a.id)]||0, t); }));
+    let got = 0, need = 0;
+    state.goals.forEach(g => list(g.actions).forEach(a => { const t = +a.target||0; need += t; got += Math.min(actCount(g,a,w), t); }));
     return need ? Math.round(got/need*100) : null;
   }
   function sumAction(gid, aid){ let s = 0; Object.values(state.gweeks).forEach(d => { s += +d[ckey(gid,aid)]||0; }); return s; }
@@ -605,11 +804,12 @@ fieldset{border:0;padding:0;margin:0}
       const cls = s==null || i>W ? "" : s>=85 ? "hit" : s>=60 ? "near" : "low";
       cells += `<span class="${cls} ${i===W?"cur":""}" title="Week ${i}${s!=null&&i<=W?": "+s+"%":""}">${i}</span>`; }
     $("cyc-weeks").innerHTML = cells;
+    renderQuick(); renderNow();
     if (!state.goals.length) return;
     const wk = state.gweeks["w"+W] || {};
     $("gcards").innerHTML = state.goals.slice().sort((a,b)=>(a.order||0)-(b.order||0)).map(g=>{
       const o = g.outcome || {};
-      const cur = o.source && o.source.startsWith("sum:") ? sumAction(g.id, o.source.slice(4)) : o.source === "weeks" ? Array.from({length:W-1},(_,i)=>i+1).filter(i=>{ const d=state.gweeks["w"+i]||{}; return list(g.actions).every(a=>(+d[ckey(g.id,a.id)]||0)>=(+a.target||0)); }).length : (+o.current||0);
+      const cur = o.source && o.source.startsWith("sum:") ? sumAction(g.id, o.source.slice(4)) : o.source === "weeks" ? Array.from({length:W-1},(_,i)=>i+1).filter(i=>{ const d=state.gweeks["w"+i]||{}; return list(g.actions).every(a=>actCount(g,a,i)>=(+a.target||0)); }).length : (+o.current||0);
       const pct = o.target ? Math.min(100, Math.round(cur/o.target*100)) : 0;
       const nextM = list(g.milestones).filter(m=>!m.done).sort((a,b)=>String(a.due).localeCompare(String(b.due)));
       return `<article class="gcard">
@@ -618,13 +818,34 @@ fieldset{border:0;padding:0;margin:0}
         ${g.smart?`<p class="smart">${esc(g.smart)}</p>`:""}
         ${o.target?`<div class="outc"><div class="outc-top"><span>${esc(o.label||"Progress")}</span><span class="mono">${cur} / ${esc(o.target)}${o.source==="manual"?` <span class="ctr" style="display:inline-flex"><button type="button" data-out="${esc(g.id)}" data-d="1" aria-label="Add one to ${esc(o.label)}">+</button></span>`:""}</span></div><div class="progress"><i style="width:${pct}%"></i></div></div>`:""}
         <div class="review" style="gap:6px"><span class="label">Week ${W} actions</span>
-          <ul class="acts">${list(g.actions).map(a=>{ const n = +wk[ckey(g.id,a.id)]||0; const t = +a.target||0;
-            return `<li><span>${esc(a.label)}</span><span class="ctr"><button type="button" data-g="${esc(g.id)}" data-a="${esc(a.id)}" data-d="-1" aria-label="Remove one ${esc(a.label)}">−</button><output class="${n>=t&&t?"met":""}">${n}/${t}</output><button type="button" data-g="${esc(g.id)}" data-a="${esc(a.id)}" data-d="1" aria-label="Add one ${esc(a.label)}">+</button></span></li>`; }).join("")}</ul></div>
+          <ul class="acts">${list(g.actions).map(a=>actRow(g,a,W)).join("")}</ul></div>
         ${g.ifThen?`<p class="ifthen"><b>If–then plan:</b> ${esc(g.ifThen)}</p>`:""}
         ${nextM.length?`<ul class="miles">${nextM.slice(0,2).map(m=>`<li><span class="d">${esc(fmtShort(m.due))}</span><span>${esc(m.label)}</span></li>`).join("")}</ul>`:""}
       </article>`;
     }).join("");
   }
+  function actRow(g, a, W){
+    const n = actCount(g,a,W); const t = +a.target||0;
+    const ctrl = a.auto ? `<output class="${n>=t&&t?"met":""}" title="Filled in from your steps">${n}/${t}</output>`
+      : `<button type="button" data-g="${esc(g.id)}" data-a="${esc(a.id)}" data-d="-1" aria-label="Remove one ${esc(a.label)}">−</button><output class="${n>=t&&t?"met":""}">${n}/${t}</output><button type="button" data-g="${esc(g.id)}" data-a="${esc(a.id)}" data-d="1" aria-label="Add one ${esc(a.label)}">+</button>`;
+    return `<li><span>${esc(a.label)}</span><span class="ctr">${ctrl}</span></li>`;
+  }
+  function renderQuick(){
+    const W = weekNo(); const sc = weekScore(W);
+    $("gquick-score").textContent = sc==null ? "" : `Week ${W} · ${sc}%`;
+    $("gquick").innerHTML = state.goals.slice().sort((a,b)=>(a.order||0)-(b.order||0)).map(g => list(g.actions).map(a=>actRow(g,a,W)).join("")).join("") || `<li><span class="muted">Goals load here.</span></li>`;
+  }
+  async function bumpGoal(gid, aid, d){
+    const W = weekNo(); const k = ckey(gid, aid);
+    const cur = +((state.gweeks["w"+W]||{})[k])||0; const next = Math.max(0, cur + d);
+    await state.db.doc("goalweeks/w"+W).set(Object.assign({}, state.gweeks["w"+W] || {week:W}, {[k]:next, week:W, updatedAt:new Date().toISOString()}));
+    if (d > 0){ const g = state.goals.find(x=>x.id===gid); const a = g && list(g.actions).find(x=>x.id===aid); celebrate((a ? a.label : "Goal action") + " logged"); }
+  }
+  $("gquick").addEventListener("click", async e=>{
+    const b = e.target.closest("button"); if (!b || !state.db || !b.dataset.g) return;
+    try { await bumpGoal(b.dataset.g, b.dataset.a, +b.dataset.d); $("gquick-status").textContent = ""; }
+    catch(err){ $("gquick-status").textContent = "Could not save that. Try again in a moment."; }
+  });
   $("gcards").addEventListener("click", async e=>{
     const b = e.target.closest("button"); if (!b || !state.db) return;
     const d = +b.dataset.d;
@@ -634,9 +855,7 @@ fieldset{border:0;padding:0;margin:0}
         const o = Object.assign({}, g.outcome); o.current = Math.max(0,(+o.current||0)+d);
         await state.db.doc("goals/"+g.id).update({outcome:o});
       } else if (b.dataset.g){
-        const W = weekNo(); const k = ckey(b.dataset.g, b.dataset.a);
-        const cur = +((state.gweeks["w"+W]||{})[k])||0; const next = Math.max(0, cur + d);
-        await state.db.doc("goalweeks/w"+W).set(Object.assign({}, state.gweeks["w"+W] || {week:W}, {[k]:next, week:W, updatedAt:new Date().toISOString()}));
+        await bumpGoal(b.dataset.g, b.dataset.a, d);
       }
       $("goal-status").textContent = "";
     } catch(err){ $("goal-status").textContent = "Could not save that. Try again in a moment."; }
@@ -644,7 +863,230 @@ fieldset{border:0;padding:0;margin:0}
 
   function fmtShort(k){ if(!k) return ""; const d = new Date(k+"T12:00:00"); return isNaN(d) ? k : d.toLocaleDateString("en-GB",{day:"numeric",month:"short"}); }
 
-  renderTasks(); renderDays(); chips();
+  // ---------- Shared: toast + celebration ----------
+  let toastT = null;
+  function toast(msg){ const t = $("toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove("show"), 2200); }
+  function winsToday(){
+    const d = x => String(x||"").slice(0,10) === TODAY;
+    return state.tasks.filter(x=>x.done && d(x.doneAt)).length + state.school.filter(x=>x.type==="todo" && x.done && d(x.doneAt)).length + list((state.focus||{}).sessions).length;
+  }
+  function celebrate(msg){
+    const n = winsToday() + 1;
+    toast(`${msg}. ${n} win${n===1?"":"s"} today`);
+    const b = $("wins-count"); b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop");
+  }
+
+  // ---------- Tabs and folding ----------
+  function showTab(name){
+    ["today","plan"].forEach(t => { $("tab-"+t).hidden = t !== name; $("tab-btn-"+t).setAttribute("aria-selected", String(t === name)); });
+    try { localStorage.setItem("daybook.tab", name); } catch(e){}
+  }
+  $("tab-btn-today").addEventListener("click", ()=>showTab("today"));
+  $("tab-btn-plan").addEventListener("click", ()=>showTab("plan"));
+  (function(){
+    const planIds = ["goals","week","review","someday"];
+    const hash = (location.hash||"").slice(1);
+    let t = "today"; try { t = localStorage.getItem("daybook.tab") || "today"; } catch(e){}
+    if (hash) t = planIds.includes(hash) ? "plan" : "today";
+    showTab(t);
+  })();
+  let folds = {}; try { folds = JSON.parse(localStorage.getItem("daybook.folds")||"{}"); } catch(e){}
+  document.querySelectorAll("section[data-fold]").forEach(sec => {
+    const key = sec.dataset.fold; const head = sec.querySelector(".panel-head"); if (!head) return;
+    const btn = document.createElement("button"); btn.type = "button"; btn.className = "fold";
+    const apply = () => { const f = !!folds[key]; sec.classList.toggle("folded", f); btn.textContent = f ? "Show" : "Hide"; btn.setAttribute("aria-expanded", String(!f)); };
+    btn.addEventListener("click", () => { folds[key] = !folds[key]; try { localStorage.setItem("daybook.folds", JSON.stringify(folds)); } catch(e){} apply(); });
+    head.appendChild(btn); apply();
+  });
+
+  // ---------- Time blindness ----------
+  const toMinT = t => { const m = /^(\d{1,2}):(\d{2})/.exec(t||""); return m ? (+m[1])*60+(+m[2]) : null; };
+  const fmtDur = m => m >= 60 ? `${Math.floor(m/60)}h ${m%60}m` : `${m}m`;
+  function renderClock(){
+    const d = new Date(); const mins = d.getHours()*60 + d.getMinutes();
+    const b = state.brief && state.brief.date === TODAY ? state.brief : null;
+    const sch = b ? list(b.schedule) : [];
+    const cur = sch.find(e => { const s = toMinT(e.start), en = toMinT(e.end); return s!=null && s <= mins && en!=null && en > mins; });
+    const next = sch.filter(e => (toMinT(e.start) ?? -1) > mins).sort((a,c)=>toMinT(a.start)-toMinT(c.start))[0];
+    if (next){ const left = toMinT(next.start) - mins; $("next-ev").textContent = `${next.title} at ${next.start}`; $("next-in").textContent = `in ${fmtDur(left)}${left <= 15 ? " · get ready now" : ""}`; }
+    else { $("next-ev").textContent = b ? "Nothing else on the calendar today" : "Your schedule loads with the morning brief"; $("next-in").textContent = ""; }
+    const live = $("now-live");
+    if (cur){ live.hidden = false; live.textContent = `Happening now: ${cur.title} until ${cur.end}`; } else live.hidden = true;
+    const wd = d.getDay() >= 1 && d.getDay() <= 5;
+    const [s, e, label] = wd ? [9*60, 15*60, "School hours left"] : [8*60, 20*60, "Daylight hours left"];
+    const left = Math.max(0, e - Math.max(mins, s));
+    $("day-label").textContent = label;
+    $("day-left").textContent = mins >= e ? (wd ? "Pick up time" : "Evening") : mins < s ? `Starts at ${pad(Math.floor(s/60))}:00` : fmtDur(left);
+    $("day-fill").style.width = (mins < s ? 100 : Math.round(left/(e-s)*100)) + "%";
+  }
+  setInterval(()=>{ renderClock(); }, 30000);
+
+  // ---------- Now card ----------
+  let skipped = new Set(); let focusMin = 25; let nowItem = null;
+  function nowQueue(){
+    const q = [];
+    const open = state.tasks.filter(t => !t.done).sort((a,b)=> String(a.due||"9999").localeCompare(String(b.due||"9999")) || String(a.createdAt||"").localeCompare(String(b.createdAt||"")));
+    open.forEach(t => { const st = list(t.steps); const i = st.findIndex(s=>!s.done);
+      q.push({kind:"task", id:t.id, title: i >= 0 ? st[i].t : t.title, parent: i >= 0 ? t.title : "", stepIndex: i, meta: t.due ? (t.due < TODAY ? "Overdue" : t.due === TODAY ? "Due today" : "Due "+fmtDay(t.due)) : ""}); });
+    state.school.filter(x=>x.type==="todo" && !x.done).forEach(x => q.push({kind:"school", id:x.id, title:x.title, parent: x.child ? "School · "+x.child : "School", meta: x.due ? "Due "+fmtDay(x.due) : ""}));
+    const W = weekNo();
+    state.goals.slice().sort((a,b)=>(a.order||0)-(b.order||0)).forEach(g => list(g.actions).forEach(a => { if (a.auto) return; const n = actCount(g,a,W), t = +a.target||0; if (n < t) q.push({kind:"goal", gid:g.id, aid:a.id, id:g.id+"/"+a.id, title:a.label, parent:g.title, meta:`${n} of ${t} this week`}); }));
+    return q;
+  }
+  function renderNow(){
+    if ($("focus").hidden === false) return;
+    const all = nowQueue(); let q = all.filter(x => !skipped.has(x.kind+":"+x.id));
+    if (!q.length && all.length){ skipped = new Set(); q = all; }
+    nowItem = q[0] || null;
+    $("now-count").textContent = all.length ? `${all.length} in the queue` : "";
+    if (!nowItem){ $("now-title").textContent = state.db ? "All clear. Take a breath." : "Your next step appears here."; $("now-parent").hidden = true; $("now-meta").textContent = state.db ? "Nothing waiting. Add a task, or log a goal action when you do one." : ""; ["now-start","now-done","now-smaller","now-skip"].forEach(i=>$(i).disabled = true); return; }
+    ["now-start","now-done","now-skip"].forEach(i=>$(i).disabled = false);
+    $("now-smaller").disabled = !(nowItem.kind === "task" && nowItem.stepIndex < 0);
+    $("now-title").textContent = nowItem.title;
+    $("now-parent").hidden = !nowItem.parent; $("now-parent").textContent = nowItem.parent ? (nowItem.kind === "task" ? "Part of: "+nowItem.parent : nowItem.parent) : "";
+    $("now-meta").textContent = nowItem.meta || "";
+  }
+  document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
+    focusMin = +b.dataset.min; document.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  }));
+  $("now-skip").addEventListener("click", () => { if (nowItem){ skipped.add(nowItem.kind+":"+nowItem.id); renderNow(); } });
+  async function completeNow(item){
+    if (!item || !state.db) return;
+    try {
+      if (item.kind === "task"){ if (item.stepIndex >= 0) await setStep(item.id, item.stepIndex, true); else await markTask(item.id, true); }
+      else if (item.kind === "school"){ await state.db.doc("school/"+item.id).update({done:true, doneAt:new Date().toISOString()}); celebrate("School job done"); }
+      else if (item.kind === "goal"){ await bumpGoal(item.gid, item.aid, 1); }
+      $("now-status").textContent = "";
+    } catch(e){ $("now-status").textContent = "Could not save that. Try again in a moment."; }
+  }
+  $("now-done").addEventListener("click", () => completeNow(nowItem));
+
+  // focus timer
+  let timer = null; let focusItem = null;
+  function tick(){
+    let f = null; try { f = JSON.parse(localStorage.getItem("daybook.focus")||"null"); } catch(e){}
+    if (!f){ return stopFocus(false); }
+    const left = Math.max(0, f.end - Date.now()); const total = f.min*60000;
+    $("focus-time").textContent = `${pad(Math.floor(left/60000))}:${pad(Math.floor(left/1000)%60)}`;
+    $("focus-fill").style.width = (left/total*100) + "%";
+    if (left <= 0) finishFocus(f);
+  }
+  function startFocus(){
+    if (!nowItem) return;
+    focusItem = nowItem;
+    const f = {end: Date.now() + focusMin*60000, min: focusMin, label: nowItem.title, item: nowItem};
+    try { localStorage.setItem("daybook.focus", JSON.stringify(f)); } catch(e){}
+    $("focus").hidden = false; $("now-actions").hidden = true; $("finish").hidden = true;
+    clearInterval(timer); timer = setInterval(tick, 1000); tick();
+  }
+  function stopFocus(clear = true){
+    clearInterval(timer); timer = null;
+    if (clear){ try { localStorage.removeItem("daybook.focus"); } catch(e){} }
+    $("focus").hidden = true; $("now-actions").hidden = false; renderNow();
+  }
+  async function finishFocus(f){
+    clearInterval(timer); timer = null;
+    try { localStorage.removeItem("daybook.focus"); } catch(e){}
+    focusItem = f.item;
+    $("focus").hidden = true; $("finish").hidden = false; $("now-actions").hidden = true;
+    $("finish-q").textContent = focusItem && focusItem.kind === "goal" ? `Log it as one "${focusItem.title}"?` : "Did you finish it?";
+    try { const a = new (window.AudioContext||window.webkitAudioContext)(); const o = a.createOscillator(); const g = a.createGain(); o.frequency.value = 660; g.gain.setValueAtTime(.15, a.currentTime); g.gain.exponentialRampToValueAtTime(.001, a.currentTime+.8); o.connect(g).connect(a.destination); o.start(); o.stop(a.currentTime+.8); } catch(e){}
+    if (state.db){
+      const sessions = list((state.focus||{}).sessions).concat([{label:f.label, minutes:f.min, end:new Date().toISOString()}]);
+      try { await state.db.doc("focus/"+TODAY).set({date:TODAY, sessions}); } catch(e){}
+    }
+    toast(`${f.min} minute focus session done`);
+  }
+  $("now-start").addEventListener("click", startFocus);
+  $("focus-stop").addEventListener("click", () => stopFocus(true));
+  $("finish-yes").addEventListener("click", async () => { $("finish").hidden = true; $("now-actions").hidden = false; await completeNow(focusItem); focusItem = null; renderNow(); });
+  $("finish-no").addEventListener("click", () => { $("finish").hidden = true; $("now-actions").hidden = false; focusItem = null; renderNow(); });
+  (function resume(){ let f = null; try { f = JSON.parse(localStorage.getItem("daybook.focus")||"null"); } catch(e){}
+    if (f){ if (f.end > Date.now()){ focusItem = f.item; $("focus").hidden = false; $("now-actions").hidden = true; $("now-title").textContent = f.label; timer = setInterval(tick, 1000); tick(); } else { try { localStorage.removeItem("daybook.focus"); } catch(e){} } } })();
+
+  // make it smaller
+  async function splitTask(id, statusEl){
+    const t = state.tasks.find(x=>x.id===id); if (!t || !state.db) return;
+    let sample = null; try { sample = await window.claude.use("sample"); } catch(e){}
+    if (!sample){ statusEl.textContent = "Splitting tasks needs Claude, which isn't available in this view."; return; }
+    statusEl.textContent = "Breaking it down…";
+    try {
+      const out = await sample.json(`You help a busy parent with ADHD get started. Break this task into exactly 3 tiny, concrete steps in order. Step 1 must take 2 minutes or less and be a physical action (open, find, write one line). Each step under 12 words, plain British English, no dashes. Task: "${t.title}". Reply as JSON: {"steps":["...","...","..."]}`, {modelTier:"quick"});
+      const steps = list(out && out.steps).slice(0,3).map(x=>({t:String(x).slice(0,120), done:false}));
+      if (!steps.length) throw new Error("empty");
+      await state.db.doc("tasks/"+id).update({steps});
+      statusEl.textContent = ""; toast("Split into 3 small steps");
+    } catch(e){
+      statusEl.textContent = e && e.code === "not_granted" ? "Allow Claude for this page to split tasks." : "Could not split that just now. Try again in a minute.";
+    }
+  }
+  $("now-smaller").addEventListener("click", () => { if (nowItem && nowItem.kind === "task") splitTask(nowItem.id, $("now-status")); });
+
+  // ---------- Brain dump ----------
+  state.dumps = []; state.someday = [];
+  $("dump-form").addEventListener("submit", async e => {
+    e.preventDefault();
+    const text = $("dump-text").value.trim(); if (!text) { $("dump-status").textContent = "Type or say something first."; return; }
+    if (!state.db){ $("dump-status").textContent = "Saving is available when you open this page on claude.ai."; return; }
+    $("dump-send").disabled = true;
+    try { await state.db.collection("dumps").add({text, createdAt:new Date().toISOString(), processed:false}); $("dump-text").value = ""; $("dump-status").textContent = ""; toast("Out of your head. Daybook will sort it."); }
+    catch(err){ $("dump-status").textContent = "Could not save that. Your text is still here, so try again."; }
+    $("dump-send").disabled = false;
+  });
+  function renderDumps(){
+    const n = state.dumps.length;
+    $("dump-count").textContent = n ? `${n} waiting to sort` : "";
+    $("someday-list").innerHTML = state.someday.length ? state.someday.map(x => `<li style="grid-template-columns:1fr auto"><div><div class="tt">${esc(x.title)}</div>${x.note?`<div class="meta">${esc(x.note)}</div>`:""}</div><button class="x" type="button" data-sd="${esc(x.id)}" aria-label="Remove ${esc(x.title)}">×</button></li>`).join("")
+      : `<li style="display:block"><p class="empty">Ideas that aren't for this week land here, so they stop taking up headspace.</p></li>`;
+  }
+  $("someday-list").addEventListener("click", async e => { const id = e.target.dataset && e.target.dataset.sd; if (id && state.db) { try { await state.db.doc("someday/"+id).delete(); } catch(err){} } });
+
+  // ---------- Steps ----------
+  state.steps = {};
+  async function saveSteps(n){
+    const prev = +((state.steps[TODAY]||{}).steps)||0;
+    await state.db.doc("steps/"+TODAY).set({date:TODAY, steps:n, updatedAt:new Date().toISOString()});
+    if (n >= 10000 && prev < 10000) celebrate("10,000 steps");
+  }
+  $("steps-form").addEventListener("submit", async e => {
+    e.preventDefault();
+    const v = $("steps-input").value; if (v === "") return;
+    if (!state.db){ $("steps-status").textContent = "Saving is available when you open this page on claude.ai."; return; }
+    try { await saveSteps(Math.max(0, Math.round(+v))); $("steps-input").value = ""; $("steps-status").textContent = ""; }
+    catch(err){ $("steps-status").textContent = "Could not save your steps. Try again."; }
+  });
+  function renderSteps(){
+    const n = +((state.steps[TODAY]||{}).steps)||0;
+    $("steps-today").textContent = n.toLocaleString("en-GB");
+    $("steps-left").textContent = n >= 10000 ? "Goal hit. Brilliant." : n ? `${(10000-n).toLocaleString("en-GB")} to go · about ${Math.round((10000-n)/110)} minutes walking` : "Log today's steps from Garmin";
+    $("ring-fg").style.strokeDashoffset = String(314.16 * (1 - Math.min(1, n/10000)));
+    let html = "";
+    for (let i=6;i>=0;i--){ const d = new Date(now); d.setDate(d.getDate()-i); const k = ymd(d); const v = +((state.steps[k]||{}).steps)||0;
+      html += `<div class="mb ${k===TODAY?"today":""}" title="${esc(fmtDay(k))}: ${v.toLocaleString("en-GB")} steps"><div class="col-bar"><i class="${v>=10000?"hit":""}" style="height:${Math.min(100, v/14000*100)}%"></i></div><span>${d.toLocaleDateString("en-GB",{weekday:"narrow"})}</span></div>`; }
+    $("steps-week").innerHTML = html;
+    const ci = state.checkins[TODAY];
+    if ((!ci || ci.steps == null) && n && document.activeElement !== $("ci-steps")) $("ci-steps").value = n;
+  }
+
+  // ---------- Wins and streaks ----------
+  function streak(test){ let c = 0; const d = new Date(now); if (!test(ymd(d))) d.setDate(d.getDate()-1); while (test(ymd(d)) && c < 400){ c++; d.setDate(d.getDate()-1); } return c; }
+  function renderWins(){
+    const isT = x => String(x||"").slice(0,10) === TODAY;
+    const items = [];
+    state.tasks.filter(x=>x.done && isT(x.doneAt)).forEach(x=>items.push(x.title));
+    state.school.filter(x=>x.type==="todo" && x.done && isT(x.doneAt)).forEach(x=>items.push("School: "+x.title));
+    list((state.focus||{}).sessions).forEach(s=>items.push(`${s.minutes} minute focus: ${s.label}`));
+    if ((+((state.steps[TODAY]||{}).steps)||0) >= 10000) items.push("10,000 steps");
+    $("wins-count").textContent = items.length ? `${items.length} win${items.length===1?"":"s"}` : "";
+    $("winlist").innerHTML = items.length ? items.map(x=>`<li>${esc(x)}</li>`).join("") : `<li style="color:var(--muted)">Your wins show up here as you go. Start with the Now card.</li>`;
+    const ciS = streak(k => !!state.checkins[k]);
+    const stS = streak(k => (+((state.steps[k]||{}).steps)||0) >= 10000);
+    let wkS = 0; for (let w = weekNo()-1; w >= 1; w--){ const s = weekScore(w); if (s != null && s >= 85) wkS++; else break; }
+    const tile = (n, label) => `<div class="streak ${n?"on":""}"><b>${n}</b><span>${label}</span></div>`;
+    $("streaks").innerHTML = tile(ciS, "day check-in streak") + tile(stS, "days at 10k") + tile(wkS, "weeks at 85%");
+  }
+
+  renderTasks(); renderDays(); chips(); renderClock(); renderSteps(); renderWins(); renderDumps();
 
   // ---------- Data ----------
   (async function(){
@@ -653,16 +1095,22 @@ fieldset{border:0;padding:0;margin:0}
     if (!db){ $("foot").textContent = "Open this page on claude.ai to see your live data."; return; }
     state.db = db;
     const weekAgo = new Date(mondayOf(now)); weekAgo.setDate(weekAgo.getDate()-7); const since = ymd(weekAgo);
-    db.collection("briefs").orderBy("date","desc").limit(1).onSnapshot(s=>{ state.brief = s.docs[0] ? s.docs[0].data() : null; renderBrief(); chips(); }, ()=>{});
+    db.collection("briefs").orderBy("date","desc").limit(1).onSnapshot(s=>{ state.brief = s.docs[0] ? s.docs[0].data() : null; renderBrief(); chips(); renderClock(); }, ()=>{});
     db.collection("tasks").onSnapshot(s=>{ state.tasks = s.docs.map(d=>Object.assign({id:d.id}, d.data())); renderTasks(); }, ()=>{ $("task-status").textContent = "Tasks could not load. Refresh the page to retry."; });
-    db.collection("checkins").where("date",">=",since).onSnapshot(s=>{ state.checkins = {}; s.docs.forEach(d=>{ const v=d.data(); state.checkins[v.date||d.id]=v; }); fillCheckin(); renderDays(); chips(); }, ()=>{});
+    const sixty = new Date(now); sixty.setDate(sixty.getDate()-60);
+    db.collection("checkins").where("date",">=",ymd(sixty)).onSnapshot(s=>{ state.checkins = {}; s.docs.forEach(d=>{ const v=d.data(); state.checkins[v.date||d.id]=v; }); fillCheckin(); renderDays(); chips(); renderWins(); renderSteps(); }, ()=>{});
     db.collection("reviews").where("date",">=",since).onSnapshot(s=>{ state.reviews = {}; s.docs.forEach(d=>{ const v=d.data(); state.reviews[v.date||d.id]=v; }); renderReview(); renderDays(); }, ()=>{});
     db.collection("weekly").orderBy("generatedAt","desc").limit(1).onSnapshot(s=>{ state.weekly = s.docs[0] ? s.docs[0].data() : null; renderWeekly(); }, ()=>{});
-    db.collection("school").onSnapshot(s=>{ state.school = s.docs.map(d=>Object.assign({id:d.id}, d.data())); renderSchool(); }, ()=>{});
+    db.collection("school").onSnapshot(s=>{ state.school = s.docs.map(d=>Object.assign({id:d.id}, d.data())); renderSchool(); renderNow(); renderWins(); }, ()=>{});
     db.collection("schoolinbox").where("processed","==",false).onSnapshot(s=>{ state.drops = s.docs.map(d=>d.data()); renderSchool(); }, ()=>{});
     db.doc("cycles/current").onSnapshot(s=>{ state.cycle = s.exists ? s.data() : null; renderGoals(); }, ()=>{});
     db.collection("goals").onSnapshot(s=>{ state.goals = s.docs.map(d=>Object.assign({id:d.id}, d.data())); renderGoals(); }, ()=>{});
-    db.collection("goalweeks").onSnapshot(s=>{ state.gweeks = {}; s.docs.forEach(d=>{ state.gweeks[d.id] = d.data(); }); renderGoals(); }, ()=>{});
+    db.collection("goalweeks").onSnapshot(s=>{ state.gweeks = {}; s.docs.forEach(d=>{ state.gweeks[d.id] = d.data(); }); renderGoals(); renderWins(); }, ()=>{});
+    db.collection("steps").where("date",">=",ymd(sixty)).onSnapshot(s=>{ state.steps = {}; s.docs.forEach(d=>{ const v=d.data(); state.steps[v.date||d.id]=v; }); renderSteps(); renderWins(); renderGoals(); }, ()=>{});
+    db.doc("focus/"+TODAY).onSnapshot(s=>{ state.focus = s.exists ? s.data() : null; renderWins(); }, ()=>{});
+    db.collection("dumps").where("processed","==",false).onSnapshot(s=>{ state.dumps = s.docs.map(d=>d.data()); renderDumps(); }, ()=>{});
+    db.collection("someday").onSnapshot(s=>{ state.someday = s.docs.map(d=>Object.assign({id:d.id}, d.data())); renderDumps(); }, ()=>{});
+    renderNow();
   })();
 })();
 </script>
