@@ -188,8 +188,7 @@ fieldset{border:0;padding:0;margin:0}
 .sch-todo li{grid-template-columns:22px 1fr}
 .drop{display:grid;gap:8px;padding:12px 14px;border:1px dashed var(--line);border-radius:10px;background:var(--bg)}
 .drop-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
-.filepick{font-size:13px;color:var(--muted);display:flex;gap:6px;align-items:center;cursor:pointer}
-.filepick input{max-width:190px;font-size:12.5px}
+.howto{margin:0;padding-left:20px;display:grid;gap:4px;font-size:14px}
 
 /* goals */
 .goals{border-top:4px solid var(--dusk)}
@@ -267,13 +266,19 @@ fieldset{border:0;padding:0;margin:0}
           <span class="label">School to-dos</span>
           <ul class="tasks sch-todo" id="sch-todos"></ul>
         </div>
+        <div class="drop">
+          <span class="label">School app messages</span>
+          <ol class="howto">
+            <li>Screenshot the message in My Child at School.</li>
+            <li>Tap <b>Share</b>, choose <b>Drive</b>, and save it to the <b>Daybook School Inbox</b> folder.</li>
+            <li>That's it. Daybook reads it at the next brief or review and adds the dates to your Family calendar.</li>
+          </ol>
+          <a href="https://drive.google.com/drive/folders/1mQk2Y6ZBfZvIGaF1kXXzvFVrEOgFcv_8" target="_blank" rel="noopener">Open the Daybook School Inbox folder</a>
+        </div>
         <form class="drop" id="drop-form" autocomplete="off">
-          <label class="label" for="drop-text">Drop in a school app message</label>
-          <textarea id="drop-text" placeholder="Paste a message from My Child at School, or attach a screenshot. Daybook picks out the dates, forms, payments and kit."></textarea>
-          <div class="drop-row">
-            <label class="filepick" id="pick-wrap">Screenshot <input type="file" id="drop-file" accept="image/*"></label>
-            <button class="btn" type="submit" id="drop-send">Send to Daybook</button>
-          </div>
+          <label class="label" for="drop-text">Or say it in a sentence</label>
+          <textarea id="drop-text" placeholder="Tap the microphone on your keyboard and say it, e.g. Mira: non uniform day Friday 3 October, bring £1."></textarea>
+          <div class="drop-row"><span></span><button class="btn" type="submit" id="drop-send">Send to Daybook</button></div>
           <p class="status" id="drop-status"></p>
         </form>
       </section>
@@ -562,22 +567,16 @@ fieldset{border:0;padding:0;margin:0}
   });
   $("drop-form").addEventListener("submit", async e=>{
     e.preventDefault();
-    const text = $("drop-text").value.trim(); const file = $("drop-file").files[0];
-    if (!text && !file){ $("drop-status").textContent = "Paste the message text or choose a screenshot first."; return; }
+    const text = $("drop-text").value.trim();
+    if (!text){ $("drop-status").textContent = "Type or say the message first."; return; }
     if (!state.db){ $("drop-status").textContent = "Sending is available when you open this page on claude.ai."; return; }
     $("drop-send").disabled = true; $("drop-status").dataset.busy = "1"; $("drop-status").textContent = "Sending…";
     try {
-      let assetId = null, assetUrl = null;
-      if (file){
-        const assets = await window.claude.use("assets");
-        if (!assets) throw new Error("no-assets");
-        const up = await assets.upload(file); assetId = up.id; assetUrl = up.url;
-      }
-      await state.db.collection("schoolinbox").add({text, assetId, assetUrl, createdAt:new Date().toISOString(), processed:false});
-      $("drop-text").value = ""; $("drop-file").value = "";
+      await state.db.collection("schoolinbox").add({text, source:"typed", createdAt:new Date().toISOString(), processed:false});
+      $("drop-text").value = "";
       $("drop-status").textContent = "Sent. Daybook will add any dates to your Family calendar and list the to-dos here.";
     } catch(err){
-      $("drop-status").textContent = err && err.message === "no-assets" ? "Screenshots can't be sent from this view. Paste the text instead." : "Could not send that. Your text is still here, so try again.";
+      $("drop-status").textContent = "Could not send that. Your text is still here, so try again.";
     }
     delete $("drop-status").dataset.busy; $("drop-send").disabled = false;
   });
@@ -653,7 +652,6 @@ fieldset{border:0;padding:0;margin:0}
     try { db = await window.claude?.use?.("db"); } catch(e){ db = null; }
     if (!db){ $("foot").textContent = "Open this page on claude.ai to see your live data."; return; }
     state.db = db;
-    window.claude.use("assets").then(a=>{ if (!a) $("pick-wrap").hidden = true; }, ()=>{ $("pick-wrap").hidden = true; });
     const weekAgo = new Date(mondayOf(now)); weekAgo.setDate(weekAgo.getDate()-7); const since = ymd(weekAgo);
     db.collection("briefs").orderBy("date","desc").limit(1).onSnapshot(s=>{ state.brief = s.docs[0] ? s.docs[0].data() : null; renderBrief(); chips(); }, ()=>{});
     db.collection("tasks").onSnapshot(s=>{ state.tasks = s.docs.map(d=>Object.assign({id:d.id}, d.data())); renderTasks(); }, ()=>{ $("task-status").textContent = "Tasks could not load. Refresh the page to retry."; });
