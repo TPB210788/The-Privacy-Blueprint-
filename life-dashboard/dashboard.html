@@ -1,0 +1,479 @@
+<title>Daybook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F4F7; --surface:#FFFFFF; --surface-2:#E9EDF3; --line:#D6DCE5;
+  --ink:#18202D; --muted:#5A6576; --faint:#8A94A4;
+  --dawn:#B8621A; --dawn-soft:#FBEBDC;
+  --dusk:#3B45A0; --dusk-soft:#E4E6F7;
+  --good:#23845A; --good-soft:#DDF1E6;
+  --warn:#A87708; --warn-soft:#F7EDCF;
+  --bad:#B63A33; --bad-soft:#F7E0DE;
+  --shadow:0 1px 2px rgba(24,32,45,.06),0 4px 16px rgba(24,32,45,.05);
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Instrument Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#10141C; --surface:#171D28; --surface-2:#1F2733; --line:#2B3442;
+    --ink:#E7EBF2; --muted:#A1ABBB; --faint:#6F7A8C;
+    --dawn:#F0A25C; --dawn-soft:#33251A;
+    --dusk:#A3AAF5; --dusk-soft:#22264A;
+    --good:#5DCB94; --good-soft:#15301F;
+    --warn:#E3B84A; --warn-soft:#342A10;
+    --bad:#F08A82; --bad-soft:#3A1D1B;
+    --shadow:0 1px 2px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10141C; --surface:#171D28; --surface-2:#1F2733; --line:#2B3442;
+  --ink:#E7EBF2; --muted:#A1ABBB; --faint:#6F7A8C;
+  --dawn:#F0A25C; --dawn-soft:#33251A;
+  --dusk:#A3AAF5; --dusk-soft:#22264A;
+  --good:#5DCB94; --good-soft:#15301F;
+  --warn:#E3B84A; --warn-soft:#342A10;
+  --bad:#F08A82; --bad-soft:#3A1D1B;
+  --shadow:0 1px 2px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;padding-inline:16px;padding-block:20px 48px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:20px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(28px,4.4vw,42px);font-weight:700;line-height:1.05}
+h2{font-size:19px;font-weight:700}
+h3{font-size:15px;font-weight:600;font-family:var(--body)}
+p{margin:0}
+.label{font-size:11.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:600}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--dusk);outline-offset:2px}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:flex-end;justify-content:space-between}
+.top .date{display:grid;gap:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;font-size:12.5px;font-weight:500;background:var(--surface-2);color:var(--muted);white-space:nowrap}
+.chip i{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block}
+.chip.good{background:var(--good-soft);color:var(--good)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.dawn{background:var(--dawn-soft);color:var(--dawn)}
+.chip.dusk{background:var(--dusk-soft);color:var(--dusk)}
+
+/* stats strip */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.stat{background:var(--surface);padding:14px 16px;display:grid;gap:2px}
+.stat b{font-family:var(--display);font-size:28px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:12.5px;color:var(--muted)}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* grid */
+.grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:20px;align-items:start}
+.col{display:grid;gap:20px}
+@media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:grid;gap:14px;box-shadow:var(--shadow)}
+.panel-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.empty{color:var(--muted);font-size:14px;padding:10px 12px;background:var(--surface-2);border-radius:10px}
+
+/* brief */
+.brief{border-top:4px solid var(--dawn)}
+.brief .headline{font-family:var(--display);font-size:22px;font-weight:500;line-height:1.3;max-width:62ch}
+.brief .summary{color:var(--muted);max-width:68ch}
+.prio{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:p}
+.prio li{counter-increment:p;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
+.prio li::before{content:counter(p);font-family:var(--mono);font-size:12px;font-weight:500;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:var(--dawn-soft);color:var(--dawn)}
+.headsup{display:grid;gap:6px;padding:12px 14px;background:var(--warn-soft);border-radius:10px;color:var(--ink);font-size:14px}
+.headsup ul{margin:0;padding-left:18px}
+
+/* timeline */
+.tl{list-style:none;margin:0;padding:0;display:grid}
+.tl li{display:grid;grid-template-columns:92px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.tl li:first-child{border-top:0}
+.tl .t{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:1px}
+.tl .ev{display:grid;gap:2px}
+.tl .ev small{color:var(--muted);font-size:13px}
+.tl li.now .t{color:var(--dawn);font-weight:500}
+.tl li.past{opacity:.55}
+.cal{font-size:11.5px;padding:1px 7px;border-radius:999px;background:var(--surface-2);color:var(--muted);margin-left:6px;vertical-align:1px}
+.allday{display:flex;flex-wrap:wrap;gap:6px}
+
+/* email */
+.mail{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.mail li{display:grid;gap:3px;padding:10px 12px;border-radius:10px;background:var(--surface-2)}
+.mail .from{font-size:13px;color:var(--muted)}
+.mail .act{font-size:13px;color:var(--dawn);font-weight:500}
+a{color:var(--dusk)}
+
+/* tasks */
+.tasks{list-style:none;margin:0;padding:0;display:grid}
+.tasks li{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:start;padding:8px 0;border-top:1px solid var(--line)}
+.tasks li:first-child{border-top:0}
+.tasks input[type=checkbox]{width:18px;height:18px;margin:2px 0 0;accent-color:var(--good)}
+.tasks li.done .tt{text-decoration:line-through;color:var(--faint)}
+.tasks .meta{font-size:12px;color:var(--muted)}
+.tasks .meta.overdue{color:var(--bad)}
+.x{border:0;background:none;color:var(--faint);cursor:pointer;padding:2px 6px;border-radius:6px;font-size:16px;line-height:1}
+.x:hover{color:var(--bad);background:var(--bad-soft)}
+.addrow{display:flex;gap:8px}
+.addrow input{flex:1;min-width:0}
+input[type=text],input[type=date],textarea{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:9px 11px;width:100%}
+textarea{resize:vertical;min-height:66px}
+.btn{border:0;border-radius:9px;padding:9px 16px;font-weight:600;cursor:pointer;background:var(--ink);color:var(--surface);white-space:nowrap}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.dusk{background:var(--dusk);color:#fff}
+:root[data-theme="dark"] .btn.dusk{color:#10141C}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.dusk{color:#10141C}}
+.progress{height:6px;border-radius:999px;background:var(--surface-2);overflow:hidden}
+.progress i{display:block;height:100%;background:var(--good);border-radius:999px;transition:width .3s}
+
+/* check-in */
+.checkin{border-top:4px solid var(--dusk)}
+.field{display:grid;gap:6px}
+.field label,.field legend{font-size:13.5px;font-weight:600}
+fieldset{border:0;padding:0;margin:0}
+.scale{display:flex;gap:6px;flex-wrap:wrap}
+.scale input{position:absolute;opacity:0;pointer-events:none}
+.scale label{width:40px;height:36px;display:grid;place-items:center;border:1px solid var(--line);border-radius:9px;cursor:pointer;font-family:var(--mono);font-size:14px;font-weight:500;background:var(--bg)}
+.scale input:checked+label{background:var(--dusk);border-color:var(--dusk);color:var(--surface)}
+.scale input:focus-visible+label{outline:2px solid var(--dusk);outline-offset:2px}
+.scale-hint{display:flex;justify-content:space-between;font-size:11.5px;color:var(--faint);max-width:226px}
+.status{font-size:13px;color:var(--muted);min-height:1.2em}
+
+/* review */
+.review{display:grid;gap:12px}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.twocol{grid-template-columns:1fr}}
+.box{padding:12px 14px;border-radius:10px;display:grid;gap:6px;font-size:14px}
+.box ul{margin:0;padding-left:18px;display:grid;gap:3px}
+.box.good{background:var(--good-soft)}
+.box.bad{background:var(--bad-soft)}
+.box.good .label{color:var(--good)}
+.box.bad .label{color:var(--bad)}
+.fix{display:grid;gap:4px;padding:12px 14px;border-left:3px solid var(--dusk);background:var(--dusk-soft);border-radius:0 10px 10px 0;font-size:14px}
+
+/* week */
+.week{border-top:4px solid var(--ink)}
+.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.day{display:grid;gap:6px;justify-items:center;padding:10px 4px;border-radius:10px;background:var(--surface-2);text-align:center}
+.day.today{outline:2px solid var(--dawn);outline-offset:-2px}
+.day .dn{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.day .sc{font-family:var(--display);font-size:22px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.day .sc.none{color:var(--faint);font-size:18px}
+.bar{width:70%;height:36px;display:flex;align-items:flex-end;background:transparent}
+.bar i{display:block;width:100%;border-radius:4px 4px 1px 1px;background:var(--dusk);min-height:3px}
+.day .en{font-size:11px;color:var(--muted)}
+.improve{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:i}
+.improve li{counter-increment:i;display:grid;grid-template-columns:30px 1fr;gap:12px;padding:14px;border:1px solid var(--line);border-radius:12px}
+.improve li::before{content:counter(i);font-family:var(--display);font-weight:700;font-size:20px;color:var(--dusk);line-height:1.1}
+.improve .how{font-size:14px;color:var(--muted)}
+.wk-sum{max-width:72ch}
+.focus{font-family:var(--display);font-size:18px;font-weight:500;padding:12px 16px;background:var(--dawn-soft);border-radius:10px}
+.tri{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:720px){.tri{grid-template-columns:1fr}}
+.foot{font-size:12.5px;color:var(--faint);text-align:center}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="date">
+      <span class="label" id="greet">Good morning</span>
+      <h1 id="today-title">Today</h1>
+    </div>
+    <div class="chips" id="chips"></div>
+  </header>
+
+  <section class="stats" aria-label="Today in numbers">
+    <div class="stat"><b id="st-meet">–</b><span>Events today</span></div>
+    <div class="stat"><b id="st-free">–</b><span>Free hours (8am to 6pm)</span></div>
+    <div class="stat"><b id="st-mail">–</b><span>Emails needing you</span></div>
+    <div class="stat"><b id="st-task">–</b><span>Tasks done today</span></div>
+  </section>
+
+  <div class="grid">
+    <div class="col">
+      <section class="panel brief" id="brief">
+        <div class="panel-head"><h2>Morning brief</h2><span class="label mono" id="brief-time"></span></div>
+        <div id="brief-body"><p class="empty">Your first brief lands tomorrow morning at 6:46. It pulls your calendars, inbox and Notion tasks into one plan for the day.</p></div>
+      </section>
+
+      <section class="panel" id="today">
+        <div class="panel-head"><h2>Today's schedule</h2><span class="label">All calendars</span></div>
+        <div id="sched"><p class="empty">Your schedule appears here with each morning brief.</p></div>
+      </section>
+
+      <section class="panel" id="inbox">
+        <div class="panel-head"><h2>Inbox: needs you</h2><span class="label">Gmail</span></div>
+        <div id="mail"><p class="empty">Emails that need a reply or action show here each morning. Newsletters and receipts are left out.</p></div>
+      </section>
+    </div>
+
+    <div class="col">
+      <section class="panel" id="todo">
+        <div class="panel-head"><h2>To do</h2><span class="label mono" id="task-count"></span></div>
+        <div class="progress" aria-hidden="true"><i id="task-bar" style="width:0"></i></div>
+        <ul class="tasks" id="tasks"></ul>
+        <form class="addrow" id="add-form" autocomplete="off">
+          <input type="text" id="add-title" placeholder="Add a task" aria-label="New task">
+          <button class="btn" type="submit">Add</button>
+        </form>
+        <p class="status" id="task-status"></p>
+      </section>
+
+      <section class="panel checkin" id="checkin">
+        <div class="panel-head"><h2>Evening check-in</h2><span class="label" id="ci-when">Takes 2 minutes</span></div>
+        <form id="ci-form" class="review" autocomplete="off">
+          <div class="field"><label for="ci-well">What went well today?</label><textarea id="ci-well" placeholder="Finished the proposal before lunch. Walked the kids to school."></textarea></div>
+          <div class="field"><label for="ci-didnt">What didn't go well?</label><textarea id="ci-didnt" placeholder="Got pulled into email after 3pm and lost the afternoon."></textarea></div>
+          <fieldset class="field"><legend>How was the day overall?</legend>
+            <div class="scale" id="ci-score"></div>
+            <div class="scale-hint"><span>Rough</span><span>Great</span></div>
+          </fieldset>
+          <fieldset class="field"><legend>Energy level</legend>
+            <div class="scale" id="ci-energy"></div>
+            <div class="scale-hint"><span>Drained</span><span>Full</span></div>
+          </fieldset>
+          <div class="field"><label for="ci-tomorrow">The one thing that matters tomorrow</label><input type="text" id="ci-tomorrow" placeholder="Send the invoice to Hayes Ltd"></div>
+          <div class="addrow"><button class="btn dusk" type="submit" id="ci-save">Save check-in</button></div>
+          <p class="status" id="ci-status"></p>
+        </form>
+      </section>
+
+      <section class="panel" id="review">
+        <div class="panel-head"><h2>Last night's review</h2><span class="label mono" id="rv-date"></span></div>
+        <div id="rv-body"><p class="empty">Each night at 9:28 Claude reviews your day: what you planned, what got done, and what slipped. The review appears here.</p></div>
+      </section>
+    </div>
+  </div>
+
+  <section class="panel week" id="week">
+    <div class="panel-head"><h2>This week</h2><span class="label">Day score out of 5, energy bar underneath</span></div>
+    <div class="days" id="days"></div>
+    <div id="wk-body"><p class="empty">Every Sunday evening your check-ins and nightly reviews roll up into a weekly analysis with the three changes that will help most next week.</p></div>
+  </section>
+
+  <p class="foot" id="foot">Brief at 6:46 · Check-in reminder at 9:28pm · Weekly review Sunday 6:46pm · London time</p>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const pad = n => String(n).padStart(2,"0");
+  const ymd = d => d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+  const now = new Date();
+  const TODAY = ymd(now);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const safeUrl = u => /^https:\/\//i.test(u||"") ? esc(u) : "";
+  const list = arr => Array.isArray(arr) ? arr : [];
+
+  // Header
+  const h = now.getHours();
+  $("greet").textContent = h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
+  $("today-title").textContent = now.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"});
+
+  // Scales
+  function buildScale(host, name){
+    host.innerHTML = [1,2,3,4,5].map(n =>
+      `<input type="radio" name="${name}" id="${name}-${n}" value="${n}"><label for="${name}-${n}">${n}</label>`).join("");
+  }
+  buildScale($("ci-score"),"score");
+  buildScale($("ci-energy"),"energy");
+
+  const state = {brief:null, tasks:[], checkins:{}, reviews:{}, weekly:null, db:null};
+
+  function chips(){
+    const c = [];
+    if (state.brief && state.brief.date === TODAY) c.push(`<span class="chip dawn"><i></i>Brief ready</span>`);
+    else c.push(`<span class="chip"><i></i>Brief due 6:46am</span>`);
+    if (state.checkins[TODAY]) c.push(`<span class="chip good"><i></i>Checked in</span>`);
+    else if (h >= 18) c.push(`<span class="chip dusk"><i></i>Check-in open</span>`);
+    const open = state.tasks.filter(t => !t.done).length;
+    if (open) c.push(`<span class="chip"><i></i>${open} open task${open===1?"":"s"}</span>`);
+    $("chips").innerHTML = c.join("");
+  }
+
+  // ---------- Brief ----------
+  function renderBrief(){
+    const b = state.brief;
+    if (!b) return;
+    const stale = b.date !== TODAY;
+    $("brief-time").textContent = stale ? "From "+fmtDay(b.date) : (b.generatedAt ? "Updated "+new Date(b.generatedAt).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"}) : "");
+    const heads = list(b.headsUp);
+    $("brief-body").innerHTML = `
+      <div class="review">
+        ${b.headline ? `<p class="headline">${esc(b.headline)}</p>` : ""}
+        ${b.summary ? `<p class="summary">${esc(b.summary)}</p>` : ""}
+        ${list(b.priorities).length ? `<div class="review"><span class="label">Top priorities</span><ol class="prio">${list(b.priorities).map(p=>`<li><span>${esc(p)}</span></li>`).join("")}</ol></div>` : ""}
+        ${heads.length ? `<div class="headsup"><span class="label" style="color:var(--warn)">Heads up</span><ul>${heads.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>` : ""}
+      </div>`;
+    // schedule
+    const sch = list(b.schedule), all = list(b.allDay);
+    const mins = now.getHours()*60+now.getMinutes();
+    const toMin = t => { const m = /^(\d{1,2}):(\d{2})/.exec(t||""); return m ? (+m[1])*60+(+m[2]) : null; };
+    if (sch.length || all.length){
+      $("sched").innerHTML = `
+        ${all.length ? `<div class="allday">${all.map(a=>`<span class="chip">${esc(a)}</span>`).join("")}</div>` : ""}
+        <ul class="tl">${sch.map(e=>{
+          const s = toMin(e.start), en = toMin(e.end);
+          const cls = stale ? "" : (en!=null && en <= mins ? "past" : (s!=null && s <= mins && (en==null || en > mins) ? "now" : ""));
+          return `<li class="${cls}"><span class="t">${esc(e.start||"")}${e.end?"–"+esc(e.end):""}</span>
+            <div class="ev"><span>${esc(e.title)}${e.calendar?`<span class="cal">${esc(e.calendar)}</span>`:""}</span>
+            ${e.location?`<small>${esc(e.location)}</small>`:""}${e.prep?`<small>Prep: ${esc(e.prep)}</small>`:""}</div></li>`;}).join("")}</ul>`;
+    } else $("sched").innerHTML = `<p class="empty">Nothing on the calendar today.</p>`;
+    // mail
+    const m = list(b.emails);
+    $("mail").innerHTML = m.length ? `<ul class="mail">${m.map(x=>`<li>
+        <span class="from">${esc(x.from)}</span>
+        <strong>${safeUrl(x.url)?`<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.subject)}</a>`:esc(x.subject)}</strong>
+        ${x.why?`<span>${esc(x.why)}</span>`:""}
+        ${x.action?`<span class="act">${esc(x.action)}</span>`:""}</li>`).join("")}</ul>`
+      : `<p class="empty">Inbox is clear of anything urgent.</p>`;
+    const st = b.stats || {};
+    $("st-meet").textContent = st.meetings ?? sch.length;
+    $("st-free").textContent = st.freeHours ?? "–";
+    $("st-mail").textContent = st.emailsNeedingReply ?? m.length;
+  }
+
+  // ---------- Tasks ----------
+  function renderTasks(){
+    const t = state.tasks.slice().sort((a,b)=> (a.done-b.done) || String(a.due||"9999").localeCompare(String(b.due||"9999")) || String(a.createdAt||"").localeCompare(String(b.createdAt||"")));
+    const doneToday = t.filter(x => x.done && String(x.doneAt||"").slice(0,10) === TODAY).length;
+    const visible = t.filter(x => !x.done || String(x.doneAt||"").slice(0,10) === TODAY);
+    const total = visible.length;
+    $("task-count").textContent = total ? `${doneToday} of ${total} done` : "";
+    $("task-bar").style.width = total ? (doneToday/total*100)+"%" : "0";
+    $("st-task").textContent = doneToday;
+    if (!visible.length){ $("tasks").innerHTML = `<li style="display:block"><p class="empty">No open tasks. Add one below, or the morning brief will bring in anything due from Notion.</p></li>`; chips(); return; }
+    $("tasks").innerHTML = visible.map(x=>{
+      const overdue = !x.done && x.due && x.due < TODAY;
+      const meta = [x.due ? (x.due===TODAY?"Due today":overdue?"Overdue · "+fmtDay(x.due):"Due "+fmtDay(x.due)) : "", x.source && x.source!=="dashboard" ? "From "+x.source : ""].filter(Boolean).join(" · ");
+      const title = safeUrl(x.url) ? `<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>` : esc(x.title);
+      return `<li class="${x.done?"done":""}"><input type="checkbox" id="tk-${esc(x.id)}" data-id="${esc(x.id)}" ${x.done?"checked":""} aria-label="Mark ${esc(x.title)} done">
+        <div><div class="tt">${title}</div>${meta?`<div class="meta ${overdue?"overdue":""}">${esc(meta)}</div>`:""}</div>
+        <button class="x" type="button" data-del="${esc(x.id)}" aria-label="Remove ${esc(x.title)}">×</button></li>`;
+    }).join("");
+    chips();
+  }
+  $("tasks").addEventListener("change", async e=>{
+    const id = e.target.dataset.id; if (!id || !state.db) return;
+    const done = e.target.checked;
+    try { await state.db.doc("tasks/"+id).update({done, doneAt: done ? new Date().toISOString() : null}); }
+    catch(err){ $("task-status").textContent = "Could not save that change. Check your connection and try again."; e.target.checked = !done; }
+  });
+  $("tasks").addEventListener("click", async e=>{
+    const id = e.target.dataset && e.target.dataset.del; if (!id || !state.db) return;
+    try { await state.db.doc("tasks/"+id).delete(); } catch(err){ $("task-status").textContent = "Could not remove that task."; }
+  });
+  $("add-form").addEventListener("submit", async e=>{
+    e.preventDefault();
+    const title = $("add-title").value.trim(); if (!title) return;
+    if (!state.db){ $("task-status").textContent = "Saving is available when you open this page on claude.ai."; return; }
+    try {
+      await state.db.collection("tasks").add({title, done:false, due:TODAY, source:"dashboard", url:"", createdAt:new Date().toISOString(), doneAt:null});
+      $("add-title").value = ""; $("task-status").textContent = "";
+    } catch(err){ $("task-status").textContent = "Could not add that task. Try again in a moment."; }
+  });
+
+  // ---------- Check-in ----------
+  function fillCheckin(){
+    const c = state.checkins[TODAY];
+    if (!c) return;
+    if (document.activeElement && $("ci-form").contains(document.activeElement)) return;
+    $("ci-well").value = c.wentWell || ""; $("ci-didnt").value = c.didnt || ""; $("ci-tomorrow").value = c.tomorrow || "";
+    if (c.dayScore) { const r = $("score-"+c.dayScore); if (r) r.checked = true; }
+    if (c.energy) { const r = $("energy-"+c.energy); if (r) r.checked = true; }
+    $("ci-when").textContent = "Saved " + (c.savedAt ? new Date(c.savedAt).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"}) : "");
+    $("ci-save").textContent = "Update check-in";
+  }
+  $("ci-form").addEventListener("submit", async e=>{
+    e.preventDefault();
+    const val = n => { const r = document.querySelector(`input[name="${n}"]:checked`); return r ? +r.value : null; };
+    const data = {date:TODAY, wentWell:$("ci-well").value.trim(), didnt:$("ci-didnt").value.trim(), dayScore:val("score"), energy:val("energy"), tomorrow:$("ci-tomorrow").value.trim(), savedAt:new Date().toISOString()};
+    if (!data.wentWell && !data.didnt && !data.dayScore){ $("ci-status").textContent = "Add at least one line or a score, then save."; return; }
+    if (!state.db){ $("ci-status").textContent = "Saving is available when you open this page on claude.ai."; return; }
+    $("ci-save").disabled = true;
+    try { await state.db.doc("checkins/"+TODAY).set(data); $("ci-status").textContent = "Saved. Tonight's review and Sunday's analysis will use it."; }
+    catch(err){ $("ci-status").textContent = "Could not save your check-in. Your text is still here, so try again."; }
+    $("ci-save").disabled = false;
+  });
+
+  // ---------- Review ----------
+  function renderReview(){
+    const keys = Object.keys(state.reviews).sort().reverse();
+    if (!keys.length) return;
+    const r = state.reviews[keys[0]];
+    $("rv-date").textContent = fmtDay(r.date);
+    const s = r.stats || {};
+    $("rv-body").innerHTML = `<div class="review">
+      ${r.summary?`<p>${esc(r.summary)}</p>`:""}
+      <div class="chips">
+        ${r.score!=null?`<span class="chip ${r.score>=7?"good":r.score>=5?"warn":"dusk"}">Day score ${esc(r.score)}/10</span>`:""}
+        ${s.tasksDone!=null?`<span class="chip">${esc(s.tasksDone)} tasks done</span>`:""}
+        ${s.tasksOpen!=null?`<span class="chip">${esc(s.tasksOpen)} carried over</span>`:""}
+        ${s.emailsWaiting!=null?`<span class="chip">${esc(s.emailsWaiting)} emails waiting</span>`:""}
+      </div>
+      <div class="twocol">
+        <div class="box good"><span class="label">Went well</span>${list(r.wins).length?`<ul>${list(r.wins).map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:`<span class="muted">Nothing logged</span>`}</div>
+        <div class="box bad"><span class="label">Didn't go well</span>${list(r.misses).length?`<ul>${list(r.misses).map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:`<span class="muted">Nothing logged</span>`}</div>
+      </div>
+      ${r.tomorrowFix?`<div class="fix"><span class="label" style="color:var(--dusk)">Try tomorrow</span><span>${esc(r.tomorrowFix)}</span></div>`:""}
+    </div>`;
+  }
+
+  // ---------- Week ----------
+  function mondayOf(d){ const x = new Date(d); const k = (x.getDay()+6)%7; x.setDate(x.getDate()-k); x.setHours(12,0,0,0); return x; }
+  function renderDays(){
+    const mon = mondayOf(now);
+    let html = "";
+    for (let i=0;i<7;i++){
+      const d = new Date(mon); d.setDate(mon.getDate()+i); const k = ymd(d);
+      const c = state.checkins[k] || {}; const r = state.reviews[k] || {};
+      const score = c.dayScore ?? (r.score!=null ? Math.round(r.score/2) : null);
+      const energy = c.energy ?? null;
+      html += `<div class="day ${k===TODAY?"today":""}" title="${esc(fmtDay(k))}">
+        <span class="dn">${d.toLocaleDateString("en-GB",{weekday:"short"})}</span>
+        <span class="sc ${score==null?"none":""}">${score==null?"·":esc(score)}</span>
+        <div class="bar" aria-label="Energy ${energy??"not logged"}"><i style="height:${energy?energy*20:0}%;${energy?"":"background:transparent"}"></i></div>
+        <span class="en">${energy?"Energy "+energy:"&nbsp;"}</span></div>`;
+    }
+    $("days").innerHTML = html;
+  }
+  function renderWeekly(){
+    const w = state.weekly; if (!w) return;
+    const av = w.averages || {};
+    const col = (title, arr, cls) => `<div class="box ${cls}"><span class="label">${title}</span>${list(arr).length?`<ul>${list(arr).map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:`<span class="muted">None noted</span>`}</div>`;
+    $("wk-body").innerHTML = `<div class="review">
+      <div class="panel-head"><h3>Weekly analysis · ${esc(w.range||w.week)}</h3>
+        <div class="chips">${av.dayScore!=null?`<span class="chip">Avg day ${esc(av.dayScore)}/5</span>`:""}${av.energy!=null?`<span class="chip">Avg energy ${esc(av.energy)}/5</span>`:""}${av.completion!=null?`<span class="chip good">${esc(av.completion)}% tasks done</span>`:""}</div></div>
+      ${w.summary?`<p class="wk-sum">${esc(w.summary)}</p>`:""}
+      <div class="tri">${col("What worked", w.whatWorked, "good")}${col("What didn't", w.whatDidnt, "bad")}${col("Patterns", w.patterns, "")}</div>
+      ${list(w.improvements).length?`<div class="review"><span class="label">Improve next week</span><ol class="improve">${list(w.improvements).map(i=>`<li><div><h3>${esc(i.title)}</h3>${i.why?`<p class="how">${esc(i.why)}</p>`:""}${i.how?`<p class="how"><strong>How:</strong> ${esc(i.how)}</p>`:""}</div></li>`).join("")}</ol></div>`:""}
+      ${w.focus?`<p class="focus">${esc(w.focus)}</p>`:""}
+    </div>`;
+  }
+
+  function fmtDay(k){ if(!k) return ""; const d = new Date(k+"T12:00:00"); return isNaN(d) ? k : d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"}); }
+
+  renderTasks(); renderDays(); chips();
+
+  // ---------- Data ----------
+  (async function(){
+    let db = null;
+    try { db = await window.claude?.use?.("db"); } catch(e){ db = null; }
+    if (!db){ $("foot").textContent = "Open this page on claude.ai to see your live data."; return; }
+    state.db = db;
+    const weekAgo = new Date(mondayOf(now)); weekAgo.setDate(weekAgo.getDate()-7); const since = ymd(weekAgo);
+    db.collection("briefs").orderBy("date","desc").limit(1).onSnapshot(s=>{ state.brief = s.docs[0] ? s.docs[0].data() : null; renderBrief(); chips(); }, ()=>{});
+    db.collection("tasks").onSnapshot(s=>{ state.tasks = s.docs.map(d=>Object.assign({id:d.id}, d.data())); renderTasks(); }, ()=>{ $("task-status").textContent = "Tasks could not load. Refresh the page to retry."; });
+    db.collection("checkins").where("date",">=",since).onSnapshot(s=>{ state.checkins = {}; s.docs.forEach(d=>{ const v=d.data(); state.checkins[v.date||d.id]=v; }); fillCheckin(); renderDays(); chips(); }, ()=>{});
+    db.collection("reviews").where("date",">=",since).onSnapshot(s=>{ state.reviews = {}; s.docs.forEach(d=>{ const v=d.data(); state.reviews[v.date||d.id]=v; }); renderReview(); renderDays(); }, ()=>{});
+    db.collection("weekly").orderBy("generatedAt","desc").limit(1).onSnapshot(s=>{ state.weekly = s.docs[0] ? s.docs[0].data() : null; renderWeekly(); }, ()=>{});
+  })();
+})();
+</script>
