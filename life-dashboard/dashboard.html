@@ -122,6 +122,7 @@ a{color:var(--dusk)}
 .x{border:0;background:none;color:var(--faint);cursor:pointer;padding:2px 6px;border-radius:6px;font-size:16px;line-height:1}
 .x:hover{color:var(--bad);background:var(--bad-soft)}
 .addrow{display:flex;gap:8px}
+#steps-form{flex-wrap:wrap}#steps-form input{flex:1 1 120px;min-width:0}
 .addrow input{flex:1;min-width:0}
 input[type=text],input[type=date],textarea{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:9px 11px;width:100%}
 textarea{resize:vertical;min-height:66px}
@@ -305,6 +306,13 @@ fieldset{border:0;padding:0;margin:0}
 .miles li{display:flex;gap:8px;align-items:baseline}
 .miles li.done{color:var(--faint);text-decoration:line-through}
 .miles .d{font-family:var(--mono);font-size:12px;color:var(--muted);min-width:52px}
+/* linked pages */
+.linkbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.linkbar a{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:var(--surface);border:1px solid var(--line);color:var(--ink);text-decoration:none;font-weight:600;font-size:14px}
+.linkbar a:hover{border-color:var(--dusk)}
+.linkbar a small{font-weight:500;color:var(--muted);font-size:12.5px}
+.linkbar.sun a{border-color:var(--dawn);background:var(--dawn-soft)}
+.linkbar .sunnote{font-size:13px;color:var(--dawn);font-weight:600}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
@@ -325,6 +333,12 @@ fieldset{border:0;padding:0;margin:0}
   <nav class="tabs" role="tablist" aria-label="Views">
     <button type="button" role="tab" id="tab-btn-today" aria-selected="true" aria-controls="tab-today">Today</button>
     <button type="button" role="tab" id="tab-btn-plan" aria-selected="false" aria-controls="tab-plan">Plan</button>
+  </nav>
+
+  <nav class="linkbar" id="linkbar" aria-label="Sunday pages">
+    <span class="sunnote" id="sunnote" hidden>It's Sunday:</span>
+    <a href="https://claude.ai/code/artifact/9afc641d-e30a-412a-932b-b0e05a191381" target="_blank" rel="noopener">Sunday Reset <small>weekly routine</small></a>
+    <a href="https://claude.ai/artifact/9DJxEAYB2HDYaVBFgLnhVz" target="_blank" rel="noopener">Money Sunday <small>budget check</small></a>
   </nav>
 
   <div id="tab-today" role="tabpanel" class="pane">
@@ -400,7 +414,10 @@ fieldset{border:0;padding:0;margin:0}
             <div class="steps-num"><b class="mono" id="steps-today">–</b><span class="muted" id="steps-left">Log today's steps from Garmin</span></div>
           </div>
           <form class="addrow" id="steps-form" autocomplete="off">
-            <input type="number" id="steps-input" inputmode="numeric" min="0" step="1" placeholder="Steps so far" aria-label="Steps so far today">
+            <div class="seg" id="steps-day" role="group" aria-label="Which day">
+              <button type="button" data-day="today" aria-pressed="true">Today</button><button type="button" data-day="yday" aria-pressed="false">Yesterday</button>
+            </div>
+            <input type="number" id="steps-input" inputmode="numeric" min="0" step="1" placeholder="Steps so far" aria-label="Steps so far">
             <button class="btn" type="submit">Update</button>
           </form>
           <div class="minibars" id="steps-week" aria-label="Steps over the last 7 days"></div>
@@ -528,6 +545,8 @@ fieldset{border:0;padding:0;margin:0}
   const h = now.getHours();
   $("greet").textContent = h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
   $("today-title").textContent = now.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"});
+
+  if (now.getDay() === 0){ $("linkbar").classList.add("sun"); $("sunnote").hidden = false; }
 
   // Scales
   function buildScale(host, name){
@@ -671,7 +690,7 @@ fieldset{border:0;padding:0;margin:0}
     $("ci-save").disabled = true;
     try {
       await state.db.doc("checkins/"+TODAY).set(data);
-      if (data.steps != null) await saveSteps(data.steps);
+      if (data.steps != null) await saveSteps(data.steps, TODAY);
       $("ci-status").textContent = "Saved. Tonight's review and Sunday's analysis will use it."; celebrate("Check-in saved");
     }
     catch(err){ $("ci-status").textContent = "Could not save your check-in. Your text is still here, so try again."; }
@@ -946,8 +965,8 @@ fieldset{border:0;padding:0;margin:0}
     $("now-parent").hidden = !nowItem.parent; $("now-parent").textContent = nowItem.parent ? (nowItem.kind === "task" ? "Part of: "+nowItem.parent : nowItem.parent) : "";
     $("now-meta").textContent = nowItem.meta || "";
   }
-  document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
-    focusMin = +b.dataset.min; document.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  document.querySelectorAll("#now .seg button").forEach(b => b.addEventListener("click", () => {
+    focusMin = +b.dataset.min; document.querySelectorAll("#now .seg button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
   }));
   $("now-skip").addEventListener("click", () => { if (nowItem){ skipped.add(nowItem.kind+":"+nowItem.id); renderNow(); } });
   async function completeNow(item){
@@ -1043,10 +1062,19 @@ fieldset{border:0;padding:0;margin:0}
 
   // ---------- Steps ----------
   state.steps = {};
-  async function saveSteps(n){
-    const prev = +((state.steps[TODAY]||{}).steps)||0;
-    await state.db.doc("steps/"+TODAY).set({date:TODAY, steps:n, updatedAt:new Date().toISOString()});
-    if (n >= 10000 && prev < 10000) celebrate("10,000 steps");
+  const YDAY = ymd(new Date(now.getFullYear(), now.getMonth(), now.getDate()-1));
+  let stepsDay = TODAY;
+  document.querySelectorAll("#steps-day button").forEach(b => b.addEventListener("click", () => {
+    stepsDay = b.dataset.day === "yday" ? YDAY : TODAY;
+    document.querySelectorAll("#steps-day button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    const cur = +((state.steps[stepsDay]||{}).steps)||0;
+    $("steps-input").placeholder = stepsDay === TODAY ? "Steps so far" : (cur ? "Yesterday: "+cur.toLocaleString("en-GB") : "Yesterday");
+  }));
+  async function saveSteps(n, day = stepsDay){
+    const prev = +((state.steps[day]||{}).steps)||0;
+    await state.db.doc("steps/"+day).set({date:day, steps:n, updatedAt:new Date().toISOString()});
+    if (n >= 10000 && prev < 10000) celebrate(day === TODAY ? "10,000 steps" : "10,000 steps yesterday");
+    if (day !== TODAY) toast("Yesterday's steps saved");
   }
   $("steps-form").addEventListener("submit", async e => {
     e.preventDefault();
