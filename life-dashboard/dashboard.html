@@ -319,7 +319,7 @@ fieldset{border:0;padding:0;margin:0}
 
   <section class="clockbar" id="clockbar" aria-label="Time">
     <div class="nextup"><span class="label">Next up</span><strong id="next-ev">Nothing else on the calendar today</strong><span class="mono countdown" id="next-in"></span></div>
-    <div class="daybar"><div class="daybar-top"><span class="label" id="day-label">School hours left</span><span class="mono" id="day-left"></span></div><div class="progress big"><i id="day-fill" style="width:0"></i></div></div>
+    <div class="daybar"><div class="daybar-top"><span class="label" id="day-label">Work day left</span><span class="mono" id="day-left"></span></div><div class="progress big"><i id="day-fill" style="width:0"></i></div></div>
   </section>
 
   <nav class="tabs" role="tablist" aria-label="Views">
@@ -913,10 +913,10 @@ fieldset{border:0;padding:0;margin:0}
     const live = $("now-live");
     if (cur){ live.hidden = false; live.textContent = `Happening now: ${cur.title} until ${cur.end}`; } else live.hidden = true;
     const wd = d.getDay() >= 1 && d.getDay() <= 5;
-    const [s, e, label] = wd ? [9*60, 15*60, "School hours left"] : [8*60, 20*60, "Daylight hours left"];
+    const [s, e, label] = wd ? [9*60, 17*60, "Work day left"] : [8*60, 20*60, "Daylight hours left"];
     const left = Math.max(0, e - Math.max(mins, s));
     $("day-label").textContent = label;
-    $("day-left").textContent = mins >= e ? (wd ? "Pick up time" : "Evening") : mins < s ? `Starts at ${pad(Math.floor(s/60))}:00` : fmtDur(left);
+    $("day-left").textContent = mins >= e ? (wd ? "Work done" : "Evening") : mins < s ? `Starts at ${pad(Math.floor(s/60))}:00` : fmtDur(left);
     $("day-fill").style.width = (mins < s ? 100 : Math.round(left/(e-s)*100)) + "%";
   }
   setInterval(()=>{ renderClock(); }, 30000);
