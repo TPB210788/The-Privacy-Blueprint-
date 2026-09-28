@@ -306,6 +306,27 @@ fieldset{border:0;padding:0;margin:0}
 .miles li{display:flex;gap:8px;align-items:baseline}
 .miles li.done{color:var(--faint);text-decoration:line-through}
 .miles .d{font-family:var(--mono);font-size:12px;color:var(--muted);min-width:52px}
+/* money */
+.money{border-top:4px solid var(--good)}
+.m-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.m-left b{font-family:var(--display);font-size:34px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.m-left.over b{color:var(--bad)}
+.m-sub{font-size:13px;color:var(--muted)}
+#m-bar{background:var(--good)}
+#m-bar.warn{background:var(--warn)}#m-bar.bad{background:var(--bad)}
+.m-list{list-style:none;margin:0;padding:0;display:grid}
+.m-list li{display:grid;grid-template-columns:62px 1fr auto;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:14px;align-items:baseline}
+.m-list li:first-child{border-top:0}
+.m-list .when{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.m-list .amt{font-family:var(--mono);font-size:13px}
+.m-debts li{grid-template-columns:1fr auto}
+.m-note{font-size:13px;padding:9px 12px;background:var(--good-soft);border-radius:9px}
+.m-months{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.m-month{display:grid;gap:2px;padding:10px;border-radius:10px;background:var(--surface-2);text-align:center}
+.m-month b{font-family:var(--display);font-size:20px;font-variant-numeric:tabular-nums}
+.m-month span{font-size:11.5px;color:var(--muted)}
+.m-month.cur{outline:2px solid var(--good);outline-offset:-2px}
+#m-form input{flex:1 1 110px;min-width:0}
 /* linked pages */
 .linkbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .linkbar a{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:var(--surface);border:1px solid var(--line);color:var(--ink);text-decoration:none;font-weight:600;font-size:14px}
@@ -407,6 +428,23 @@ fieldset{border:0;padding:0;margin:0}
       </div>
 
       <div class="col">
+        <section class="panel money" id="money" data-fold="money">
+          <div class="panel-head"><h2>Money this week</h2><span class="label" id="m-week"></span></div>
+          <div class="m-top">
+            <div class="m-left" id="m-left-wrap"><b class="mono" id="m-left">£–</b> <span class="m-sub" id="m-left-sub">left to spend</span></div>
+            <span class="m-sub" id="m-perday"></span>
+          </div>
+          <div class="progress big" aria-hidden="true"><i id="m-bar" style="width:0"></i></div>
+          <form class="addrow" id="m-form" autocomplete="off">
+            <input type="number" id="m-input" inputmode="decimal" min="0" step="0.01" placeholder="£ just spent" aria-label="Amount just spent">
+            <button class="btn" type="submit">Add</button>
+            <button class="btn ghost" type="button" id="m-undo" hidden>Undo</button>
+          </form>
+          <div class="review" style="gap:6px"><span class="label">Coming out next</span><ul class="m-list" id="m-bills"></ul></div>
+          <p class="m-note" id="m-note" hidden></p>
+          <p class="status" id="m-status"></p>
+        </section>
+
         <section class="panel steps" id="steps" data-fold="steps">
           <div class="panel-head"><h2>Steps</h2><span class="label">Goal 10,000 a day</span></div>
           <div class="steps-row">
@@ -502,6 +540,16 @@ fieldset{border:0;padding:0;margin:0}
     </div>
     <div class="gcards" id="gcards"><p class="empty">Your goals load here.</p></div>
     <p class="status" id="goal-status"></p>
+  </section>
+
+    <section data-fold="mplan" class="panel money" id="mplan">
+    <div class="panel-head"><h2>Money plan</h2><span class="label" id="mp-updated"></span></div>
+    <div class="review" style="gap:6px"><span class="label">Spending room each month, after every bill</span><div class="m-months" id="mp-months"></div></div>
+    <div class="twocol">
+      <div class="review" style="gap:6px"><span class="label">Monthly bills (your share)</span><ul class="m-list" id="mp-bills"></ul></div>
+      <div class="review" style="gap:6px"><span class="label">Debts and plan</span><ul class="m-list m-debts" id="mp-debts"></ul></div>
+    </div>
+    <div id="mp-rules"></div>
   </section>
 
     <section data-fold="week" class="panel week" id="week">
@@ -903,7 +951,7 @@ fieldset{border:0;padding:0;margin:0}
   $("tab-btn-today").addEventListener("click", ()=>showTab("today"));
   $("tab-btn-plan").addEventListener("click", ()=>showTab("plan"));
   (function(){
-    const planIds = ["goals","week","review","someday"];
+    const planIds = ["goals","mplan","week","review","someday"];
     const hash = (location.hash||"").slice(1);
     let t = "today"; try { t = localStorage.getItem("daybook.tab") || "today"; } catch(e){}
     if (hash) t = planIds.includes(hash) ? "plan" : "today";
@@ -1096,6 +1144,59 @@ fieldset{border:0;padding:0;margin:0}
     if ((!ci || ci.steps == null) && n && document.activeElement !== $("ci-steps")) $("ci-steps").value = n;
   }
 
+  // ---------- Money ----------
+  state.money = null; state.spend = {};
+  const gbp = n => (n<0?"−":"")+"£"+Math.abs(Math.round(n)).toLocaleString("en-GB");
+  const gbp2 = n => "£"+(+n).toLocaleString("en-GB",{minimumFractionDigits:2,maximumFractionDigits:2});
+  const WEEK = ymd(mondayOf(now));
+  let lastSpend = null;
+  const ord = n => { const t=["th","st","nd","rd"], v=n%100; return n+(t[(v-20)%10]||t[v]||t[0]); };
+  function nextDate(day){ const d = new Date(now.getFullYear(), now.getMonth(), 1); const last = new Date(d.getFullYear(), d.getMonth()+1, 0).getDate(); d.setDate(Math.min(day,last)); if (ymd(d) < TODAY){ const n = new Date(now.getFullYear(), now.getMonth()+1, 1); const l2 = new Date(n.getFullYear(), n.getMonth()+1, 0).getDate(); n.setDate(Math.min(day,l2)); return n; } return d; }
+  function renderMoney(){
+    const m = state.money; if (!m) return;
+    const limit = +m.weekly || 0; const spent = +((state.spend[WEEK]||{}).spent) || 0; const left = limit - spent;
+    const dayIdx = (now.getDay()+6)%7; const daysLeft = 7 - dayIdx;
+    $("m-week").textContent = gbp(limit) + " a week";
+    $("m-left").textContent = gbp(left);
+    $("m-left-wrap").classList.toggle("over", left < 0);
+    $("m-left-sub").textContent = left < 0 ? "over this week" : "left to spend";
+    $("m-perday").textContent = left > 0 ? `about ${gbp(left/daysLeft)} a day for ${daysLeft} day${daysLeft===1?"":"s"}` : (left===0 ? "Spent up for this week" : "Take it from next week");
+    const pct = limit ? Math.min(100, spent/limit*100) : 0;
+    const bar = $("m-bar"); bar.style.width = pct+"%"; bar.className = pct >= 100 ? "bad" : pct >= 75 ? "warn" : "";
+    const up = list(m.bills).map(b => Object.assign({}, b, {next: nextDate(+b.day)})).sort((a,b)=>a.next-b.next).slice(0,4);
+    $("m-bills").innerHTML = up.map(b => `<li><span class="when">${esc(b.next.toLocaleDateString("en-GB",{day:"numeric",month:"short"}))}</span><span>${esc(b.name)}</span><span class="amt">${gbp2(b.amount)}</span></li>`).join("") || `<li><span></span><span class="muted">No bills listed</span><span></span></li>`;
+    const note = $("m-note"); note.hidden = !m.note; note.textContent = m.note || "";
+    renderMoneyPlan();
+  }
+  function renderMoneyPlan(){
+    const m = state.money; if (!m) return;
+    $("mp-updated").textContent = m.updatedAt ? "Updated " + fmtDay(String(m.updatedAt).slice(0,10)) : "";
+    const cur = TODAY.slice(0,7);
+    $("mp-months").innerHTML = list(m.months).map(x => `<div class="m-month ${x.month===cur?"cur":""}" title="${esc(x.note||"")}"><span>${esc(x.label)}</span><b>${gbp(x.room)}</b><span>${gbp(x.room*12/52)} a week</span></div>`).join("");
+    const bills = list(m.bills).slice().sort((a,b)=>(+a.day)-(+b.day));
+    const total = bills.reduce((t,b)=>t+(+b.amount||0),0);
+    $("mp-bills").innerHTML = bills.map(b => `<li><span class="when">${esc(ord(+b.day))}</span><span>${esc(b.name)}</span><span class="amt">${gbp2(b.amount)}</span></li>`).join("") + `<li><span></span><strong>Total</strong><span class="amt"><strong>${gbp2(total)}</strong></span></li>`;
+    $("mp-debts").innerHTML = list(m.debts).map(d => `<li><span><strong>${esc(d.name)}</strong><br><small class="muted">${esc(d.note||"")}</small></span><span class="amt">${d.balance!=null?gbp(d.balance):""}</span></li>`).join("");
+    $("mp-rules").innerHTML = list(m.rules).length ? `<div class="ifthen"><b>Money rules:</b> ${list(m.rules).map(esc).join(" · ")}</div>` : "";
+  }
+  async function addSpend(amount){
+    const cur = +((state.spend[WEEK]||{}).spent) || 0;
+    const next = Math.max(0, Math.round((cur + amount)*100)/100);
+    await state.db.doc("spend/"+WEEK).set({week:WEEK, spent:next, updatedAt:new Date().toISOString()});
+    lastSpend = amount;
+  }
+  $("m-form").addEventListener("submit", async e => {
+    e.preventDefault();
+    const v = parseFloat($("m-input").value); if (!v || v <= 0) return;
+    if (!state.db){ $("m-status").textContent = "Saving is available when you open this page on claude.ai."; return; }
+    try { await addSpend(v); $("m-input").value = ""; $("m-status").textContent = ""; $("m-undo").hidden = false; }
+    catch(err){ $("m-status").textContent = "Could not save that. Try again."; }
+  });
+  $("m-undo").addEventListener("click", async () => {
+    if (lastSpend == null || !state.db) return;
+    try { await addSpend(-lastSpend); lastSpend = null; $("m-undo").hidden = true; } catch(err){}
+  });
+
   // ---------- Wins and streaks ----------
   function streak(test){ let c = 0; const d = new Date(now); if (!test(ymd(d))) d.setDate(d.getDate()-1); while (test(ymd(d)) && c < 400){ c++; d.setDate(d.getDate()-1); } return c; }
   function renderWins(){
@@ -1137,6 +1238,8 @@ fieldset{border:0;padding:0;margin:0}
     db.collection("steps").where("date",">=",ymd(sixty)).onSnapshot(s=>{ state.steps = {}; s.docs.forEach(d=>{ const v=d.data(); state.steps[v.date||d.id]=v; }); renderSteps(); renderWins(); renderGoals(); }, ()=>{});
     db.doc("focus/"+TODAY).onSnapshot(s=>{ state.focus = s.exists ? s.data() : null; renderWins(); }, ()=>{});
     db.collection("dumps").where("processed","==",false).onSnapshot(s=>{ state.dumps = s.docs.map(d=>d.data()); renderDumps(); }, ()=>{});
+    db.doc("money/plan").onSnapshot(s=>{ state.money = s.exists ? s.data() : null; renderMoney(); }, ()=>{});
+    db.collection("spend").where("week",">=",ymd(sixty)).onSnapshot(s=>{ state.spend = {}; s.docs.forEach(d=>{ const v=d.data(); state.spend[v.week||d.id]=v; }); renderMoney(); }, ()=>{});
     db.collection("someday").onSnapshot(s=>{ state.someday = s.docs.map(d=>Object.assign({id:d.id}, d.data())); renderDumps(); }, ()=>{});
     renderNow();
   })();

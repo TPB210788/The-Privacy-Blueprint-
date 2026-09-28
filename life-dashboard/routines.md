@@ -31,3 +31,5 @@ the ArtifactData tool. Archiving that session stops the routines.
 - `weekly/{week}`: `week, range, generatedAt, summary, averages{dayScore,energy,completion}, whatWorked[], whatDidnt[], patterns[], improvements[{title,why,how}], focus`
 
 The full routine prompts live in the routines themselves (claude.ai, Routines list).
+- `money/plan`: `weekly, note, bills[{name, amount, day}], debts[{name, balance, note}], months[{month, label, room, note}], rules[], updatedAt` (the Money panels)
+- `spend/{monday date}`: `week, spent, updatedAt`, added to from the Money this week panel
