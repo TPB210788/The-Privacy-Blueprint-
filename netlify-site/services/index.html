@@ -72,6 +72,21 @@
 
     .service-cta { margin-top:32px; }
 
+    .tier-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:28px; }
+    @media(max-width:600px){ .tier-grid { grid-template-columns:1fr; } }
+    .tier-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:22px 20px; }
+    .tier-name { font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--brown); margin-bottom:10px; }
+    .tier-price { font-family:'Fraunces',Georgia,serif; font-size:1.5rem; margin-bottom:14px; line-height:1; }
+    .tier-price span { font-family:'Inter',system-ui,sans-serif; font-size:13px; color:var(--muted); font-weight:400; }
+    .tier-list { list-style:none; padding:0; }
+    .tier-list li { font-size:13px; color:rgba(43,40,36,.70); padding:6px 0 6px 16px; border-bottom:1px solid var(--border); position:relative; line-height:1.5; }
+    .tier-list li:last-child { border-bottom:none; }
+    .tier-list li::before { content:''; position:absolute; left:0; top:12px; width:8px; height:5px; border-left:1.5px solid var(--brown); border-bottom:1.5px solid var(--brown); transform:rotate(-45deg) translateY(-1px); }
+    .tier-note { font-size:14px; color:rgba(43,40,36,.65); margin-top:14px; line-height:1.55; }
+    .price-note { font-size:14px; color:rgba(43,40,36,.65); margin-top:12px; line-height:1.55; }
+    .incentive-box { background:rgba(138,90,59,.06); border:1px solid rgba(138,90,59,.18); border-radius:10px; padding:18px 22px; margin-top:28px; }
+    .incentive-box p { font-size:14px; color:var(--charcoal); line-height:1.6; margin:0; }
+
     .site-footer { background:var(--surface); border-top:1px solid var(--border); }
     .footer-inner { max-width:1040px; margin:0 auto; padding:40px 24px; display:flex; flex-direction:column; gap:20px; }
     .footer-links { display:flex; flex-wrap:wrap; gap:6px 24px; }
@@ -151,6 +166,37 @@
           <li>Charities and third-sector organisations with limited compliance resource</li>
         </ul>
 
+        <div class="inc-head">Retainer tiers</div>
+        <div class="tier-grid">
+          <div class="tier-card">
+            <div class="tier-name">Essentials</div>
+            <div class="tier-price">£750 <span>/ month</span></div>
+            <ul class="tier-list">
+              <li>Around 4 hours a month</li>
+              <li>Email support</li>
+              <li>Monthly check-in call</li>
+            </ul>
+          </div>
+          <div class="tier-card">
+            <div class="tier-name">Standard</div>
+            <div class="tier-price">£1,250 <span>/ month</span></div>
+            <ul class="tier-list">
+              <li>Around 1 day a month</li>
+              <li>DPIA reviews</li>
+              <li>Quarterly privacy report</li>
+            </ul>
+          </div>
+          <div class="tier-card">
+            <div class="tier-name">Embedded</div>
+            <div class="tier-price">£2,000 <span>/ month</span></div>
+            <ul class="tier-list">
+              <li>Up to 1 day a week</li>
+              <li>Acting as your part-time privacy lead</li>
+            </ul>
+          </div>
+        </div>
+        <p class="tier-note">Not sure which fits? Book a free 20-minute call and we'll recommend the right level.</p>
+
         <div class="meta-row">
           <div class="meta-item">
             <div class="meta-label">Minimum commitment</div>
@@ -158,7 +204,7 @@
           </div>
           <div class="meta-item">
             <div class="meta-label">Price</div>
-            <div class="meta-val">From <strong>[price]</strong> per month</div>
+            <div class="meta-val">From <strong>£750</strong> per month</div>
           </div>
         </div>
         <div class="service-cta">
@@ -170,7 +216,7 @@
       <section class="service-block" id="dpia">
         <div class="service-num">02</div>
         <h2>DPIA and AI Governance</h2>
-        <p>Data Protection Impact Assessments completed to ICO standard. AI governance reviews for businesses developing or procuring AI tools.</p>
+        <p>Data Protection Impact Assessments completed in line with ICO guidance. AI governance reviews for businesses developing or procuring AI tools.</p>
 
         <div class="explain-box">
           <div class="meta-label">What is a DPIA?</div>
@@ -200,9 +246,10 @@
           </div>
           <div class="meta-item">
             <div class="meta-label">Price</div>
-            <div class="meta-val">From <strong>[price]</strong></div>
+            <div class="meta-val">From <strong>£650</strong></div>
           </div>
         </div>
+        <p class="price-note">Standard DPIAs from £650. Complex or high-risk AI reviews from £1,000.</p>
         <div class="service-cta">
           <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn">Book a free 20-minute call</a>
         </div>
@@ -237,11 +284,15 @@
           </div>
           <div class="meta-item">
             <div class="meta-label">Price</div>
-            <div class="meta-val">From <strong>[price]</strong></div>
+            <div class="meta-val">From <strong>£850</strong></div>
           </div>
         </div>
+        <p class="price-note">Includes a written report, risk-scored findings across 16 domains and a prioritised action plan.</p>
         <div class="service-cta">
           <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn">Book a free 20-minute call</a>
+        </div>
+        <div class="incentive-box">
+          <p>Move to a monthly retainer within 30 days and we'll credit your assessment fee against your first month.</p>
         </div>
       </section>
 
