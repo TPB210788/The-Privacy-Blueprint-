@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>About | The Privacy Blueprint</title>
+  <meta name="description" content="Ten years of in-house data protection experience at a major UK charity. A practitioner's approach to GDPR compliance for founders, SMEs and agencies.">
+  <meta name="robots" content="index, follow">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter:wght@400;500;600&display=swap">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; }
+    :root {
+      --cream:#F3EEE4; --surface:#FDFAF5; --charcoal:#2B2824;
+      --brown:#8A5A3B; --brown-dark:#6B4028;
+      --muted:rgba(43,40,36,.60); --border:rgba(43,40,36,.09);
+    }
+    body { font-family:'Inter',system-ui,sans-serif; background:var(--cream); color:var(--charcoal); line-height:1.65; -webkit-font-smoothing:antialiased; }
+    h1,h2,h3 { font-family:'Fraunces',Georgia,serif; font-weight:400; line-height:1.2; text-wrap:balance; }
+    h1 { font-size:clamp(1.9rem,4.5vw,2.8rem); letter-spacing:-.02em; margin-bottom:16px; }
+    h2 { font-size:clamp(1.3rem,2.5vw,1.75rem); margin-bottom:14px; }
+    p { margin-bottom:16px; }
+    p:last-child { margin-bottom:0; }
+    a { color:inherit; }
+
+    .site-header { position:sticky; top:env(safe-area-inset-top,0); z-index:100; background:var(--surface); border-bottom:1px solid var(--border); }
+    .nav-inner { max-width:1040px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; height:60px; }
+    .nav-brand { font-family:'Fraunces',Georgia,serif; font-size:17px; color:var(--charcoal); text-decoration:none; white-space:nowrap; flex-shrink:0; }
+    .nav-links { display:flex; align-items:center; gap:4px; }
+    .nav-link { font-size:14px; color:var(--muted); text-decoration:none; padding:6px 10px; border-radius:6px; white-space:nowrap; transition:color .15s; }
+    .nav-link:hover, .nav-link.active { color:var(--charcoal); }
+    .nav-cta { font-size:13px; font-weight:500; color:#fff; background:var(--brown); text-decoration:none; padding:8px 16px; border-radius:6px; white-space:nowrap; margin-left:6px; transition:background .15s; }
+    .nav-cta:hover { background:var(--brown-dark); }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:8px; color:var(--charcoal); }
+    @media(max-width:700px){
+      .nav-links { display:none; }
+      .nav-links.open { display:flex; flex-direction:column; align-items:flex-start; position:absolute; top:60px; left:0; right:0; background:var(--surface); border-bottom:1px solid var(--border); padding:16px 24px 24px; gap:4px; }
+      .nav-toggle { display:block; }
+    }
+
+    .page-wrap { min-height:100vh; display:flex; flex-direction:column; }
+    main { flex:1; }
+    .content { max-width:760px; margin:0 auto; padding-inline:24px; }
+
+    .kicker { font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--brown); margin-bottom:12px; }
+    .lead { font-size:1.05rem; color:var(--muted); line-height:1.75; margin-bottom:28px; }
+    .btn { display:inline-block; font-size:15px; font-weight:500; color:#fff; background:var(--brown); padding:13px 28px; border-radius:8px; text-decoration:none; transition:background .15s; }
+    .btn:hover { background:var(--brown-dark); }
+
+    .page-header { padding:64px 0 48px; border-bottom:1px solid var(--border); }
+    .section { padding:52px 0; border-bottom:1px solid var(--border); }
+    .section:last-child { border-bottom:none; padding-bottom:80px; }
+
+    .body-text p { font-size:15px; color:rgba(43,40,36,.72); line-height:1.75; margin-bottom:16px; }
+    .body-text p:last-child { margin-bottom:0; }
+
+    /* Experience grid */
+    .xp-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-top:24px; }
+    .xp-cell { background:var(--surface); padding:20px; }
+    .xp-val { font-family:'Fraunces',Georgia,serif; font-size:1.2rem; font-weight:400; margin-bottom:4px; }
+    .xp-lbl { font-size:12px; color:var(--muted); line-height:1.4; }
+    @media(max-width:560px){ .xp-grid { grid-template-columns:1fr 1fr; } }
+
+    .ico-note { margin-top:20px; font-size:13px; color:rgba(43,40,36,.45); }
+    .pullquote { border-left:3px solid var(--brown); padding-left:20px; margin:28px 0; font-family:'Fraunces',Georgia,serif; font-size:1.15rem; font-weight:300; font-style:italic; color:rgba(43,40,36,.72); line-height:1.5; }
+
+    .site-footer { background:var(--surface); border-top:1px solid var(--border); }
+    .footer-inner { max-width:1040px; margin:0 auto; padding:40px 24px; display:flex; flex-direction:column; gap:20px; }
+    .footer-links { display:flex; flex-wrap:wrap; gap:6px 24px; }
+    .footer-links a { font-size:14px; color:var(--muted); text-decoration:none; }
+    .footer-links a:hover { color:var(--charcoal); }
+    .footer-meta { display:flex; align-items:center; gap:20px; }
+    .footer-meta a { font-size:14px; color:var(--muted); text-decoration:none; }
+    .footer-meta a:hover { color:var(--charcoal); }
+    .footer-legal { display:flex; flex-wrap:wrap; gap:4px 20px; font-size:12px; color:rgba(43,40,36,.38); }
+    .footer-legal a { color:rgba(43,40,36,.38); text-decoration:none; }
+    .footer-legal a:hover { color:var(--muted); }
+
+    @media(prefers-color-scheme:dark){
+      :root:not([data-theme="light"]){
+        --cream:#1D1A17; --surface:#252119; --charcoal:#E8E2D8;
+        --brown:#C48A60; --brown-dark:#D4976E;
+        --muted:rgba(232,226,216,.60); --border:rgba(232,226,216,.09);
+        color-scheme:dark;
+      }
+    }
+    :root[data-theme="dark"]{
+      --cream:#1D1A17; --surface:#252119; --charcoal:#E8E2D8;
+      --brown:#C48A60; --brown-dark:#D4976E;
+      --muted:rgba(232,226,216,.60); --border:rgba(232,226,216,.09);
+      color-scheme:dark;
+    }
+  </style>
+</head>
+<body class="page-wrap">
+
+  <header class="site-header">
+    <nav class="nav-inner">
+      <a href="/" class="nav-brand">The Privacy Blueprint</a>
+      <div class="nav-links" id="nav-links">
+        <a href="/services/" class="nav-link">Services</a>
+        <a href="/about/" class="nav-link active">About</a>
+        <a href="/resources/" class="nav-link">Resources</a>
+        <a href="https://the-privacy-blueprint.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-link">Free Check</a>
+        <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="nav-cta">Book a call</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.getElementById('nav-links').classList.toggle('open')">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="content">
+
+      <div class="page-header">
+        <p class="kicker">The Privacy Blueprint</p>
+        <h1>About The Privacy Blueprint</h1>
+        <p class="lead">A consultancy built on operational experience, not advisory distance.</p>
+      </div>
+
+      <!-- The approach -->
+      <section class="section">
+        <h2>The approach</h2>
+        <div class="body-text">
+          <p>Most privacy consultants come from legal or advisory backgrounds. The Privacy Blueprint is different.</p>
+          <p>It is built on ten years of in-house experience running a privacy function inside a major UK charity, managing real compliance problems at real operational scale. That means the work is grounded in what actually happens inside an organisation: the DPIA requests that arrive at the wrong time, the data subject access requests that land on a Friday afternoon, the supplier with no data processing agreement in place, the reporting line that needs educating rather than just a policy document.</p>
+          <p>This is not a framework applied from the outside. It is a practitioner's approach applied to your business.</p>
+        </div>
+        <blockquote class="pullquote">Practical. Documented. No jargon.</blockquote>
+      </section>
+
+      <!-- Experience -->
+      <section class="section">
+        <h2>The experience</h2>
+        <div class="xp-grid">
+          <div class="xp-cell">
+            <div class="xp-val">10 years</div>
+            <div class="xp-lbl">In-house at a major UK charity</div>
+          </div>
+          <div class="xp-cell">
+            <div class="xp-val">Organisation-wide</div>
+            <div class="xp-lbl">Built and ran full DPIA programme</div>
+          </div>
+          <div class="xp-cell">
+            <div class="xp-val">30 days → 2–3 weeks</div>
+            <div class="xp-lbl">DPIA turnaround improvement</div>
+          </div>
+          <div class="xp-cell">
+            <div class="xp-val">C-suite reporting</div>
+            <div class="xp-lbl">Privacy metrics to senior leadership</div>
+          </div>
+          <div class="xp-cell">
+            <div class="xp-val">16 domains</div>
+            <div class="xp-lbl">Proprietary gap assessment, risk-weighted, DUA Act 2025 coverage</div>
+          </div>
+          <div class="xp-cell">
+            <div class="xp-val">ICO Registered</div>
+            <div class="xp-lbl">C1883894</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Philosophy -->
+      <section class="section">
+        <h2>The philosophy</h2>
+        <div class="body-text">
+          <p>Privacy compliance should be enabling, not obstructing. A well-run privacy function helps organisations build trust, move faster on products and data initiatives, and avoid the regulatory and reputational cost of getting it wrong.</p>
+          <p>The Privacy Blueprint exists to make that kind of compliance accessible to founders, SMEs and growing teams who cannot justify a full-time privacy hire but need the real thing, not a checkbox exercise.</p>
+        </div>
+        <div style="margin-top:32px">
+          <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn">Book a free 20-minute call</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="/services/">Services</a>
+        <a href="/about/">About</a>
+        <a href="/resources/">Resources</a>
+        <a href="https://the-privacy-blueprint.vercel.app/" target="_blank" rel="noopener noreferrer">Free Health Check</a>
+      </div>
+      <div class="footer-meta">
+        <a href="mailto:hello@theprivacyblueprint.co.uk">hello@theprivacyblueprint.co.uk</a>
+        <!-- Replace href with your LinkedIn URL -->
+        <a href="#linkedin" aria-label="LinkedIn" style="display:flex;align-items:center;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="color:var(--muted)"><rect x="2" y="2" width="20" height="20" rx="4"/><path stroke-linecap="round" d="M7 10v7M7 7v.01M12 17v-4a2 2 0 014 0v4M12 10v7"/></svg>
+        </a>
+      </div>
+      <div class="footer-legal">
+        <span>ICO Registration: C1883894</span>
+        <span>© 2026 The Privacy Blueprint</span>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/cookie-policy/">Cookie Policy</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
