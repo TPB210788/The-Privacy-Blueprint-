@@ -6,16 +6,30 @@
   <title>About | The Privacy Blueprint</title>
   <meta name="description" content="Ten years of in-house data protection experience at a major UK charity. A practitioner's approach to GDPR compliance for founders, SMEs and agencies.">
   <meta name="robots" content="index, follow">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Inter:wght@400;500;600&display=swap">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; }
     :root {
-      --cream:#F3EEE4; --surface:#FDFAF5; --charcoal:#2B2824;
-      --brown:#8A5A3B; --brown-dark:#6B4028;
-      --muted:rgba(43,40,36,.60); --border:rgba(43,40,36,.09);
+      --bg: #F7F6F4; --surface: #FFFFFF; --panel: #E7E3DE;
+      --fg: #26232A; --plum: #4A2C40; --plum-hover: #3A2233;
+      --plum-tint: #EFE6EC; --muted: #635D66; --border: #E3DFDA;
     }
-    body { font-family:'Inter',system-ui,sans-serif; background:var(--cream); color:var(--charcoal); line-height:1.65; -webkit-font-smoothing:antialiased; }
-    h1,h2,h3 { font-family:'Fraunces',Georgia,serif; font-weight:400; line-height:1.2; text-wrap:balance; }
+    @media(prefers-color-scheme:dark){
+      :root:not([data-theme="light"]){
+        --bg:#1C1921; --surface:#23202A; --panel:#2D2934;
+        --fg:#EDE9F0; --plum:#C48AB0; --plum-hover:#D49EC0;
+        --plum-tint:#2D2034; --muted:#9E96A4; --border:rgba(237,233,240,.10);
+        color-scheme:dark;
+      }
+    }
+    :root[data-theme="dark"]{
+      --bg:#1C1921; --surface:#23202A; --panel:#2D2934;
+      --fg:#EDE9F0; --plum:#C48AB0; --plum-hover:#D49EC0;
+      --plum-tint:#2D2034; --muted:#9E96A4; --border:rgba(237,233,240,.10);
+      color-scheme:dark;
+    }
+    body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--fg); line-height:1.65; -webkit-font-smoothing:antialiased; }
+    h1,h2,h3 { font-family:'Source Serif 4',Georgia,serif; font-weight:500; line-height:1.2; text-wrap:balance; }
     h1 { font-size:clamp(1.9rem,4.5vw,2.8rem); letter-spacing:-.02em; margin-bottom:16px; }
     h2 { font-size:clamp(1.3rem,2.5vw,1.75rem); margin-bottom:14px; }
     p { margin-bottom:16px; }
@@ -23,17 +37,17 @@
     a { color:inherit; }
 
     .site-header { position:sticky; top:env(safe-area-inset-top,0); z-index:100; background:var(--surface); border-bottom:1px solid var(--border); }
-    .nav-inner { max-width:1040px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; height:60px; }
-    .nav-brand { font-family:'Fraunces',Georgia,serif; font-size:17px; color:var(--charcoal); text-decoration:none; white-space:nowrap; flex-shrink:0; }
+    .nav-inner { max-width:1040px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; height:62px; }
+    .nav-brand { font-family:'Source Serif 4',Georgia,serif; font-weight:500; font-size:17px; color:var(--fg); text-decoration:none; white-space:nowrap; flex-shrink:0; }
     .nav-links { display:flex; align-items:center; gap:4px; }
     .nav-link { font-size:14px; color:var(--muted); text-decoration:none; padding:6px 10px; border-radius:6px; white-space:nowrap; transition:color .15s; }
-    .nav-link:hover, .nav-link.active { color:var(--charcoal); }
-    .nav-cta { font-size:13px; font-weight:500; color:#fff; background:var(--brown); text-decoration:none; padding:8px 16px; border-radius:6px; white-space:nowrap; margin-left:6px; transition:background .15s; }
-    .nav-cta:hover { background:var(--brown-dark); }
-    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:8px; color:var(--charcoal); }
+    .nav-link:hover, .nav-link.active { color:var(--fg); }
+    .nav-cta { font-size:13px; font-weight:500; color:#fff; background:var(--plum); text-decoration:none; padding:8px 16px; border-radius:6px; white-space:nowrap; margin-left:6px; transition:background .15s; }
+    .nav-cta:hover { background:var(--plum-hover); }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:8px; color:var(--fg); }
     @media(max-width:700px){
       .nav-links { display:none; }
-      .nav-links.open { display:flex; flex-direction:column; align-items:flex-start; position:absolute; top:60px; left:0; right:0; background:var(--surface); border-bottom:1px solid var(--border); padding:16px 24px 24px; gap:4px; }
+      .nav-links.open { display:flex; flex-direction:column; align-items:flex-start; position:absolute; top:62px; left:0; right:0; background:var(--surface); border-bottom:1px solid var(--border); padding:16px 24px 24px; gap:4px; }
       .nav-toggle { display:block; }
     }
 
@@ -41,54 +55,31 @@
     main { flex:1; }
     .content { max-width:760px; margin:0 auto; padding-inline:24px; }
 
-    .kicker { font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--brown); margin-bottom:12px; }
+    .kicker { font-size:13px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--plum); margin-bottom:12px; }
     .lead { font-size:1.05rem; color:var(--muted); line-height:1.75; margin-bottom:28px; }
-    .btn { display:inline-block; font-size:15px; font-weight:500; color:#fff; background:var(--brown); padding:13px 28px; border-radius:8px; text-decoration:none; transition:background .15s; }
-    .btn:hover { background:var(--brown-dark); }
+    .btn { display:inline-block; font-size:15px; font-weight:500; color:#fff; background:var(--plum); padding:13px 28px; border-radius:8px; text-decoration:none; transition:background .15s; }
+    .btn:hover { background:var(--plum-hover); }
 
     .page-header { padding:64px 0 48px; border-bottom:1px solid var(--border); }
     .section { padding:52px 0; border-bottom:1px solid var(--border); }
     .section:last-child { border-bottom:none; padding-bottom:80px; }
 
-    .body-text p { font-size:15px; color:rgba(43,40,36,.72); line-height:1.75; margin-bottom:16px; }
+    .body-text p { font-size:15px; color:var(--muted); line-height:1.75; margin-bottom:16px; }
     .body-text p:last-child { margin-bottom:0; }
 
-    /* Experience grid */
-    .xp-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-top:24px; }
-    .xp-cell { background:var(--surface); padding:20px; }
-    .xp-val { font-family:'Fraunces',Georgia,serif; font-size:1.2rem; font-weight:400; margin-bottom:4px; }
-    .xp-lbl { font-size:12px; color:var(--muted); line-height:1.4; }
-    @media(max-width:560px){ .xp-grid { grid-template-columns:1fr 1fr; } }
+    .pullquote { border-left:3px solid var(--plum); padding:4px 0 4px 20px; margin:28px 0; font-family:'Source Serif 4',Georgia,serif; font-weight:500; font-size:1.15rem; font-style:italic; color:var(--fg); line-height:1.5; opacity:.75; }
 
-    .ico-note { margin-top:20px; font-size:13px; color:rgba(43,40,36,.45); }
-    .pullquote { border-left:3px solid var(--brown); padding-left:20px; margin:28px 0; font-family:'Fraunces',Georgia,serif; font-size:1.15rem; font-weight:300; font-style:italic; color:rgba(43,40,36,.72); line-height:1.5; }
-
-    .site-footer { background:var(--surface); border-top:1px solid var(--border); }
+    .site-footer { background:#26232A; }
     .footer-inner { max-width:1040px; margin:0 auto; padding:40px 24px; display:flex; flex-direction:column; gap:20px; }
     .footer-links { display:flex; flex-wrap:wrap; gap:6px 24px; }
-    .footer-links a { font-size:14px; color:var(--muted); text-decoration:none; }
-    .footer-links a:hover { color:var(--charcoal); }
+    .footer-links a { font-size:14px; color:#D9C7D3; text-decoration:none; transition:color .15s; }
+    .footer-links a:hover { color:#fff; }
     .footer-meta { display:flex; align-items:center; gap:20px; }
-    .footer-meta a { font-size:14px; color:var(--muted); text-decoration:none; }
-    .footer-meta a:hover { color:var(--charcoal); }
-    .footer-legal { display:flex; flex-wrap:wrap; gap:4px 20px; font-size:12px; color:rgba(43,40,36,.38); }
-    .footer-legal a { color:rgba(43,40,36,.38); text-decoration:none; }
-    .footer-legal a:hover { color:var(--muted); }
-
-    @media(prefers-color-scheme:dark){
-      :root:not([data-theme="light"]){
-        --cream:#1D1A17; --surface:#252119; --charcoal:#E8E2D8;
-        --brown:#C48A60; --brown-dark:#D4976E;
-        --muted:rgba(232,226,216,.60); --border:rgba(232,226,216,.09);
-        color-scheme:dark;
-      }
-    }
-    :root[data-theme="dark"]{
-      --cream:#1D1A17; --surface:#252119; --charcoal:#E8E2D8;
-      --brown:#C48A60; --brown-dark:#D4976E;
-      --muted:rgba(232,226,216,.60); --border:rgba(232,226,216,.09);
-      color-scheme:dark;
-    }
+    .footer-meta a { font-size:14px; color:#D9C7D3; text-decoration:none; transition:color .15s; }
+    .footer-meta a:hover { color:#fff; }
+    .footer-legal { display:flex; flex-wrap:wrap; gap:4px 20px; font-size:12px; color:rgba(255,255,255,.38); }
+    .footer-legal a { color:rgba(255,255,255,.38); text-decoration:none; }
+    .footer-legal a:hover { color:rgba(255,255,255,.65); }
   </style>
 </head>
 <body class="page-wrap">
@@ -118,7 +109,6 @@
         <p class="lead">A consultancy built on operational experience, not advisory distance.</p>
       </div>
 
-      <!-- The approach -->
       <section class="section">
         <h2>The approach</h2>
         <div class="body-text">
@@ -129,38 +119,6 @@
         <blockquote class="pullquote">Practical. Documented. No jargon.</blockquote>
       </section>
 
-      <!-- Experience -->
-      <section class="section">
-        <h2>The experience</h2>
-        <div class="xp-grid">
-          <div class="xp-cell">
-            <div class="xp-val">10 years</div>
-            <div class="xp-lbl">In-house at a major UK charity</div>
-          </div>
-          <div class="xp-cell">
-            <div class="xp-val">Organisation-wide</div>
-            <div class="xp-lbl">Built and ran full DPIA programme</div>
-          </div>
-          <div class="xp-cell">
-            <div class="xp-val">30 days → 2–3 weeks</div>
-            <div class="xp-lbl">DPIA turnaround improvement</div>
-          </div>
-          <div class="xp-cell">
-            <div class="xp-val">C-suite reporting</div>
-            <div class="xp-lbl">Privacy metrics to senior leadership</div>
-          </div>
-          <div class="xp-cell">
-            <div class="xp-val">16 domains</div>
-            <div class="xp-lbl">Proprietary gap assessment, risk-weighted, DUA Act 2025 coverage</div>
-          </div>
-          <div class="xp-cell">
-            <div class="xp-val">ICO Registered</div>
-            <div class="xp-lbl">C1883894</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Philosophy -->
       <section class="section">
         <h2>The philosophy</h2>
         <div class="body-text">
@@ -185,10 +143,7 @@
       </div>
       <div class="footer-meta">
         <a href="mailto:hello@theprivacyblueprint.co.uk">hello@theprivacyblueprint.co.uk</a>
-        <!-- Replace href with your LinkedIn URL -->
-        <a href="https://linkedin.com/company/the-privacy-blueprint" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="display:flex;align-items:center;">
-          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="color:var(--muted)"><rect x="2" y="2" width="20" height="20" rx="4"/><path stroke-linecap="round" d="M7 10v7M7 7v.01M12 17v-4a2 2 0 014 0v4M12 10v7"/></svg>
-        </a>
+        <a href="https://linkedin.com/company/the-privacy-blueprint" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
       <div class="footer-legal">
         <span>ICO Registration: C1883894</span>
