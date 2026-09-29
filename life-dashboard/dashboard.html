@@ -326,6 +326,7 @@ fieldset{border:0;padding:0;margin:0}
 .m-month b{font-family:var(--display);font-size:20px;font-variant-numeric:tabular-nums}
 .m-month span{font-size:11.5px;color:var(--muted)}
 .m-month.cur{outline:2px solid var(--good);outline-offset:-2px}
+.m-od{font-family:var(--mono);font-size:11px;white-space:nowrap;color:var(--bad)!important}.m-od.ok{color:var(--good)!important}
 #m-form input{flex:1 1 110px;min-width:0}
 /* linked pages */
 .linkbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -544,7 +545,8 @@ fieldset{border:0;padding:0;margin:0}
 
     <section data-fold="mplan" class="panel money" id="mplan">
     <div class="panel-head"><h2>Money plan</h2><span class="label" id="mp-updated"></span></div>
-    <div class="review" style="gap:6px"><span class="label">Spending room each month, after every bill</span><div class="m-months" id="mp-months"></div></div>
+    <div class="review" style="gap:6px"><span class="label">Spending room each month, after every bill, and where the overdraft ends</span><div class="m-months" id="mp-months"></div></div>
+    <div class="review" style="gap:6px" id="mp-split"></div>
     <div class="twocol">
       <div class="review" style="gap:6px"><span class="label">Monthly bills (your share)</span><ul class="m-list" id="mp-bills"></ul></div>
       <div class="review" style="gap:6px"><span class="label">Debts and plan</span><ul class="m-list m-debts" id="mp-debts"></ul></div>
@@ -1172,7 +1174,10 @@ fieldset{border:0;padding:0;margin:0}
     const m = state.money; if (!m) return;
     $("mp-updated").textContent = m.updatedAt ? "Updated " + fmtDay(String(m.updatedAt).slice(0,10)) : "";
     const cur = TODAY.slice(0,7);
-    $("mp-months").innerHTML = list(m.months).map(x => `<div class="m-month ${x.month===cur?"cur":""}" title="${esc(x.note||"")}"><span>${esc(x.label)}</span><b>${gbp(x.room)}</b><span>${gbp(x.room*12/52)} a week</span></div>`).join("");
+    $("mp-months").innerHTML = list(m.months).map(x => `<div class="m-month ${x.month===cur?"cur":""}" title="${esc(x.note||"")}"><span>${esc(x.label)}</span><b>${gbp(x.room)}</b><span>${gbp(x.room*12/52)} a week</span>${x.odEnd!=null?`<span class="m-od ${x.odEnd>=0?"ok":""}">${x.odEnd<0?"Overdraft "+gbp(-x.odEnd):"In credit "+gbp(x.odEnd)}</span>`:""}</div>`).join("");
+    const months = list(m.months); const focus = months.find(x=>x.month===cur) || months.find(x=>x.month>cur) || months[0];
+    const sp = focus && focus.split;
+    $("mp-split").innerHTML = sp ? `<span class="label">${esc(focus.label)} split</span><ul class="m-list m-debts">${Object.entries(sp).filter(([,v])=>v).map(([k,v])=>`<li><span>${esc(({tfl:"TfL",food:"Food",kids:"Kids and school",extras:"You and extras",christmas:"Christmas",overdraft:"Pay off overdraft"})[k]||k)}</span><span class="amt">${gbp(v)} <small class="muted">(${gbp(v*12/52)} a week)</small></span></li>`).join("")}</ul>${focus.note?`<p class="m-sub">${esc(focus.note)}</p>`:""}${m.odNote?`<p class="m-sub">${esc(m.odNote)}</p>`:""}` : "";
     const bills = list(m.bills).slice().sort((a,b)=>(+a.day)-(+b.day));
     const total = bills.reduce((t,b)=>t+(+b.amount||0),0);
     $("mp-bills").innerHTML = bills.map(b => `<li><span class="when">${esc(ord(+b.day))}</span><span>${esc(b.name)}</span><span class="amt">${gbp2(b.amount)}</span></li>`).join("") + `<li><span></span><strong>Total</strong><span class="amt"><strong>${gbp2(total)}</strong></span></li>`;
