@@ -180,6 +180,36 @@ fieldset{border:0;padding:0;margin:0}
 @media (max-width:720px){.tri{grid-template-columns:1fr}}
 .foot{font-size:12.5px;color:var(--faint);text-align:center}
 
+
+/* outreach */
+.outreach{border-top:4px solid var(--dusk)}
+.o-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.o-stat{display:grid;gap:1px;padding:10px 8px;border-radius:10px;background:var(--surface-2);text-align:center}
+.o-stat b{font-family:var(--display);font-size:22px;line-height:1.1;font-variant-numeric:tabular-nums}
+.o-stat span{font-size:11.5px;color:var(--muted)}
+.o-stat.hit{background:var(--good-soft)}.o-stat.hit b{color:var(--good)}
+@media (max-width:480px){.o-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.o-due{font-size:13.5px;padding:9px 12px;background:var(--warn-soft);border-radius:9px}
+.o-list{list-style:none;margin:0;padding:0;display:grid}
+.o-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;padding:10px 0;border-top:1px solid var(--line);align-items:start}
+.o-list li:first-child{border-top:0}
+.o-name{font-weight:600;overflow-wrap:anywhere}
+.o-meta{font-size:12.5px;color:var(--muted);overflow-wrap:anywhere}
+.o-meta.due{color:var(--bad);font-weight:600}
+.o-note{font-size:13px;color:var(--muted);grid-column:1/-1}
+.o-ctrl{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.o-ctrl select{font:inherit;font-size:13px;padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);max-width:150px}
+.o-ctrl .mini{white-space:nowrap}
+.o-won .o-name{color:var(--good)}
+.o-closed{opacity:.55}
+.o-add{display:grid;gap:8px;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.o-add input,.o-add select{font:inherit}
+.o-add select{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:9px 11px;color:var(--ink);width:100%}
+.o-add .full{grid-column:1/-1}
+@media (max-width:480px){.o-add{grid-template-columns:minmax(0,1fr)}}
+.o-filter{display:flex;gap:6px;flex-wrap:wrap}
+.o-filter button{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:4px 11px;font-size:12.5px;cursor:pointer;color:var(--muted)}
+.o-filter button[aria-pressed="true"]{background:var(--dusk-soft);color:var(--dusk);border-color:var(--dusk);font-weight:600}
 /* time */
 .clockbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 24px;align-items:end;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 18px}
 @media (max-width:640px){.clockbar{grid-template-columns:minmax(0,1fr)}}
@@ -307,6 +337,22 @@ fieldset{border:0;padding:0;margin:0}
 .miles li.done{color:var(--faint);text-decoration:line-through}
 .miles .d{font-family:var(--mono);font-size:12px;color:var(--muted);min-width:52px}
 /* money */
+.hw{border-top:4px solid var(--dusk)}
+.hw-grid{width:100%;border-collapse:collapse;font-size:13.5px}
+.hw-grid th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;text-align:center;padding:4px 2px}
+.hw-grid th:first-child,.hw-grid td:first-child{text-align:left}
+.hw-grid td{padding:4px 2px;border-top:1px solid var(--line);text-align:center}
+.hw-grid tr.today td{background:var(--dawn-soft)}
+.hw-grid tr.dads td{color:var(--faint)}
+.hw-b{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--bg);cursor:pointer;font-size:14px;line-height:1;color:var(--muted)}
+.hw-b[aria-pressed="true"]{background:var(--good);border-color:var(--good);color:#fff}
+.hw-b.dad{width:auto;padding:0 8px;font-size:11.5px}
+.hw-b.dad[aria-pressed="true"]{background:var(--surface-2);border-color:var(--line);color:var(--ink)}
+.hw-once{display:flex;flex-wrap:wrap;gap:6px}
+.hw-once button{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:6px 11px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted)}
+.hw-once button[aria-pressed="true"]{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+.hw-focus{background:var(--dusk-soft);border-radius:10px;padding:10px 12px;font-size:14px;display:grid;gap:4px}
+.hw-focus b{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--dusk)}
 .money{border-top:4px solid var(--good)}
 .m-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
 .m-left b{font-family:var(--display);font-size:34px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
@@ -361,6 +407,7 @@ fieldset{border:0;padding:0;margin:0}
     <span class="sunnote" id="sunnote" hidden>It's Sunday:</span>
     <a href="https://claude.ai/code/artifact/9afc641d-e30a-412a-932b-b0e05a191381" target="_blank" rel="noopener">Sunday Reset <small>weekly routine</small></a>
     <a href="https://claude.ai/artifact/9DJxEAYB2HDYaVBFgLnhVz" target="_blank" rel="noopener">Money Sunday <small>budget check</small></a>
+    <a href="https://claude.ai/code/artifact/3302769e-6827-4192-87a7-acab2934f8bc" target="_blank" rel="noopener">Outreach strategy <small>brand and plan</small></a>
   </nav>
 
   <div id="tab-today" role="tabpanel" class="pane">
@@ -422,6 +469,46 @@ fieldset{border:0;padding:0;margin:0}
           <p class="status" id="gquick-status"></p>
         </section>
 
+        <section class="panel outreach" id="outreach" data-fold="outreach">
+          <div class="panel-head"><h2>Consulting outreach</h2><span class="label mono" id="o-week"></span></div>
+          <div class="o-stats" id="o-stats"></div>
+          <div class="o-due" id="o-due" hidden></div>
+          <div class="o-filter" id="o-filter" role="group" aria-label="Show">
+            <button type="button" data-f="active" aria-pressed="true">Active</button>
+            <button type="button" data-f="due" aria-pressed="false">Follow up due</button>
+            <button type="button" data-f="all" aria-pressed="false">All</button>
+          </div>
+          <ul class="o-list" id="o-list"><li style="display:block"><p class="empty">Every person or company you contact goes here, with the next follow up date worked out for you.</p></li></ul>
+          <details id="o-add-wrap">
+            <summary class="mini" style="cursor:pointer;padding:4px 0">+ Log new outreach</summary>
+            <form class="o-add" id="o-form" autocomplete="off" style="margin-top:10px">
+              <input type="text" id="o-name" placeholder="Contact name" aria-label="Contact name" required>
+              <input type="text" id="o-company" placeholder="Company" aria-label="Company">
+              <select id="o-segment" aria-label="Segment">
+                <option value="Warm contact">Warm contact</option>
+                <option value="Agency">Agency</option>
+                <option value="SaaS or AI startup">SaaS or AI startup</option>
+                <option value="Health tech">Health tech</option>
+                <option value="Charity">Charity</option>
+                <option value="SME">SME</option>
+                <option value="Recruiter">Recruiter</option>
+                <option value="Platform">Platform (Jack &amp; Jill, Ethos)</option>
+              </select>
+              <select id="o-channel" aria-label="Channel">
+                <option>Email</option><option>LinkedIn</option><option>Instagram DM</option><option>WhatsApp</option><option>Platform</option><option>Referral</option>
+              </select>
+              <select id="o-status-new" aria-label="Status">
+                <option value="sent">Sent today</option>
+                <option value="todo">To contact</option>
+              </select>
+              <input type="text" id="o-trigger" placeholder="Trigger (just raised, AI launch…)" aria-label="Trigger">
+              <input type="text" id="o-notes" class="full" placeholder="Notes" aria-label="Notes">
+              <button class="btn dusk full" type="submit">Add to tracker</button>
+            </form>
+          </details>
+          <p class="status" id="o-status"></p>
+        </section>
+
         <section data-fold="inbox" class="panel" id="inbox">
         <div class="panel-head"><h2>Inbox: needs you</h2><span class="label">Gmail</span></div>
         <div id="mail"><p class="empty">Emails that need a reply or action show here each morning. Newsletters and receipts are left out.</p></div>
@@ -429,6 +516,16 @@ fieldset{border:0;padding:0;margin:0}
       </div>
 
       <div class="col">
+        <section class="panel hw" id="homework" data-fold="homework">
+          <div class="panel-head"><h2>Yaya's homework</h2><span class="label" id="hw-due"></span></div>
+          <p class="m-sub" id="hw-sum"></p>
+          <table class="hw-grid" aria-label="Daily homework ticks"><thead><tr><th>Day</th><th>Read</th><th>TTRS</th><th>Spell</th><th>Nudged</th><th></th></tr></thead><tbody id="hw-days"></tbody></table>
+          <span class="label">Once this week</span>
+          <div class="hw-once" id="hw-once"></div>
+          <div class="hw-focus" id="hw-focus" hidden></div>
+          <p class="status" id="hw-status"></p>
+        </section>
+
         <section class="panel money" id="money" data-fold="money">
           <div class="panel-head"><h2>Money this week</h2><span class="label" id="m-week"></span></div>
           <div class="m-top">
@@ -614,6 +711,8 @@ fieldset{border:0;padding:0;margin:0}
     else c.push(`<span class="chip"><i></i>Brief due 6:46am</span>`);
     if (state.checkins[TODAY]) c.push(`<span class="chip good"><i></i>Checked in</span>`);
     else if (h >= 18) c.push(`<span class="chip dusk"><i></i>Check-in open</span>`);
+    let oDue = 0; try { oDue = (state.outreach||[]).filter(x => oIsDue(x)).length; } catch(e){}
+    if (oDue) c.push(`<span class="chip warn"><i></i>${oDue} follow up${oDue===1?"":"s"} due</span>`);
     const open = state.tasks.filter(t => !t.done).length;
     if (open) c.push(`<span class="chip"><i></i>${open} open task${open===1?"":"s"}</span>`);
     $("chips").innerHTML = c.join("");
@@ -1202,6 +1301,43 @@ fieldset{border:0;padding:0;margin:0}
     try { await addSpend(-lastSpend); lastSpend = null; $("m-undo").hidden = true; } catch(err){}
   });
 
+  // ---------- Homework (Soraiyah) ----------
+  state.hw = null;
+  const HW_DAILY = [["reading","Read","Reading 15 to 20 min"],["ttrs","TTRS","TTRS 10 min"],["spell","Spell","Spellings practice"],["reminded","Nudged","You reminded her"]];
+  const HW_ONCE = [["maths","CGP maths workout"],["english","CGP English workout"],["optional","Optional tasks"],["bag","In her bag for Monday"]];
+  function hwDays(){ const out=[]; const d = new Date(WEEK+"T12:00:00"); for (let i=0;i<7;i++){ out.push(ymd(d)); d.setDate(d.getDate()+1); } return out; }
+  function renderHomework(){
+    const h = state.hw || {}; const days = hwDays(); const due = new Date(WEEK+"T12:00:00"); due.setDate(due.getDate()+7);
+    $("hw-due").textContent = "Hand in "+due.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
+    const dd = h.days || {};
+    $("hw-days").innerHTML = days.map(k => { const v = dd[k]||{}; const dad = !!v.dads; const d = new Date(k+"T12:00:00");
+      return `<tr class="${k===TODAY?"today":""} ${dad?"dads":""}"><td>${d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric"})}</td>${HW_DAILY.map(([f,,t])=>`<td><button type="button" class="hw-b" data-day="${k}" data-f="${f}" aria-pressed="${!!v[f]}" aria-label="${esc(t)}, ${esc(fmtDay(k))}" ${dad?"disabled":""}>${v[f]?"✓":""}</button></td>`).join("")}<td><button type="button" class="hw-b dad" data-day="${k}" data-f="dads" aria-pressed="${dad}" title="She's at her dad's this day">Dad's</button></td></tr>`; }).join("");
+    const w = h.weekly || {};
+    $("hw-once").innerHTML = HW_ONCE.map(([f,t])=>`<button type="button" data-f="${f}" aria-pressed="${!!w[f]}">${w[f]?"✓ ":""}${esc(t)}</button>`).join("");
+    const home = days.filter(k => !(dd[k]||{}).dads && k <= TODAY);
+    const cnt = f => home.filter(k => (dd[k]||{})[f]).length;
+    $("hw-sum").textContent = home.length ? `So far: reading ${cnt("reading")} of ${home.length} days, TTRS ${cnt("ttrs")}, spellings ${cnt("spell")}. Workouts ${(w.maths?1:0)+(w.english?1:0)} of 2.` : "New week. Tick each day as she does it; mark days at her dad's so they don't count.";
+    const f = h.focus || {}; const fx = [];
+    if (list(f.spellings).length) fx.push(`<div><b>Tricky spellings</b><br>${list(f.spellings).map(esc).join(", ")}</div>`);
+    if (f.maths) fx.push(`<div><b>Maths to practise</b><br>${esc(f.maths)}</div>`);
+    if (f.note) fx.push(`<div class="muted">${esc(f.note)}</div>`);
+    $("hw-focus").hidden = !fx.length; $("hw-focus").innerHTML = fx.join("");
+  }
+  async function saveHw(patch){
+    if (!state.db){ $("hw-status").textContent = "Saving is available when you open this page on claude.ai."; return; }
+    const cur = JSON.parse(JSON.stringify(state.hw || {}));
+    const next = Object.assign({week:WEEK}, cur, patch, {updatedAt:new Date().toISOString()});
+    state.hw = next; renderHomework();
+    try { await state.db.doc("homework/"+WEEK).set(next); $("hw-status").textContent = ""; } catch(err){ $("hw-status").textContent = "Could not save that. Try again."; }
+  }
+  $("hw-days").addEventListener("click", e => { const b = e.target.closest("button[data-f]"); if (!b) return;
+    const days = JSON.parse(JSON.stringify((state.hw||{}).days||{})); const k = b.dataset.day, f = b.dataset.f;
+    days[k] = Object.assign({}, days[k], {[f]: !(days[k]||{})[f]}); saveHw({days}); });
+  $("hw-once").addEventListener("click", e => { const b = e.target.closest("button[data-f]"); if (!b) return;
+    const weekly = Object.assign({}, (state.hw||{}).weekly); weekly[b.dataset.f] = !weekly[b.dataset.f]; saveHw({weekly});
+    if (weekly[b.dataset.f]) celebrate(b.textContent.replace("✓ ","")+" done"); });
+  renderHomework();
+
   // ---------- Wins and streaks ----------
   function streak(test){ let c = 0; const d = new Date(now); if (!test(ymd(d))) d.setDate(d.getDate()-1); while (test(ymd(d)) && c < 400){ c++; d.setDate(d.getDate()-1); } return c; }
   function renderWins(){
@@ -1220,7 +1356,114 @@ fieldset{border:0;padding:0;margin:0}
     $("streaks").innerHTML = tile(ciS, "day check-in streak") + tile(stS, "days at 10k") + tile(wkS, "weeks at 85%");
   }
 
-  renderTasks(); renderDays(); chips(); renderClock(); renderSteps(); renderWins(); renderDumps();
+
+  // ---------- Consulting outreach ----------
+  state.outreach = [];
+  const O_STATUS = [
+    ["todo","To contact"],["sent","Sent"],["fu1","Follow up 1 sent"],["fu2","Follow up 2 sent"],
+    ["replied","Replied"],["call","Call booked"],["proposal","Proposal sent"],["won","Won"],["notnow","Not now"],["noreply","No reply"]
+  ];
+  const O_LABEL = Object.fromEntries(O_STATUS);
+  const O_CLOSED = ["won","notnow","noreply"];
+  const addDays = (k, n) => { const d = new Date(k+"T12:00:00"); d.setDate(d.getDate()+n); return ymd(d); };
+  function oNextDate(status, from){
+    if (status === "sent") return addDays(from, 7);
+    if (status === "fu1") return addDays(from, 7);
+    if (status === "fu2") return addDays(from, 14);
+    if (status === "replied" || status === "proposal") return addDays(from, 5);
+    if (status === "call") return addDays(from, 2);
+    return null;
+  }
+  function oIsDue(x){ return x && !O_CLOSED.includes(x.status) && x.nextDate && x.nextDate <= TODAY; }
+  function oNextAction(x){
+    return ({todo:"Send first message", sent:"Send follow up 1", fu1:"Send follow up 2", fu2:"Close the loop or mark no reply",
+      replied:"Reply and suggest a call", call:"Send summary within 48 hours", proposal:"Chase the proposal"})[x.status] || "";
+  }
+  let oFilter = "active";
+  function renderOutreach(){
+    const all = state.outreach;
+    const wk = ymd(mondayOf(now));
+    const inWeek = k => k && k >= wk;
+    const sentWk = all.filter(x => inWeek(x.sentAt)).length;
+    const replies = all.filter(x => ["replied","call","proposal","won"].includes(x.status)).length;
+    const calls = all.filter(x => ["call","proposal","won"].includes(x.status)).length;
+    const won = all.filter(x => x.status === "won").length;
+    $("o-week").textContent = `${sentWk} of 5 this week`;
+    const tile = (n, label, hit) => `<div class="o-stat ${hit?"hit":""}"><b>${n}</b><span>${label}</span></div>`;
+    $("o-stats").innerHTML = tile(`${sentWk}/5`, "sent this week", sentWk >= 5) + tile(replies, "replies", replies>0) + tile(calls, "calls", calls>0) + tile(won, "clients won", won>0);
+    const due = all.filter(oIsDue);
+    const dueEl = $("o-due");
+    if (due.length){ dueEl.hidden = false; dueEl.innerHTML = `<b>Due today:</b> ${due.map(x => `${esc(x.name)} (${esc(oNextAction(x).toLowerCase())})`).join(" · ")}`; }
+    else dueEl.hidden = true;
+    let rows = all.slice();
+    if (oFilter === "active") rows = rows.filter(x => !O_CLOSED.includes(x.status));
+    if (oFilter === "due") rows = rows.filter(oIsDue);
+    rows.sort((a,b) => (oIsDue(b)?1:0)-(oIsDue(a)?1:0) || String(a.nextDate||"9999").localeCompare(String(b.nextDate||"9999")) || String(b.createdAt||"").localeCompare(String(a.createdAt||"")));
+    if (!rows.length){
+      $("o-list").innerHTML = `<li style="display:block"><p class="empty">${oFilter==="due" ? "No follow ups due. Nice." : all.length ? "Nothing here with this filter." : "Every person or company you contact goes here, with the next follow up date worked out for you."}</p></li>`;
+    } else {
+      $("o-list").innerHTML = rows.map(x => {
+        const isDue = oIsDue(x), closed = O_CLOSED.includes(x.status);
+        const opts = O_STATUS.map(([v,l]) => `<option value="${v}" ${v===x.status?"selected":""}>${l}</option>`).join("");
+        const meta = [x.company, x.segment, x.channel].filter(Boolean).map(esc).join(" · ");
+        const when = closed ? (x.status==="won" ? "Client won" : O_LABEL[x.status]) : x.nextDate ? `${isDue ? "Due" : "Next"} ${fmtDay(x.nextDate)}: ${esc(oNextAction(x))}` : esc(oNextAction(x));
+        return `<li class="${x.status==="won"?"o-won":""} ${closed && x.status!=="won"?"o-closed":""}">
+          <div><div class="o-name">${esc(x.name)}</div>${meta?`<div class="o-meta">${meta}</div>`:""}<div class="o-meta ${isDue?"due":""}">${when}</div></div>
+          <div class="o-ctrl">
+            <select data-ost="${esc(x.id)}" aria-label="Status for ${esc(x.name)}">${opts}</select>
+            ${!closed && x.status!=="todo" ? `<button class="mini" type="button" data-oadv="${esc(x.id)}">Done ✓</button>` : ""}
+            <button class="x" type="button" data-odel="${esc(x.id)}" aria-label="Remove ${esc(x.name)}">×</button>
+          </div>
+          ${x.notes||x.trigger ? `<div class="o-note">${[x.trigger?`Trigger: ${esc(x.trigger)}`:"", esc(x.notes||"")].filter(Boolean).join(" · ")}</div>` : ""}
+        </li>`;
+      }).join("");
+    }
+  }
+  async function oSetStatus(id, status){
+    const x = state.outreach.find(o => o.id === id); if (!x || !state.db) return;
+    const upd = {status, updatedAt:new Date().toISOString(), nextDate:oNextDate(status, TODAY)};
+    if (status === "sent" && !x.sentAt) upd.sentAt = TODAY;
+    const hist = list(x.history).concat([{date:TODAY, status}]); upd.history = hist;
+    await state.db.doc("outreach/"+id).update(upd);
+    if (status === "won") celebrate("New client won");
+    else if (["replied","call"].includes(status)) toast(status==="call" ? "Call booked. Prep the 20 minute agenda" : "They replied. Suggest a call");
+  }
+  const O_ADVANCE = {sent:"fu1", fu1:"fu2", fu2:"noreply", replied:"call", call:"proposal", proposal:"won"};
+  $("o-list").addEventListener("change", async e => {
+    const id = e.target.dataset && e.target.dataset.ost; if (!id) return;
+    try { await oSetStatus(id, e.target.value); $("o-status").textContent = ""; }
+    catch(err){ $("o-status").textContent = "Could not save that change. Try again."; }
+  });
+  $("o-list").addEventListener("click", async e => {
+    const d = e.target.dataset || {};
+    if (d.oadv){ const x = state.outreach.find(o => o.id === d.oadv); if (!x) return;
+      const nx = O_ADVANCE[x.status]; if (!nx) return;
+      try { await oSetStatus(x.id, nx); } catch(err){ $("o-status").textContent = "Could not save that change."; } }
+    if (d.odel && state.db){ try { await state.db.doc("outreach/"+d.odel).delete(); } catch(err){ $("o-status").textContent = "Could not remove that."; } }
+  });
+  $("o-filter").addEventListener("click", e => {
+    const f = e.target.dataset && e.target.dataset.f; if (!f) return;
+    oFilter = f; document.querySelectorAll("#o-filter button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.f === f)));
+    renderOutreach();
+  });
+  $("o-form").addEventListener("submit", async e => {
+    e.preventDefault();
+    const name = $("o-name").value.trim(); if (!name){ $("o-status").textContent = "Add a contact name first."; return; }
+    if (!state.db){ $("o-status").textContent = "Saving is available when you open this page on claude.ai."; return; }
+    const status = $("o-status-new").value;
+    const doc = {name, company:$("o-company").value.trim(), segment:$("o-segment").value, channel:$("o-channel").value,
+      trigger:$("o-trigger").value.trim(), notes:$("o-notes").value.trim(), status,
+      sentAt: status==="sent" ? TODAY : null, nextDate: status==="sent" ? oNextDate("sent", TODAY) : TODAY,
+      history:[{date:TODAY, status}], createdAt:new Date().toISOString(), updatedAt:new Date().toISOString()};
+    try {
+      await state.db.collection("outreach").add(doc);
+      ["o-name","o-company","o-trigger","o-notes"].forEach(i => $(i).value = "");
+      $("o-status").textContent = "";
+      if (status === "sent") celebrate("Outreach sent"); else toast("Added to your list");
+    } catch(err){ $("o-status").textContent = "Could not add that. Your text is still here, so try again."; }
+  });
+
+  renderTasks(); renderDays(); chips(); renderClock(); renderSteps(); renderWins(); renderDumps(); renderOutreach();
 
   // ---------- Data ----------
   (async function(){
@@ -1243,10 +1486,14 @@ fieldset{border:0;padding:0;margin:0}
     db.collection("steps").where("date",">=",ymd(sixty)).onSnapshot(s=>{ state.steps = {}; s.docs.forEach(d=>{ const v=d.data(); state.steps[v.date||d.id]=v; }); renderSteps(); renderWins(); renderGoals(); }, ()=>{});
     db.doc("focus/"+TODAY).onSnapshot(s=>{ state.focus = s.exists ? s.data() : null; renderWins(); }, ()=>{});
     db.collection("dumps").where("processed","==",false).onSnapshot(s=>{ state.dumps = s.docs.map(d=>d.data()); renderDumps(); }, ()=>{});
+    db.doc("homework/"+WEEK).onSnapshot(s=>{ state.hw = s.exists ? s.data() : null; renderHomework(); }, ()=>{});
     db.doc("money/plan").onSnapshot(s=>{ state.money = s.exists ? s.data() : null; renderMoney(); }, ()=>{});
     db.collection("spend").where("week",">=",ymd(sixty)).onSnapshot(s=>{ state.spend = {}; s.docs.forEach(d=>{ const v=d.data(); state.spend[v.week||d.id]=v; }); renderMoney(); }, ()=>{});
+    db.collection("outreach").onSnapshot(s=>{ state.outreach = s.docs.map(d=>Object.assign({id:d.id}, d.data())); renderOutreach(); chips(); }, ()=>{ $("o-status").textContent = "Outreach could not load. Refresh to retry."; });
     db.collection("someday").onSnapshot(s=>{ state.someday = s.docs.map(d=>Object.assign({id:d.id}, d.data())); renderDumps(); }, ()=>{});
     renderNow();
   })();
 })();
 </script>
+
+</body></html>

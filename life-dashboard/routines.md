@@ -32,4 +32,6 @@ the ArtifactData tool. Archiving that session stops the routines.
 
 The full routine prompts live in the routines themselves (claude.ai, Routines list).
 - `money/plan`: `weekly, note, bills[{name, amount, day}], debts[{name, balance, note}], months[{month, label, room, note, split{tfl, food, kids, extras, christmas, overdraft}, odEnd}], odNote, rules[], updatedAt` (odEnd is the overdraft at month end, negative means overdrawn) (the Money panels)
+- `homework/{monday}`: `week, days{date:{reading, ttrs, spell, reminded, dads}}, weekly{maths, english, optional, bag}, focus{spellings[], maths, note}, updatedAt` (Soraiyah's homework tracker; set Monday, hand in the next Monday)
+- `outreach/{id}`: consulting outreach tracker (added by another session)
 - `spend/{monday date}`: `week, spent, updatedAt`, added to from the Money this week panel
