@@ -2,14 +2,19 @@
 
 Saved for when you're at your laptop. All changes are on the branch `ccr-66998721-9w9jes`.
 
-## 1. Decide two wording points (5 min)
+## 1. Read and approve the new content (15 min)
+- [ ] Read the new FAQs page (`/faqs/`). Check every answer is true for your business, especially: "same person works on your engagement start to finish", "this is not legal advice", and the timelines
+- [ ] Check the new homepage headline: "GDPR compliance that's practical, documented and jargon free"
+- [ ] Check you're happy with the 7 stock photos (all faceless, free Unsplash licence, no credit needed)
+
+## 1b. Decide two wording points (5 min)
 - [ ] Keep "£75 Action Plan credited in full against a Gap Assessment booked within 30 days"? (Services page, Home page, quiz results)
 - [ ] Keep "I'll email your checklist within 1 working day"? (quiz, after someone enters their email)
 
 Tell Claude your answers and it will update the wording.
 
 ## 2. Publish the main website and move it to theprivacyblueprint.co.uk (15 min)
-First, check the screenshot `updated-homepage-preview.png` from the chat looks like glittering-cocada-3b4fc5.netlify.app (plum button, serif headline). If it does:
+The site has a new forest green and sand design, so it will look different from glittering-cocada. That's expected. Preview: `updated-homepage-preview.png`.
 
 **Upload the updates**
 - [ ] Download `theprivacyblueprint-site.zip` from the branch on GitHub
@@ -24,8 +29,11 @@ First, check the screenshot `updated-homepage-preview.png` from the chat looks l
 - [ ] Wait up to an hour, then check https://theprivacyblueprint.co.uk shows the new design and the padlock (HTTPS)
 
 **Final checks**
-- [ ] Live About page has no photo or name
+- [ ] Live About page has no photo, no name and no "headshot" section
+- [ ] Cookie notice appears on first visit and disappears after "Got it"
+- [ ] The FAQs page opens from the top menu
 - [ ] Privacy Policy and Cookie Policy footer links open
+- [ ] Open the site on your phone and scroll every page
 - [ ] Optional: rename the site in Netlify (Site configuration > Change site name) to something like `theprivacyblueprint`
 
 ## 3. Publish the Health Check quiz (5 min)

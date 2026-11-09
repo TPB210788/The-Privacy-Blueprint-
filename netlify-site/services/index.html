@@ -10,332 +10,191 @@
   <meta property="og:description" content="GDPR gap assessment, DPIA, AI governance and fractional privacy support for growing businesses. Fixed fees, practical outputs, plain English.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://theprivacyblueprint.co.uk/services/">
+  <meta property="og:image" content="https://theprivacyblueprint.co.uk/assets/img/office-plants.webp">
+  <meta name="theme-color" content="#1F4D3A">
   <meta name="robots" content="index, follow">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Inter:wght@400;500;600&display=swap">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; }
-    :root {
-      --bg: #F7F6F4; --surface: #FFFFFF; --panel: #E7E3DE;
-      --fg: #26232A; --plum: #4A2C40; --plum-hover: #3A2233;
-      --plum-tint: #EFE6EC; --muted: #635D66; --border: #E3DFDA;
-    }
-    @media(prefers-color-scheme:dark){
-      :root:not([data-theme="light"]){
-        --bg:#1C1921; --surface:#23202A; --panel:#2D2934;
-        --fg:#EDE9F0; --plum:#C48AB0; --plum-hover:#D49EC0;
-        --plum-tint:#2D2034; --muted:#9E96A4; --border:rgba(237,233,240,.10);
-        color-scheme:dark;
-      }
-    }
-    :root[data-theme="dark"]{
-      --bg:#1C1921; --surface:#23202A; --panel:#2D2934;
-      --fg:#EDE9F0; --plum:#C48AB0; --plum-hover:#D49EC0;
-      --plum-tint:#2D2034; --muted:#9E96A4; --border:rgba(237,233,240,.10);
-      color-scheme:dark;
-    }
-    body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--fg); line-height:1.65; -webkit-font-smoothing:antialiased; }
-    h1,h2,h3 { font-family:'Source Serif 4',Georgia,serif; font-weight:500; line-height:1.2; text-wrap:balance; }
-    h1 { font-size:clamp(1.9rem,4.5vw,2.8rem); letter-spacing:-.02em; margin-bottom:16px; }
-    h2 { font-size:clamp(1.3rem,2.5vw,1.75rem); margin-bottom:14px; }
-    h3 { font-size:1.1rem; margin-bottom:8px; }
-    p { margin-bottom:16px; }
-    p:last-child { margin-bottom:0; }
-    a { color:inherit; }
-    ul { list-style:none; padding:0; }
-
-    .site-header { position:sticky; top:env(safe-area-inset-top,0); z-index:100; background:var(--surface); border-bottom:1px solid var(--border); }
-    .nav-inner { max-width:1040px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; height:62px; }
-    .nav-brand { font-family:'Source Serif 4',Georgia,serif; font-weight:500; font-size:17px; color:var(--fg); text-decoration:none; white-space:nowrap; flex-shrink:0; }
-    .nav-links { display:flex; align-items:center; gap:4px; }
-    .nav-link { font-size:14px; color:var(--muted); text-decoration:none; padding:6px 10px; border-radius:6px; white-space:nowrap; transition:color .15s; }
-    .nav-link:hover, .nav-link.active { color:var(--fg); }
-    .nav-cta { font-size:13px; font-weight:500; color:#fff; background:var(--plum); text-decoration:none; padding:8px 16px; border-radius:6px; white-space:nowrap; margin-left:6px; transition:background .15s; }
-    .nav-cta:hover { background:var(--plum-hover); }
-    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:8px; color:var(--fg); }
-    @media(max-width:700px){
-      .nav-links { display:none; }
-      .nav-links.open { display:flex; flex-direction:column; align-items:flex-start; position:absolute; top:62px; left:0; right:0; background:var(--surface); border-bottom:1px solid var(--border); padding:16px 24px 24px; gap:4px; }
-      .nav-toggle { display:block; }
-    }
-
-    .page-wrap { min-height:100vh; display:flex; flex-direction:column; }
-    main { flex:1; }
-    .content { max-width:760px; margin:0 auto; padding-inline:24px; }
-
-    .kicker { font-size:13px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--plum); margin-bottom:12px; }
-    .lead { font-size:1.05rem; color:var(--muted); line-height:1.75; margin-bottom:28px; }
-    .btn { display:inline-block; font-size:15px; font-weight:500; color:#fff; background:var(--plum); padding:13px 28px; border-radius:8px; text-decoration:none; transition:background .15s; }
-    .btn:hover { background:var(--plum-hover); }
-
-    .page-header { padding:64px 0 48px; border-bottom:1px solid var(--border); }
-    .service-block { padding:56px 0; border-bottom:1px solid var(--border); }
-    .service-block:last-child { border-bottom:none; padding-bottom:80px; }
-    .service-num { font-family:'Source Serif 4',Georgia,serif; font-size:3rem; font-weight:500; color:var(--plum); opacity:.3; line-height:1; margin-bottom:16px; }
-    .service-block > p { font-size:16px; color:var(--muted); line-height:1.75; }
-
-    .inc-head { font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:28px 0 12px; opacity:.7; }
-    .inc-list li { padding:9px 0 9px 20px; border-bottom:1px solid var(--border); font-size:14px; color:var(--muted); line-height:1.55; position:relative; }
-    .inc-list li:last-child { border-bottom:none; }
-    .inc-list li::before { content:''; position:absolute; left:0; top:17px; width:10px; height:6px; border-left:2px solid var(--plum); border-bottom:2px solid var(--plum); transform:rotate(-45deg) translateY(-1px); }
-
-    .tier-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:28px; }
-    @media(max-width:600px){ .tier-grid { grid-template-columns:1fr; } }
-    .tier-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:22px 20px; }
-    .tier-name { font-size:13px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--plum); margin-bottom:10px; }
-    .tier-price { font-family:'Source Serif 4',Georgia,serif; font-weight:500; font-size:1.5rem; margin-bottom:14px; line-height:1; }
-    .tier-price span { font-family:'Inter',system-ui,sans-serif; font-size:13px; color:var(--muted); font-weight:400; }
-    .tier-list { list-style:none; padding:0; }
-    .tier-list li { font-size:13px; color:var(--muted); padding:6px 0 6px 16px; border-bottom:1px solid var(--border); position:relative; line-height:1.5; }
-    .tier-list li:last-child { border-bottom:none; }
-    .tier-list li::before { content:''; position:absolute; left:0; top:12px; width:8px; height:5px; border-left:1.5px solid var(--plum); border-bottom:1.5px solid var(--plum); transform:rotate(-45deg) translateY(-1px); }
-    .tier-note { font-size:14px; color:var(--muted); margin-top:14px; line-height:1.55; }
-
-    .meta-row { display:flex; gap:32px; flex-wrap:wrap; margin-top:28px; padding-top:24px; border-top:1px solid var(--border); }
-    .meta-item { display:flex; flex-direction:column; gap:4px; }
-    .meta-label { font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); opacity:.7; }
-    .meta-val { font-size:14px; color:var(--fg); }
-
-    .explain-box { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:20px 22px; margin:24px 0; }
-    .explain-box .meta-label { font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); opacity:.7; margin-bottom:8px; }
-    .explain-box p { font-size:14px; color:var(--muted); line-height:1.65; }
-
-    .price-note { font-size:14px; color:var(--muted); margin-top:12px; line-height:1.55; }
-    .service-cta { margin-top:32px; }
-
-    .incentive-box { background:var(--plum-tint); border:1px solid rgba(74,44,64,.15); border-radius:10px; padding:18px 22px; margin-top:28px; }
-    .incentive-box p { font-size:14px; color:var(--fg); line-height:1.6; margin:0; }
-
-    .site-footer { background:#26232A; }
-    .footer-inner { max-width:1040px; margin:0 auto; padding:40px 24px; display:flex; flex-direction:column; gap:20px; }
-    .footer-links { display:flex; flex-wrap:wrap; gap:6px 24px; }
-    .footer-links a { font-size:14px; color:#D9C7D3; text-decoration:none; transition:color .15s; }
-    .footer-links a:hover { color:#fff; }
-    .footer-meta { display:flex; align-items:center; gap:20px; }
-    .footer-meta a { font-size:14px; color:#D9C7D3; text-decoration:none; transition:color .15s; }
-    .footer-meta a:hover { color:#fff; }
-    .footer-legal { display:flex; flex-wrap:wrap; gap:4px 20px; font-size:12px; color:rgba(255,255,255,.38); }
-    .footer-legal a { color:rgba(255,255,255,.38); text-decoration:none; }
-    .footer-legal a:hover { color:rgba(255,255,255,.65); }
-  </style>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/fraunces-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
-<body class="page-wrap">
-
+<body>
   <header class="site-header">
-    <nav class="nav-inner">
-      <a href="/" class="nav-brand">The Privacy Blueprint</a>
+    <nav class="nav-inner" aria-label="Main">
+      <a href="/" class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2l11 4.5v8.8c0 7-4.7 12-11 14.7C9.7 27.3 5 22.3 5 15.3V6.5z" fill="#1F4D3A"/><circle cx="16" cy="14" r="3.2" fill="#9BE0B4"/><path d="M14.6 16.5h2.8l.9 6h-4.6z" fill="#9BE0B4"/></svg>The Privacy Blueprint</a>
       <div class="nav-links" id="nav-links">
-        <a href="/services/" class="nav-link active">Services</a>
-        <a href="/about/" class="nav-link">About</a>
-        <a href="/resources/" class="nav-link">Resources</a>
-        <a href="https://the-privacy-blueprint.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-link">Free Check</a>
-        <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="nav-cta">Book a call</a>
+        <a href="/services/" class="nav-link active">Services</a><a href="/about/" class="nav-link">About</a><a href="/resources/" class="nav-link">Resources</a><a href="/faqs/" class="nav-link">FAQs</a>
+        <a href="https://the-privacy-blueprint.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-link">Free Health Check</a>
+        <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn nav-cta">Book a call</a>
       </div>
-      <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.getElementById('nav-links').classList.toggle('open')">
-        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
     </nav>
   </header>
 
   <main>
-    <div class="content">
 
-      <div class="page-header">
-        <p class="kicker">The Privacy Blueprint</p>
-        <h1>Services</h1>
-        <p class="lead">Start small with a £75 Action Plan, or choose one of three engagements scoped to where you are and what you actually need.</p>
+    <section class="hero page-hero"><div class="wrap hero-grid">
+      <div>
+        <p class="kicker">Services</p>
+        <h1>Support scoped to where you are</h1>
+        <p class="lead">Start small with a £75 Action Plan, or choose one of three engagements built around what your business actually needs.</p>
+        <div class="btn-row">
+          <a href="#start-here" class="btn btn-mint">See where to start <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Book a free call</a>
+        </div>
       </div>
+      <div class="photo reveal"><img src="/assets/img/typing-laptop.webp" alt="Working through compliance tasks on a laptop" width="1400" height="1050" loading="lazy" decoding="async"></div>
+    </div></section>
 
-      <section class="service-block" id="start-here">
+    
+    <section class="section bg-sand2" id="how-it-works"><div class="wrap">
+      <div class="section-head center">
+        <p class="kicker">How it works</p>
+        <h2>From uncertain to compliant in five steps</h2>
+        <p class="lead">Start free, see where you stand, and only pay for what your business actually needs.</p>
+      </div>
+      <div class="journey"><div class="j-step reveal"><div class="j-node" style="--c:var(--red)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M9 12h6M9 16h4"/></svg><span class="j-num">1</span></div>
+        <div><h3>Free Health Check</h3><p>10 questions and an instant Red, Amber or Green score.</p><span class="pill">Free, 5 mins</span></div></div><div class="j-step reveal"><div class="j-node" style="--c:#D0762F"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg><span class="j-num">2</span></div>
+        <div><h3>Discovery call</h3><p>We talk through your setup, goals and the best next step.</p><span class="pill">Free, 20 mins</span></div></div><div class="j-step reveal"><div class="j-node" style="--c:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="j-num">3</span></div>
+        <div><h3>Assess</h3><p>A £75 Action Plan or a full Gap Assessment across 16 areas.</p><span class="pill">From £75</span></div></div><div class="j-step reveal"><div class="j-node" style="--c:#6E9A3A"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 6.5a4 4 0 00-5.4 5.1L4 16.7 7.3 20l5.1-5.1a4 4 0 005.1-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg><span class="j-num">4</span></div>
+        <div><h3>Fix</h3><p>Policies, ROPA, DPIAs and processes put in place properly.</p><span class="pill">Fixed fee</span></div></div><div class="j-step reveal"><div class="j-node" style="--c:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 00-14.9-3M4 4v4h4"/><path d="M4 13a8 8 0 0014.9 3M20 20v-4h-4"/></svg><span class="j-num">5</span></div>
+        <div><h3>Stay compliant</h3><p>Ongoing oversight as your business and the law change.</p><span class="pill">From £750/mo</span></div></div></div>
+      <div class="center" style="margin-top:40px">
+        <a href="https://the-privacy-blueprint.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn">Start step 1: the free Health Check <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div></section>
+
+
+    <section class="section" id="start-here"><div class="wrap detail">
+      <div class="reveal">
+        <span class="num-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg></span>
         <p class="kicker">Start here</p>
         <h2>Privacy Action Plan</h2>
-        <p class="lead">Not ready for a full engagement? Take the free Health Check, then get a personal review of your results and a prioritised 30/60/90 day plan for your business.</p>
-        <ul class="inc-list">
-          <li>Manual review of your Health Check results and current setup</li>
-          <li>Prioritised 30/60/90 day action plan</li>
-          <li>15 minute follow up call</li>
-          <li>Delivered within 5 working days</li>
-        </ul>
-        <p class="price-note"><strong>£75</strong>, credited in full against a Gap Assessment booked within 30 days.</p>
-        <div class="service-cta">
-          <a href="https://the-privacy-blueprint.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn">Take the free Health Check first</a>
-          <p style="margin-top:12px;font-size:14px"><a href="https://shop.beacons.ai/theprivacyblueprint/107a12ce-2d3d-4edd-ae25-ed67a79b2ab6" target="_blank" rel="noopener noreferrer" style="color:var(--plum)">Already done it? Buy the Action Plan →</a></p>
-        </div>
-      </section>
+        <p class="muted">Not ready for a full engagement? Take the free Health Check, then get a personal review of your results and a prioritised plan built for your business.</p>
+        <p class="sub-head">What's included</p>
+        <ul class="checks"><li>Manual review of your Health Check results and current setup</li><li>Prioritised 30/60/90 day action plan</li><li>15 minute follow up call</li><li>Delivered within 5 working days</li></ul>
+        <p style="margin-top:18px"><a href="https://the-privacy-blueprint.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-link">Haven't taken the Health Check yet? Start here →</a></p>
+      </div>
+      <div class="aside reveal"><div class="big">£75</div><div class="row">Delivery<strong>Within 5 working days</strong></div><div class="row">Format<strong>Written plan plus 15 min call</strong></div><p style="font-size:13px;color:var(--muted);margin-top:12px">Credited in full against a Gap Assessment booked within 30 days.</p><a href="https://shop.beacons.ai/theprivacyblueprint/107a12ce-2d3d-4edd-ae25-ed67a79b2ab6" target="_blank" rel="noopener noreferrer" class="btn">Get your Action Plan</a></div>
+    </div></section>
 
-      <section class="service-block" id="fractional">
-        <div class="service-num">01</div>
-        <h2>Fractional Privacy Support</h2>
-        <p>Ongoing privacy oversight on a monthly retainer. The equivalent of a senior privacy practitioner in your team, without the cost of a full-time hire.</p>
-
-        <div class="inc-head">What the retainer covers</div>
-        <ul class="inc-list">
-          <li>Oversight and advisory time (minimum three hours per month)</li>
-          <li>DPIA review and sign-off</li>
-          <li>Record of Processing Activities (ROPA) maintenance</li>
-          <li>Data Subject Access Request (DSAR) and erasure request support</li>
-          <li>Advisory input on product and market expansion decisions</li>
-          <li>Rapid response support for data incidents</li>
-        </ul>
-
-        <div class="inc-head">Who it is for</div>
-        <ul class="inc-list">
-          <li>SMEs and growing businesses that need consistent privacy oversight as they scale</li>
-          <li>Startups post-funding building out their data protection infrastructure</li>
-          <li>Agencies handling significant volumes of client data who need documented accountability</li>
-          <li>Charities and third-sector organisations with limited compliance resource</li>
-        </ul>
-
-        <div class="inc-head">Retainer tiers</div>
-        <div class="tier-grid">
-          <div class="tier-card">
-            <div class="tier-name">Essentials</div>
-            <div class="tier-price">£750 <span>/ month</span></div>
-            <ul class="tier-list">
-              <li>Around 4 hours a month</li>
-              <li>Email support</li>
-              <li>Monthly check-in call</li>
-            </ul>
-          </div>
-          <div class="tier-card">
-            <div class="tier-name">Standard</div>
-            <div class="tier-price">£1,250 <span>/ month</span></div>
-            <ul class="tier-list">
-              <li>Around 1 day a month</li>
-              <li>DPIA reviews</li>
-              <li>Quarterly privacy report</li>
-            </ul>
-          </div>
-          <div class="tier-card">
-            <div class="tier-name">Embedded</div>
-            <div class="tier-price">£2,000 <span>/ month</span></div>
-            <ul class="tier-list">
-              <li>Up to 1 day a week</li>
-              <li>Acting as your part-time privacy lead</li>
-            </ul>
-          </div>
-        </div>
-        <p class="tier-note">Not sure which fits? Book a free 20-minute call and we'll recommend the right level.</p>
-
-        <div class="meta-row">
-          <div class="meta-item">
-            <div class="meta-label">Minimum commitment</div>
-            <div class="meta-val">Three months</div>
-          </div>
-          <div class="meta-item">
-            <div class="meta-label">Price</div>
-            <div class="meta-val">From <strong>£750</strong> per month</div>
-          </div>
-        </div>
-        <div class="service-cta">
-          <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn">Book a free 20-minute call</a>
-        </div>
-      </section>
-
-      <section class="service-block" id="dpia">
-        <div class="service-num">02</div>
-        <h2>DPIA and AI Governance</h2>
-        <p>Data Protection Impact Assessments completed in line with ICO guidance. AI governance reviews for businesses developing or procuring AI tools.</p>
-
-        <div class="explain-box">
-          <div class="meta-label">What is a DPIA?</div>
-          <p>A Data Protection Impact Assessment is a structured process for identifying and reducing the privacy risks of a new project, system or product. Under UK GDPR, a DPIA is legally required for certain types of high-risk processing. Getting it wrong means a project is non-compliant before it starts.</p>
-        </div>
-
-        <div class="inc-head">What is included</div>
-        <ul class="inc-list">
-          <li>Scoping session to determine whether a full DPIA is required, or whether a documented threshold assessment is sufficient</li>
-          <li>Full DPIA completion to ICO standard where required</li>
-          <li>AI governance review and documentation where applicable: data flows, model inputs, third-party processor agreements and ICO guidance alignment</li>
-          <li>Written output ready to share with stakeholders, regulators or clients</li>
-        </ul>
-
-        <div class="inc-head">Who it is for</div>
-        <ul class="inc-list">
-          <li>Businesses launching new products, features or data-heavy projects</li>
-          <li>Founders and SaaS companies building or integrating AI tools</li>
-          <li>Organisations required by a client or regulator to provide a completed DPIA</li>
-          <li>Teams who have attempted a DPIA internally but are not confident it meets ICO requirements</li>
-        </ul>
-
-        <div class="meta-row">
-          <div class="meta-item">
-            <div class="meta-label">Typical timeline</div>
-            <div class="meta-val">5 to 15 working days depending on complexity</div>
-          </div>
-          <div class="meta-item">
-            <div class="meta-label">Price</div>
-            <div class="meta-val">From <strong>£650</strong></div>
-          </div>
-        </div>
-        <p class="price-note">Standard DPIAs from £650. Complex or high-risk AI reviews from £1,000.</p>
-        <div class="service-cta">
-          <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn">Book a free 20-minute call</a>
-        </div>
-      </section>
-
-      <section class="service-block" id="gap-assessment">
-        <div class="service-num">03</div>
+    <section class="section bg-paper" id="gap-assessment"><div class="wrap detail">
+      <div class="reveal">
+        <span class="num-badge">01</span>
         <h2>GDPR Gap Assessment</h2>
-        <p>A structured audit of your data protection position across 16 compliance domains, using a proprietary risk-weighted scoring methodology. Designed to give you a clear, prioritised picture of where you stand and what to fix first.</p>
+        <p class="muted">A structured audit of your data protection position across 16 compliance areas, using a proprietary risk-weighted scoring method. A clear, prioritised picture of where you stand and what to fix first.</p>
+        <p class="sub-head">What's included</p>
+        <ul class="checks"><li>Assessment across 16 areas, including lawful basis, consent, data subject rights, breach management, supplier agreements, retention, international transfers and Data (Use and Access) Act 2025 readiness</li><li>Risk-weighted scoring for each area, prioritised by severity</li><li>Written report with findings and a clear action plan</li><li>30 minute debrief call to walk through the report</li></ul>
+        <p class="sub-head">Who it's for</p>
+        <ul class="checks"><li>Businesses starting out who want to understand their gaps before investing in fixes</li><li>Organisations preparing for a contract with a large client or public sector body</li><li>Companies that have grown quickly and aren't sure their setup has kept pace</li></ul>
+        <div class="callout"><strong>Bonus:</strong> move to a monthly retainer within 30 days and we'll credit your assessment fee against your first month.</div>
+      </div>
+      <div class="aside reveal"><div class="big">From £850</div><div class="row">Timeline<strong>5 to 10 working days</strong></div><div class="row">Includes<strong>Report, scoring and debrief call</strong></div><a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn">Book a free 20-minute call</a></div>
+    </div></section>
 
-        <div class="inc-head">What is included</div>
-        <ul class="inc-list">
-          <li>Assessment across 16 compliance domains: lawful basis, consent, data subject rights, breach management, third-party processor agreements, retention schedules, international transfers and Data (Use and Access) Act 2025 readiness</li>
-          <li>Risk-weighted scoring for each domain, prioritised by severity</li>
-          <li>Written report with findings and a clear action plan</li>
-          <li>30-minute debrief call to walk through the report</li>
-        </ul>
+    <section class="section" id="dpia"><div class="wrap detail">
+      <div class="reveal">
+        <span class="num-badge">02</span>
+        <h2>DPIA and AI Governance</h2>
+        <p class="muted">Data Protection Impact Assessments completed in line with ICO guidance, plus AI governance reviews for businesses developing or buying AI tools.</p>
+        <div class="callout"><strong>What is a DPIA?</strong> A structured way to spot and reduce the privacy risks of a new project, system or product. Under UK GDPR it's legally required for some high-risk processing. Getting it wrong means a project is non-compliant before it starts.</div>
+        <p class="sub-head">What's included</p>
+        <ul class="checks"><li>Scoping session to decide whether a full DPIA or a documented threshold assessment is needed</li><li>Full DPIA completed to ICO standard where required</li><li>AI governance review: data flows, model inputs, supplier agreements and ICO guidance alignment</li><li>Written output ready to share with stakeholders, regulators or clients</li></ul>
+        <p class="sub-head">Who it's for</p>
+        <ul class="checks"><li>Businesses launching new products, features or data-heavy projects</li><li>Founders and SaaS companies building or integrating AI tools</li><li>Teams who've tried a DPIA internally but aren't confident it meets ICO requirements</li></ul>
+      </div>
+      <div class="aside reveal"><div class="big">From £650</div><div class="row">Timeline<strong>5 to 15 working days</strong></div><div class="row">Complex AI reviews<strong>From £1,000</strong></div><a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn">Book a free 20-minute call</a></div>
+    </div></section>
 
-        <div class="inc-head">Who it is for</div>
-        <ul class="inc-list">
-          <li>Businesses starting out with GDPR compliance who want to understand their gaps before investing in fixes</li>
-          <li>Organisations preparing for a contract with a large client or public sector body</li>
-          <li>Companies that have grown quickly and are not confident their compliance setup has kept pace</li>
-          <li>Businesses wanting to assess their readiness for the Data (Use and Access) Act 2025</li>
-        </ul>
-
-        <div class="meta-row">
-          <div class="meta-item">
-            <div class="meta-label">Typical timeline</div>
-            <div class="meta-val">5 to 10 working days from scoping call to report delivery</div>
-          </div>
-          <div class="meta-item">
-            <div class="meta-label">Price</div>
-            <div class="meta-val">From <strong>£850</strong></div>
-          </div>
+    <section class="section bg-paper" id="fractional"><div class="wrap">
+      <div class="detail">
+        <div class="reveal">
+          <span class="num-badge">03</span>
+          <h2>Fractional Privacy Support</h2>
+          <p class="muted">Ongoing privacy oversight on a monthly retainer. The equivalent of a senior privacy practitioner in your team, without the cost of a full-time hire.</p>
+          <p class="sub-head">What the retainer covers</p>
+          <ul class="checks"><li>Oversight and advisory time every month</li><li>DPIA review and sign-off</li><li>Record of Processing Activities (ROPA) maintenance</li><li>Subject access and erasure request support</li><li>Input on product and market expansion decisions</li><li>Rapid response support for data incidents</li></ul>
         </div>
-        <p class="price-note">Includes a written report, risk-scored findings across 16 domains and a prioritised action plan.</p>
-        <div class="service-cta">
-          <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn">Book a free 20-minute call</a>
-        </div>
-        <div class="incentive-box">
-          <p>Move to a monthly retainer within 30 days and we'll credit your assessment fee against your first month.</p>
-        </div>
-      </section>
+        <div class="aside reveal"><div class="big">From £750/mo</div><div class="row">Minimum term<strong>Three months</strong></div><div class="row">Best for<strong>Growing teams, agencies, charities</strong></div><p style="font-size:13px;color:var(--muted);margin-top:12px">Not sure which level fits? We'll recommend one on your free call.</p><a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn">Book a free 20-minute call</a></div>
+      </div>
+      <p class="sub-head" style="margin-top:44px">Retainer levels</p>
+      <div class="grid g3 reveal"><div class="tier"><div class="tier-name">Essentials</div><div class="tier-price">£750 <span>/ month</span></div><ul><li>Around 4 hours a month</li><li>Email support</li><li>Monthly check-in call</li></ul></div><div class="tier"><div class="tier-name">Standard</div><div class="tier-price">£1,250 <span>/ month</span></div><ul><li>Around 1 day a month</li><li>DPIA reviews</li><li>Quarterly privacy report</li></ul></div><div class="tier"><div class="tier-name">Embedded</div><div class="tier-price">£2,000 <span>/ month</span></div><ul><li>Up to 1 day a week</li><li>Acting as your part-time privacy lead</li></ul></div></div>
+    </div></section>
 
-    </div>
+    
+    <section class="section bg-forest"><div class="wrap">
+      <div class="section-head center">
+        <p class="kicker">What your business gets</p>
+        <h2>Documents and processes you can actually use</h2>
+        <p class="lead">Not a report that sits in a folder. Practical outputs that make you compliant and show it.</p>
+      </div>
+      <div class="grid g4 compact"><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg></div><h3>Privacy and cookie policies</h3><p>Clear, accurate notices that match what you actually do.</p></div><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M9 10v9"/></svg></div><h3>Record of Processing (ROPA)</h3><p>A living map of what data you hold, why, and where it goes.</p></div><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></div><h3>DPIAs</h3><p>Risk assessments for new projects, products and AI tools.</p></div><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l3-8h12l3 8v6H3z"/><path d="M3 13h5l1 3h6l1-3h5"/></svg></div><h3>DSAR process</h3><p>A step by step way to answer access and deletion requests on time.</p></div><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></div><h3>Breach response plan</h3><p>Know exactly what to do in the first 72 hours.</p></div><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v11h14V9M10 13h4"/></svg></div><h3>Retention schedule</h3><p>How long you keep each type of data, and when to delete it.</p></div><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12l4-4 4 2 3-2 4 2 3 2"/><path d="M7 8l-4 4 6 6 2-2M21 12l-6 6-2-2M11 16l2-2M13 18l2-2"/></svg></div><h3>Supplier agreements</h3><p>DPAs in place with the tools and partners that handle your data.</p></div><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg></div><h3>Prioritised action plan</h3><p>What to fix, in what order, in plain English.</p></div></div>
+    </div></section>
+
+
+    <section class="section-tight"><div class="wrap center">
+      <p class="muted">Got questions about pricing, timelines or how it works? <a href="/faqs/" class="text-link">Read the FAQs →</a></p>
+    </div></section>
+
+    
+    <section class="section-tight"><div class="wrap">
+      <div class="cta-band reveal">
+        <svg class="deco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h2>Not sure which one is right for you?</h2>
+        <p>Every engagement starts with a free 20-minute call. We'll talk through your business, your current setup and the best path forward. No pressure, no sales pitch.</p>
+        <div class="btn-row" style="margin-top:26px">
+          <a href="https://the-privacy-blueprint.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-mint">Take the free Health Check <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Book a free 20-minute call</a>
+        </div>
+      </div>
+    </div></section>
+
+
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-links">
-        <a href="/services/">Services</a>
-        <a href="/about/">About</a>
-        <a href="/resources/">Resources</a>
-        <a href="https://the-privacy-blueprint.vercel.app/" target="_blank" rel="noopener noreferrer">Free Health Check</a>
-      </div>
-      <div class="footer-meta">
-        <a href="mailto:hello@theprivacyblueprint.co.uk">hello@theprivacyblueprint.co.uk</a>
-        <a href="https://linkedin.com/company/the-privacy-blueprint" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <a href="/" class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2l11 4.5v8.8c0 7-4.7 12-11 14.7C9.7 27.3 5 22.3 5 15.3V6.5z" fill="#2E6B50"/><circle cx="16" cy="14" r="3.2" fill="#9BE0B4"/><path d="M14.6 16.5h2.8l.9 6h-4.6z" fill="#9BE0B4"/></svg>The Privacy Blueprint</a>
+          <p>Practical, documented, jargon free privacy support for founders, SMEs, agencies and charities.</p>
+          <p style="margin-top:10px">ICO registration: C1883894</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="/services/">Services</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/resources/">Resources</a></li>
+            <li><a href="/faqs/">FAQs</a></li>
+            <li><a href="https://the-privacy-blueprint.vercel.app/" target="_blank" rel="noopener noreferrer">Free Health Check</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get in touch</h4>
+          <ul>
+            <li><a href="mailto:hello@theprivacyblueprint.co.uk">hello@theprivacyblueprint.co.uk</a></li>
+            <li><a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer">Book a free 20-minute call</a></li>
+            <li><a href="https://linkedin.com/company/the-privacy-blueprint" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          </ul>
+        </div>
       </div>
       <div class="footer-legal">
-        <span>ICO Registration: C1883894</span>
-        <span>© 2026 The Privacy Blueprint</span>
+        <span>© <span id="year">2026</span> The Privacy Blueprint</span>
         <a href="https://the-privacy-blueprint.vercel.app/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-        <a href="https://the-privacy-blueprint.vercel.app/cookie-policy" target="_blank" rel="noopener noreferrer">Cookie Policy</a>
+        <a href="/cookie-policy/">Cookie Policy</a>
+        <span>No tracking. No ad cookies.</span>
       </div>
     </div>
   </footer>
 
+  <div class="cookie" id="cookie-notice" role="region" aria-label="Cookie notice">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 109 9 3 3 0 01-3-3 3 3 0 01-3-3 3 3 0 01-3-3z"/><path d="M8 11h.01M12 15h.01M9 16h.01"/></svg>
+    <div>
+      <strong>No tracking cookies here.</strong> This site doesn't use analytics or advertising cookies. We only remember that you've seen this message. <a href="/cookie-policy/">Cookie policy</a>
+      <div><button class="btn btn-mint" data-cookie-ok type="button">Got it</button></div>
+    </div>
+  </div>
+
+  <script src="/assets/site.js" defer></script>
 </body>
 </html>

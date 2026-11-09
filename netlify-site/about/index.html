@@ -10,191 +10,141 @@
   <meta property="og:description" content="Ten years of in-house data protection experience at a major UK charity. A practitioner's approach to GDPR compliance for founders, SMEs and agencies.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://theprivacyblueprint.co.uk/about/">
+  <meta property="og:image" content="https://theprivacyblueprint.co.uk/assets/img/office-plants.webp">
+  <meta name="theme-color" content="#1F4D3A">
   <meta name="robots" content="index, follow">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Inter:wght@400;500;600&display=swap">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; }
-    :root {
-      --bg: #F7F6F4; --surface: #FFFFFF; --panel: #E7E3DE;
-      --fg: #26232A; --plum: #4A2C40; --plum-hover: #3A2233;
-      --plum-tint: #EFE6EC; --muted: #635D66; --border: #E3DFDA;
-    }
-    @media(prefers-color-scheme:dark){
-      :root:not([data-theme="light"]){
-        --bg:#1C1921; --surface:#23202A; --panel:#2D2934;
-        --fg:#EDE9F0; --plum:#C48AB0; --plum-hover:#D49EC0;
-        --plum-tint:#2D2034; --muted:#9E96A4; --border:rgba(237,233,240,.10);
-        color-scheme:dark;
-      }
-    }
-    :root[data-theme="dark"]{
-      --bg:#1C1921; --surface:#23202A; --panel:#2D2934;
-      --fg:#EDE9F0; --plum:#C48AB0; --plum-hover:#D49EC0;
-      --plum-tint:#2D2034; --muted:#9E96A4; --border:rgba(237,233,240,.10);
-      color-scheme:dark;
-    }
-    body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--fg); line-height:1.65; -webkit-font-smoothing:antialiased; }
-    h1,h2,h3 { font-family:'Source Serif 4',Georgia,serif; font-weight:500; line-height:1.2; text-wrap:balance; }
-    h1 { font-size:clamp(1.9rem,4.5vw,2.8rem); letter-spacing:-.02em; margin-bottom:16px; }
-    h2 { font-size:clamp(1.3rem,2.5vw,1.75rem); margin-bottom:14px; }
-    p { margin-bottom:16px; }
-    p:last-child { margin-bottom:0; }
-    a { color:inherit; }
-
-    .site-header { position:sticky; top:env(safe-area-inset-top,0); z-index:100; background:var(--surface); border-bottom:1px solid var(--border); }
-    .nav-inner { max-width:1040px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; height:62px; }
-    .nav-brand { font-family:'Source Serif 4',Georgia,serif; font-weight:500; font-size:17px; color:var(--fg); text-decoration:none; white-space:nowrap; flex-shrink:0; }
-    .nav-links { display:flex; align-items:center; gap:4px; }
-    .nav-link { font-size:14px; color:var(--muted); text-decoration:none; padding:6px 10px; border-radius:6px; white-space:nowrap; transition:color .15s; }
-    .nav-link:hover, .nav-link.active { color:var(--fg); }
-    .nav-cta { font-size:13px; font-weight:500; color:#fff; background:var(--plum); text-decoration:none; padding:8px 16px; border-radius:6px; white-space:nowrap; margin-left:6px; transition:background .15s; }
-    .nav-cta:hover { background:var(--plum-hover); }
-    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:8px; color:var(--fg); }
-    @media(max-width:700px){
-      .nav-links { display:none; }
-      .nav-links.open { display:flex; flex-direction:column; align-items:flex-start; position:absolute; top:62px; left:0; right:0; background:var(--surface); border-bottom:1px solid var(--border); padding:16px 24px 24px; gap:4px; }
-      .nav-toggle { display:block; }
-    }
-
-    .page-wrap { min-height:100vh; display:flex; flex-direction:column; }
-    main { flex:1; }
-    .content { max-width:760px; margin:0 auto; padding-inline:24px; }
-
-    .kicker { font-size:13px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--plum); margin-bottom:12px; }
-    .lead { font-size:1.05rem; color:var(--muted); line-height:1.75; margin-bottom:28px; }
-    .btn { display:inline-block; font-size:15px; font-weight:500; color:#fff; background:var(--plum); padding:13px 28px; border-radius:8px; text-decoration:none; transition:background .15s; }
-    .btn:hover { background:var(--plum-hover); }
-
-    .page-header { padding:64px 0 48px; border-bottom:1px solid var(--border); }
-    .section { padding:52px 0; border-bottom:1px solid var(--border); }
-    .section:last-child { border-bottom:none; padding-bottom:80px; }
-
-    .body-text p { font-size:15px; color:var(--muted); line-height:1.75; margin-bottom:16px; }
-    .body-text p:last-child { margin-bottom:0; }
-
-    .pullquote { border-left:3px solid var(--plum); padding:4px 0 4px 20px; margin:28px 0; font-family:'Source Serif 4',Georgia,serif; font-weight:500; font-size:1.15rem; font-style:italic; color:var(--fg); line-height:1.5; opacity:.75; }
-
-    .site-footer { background:#26232A; }
-    .footer-inner { max-width:1040px; margin:0 auto; padding:40px 24px; display:flex; flex-direction:column; gap:20px; }
-    .footer-links { display:flex; flex-wrap:wrap; gap:6px 24px; }
-    .footer-links a { font-size:14px; color:#D9C7D3; text-decoration:none; transition:color .15s; }
-    .footer-links a:hover { color:#fff; }
-    .footer-meta { display:flex; align-items:center; gap:20px; }
-    .footer-meta a { font-size:14px; color:#D9C7D3; text-decoration:none; transition:color .15s; }
-    .footer-meta a:hover { color:#fff; }
-    .footer-legal { display:flex; flex-wrap:wrap; gap:4px 20px; font-size:12px; color:rgba(255,255,255,.38); }
-    .footer-legal a { color:rgba(255,255,255,.38); text-decoration:none; }
-    .footer-legal a:hover { color:rgba(255,255,255,.65); }
-
-    .facts { list-style:none; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-    @media(max-width:600px){ .facts { grid-template-columns:1fr; } }
-    .facts li { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:18px 20px; display:flex; flex-direction:column; gap:4px; }
-    .facts strong { font-family:'Source Serif 4',Georgia,serif; font-weight:500; font-size:1.2rem; color:var(--plum); }
-    .facts span { font-size:14px; color:var(--muted); line-height:1.5; }
-  </style>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/fraunces-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
-<body class="page-wrap">
-
+<body>
   <header class="site-header">
-    <nav class="nav-inner">
-      <a href="/" class="nav-brand">The Privacy Blueprint</a>
+    <nav class="nav-inner" aria-label="Main">
+      <a href="/" class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2l11 4.5v8.8c0 7-4.7 12-11 14.7C9.7 27.3 5 22.3 5 15.3V6.5z" fill="#1F4D3A"/><circle cx="16" cy="14" r="3.2" fill="#9BE0B4"/><path d="M14.6 16.5h2.8l.9 6h-4.6z" fill="#9BE0B4"/></svg>The Privacy Blueprint</a>
       <div class="nav-links" id="nav-links">
-        <a href="/services/" class="nav-link">Services</a>
-        <a href="/about/" class="nav-link active">About</a>
-        <a href="/resources/" class="nav-link">Resources</a>
-        <a href="https://the-privacy-blueprint.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-link">Free Check</a>
-        <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="nav-cta">Book a call</a>
+        <a href="/services/" class="nav-link">Services</a><a href="/about/" class="nav-link active">About</a><a href="/resources/" class="nav-link">Resources</a><a href="/faqs/" class="nav-link">FAQs</a>
+        <a href="https://the-privacy-blueprint.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-link">Free Health Check</a>
+        <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn nav-cta">Book a call</a>
       </div>
-      <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.getElementById('nav-links').classList.toggle('open')">
-        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
     </nav>
   </header>
 
   <main>
-    <div class="content">
 
-      <div class="page-header">
-        <p class="kicker">The Privacy Blueprint</p>
-        <h1>About The Privacy Blueprint</h1>
-        <p class="lead">A consultancy built on operational experience, not advisory distance.</p>
+    <section class="hero page-hero"><div class="wrap hero-grid">
+      <div>
+        <p class="kicker">About</p>
+        <h1>A consultancy built on operational experience</h1>
+        <p class="lead">Not advisory distance. Ten years of running privacy inside a real organisation, now applied to yours.</p>
+        <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn btn-mint">Book a free 20-minute call <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
+      <div class="photo reveal"><img src="/assets/img/bright-desk.webp" alt="Calm, bright home office desk" width="1400" height="1050" loading="lazy" decoding="async"></div>
+    </div></section>
 
-      <section class="section">
-        <h2>The approach</h2>
-        <div class="body-text">
-          <p>Most privacy consultants come from legal or advisory backgrounds. The Privacy Blueprint is different.</p>
-          <p>It is built on ten years of in-house experience running a privacy function inside a major UK charity, managing real compliance problems at real operational scale. That means the work is grounded in what actually happens inside an organisation: the DPIA requests that arrive at the wrong time, the data subject access requests that land on a Friday afternoon, the supplier with no data processing agreement in place, the reporting line that needs educating rather than just a policy document.</p>
-          <p>This is not a framework applied from the outside. It is a practitioner's approach applied to your business.</p>
+    <section class="section"><div class="wrap split">
+      <div class="reveal">
+        <p class="kicker">The approach</p>
+        <h2>Most privacy consultants come from legal or advisory backgrounds. This is different.</h2>
+        <p class="muted">The Privacy Blueprint is built on ten years of in-house experience running a privacy function inside a major UK charity, solving real compliance problems at real operational scale.</p>
+        <p class="muted">That means the work is grounded in what actually happens inside an organisation: the DPIA request that arrives at the wrong time, the subject access request that lands on a Friday afternoon, the supplier with no data processing agreement, the reporting line that needs educating rather than just a policy document.</p>
+      </div>
+      <div class="photo reveal"><img src="/assets/img/signing-documents.webp" alt="Reviewing and signing compliance paperwork" width="1400" height="1050" loading="lazy" decoding="async"></div>
+    </div></section>
+
+    <section class="section bg-sand2"><div class="wrap">
+      <div class="section-head center">
+        <p class="kicker">At a glance</p>
+        <h2>Experience you can rely on</h2>
+      </div>
+      <div class="grid g3"><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div class="stat" style="font-size:1.6rem">10 years</div><p>running a privacy function inside a major UK charity</p></div><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></div><div class="stat" style="font-size:1.6rem">Organisation wide</div><p>DPIA process built and run from the ground up</p></div><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l3-8h12l3 8v6H3z"/><path d="M3 13h5l1 3h6l1-3h5"/></svg></div><div class="stat" style="font-size:1.6rem">High volume</div><p>data subject access requests managed end to end</p></div><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><div class="stat" style="font-size:1.6rem">Board level</div><p>privacy metrics reported directly to the C-suite</p></div><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M9 12h6M9 16h4"/></svg></div><div class="stat" style="font-size:1.6rem">16 areas</div><p>covered by our risk-weighted gap assessment, updated for the Data (Use and Access) Act 2025</p></div><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div><div class="stat" style="font-size:1.6rem">ICO registered</div><p>registration number C1883894</p></div></div>
+    </div></section>
+
+    <section class="section"><div class="wrap split flip">
+      <div class="reveal">
+        <p class="kicker">The philosophy</p>
+        <h2>Privacy compliance should be enabling, not obstructing</h2>
+        <p class="muted">A well run privacy function helps organisations build trust, move faster on products and data initiatives, and avoid the regulatory and reputational cost of getting it wrong.</p>
+        <p class="muted">The Privacy Blueprint exists to make that kind of compliance accessible to founders, SMEs and growing teams who can't justify a full-time privacy hire but need the real thing, not a checkbox exercise.</p>
+      </div>
+      <div class="photo reveal"><img src="/assets/img/handshake.webp" alt="Handshake agreeing a new engagement" width="1400" height="1050" loading="lazy" decoding="async"></div>
+    </div></section>
+
+    <section class="section bg-forest"><div class="wrap">
+      <div class="section-head center"><p class="kicker">What to expect</p><h2>Three promises on every engagement</h2></div>
+      <div class="grid g3"><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg></div><h3>Practical</h3><p>Advice that fits how your business actually runs, not a theoretical framework.</p></div><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg></div><h3>Documented</h3><p>Everything written down, so you can show compliance as well as achieve it.</p></div><div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/></svg></div><h3>No jargon</h3><p>Plain English throughout. You'll always know what to do and why.</p></div></div>
+    </div></section>
+
+    <!--
+      TESTIMONIALS: add real client quotes here when you have them.
+      Faceless friendly format: quote, then initials plus business type.
+      <section class="section"><div class="wrap narrow center">
+        <p class="kicker">What clients say</p>
+        <p class="quote" style="color:var(--ink)">"Quote goes here."</p>
+        <p class="muted" style="margin-top:14px">S.M., founder, online coaching business</p>
+      </div></section>
+    -->
+
+    
+    <section class="section-tight"><div class="wrap">
+      <div class="cta-band reveal">
+        <svg class="deco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h2>Ready to get compliant?</h2>
+        <p>Start with the free Health Check, or book a free 20-minute call to talk through your business. No obligation, no sales pitch.</p>
+        <div class="btn-row" style="margin-top:26px">
+          <a href="https://the-privacy-blueprint.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-mint">Take the free Health Check <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Book a free 20-minute call</a>
         </div>
-        <blockquote class="pullquote">Practical. Documented. No jargon.</blockquote>
-      </section>
+      </div>
+    </div></section>
 
 
-      <section class="section">
-        <h2>At a glance</h2>
-        <ul class="facts">
-          <li><strong>10 years</strong><span>running a privacy function inside a major UK charity</span></li>
-          <li><strong>Organisation wide</strong><span>DPIA process built and run from the ground up</span></li>
-          <li><strong>High volume</strong><span>data subject access requests managed end to end</span></li>
-          <li><strong>Board level</strong><span>privacy metrics reported directly to the C-suite</span></li>
-          <li><strong>16 domains</strong><span>covered by our risk-weighted gap assessment, updated for the Data (Use and Access) Act 2025</span></li>
-          <li><strong>ICO registered</strong><span>registration number C1883894</span></li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h2>Why there is no headshot here</h2>
-        <div class="body-text">
-          <p>The Privacy Blueprint practises what it advises. This website keeps personal information to the minimum it needs, and so do we.</p>
-          <p>The work speaks for itself, and the person doing it is the same experienced practitioner on every engagement. You will meet them on your free 20 minute call, and every engagement is backed by a written scope, fixed fees and full confidentiality.</p>
-        </div>
-      </section>
-
-      <!--
-        TESTIMONIALS: add real client quotes here when you have them.
-        Faceless friendly format: quote, then first name or initials plus business type.
-        <section class="section">
-          <h2>What clients say</h2>
-          <blockquote class="pullquote">"Quote goes here."</blockquote>
-          <p class="body-text">S.M., founder, online coaching business</p>
-        </section>
-      -->
-
-      <section class="section">
-        <h2>The philosophy</h2>
-        <div class="body-text">
-          <p>Privacy compliance should be enabling, not obstructing. A well-run privacy function helps organisations build trust, move faster on products and data initiatives, and avoid the regulatory and reputational cost of getting it wrong.</p>
-          <p>The Privacy Blueprint exists to make that kind of compliance accessible to founders, SMEs and growing teams who cannot justify a full-time privacy hire but need the real thing, not a checkbox exercise.</p>
-        </div>
-        <div style="margin-top:32px">
-          <a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer" class="btn">Book a free 20-minute call</a>
-        </div>
-      </section>
-
-    </div>
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-links">
-        <a href="/services/">Services</a>
-        <a href="/about/">About</a>
-        <a href="/resources/">Resources</a>
-        <a href="https://the-privacy-blueprint.vercel.app/" target="_blank" rel="noopener noreferrer">Free Health Check</a>
-      </div>
-      <div class="footer-meta">
-        <a href="mailto:hello@theprivacyblueprint.co.uk">hello@theprivacyblueprint.co.uk</a>
-        <a href="https://linkedin.com/company/the-privacy-blueprint" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <a href="/" class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2l11 4.5v8.8c0 7-4.7 12-11 14.7C9.7 27.3 5 22.3 5 15.3V6.5z" fill="#2E6B50"/><circle cx="16" cy="14" r="3.2" fill="#9BE0B4"/><path d="M14.6 16.5h2.8l.9 6h-4.6z" fill="#9BE0B4"/></svg>The Privacy Blueprint</a>
+          <p>Practical, documented, jargon free privacy support for founders, SMEs, agencies and charities.</p>
+          <p style="margin-top:10px">ICO registration: C1883894</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="/services/">Services</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/resources/">Resources</a></li>
+            <li><a href="/faqs/">FAQs</a></li>
+            <li><a href="https://the-privacy-blueprint.vercel.app/" target="_blank" rel="noopener noreferrer">Free Health Check</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get in touch</h4>
+          <ul>
+            <li><a href="mailto:hello@theprivacyblueprint.co.uk">hello@theprivacyblueprint.co.uk</a></li>
+            <li><a href="https://calendar.app.google/XFwWHg2UYvFwZjiEA" target="_blank" rel="noopener noreferrer">Book a free 20-minute call</a></li>
+            <li><a href="https://linkedin.com/company/the-privacy-blueprint" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          </ul>
+        </div>
       </div>
       <div class="footer-legal">
-        <span>ICO Registration: C1883894</span>
-        <span>© 2026 The Privacy Blueprint</span>
+        <span>© <span id="year">2026</span> The Privacy Blueprint</span>
         <a href="https://the-privacy-blueprint.vercel.app/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-        <a href="https://the-privacy-blueprint.vercel.app/cookie-policy" target="_blank" rel="noopener noreferrer">Cookie Policy</a>
+        <a href="/cookie-policy/">Cookie Policy</a>
+        <span>No tracking. No ad cookies.</span>
       </div>
     </div>
   </footer>
 
+  <div class="cookie" id="cookie-notice" role="region" aria-label="Cookie notice">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 109 9 3 3 0 01-3-3 3 3 0 01-3-3 3 3 0 01-3-3z"/><path d="M8 11h.01M12 15h.01M9 16h.01"/></svg>
+    <div>
+      <strong>No tracking cookies here.</strong> This site doesn't use analytics or advertising cookies. We only remember that you've seen this message. <a href="/cookie-policy/">Cookie policy</a>
+      <div><button class="btn btn-mint" data-cookie-ok type="button">Got it</button></div>
+    </div>
+  </div>
+
+  <script src="/assets/site.js" defer></script>
 </body>
 </html>
