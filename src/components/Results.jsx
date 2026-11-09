@@ -115,7 +115,7 @@ function EmailCapture({ answers }) {
             dashboard at formspree.io.
           */}
           <p className="font-inter text-sm text-charcoal/80 leading-relaxed">
-            Check your inbox. Your GDPR Fix-It Checklist is on its way. It's the general starting point every business needs. When you want to know exactly what applies to your business, the £75 Gap Analysis gives you a personalised action plan.
+            Thank you. I'll personally email your GDPR Fix-It Checklist within 1 working day, so keep an eye on your inbox (and your spam folder, just in case). If you'd like a plan built around your actual setup, the £75 Privacy Action Plan below is the quickest next step.
           </p>
         </div>
       </div>
@@ -168,18 +168,40 @@ function EmailCapture({ answers }) {
   )
 }
 
-function BookCTA() {
+const ACTION_PLAN_URL = 'https://shop.beacons.ai/theprivacyblueprint/107a12ce-2d3d-4edd-ae25-ed67a79b2ab6'
+const BOOKING_URL = 'https://calendar.app.google/XFwWHg2UYvFwZjiEA'
+
+const ctaCopy = {
+  red: {
+    eyebrow: 'Your results show significant gaps',
+    body: "Several of these are legal requirements, not nice to haves. The fastest way to get on top of them is a personal review of your setup with a clear plan of what to fix first. If you'd rather hand it over completely, book a free call about a full GDPR Gap Assessment.",
+    showCall: true,
+  },
+  amber: {
+    eyebrow: 'Want a personalised action plan?',
+    body: "The Health Check shows you where you stand. I'll personally review your actual setup and send you a prioritised plan built for your business, so you know exactly what to fix and in what order.",
+    showCall: false,
+  },
+  green: {
+    eyebrow: 'Strong foundations. Want to be sure?',
+    body: "A self assessment can only go so far. I'll review your actual setup against the points the Health Check can't see, and send you a short plan to close any remaining gaps.",
+    showCall: false,
+  },
+}
+
+function BookCTA({ rating }) {
+  const copy = ctaCopy[rating] || ctaCopy.amber
   return (
     <div className="bg-cream rounded-xl p-5 border border-warm-brown/20">
-      <p className="font-inter text-sm font-semibold text-warm-brown mb-1">Want a personalised action plan?</p>
-      <p className="font-inter text-sm text-charcoal/70 mb-3 leading-relaxed">
-        The Health Check shows you where you stand. I'll personally review your actual setup and send you a prioritised plan built for your business, so you know exactly what to fix and in what order.
-      </p>
+      <p className="font-inter text-sm font-semibold text-warm-brown mb-1">{copy.eyebrow}</p>
+      <p className="font-inter text-sm text-charcoal/70 mb-3 leading-relaxed">{copy.body}</p>
+      <p className="font-inter text-xs font-semibold uppercase tracking-wide text-charcoal/40 mb-2">Privacy Action Plan</p>
       <ul className="flex flex-col gap-1 mb-4">
         {[
           'Manual review of your actual setup',
           'Prioritised 30/60/90-day action plan',
           '15-min follow-up call included',
+          'Credited in full against a Gap Assessment within 30 days',
         ].map(item => (
           <li key={item} className="flex items-center gap-2 font-inter text-xs text-charcoal/70">
             <svg className="w-3.5 h-3.5 text-rag-green flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -191,14 +213,16 @@ function BookCTA() {
       </ul>
       <p className="font-inter text-xs text-charcoal/50 mb-4">Delivered within 5 working days.</p>
       <p className="font-playfair text-3xl font-700 text-charcoal mb-4">£75</p>
-      <a
-        href="https://shop.beacons.ai/theprivacyblueprint/107a12ce-2d3d-4edd-ae25-ed67a79b2ab6"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="btn-primary inline-block text-sm"
-      >
-        Get Your Action Plan for £75 →
-      </a>
+      <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
+        <a href={ACTION_PLAN_URL} target="_blank" rel="noopener noreferrer" className="btn-primary inline-block text-sm text-center">
+          Get Your Action Plan for £75 →
+        </a>
+        {copy.showCall && (
+          <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="font-inter text-sm text-warm-brown underline text-center">
+            Or book a free 20-minute call
+          </a>
+        )}
+      </div>
     </div>
   )
 }
@@ -303,7 +327,7 @@ export default function Results({ answers }) {
 
         {/* ── Section 4: Book CTA ── */}
         <div className="card mb-5 no-print">
-          <BookCTA />
+          <BookCTA rating={rag.color} />
         </div>
 
         {/* Print CTA */}

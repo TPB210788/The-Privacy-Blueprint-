@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Footer from './Footer.jsx'
 
 const BOOKING_URL = 'https://calendar.app.google/XFwWHg2UYvFwZjiEA'
+const ACTION_PLAN_URL = 'https://shop.beacons.ai/theprivacyblueprint/107a12ce-2d3d-4edd-ae25-ed67a79b2ab6'
 
 function BookingLink({ children, className }) {
   return (
@@ -27,7 +28,7 @@ function CheckItem({ children }) {
   )
 }
 
-function ServiceCard({ tag, title, bestFor, overview, included, outcome, delivery, investment }) {
+function ServiceCard({ tag, title, bestFor, overview, included, outcome, delivery, investment, ctaLabel = 'Book a Free Call →', ctaHref = BOOKING_URL }) {
   return (
     <div className="bg-white rounded-2xl border border-black/5 shadow-sm flex flex-col overflow-hidden">
       {/* Card top accent */}
@@ -75,9 +76,9 @@ function ServiceCard({ tag, title, bestFor, overview, included, outcome, deliver
         </div>
 
         {/* CTA */}
-        <BookingLink className="btn-primary text-center text-sm mt-auto">
-          Book a Free Call →
-        </BookingLink>
+        <a href={ctaHref} target="_blank" rel="noopener noreferrer" className="btn-primary text-center text-sm mt-auto">
+          {ctaLabel}
+        </a>
       </div>
     </div>
   )
@@ -116,40 +117,69 @@ export default function Services() {
             </p>
           </div>
 
-          {/* Service cards */}
+          {/* Service cards: keep prices in sync with theprivacyblueprint.co.uk/services */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
             <ServiceCard
-              tag="Package 01"
-              title="GDPR Setup & Foundation"
-              bestFor="Early-stage and growing businesses building structured GDPR foundations from day one."
-              overview="A streamlined package designed to help emerging online businesses, creators, and agencies establish a strong, practical foundation for data protection compliance, without the legal jargon or the big-agency price tag."
+              tag="Start here"
+              title="Privacy Action Plan"
+              bestFor="Small businesses who have taken the Health Check and want to know exactly what to fix first."
+              overview="A personal review of your Health Check results and your actual setup, turned into a clear plan you can work through yourself."
               included={[
-                'GDPR Gap Assessment',
-                'Core Policy Development: Privacy Policy, Cookie Policy, and Internal Data Handling Policy',
-                'ICO Registration Support',
-                'Basic Record of Processing Activities (ROPA)',
-                'One follow-up call to walk through everything',
+                'Manual review of your current setup',
+                'Prioritised 30/60/90-day action plan',
+                '15-minute follow-up call',
+                'Credited in full against a Gap Assessment booked within 30 days',
               ]}
-              outcome="A structured compliance framework that protects your business from day one."
-              delivery="1–2 weeks"
-              investment="From £950"
+              outcome="You know exactly what to fix, in what order, without a big upfront commitment."
+              delivery="Within 5 working days"
+              investment="£75"
+              ctaLabel="Get Your Action Plan →"
+              ctaHref={ACTION_PLAN_URL}
             />
-
             <ServiceCard
-              tag="Package 02"
-              title="Fractional Privacy Partner"
-              bestFor="Growing businesses that need ongoing data protection support without hiring in-house."
-              overview="A flexible, continuous support package providing expert oversight and strategic guidance as your data operations evolve. Think of it as having a privacy lead on your team, without the full-time cost."
+              tag="Service 01"
+              title="GDPR Gap Assessment"
+              bestFor="Businesses that want a full, professional picture of their compliance before investing in fixes."
+              overview="A structured audit across 16 compliance domains using a risk-weighted scoring method, updated for the Data (Use and Access) Act 2025."
               included={[
-                'Monthly Data Protection Oversight',
-                'DPIA Review and ROPA Maintenance',
-                'Advisory Calls for Product or Market Expansion',
-                'Dedicated support for DSARs and data incidents',
-                'Flexible retainer from 3 hours per month',
+                'Assessment across 16 compliance domains',
+                'Risk-weighted scoring, prioritised by severity',
+                'Written report with findings and action plan',
+                '30-minute debrief call',
+              ]}
+              outcome="A clear, documented picture of where you stand and what to fix first."
+              delivery="5 to 10 working days"
+              investment="From £850"
+            />
+            <ServiceCard
+              tag="Service 02"
+              title="DPIA and AI Governance"
+              bestFor="Businesses launching new products or data-heavy projects, or building and buying AI tools."
+              overview="Data Protection Impact Assessments completed in line with ICO guidance, with AI governance reviews where relevant."
+              included={[
+                'Scoping session and threshold assessment',
+                'Full DPIA to ICO standard where required',
+                'AI governance review and documentation',
+                'Written output ready for clients or regulators',
+              ]}
+              outcome="A defensible DPIA you can share with confidence."
+              delivery="5 to 15 working days"
+              investment="From £650"
+            />
+            <ServiceCard
+              tag="Service 03"
+              title="Fractional Privacy Support"
+              bestFor="Growing businesses that need ongoing data protection support without hiring in-house."
+              overview="Ongoing privacy oversight on a monthly retainer. Think of it as having a senior privacy lead on your team, without the full-time cost."
+              included={[
+                'Monthly oversight and advisory time',
+                'DPIA review and ROPA maintenance',
+                'DSAR and data incident support',
+                'Tiers from around 4 hours a month to 1 day a week',
               ]}
               outcome="Stay compliant as you grow, without the cost and commitment of hiring in-house."
-              delivery="Ongoing monthly retainer (3-month minimum)"
-              investment="From £450/month"
+              delivery="Monthly retainer (3-month minimum)"
+              investment="From £750/month"
             />
           </div>
 

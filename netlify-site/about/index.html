@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>About | The Privacy Blueprint</title>
   <meta name="description" content="Ten years of in-house data protection experience at a major UK charity. A practitioner's approach to GDPR compliance for founders, SMEs and agencies.">
+  <link rel="canonical" href="https://theprivacyblueprint.co.uk/about/">
+  <meta property="og:title" content="About | The Privacy Blueprint">
+  <meta property="og:description" content="Ten years of in-house data protection experience at a major UK charity. A practitioner's approach to GDPR compliance for founders, SMEs and agencies.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://theprivacyblueprint.co.uk/about/">
   <meta name="robots" content="index, follow">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Inter:wght@400;500;600&display=swap">
   <style>
@@ -80,6 +85,12 @@
     .footer-legal { display:flex; flex-wrap:wrap; gap:4px 20px; font-size:12px; color:rgba(255,255,255,.38); }
     .footer-legal a { color:rgba(255,255,255,.38); text-decoration:none; }
     .footer-legal a:hover { color:rgba(255,255,255,.65); }
+
+    .facts { list-style:none; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    @media(max-width:600px){ .facts { grid-template-columns:1fr; } }
+    .facts li { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:18px 20px; display:flex; flex-direction:column; gap:4px; }
+    .facts strong { font-family:'Source Serif 4',Georgia,serif; font-weight:500; font-size:1.2rem; color:var(--plum); }
+    .facts span { font-size:14px; color:var(--muted); line-height:1.5; }
   </style>
 </head>
 <body class="page-wrap">
@@ -119,6 +130,37 @@
         <blockquote class="pullquote">Practical. Documented. No jargon.</blockquote>
       </section>
 
+
+      <section class="section">
+        <h2>At a glance</h2>
+        <ul class="facts">
+          <li><strong>10 years</strong><span>running a privacy function inside a major UK charity</span></li>
+          <li><strong>Organisation wide</strong><span>DPIA process built and run from the ground up</span></li>
+          <li><strong>High volume</strong><span>data subject access requests managed end to end</span></li>
+          <li><strong>Board level</strong><span>privacy metrics reported directly to the C-suite</span></li>
+          <li><strong>16 domains</strong><span>covered by our risk-weighted gap assessment, updated for the Data (Use and Access) Act 2025</span></li>
+          <li><strong>ICO registered</strong><span>registration number C1883894</span></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Why there is no headshot here</h2>
+        <div class="body-text">
+          <p>The Privacy Blueprint practises what it advises. This website keeps personal information to the minimum it needs, and so do we.</p>
+          <p>The work speaks for itself, and the person doing it is the same experienced practitioner on every engagement. You will meet them on your free 20 minute call, and every engagement is backed by a written scope, fixed fees and full confidentiality.</p>
+        </div>
+      </section>
+
+      <!--
+        TESTIMONIALS: add real client quotes here when you have them.
+        Faceless friendly format: quote, then first name or initials plus business type.
+        <section class="section">
+          <h2>What clients say</h2>
+          <blockquote class="pullquote">"Quote goes here."</blockquote>
+          <p class="body-text">S.M., founder, online coaching business</p>
+        </section>
+      -->
+
       <section class="section">
         <h2>The philosophy</h2>
         <div class="body-text">
@@ -148,8 +190,8 @@
       <div class="footer-legal">
         <span>ICO Registration: C1883894</span>
         <span>© 2026 The Privacy Blueprint</span>
-        <a href="/privacy-policy/">Privacy Policy</a>
-        <a href="/cookie-policy/">Cookie Policy</a>
+        <a href="https://the-privacy-blueprint.vercel.app/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+        <a href="https://the-privacy-blueprint.vercel.app/cookie-policy" target="_blank" rel="noopener noreferrer">Cookie Policy</a>
       </div>
     </div>
   </footer>

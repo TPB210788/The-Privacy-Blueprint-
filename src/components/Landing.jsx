@@ -24,6 +24,12 @@ export default function Landing({ onStart }) {
           <p className="font-inter text-xs text-charcoal/40 mt-6">
             10 questions · No sign-up required · Instant results
           </p>
+          <p className="font-inter text-sm text-charcoal/55 mt-8">
+            Want expert help instead?{' '}
+            <a href="https://theprivacyblueprint.co.uk/services/" className="text-warm-brown underline hover:text-warm-brown-dark">
+              See how I work with businesses
+            </a>
+          </p>
         </div>
       </div>
 
