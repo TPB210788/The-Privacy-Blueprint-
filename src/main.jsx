@@ -5,11 +5,13 @@ import App from './App.jsx'
 import PrivacyPolicy from './components/PrivacyPolicy.jsx'
 import CookiePolicy from './components/CookiePolicy.jsx'
 import Services from './components/Services.jsx'
+import SiteHeader from './components/SiteHeader.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
+      <SiteHeader />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />

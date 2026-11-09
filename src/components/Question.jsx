@@ -33,10 +33,10 @@ export default function Question({ index, onAnswer }) {
       <div className="w-full max-w-xl">
         {/* Header */}
         <div className="flex items-center justify-between mb-3">
-          <p className="font-inter text-sm font-medium text-charcoal/50">
+          <p className="font-raleway text-sm font-medium text-ink/50">
             Question {index + 1} of {total}
           </p>
-          <p className="font-inter text-sm font-medium text-warm-brown">
+          <p className="font-raleway text-sm font-medium text-sage-deep">
             {q.topic}
           </p>
         </div>
@@ -44,14 +44,14 @@ export default function Question({ index, onAnswer }) {
         {/* Progress bar */}
         <div className="w-full h-1.5 bg-black/10 rounded-full mb-8 overflow-hidden">
           <div
-            className="h-full bg-warm-brown rounded-full transition-all duration-500 ease-out"
+            className="h-full bg-navy rounded-full transition-all duration-500 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
 
         {/* Question card */}
         <div className="card mb-6">
-          <h2 className="font-playfair text-xl sm:text-2xl font-500 text-charcoal leading-snug">
+          <h2 className="font-playfair text-xl sm:text-2xl font-500 text-ink leading-snug">
             {q.question}
           </h2>
         </div>

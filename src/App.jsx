@@ -39,7 +39,7 @@ export default function App() {
   }
 
   return (
-    <div className="bg-cream min-h-screen">
+    <div className="bg-sand min-h-screen">
       {screen === SCREENS.LANDING && (
         <Landing onStart={handleStart} />
       )}
@@ -58,7 +58,7 @@ export default function App() {
           <div className="pb-12 text-center">
             <button
               onClick={handleRestart}
-              className="font-inter text-xs text-charcoal/35 hover:text-charcoal/60 underline transition-colors"
+              className="font-raleway text-xs text-ink/35 hover:text-ink/60 underline transition-colors"
             >
               Start again
             </button>

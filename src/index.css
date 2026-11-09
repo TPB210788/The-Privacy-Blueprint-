@@ -3,15 +3,22 @@
 @tailwind utilities;
 
 @layer base {
+  @font-face { font-family:'Playfair Display'; font-style:normal; font-weight:500; font-display:swap; src:url('/fonts/playfair-display-latin-500-normal.woff2') format('woff2'); }
+  @font-face { font-family:'Playfair Display'; font-style:normal; font-weight:600; font-display:swap; src:url('/fonts/playfair-display-latin-600-normal.woff2') format('woff2'); }
+  @font-face { font-family:'Playfair Display'; font-style:italic; font-weight:500; font-display:swap; src:url('/fonts/playfair-display-latin-500-italic.woff2') format('woff2'); }
+  @font-face { font-family:'Raleway'; font-style:normal; font-weight:400; font-display:swap; src:url('/fonts/raleway-latin-400-normal.woff2') format('woff2'); }
+  @font-face { font-family:'Raleway'; font-style:normal; font-weight:500; font-display:swap; src:url('/fonts/raleway-latin-500-normal.woff2') format('woff2'); }
+  @font-face { font-family:'Raleway'; font-style:normal; font-weight:600; font-display:swap; src:url('/fonts/raleway-latin-600-normal.woff2') format('woff2'); }
+
   html {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Raleway', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    background-color: #F5F0EB;
-    color: #2C2C2C;
+    background-color: #F6F2EB;
+    color: #1C2B4A;
     min-height: 100vh;
   }
 }
@@ -20,30 +27,32 @@
   body { background: white !important; }
   .no-print { display: none !important; }
   .print-show { display: block !important; }
-  .card { box-shadow: none !important; border: 1px solid #e5e5e5 !important; break-inside: avoid; }
+  .card {
+    @apply bg-white border border-line p-6 sm:p-8;
+  }
   @page { margin: 1.5cm; }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-warm-brown text-cream font-inter font-medium px-8 py-4 rounded-xl
-           hover:bg-warm-brown-dark active:scale-95 transition-all duration-200
-           focus:outline-none focus:ring-2 focus:ring-warm-brown focus:ring-offset-2
-           focus:ring-offset-cream disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-navy text-white font-raleway font-semibold text-sm uppercase tracking-[0.14em] px-8 py-4 rounded-full border border-navy
+           hover:bg-navy-deep transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-sage focus:ring-offset-2
+           focus:ring-offset-sand disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .card {
-    @apply bg-white rounded-2xl shadow-sm border border-black/5 p-6 sm:p-8;
+    @apply bg-white rounded-none border border-black/5 p-6 sm:p-8;
   }
 
   .option-btn {
-    @apply w-full text-left px-5 py-4 rounded-xl border-2 transition-all duration-200
-           font-inter text-sm sm:text-base leading-snug cursor-pointer
-           focus:outline-none focus:ring-2 focus:ring-warm-brown focus:ring-offset-1;
+    @apply w-full text-left px-5 py-4 rounded-none border-2 transition-all duration-200
+           font-raleway text-sm sm:text-base leading-snug cursor-pointer
+           focus:outline-none focus:ring-2 focus:ring-sage focus:ring-offset-1;
   }
 
   .option-unselected {
-    @apply border-black/10 bg-white hover:border-warm-brown/40 hover:bg-warm-brown/5;
+    @apply border-line bg-white hover:border-navy hover:bg-sage/15;
   }
 
   .option-green {

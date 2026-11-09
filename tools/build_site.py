@@ -32,9 +32,7 @@ def ic(name):
 
 
 # Logo: a simple keyhole inside a blueprint style square frame
-LOGO = ('<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" fill="#1C2B4A"/>'
-        '<rect x="4.5" y="4.5" width="23" height="23" fill="none" stroke="#9DBFB9" stroke-width=".8"/>'
-        '<circle cx="16" cy="13.5" r="3.3" fill="#9DBFB9"/><path d="M14.4 16h3.2l1 7h-5.2z" fill="#9DBFB9"/></svg>')
+LOGO = '<img src="/assets/logo.svg" alt="" width="34" height="34">'
 
 NAV = [("Services", "/services/"), ("About", "/about/"), ("Resources", "/resources/"), ("FAQs", "/faqs/")]
 
@@ -148,7 +146,7 @@ def page_hero(label, title, lede, buttons=""):
 
 
 def contact_block(title="Let's <em>talk</em>",
-                  text="Book a free, no obligation 20-minute call. We'll talk through your business, the data you handle and the most sensible next step. In plain English, with no sales pitch."):
+                  text="Book a free, no obligation 20-minute call. We'll talk through your business, the data you handle and the most sensible next step. No obligation and no sales pitch."):
     return f'''
     <section class="contact">
       <div class="bg-sage">
@@ -210,7 +208,7 @@ DELIVERABLES = [
     ("Breach response plan", "Exactly what to do in the first 72 hours."),
     ("Retention schedule", "How long to keep each type of data, and when to delete it."),
     ("Supplier agreements", "Data processing agreements in place with your tools and partners."),
-    ("Prioritised action plan", "What to fix, in what order, in plain English."),
+    ("Prioritised action plan", "What to fix first, what can wait, and who owns each step."),
 ]
 
 
@@ -252,7 +250,7 @@ def tiles():
       <div class="tiles">
         <div class="tile"><p class="kick">Free tool</p><h3>Privacy Health Check</h3><p>Ten questions, an instant Red, Amber or Green rating and your top priorities. No sign up.</p><a href="{QUIZ}" {EXT} class="btn">Take the check</a></div>
         <div class="tile"><p class="kick">Next step</p><h3>Privacy Action Plan</h3><p>Turn your results into a personal 30/60/90 day plan, with a 15 minute follow up call. £75.</p><a href="{ACTION}" {EXT} class="btn">Get your plan</a></div>
-        <div class="tile"><p class="kick">Common questions</p><h3>FAQs</h3><p>Plain English answers on ICO registration, cookies, fines, pricing and working together.</p><a href="/faqs/" class="btn">Read the FAQs</a></div>
+        <div class="tile"><p class="kick">Common questions</p><h3>FAQs</h3><p>Answers on ICO registration, cookies, fines, pricing and working together.</p><a href="/faqs/" class="btn">Read the FAQs</a></div>
       </div>
     </div></section>
 '''
@@ -270,7 +268,7 @@ def home():
       <div class="hero-text bg-navy blueprint">
         <p class="label">Independent privacy consultancy</p>
         <h1>UK GDPR made <em>practical</em> for growing businesses</h1>
-        <p class="lede">Gap assessments, DPIAs and ongoing privacy support for founders, SMEs, agencies and charities. From a practitioner with ten years of in-house experience, not a legal textbook.</p>
+        <p class="lede">Gap assessments, DPIAs and ongoing privacy support for founders, SMEs, agencies and charities. Led by a practitioner with ten years of in-house privacy experience.</p>
         <div class="btn-row">
           <a href="{QUIZ}" {EXT} class="btn btn-sage">Free Health Check</a>
           <a href="{BOOK}" {EXT} class="btn btn-light">Book a free call</a>
@@ -278,7 +276,7 @@ def home():
       </div>
       <div class="hero-photo">
         <img src="/assets/img/office-plants.webp" alt="Bright, plant filled office" width="1400" height="1050" fetchpriority="high">
-        <p class="note">Practical. Documented. No jargon.<span>The Privacy Blueprint</span></p>
+        <p class="note">Practical. Documented. Proportionate.<span>The Privacy Blueprint</span></p>
       </div>
     </section>
 
@@ -327,7 +325,7 @@ def home():
       <div>
         <span class="tag">About us</span>
         <h2>Grounded in <em>operational</em> experience</h2>
-        <p>The Privacy Blueprint is run by an in-house privacy practitioner with ten years of experience at a major UK charity: building an organisation-wide DPIA process, managing subject access requests at volume, and reporting privacy metrics directly to the C-suite.</p>
+        <p>The Privacy Blueprint is run by an in-house privacy practitioner with ten years of experience leading privacy inside a large UK organisation: building an organisation-wide DPIA process, managing subject access requests at volume, and reporting privacy metrics directly to the C-suite.</p>
         <p>That experience is built into a proprietary gap assessment covering 16 compliance areas, updated for the Data (Use and Access) Act 2025.</p>
         <a href="/about/" class="btn" style="margin-top:12px">More about our approach</a>
       </div>
@@ -338,14 +336,14 @@ def home():
     {contact_block()}
 '''
     return page("/", "The Privacy Blueprint | Practical UK GDPR Consultancy",
-                "Practical, jargon free UK GDPR support for founders, SMEs, agencies and charities. Free Privacy Health Check, gap assessments, DPIAs and fractional privacy support.",
+                "Practical UK GDPR support for founders, SMEs, agencies and charities. Free Privacy Health Check, gap assessments, DPIAs and fractional privacy support.",
                 body)
 
 
 # ---------- ABOUT ----------
 def about():
     facts = [
-        ("10 years", "running a privacy function inside a major UK charity"),
+        ("10 years", "leading the privacy function inside a large UK organisation"),
         ("Organisation wide", "DPIA process built and run from the ground up"),
         ("High volume", "subject access requests managed end to end"),
         ("Board level", "privacy metrics reported directly to the C-suite"),
@@ -355,7 +353,7 @@ def about():
     fl = "".join(f'<li><span class="num">{n:02d}</span><div><b>{t}</b><span>{d}</span></div></li>' for n, (t, d) in enumerate(facts, 1))
     promises = [("Practical", "Advice that fits how your business actually runs, not a theoretical framework."),
                 ("Documented", "Everything written down, so you can show compliance as well as achieve it."),
-                ("No jargon", "Plain English throughout. You'll always know what to do, and why.")]
+                ("Proportionate", "Advice scaled to your size and risk. No gold plating and no paperwork for its own sake.")]
     pr = "".join(f'<div class="tile"><p class="kick">Promise {n:02d}</p><h3>{t}</h3><p>{d}</p></div>' for n, (t, d) in enumerate(promises, 1))
     body = f'''
     {page_hero("About", "A consultancy built on <em>operational</em> experience", "Not advisory distance. Ten years of running privacy inside a real organisation, now applied to yours.")}
@@ -365,7 +363,7 @@ def about():
       <div>
         <span class="tag">Our approach</span>
         <h2>Most privacy consultants come from legal or advisory backgrounds. <em>This is different.</em></h2>
-        <p>The Privacy Blueprint is built on ten years of in-house experience running a privacy function inside a major UK charity, solving real compliance problems at real operational scale.</p>
+        <p>The Privacy Blueprint is built on ten years of in-house experience running the privacy function inside a large UK organisation, solving real compliance problems at real operational scale.</p>
         <p>That means the work is grounded in what actually happens inside an organisation: the DPIA request that arrives at the wrong time, the subject access request that lands on a Friday afternoon, the supplier with no data processing agreement, the reporting line that needs educating rather than just a policy document.</p>
       </div>
     </div></section>
@@ -406,7 +404,7 @@ def about():
     {contact_block()}
 '''
     return page("/about/", "About | The Privacy Blueprint",
-                "Ten years of in-house data protection experience at a major UK charity. A practitioner's approach to GDPR compliance for founders, SMEs and agencies.", body)
+                "Ten years of in-house data protection experience. A practitioner's approach to GDPR compliance for founders, SMEs and agencies.", body)
 
 
 # ---------- SERVICES ----------
@@ -493,7 +491,7 @@ def services():
     {contact_block("Not sure which is <em>right for you?</em>", "Every engagement starts with a free 20-minute call. We'll talk through your business, your current setup and the best path forward. No pressure, no sales pitch.")}
 '''
     return page("/services/", "Services | The Privacy Blueprint",
-                "GDPR gap assessment, DPIA, AI governance and fractional privacy support for growing businesses. Fixed fees, practical outputs, plain English.", body)
+                "GDPR gap assessment, DPIA, AI governance and fractional privacy support for growing businesses. Fixed fees and practical outputs.", body)
 
 
 # ---------- RESOURCES ----------
@@ -520,7 +518,7 @@ def resources():
     {contact_block()}
 '''
     return page("/resources/", "Resources | The Privacy Blueprint",
-                "Free GDPR Privacy Health Check, practical next steps and plain English data protection resources from The Privacy Blueprint.", body)
+                "Free GDPR Privacy Health Check, practical next steps and data protection resources from The Privacy Blueprint.", body)
 
 
 FAQS = [
@@ -540,7 +538,7 @@ FAQS = [
         ("Which service is right for me?",
          "If you're not sure where you stand, start with the <a href=\"" + QUIZ + "\" target=\"_blank\" rel=\"noopener noreferrer\">free Health Check</a>. If you want a personal plan you can work through yourself, choose the £75 Action Plan. For a full professional audit, choose the Gap Assessment. If you're launching something new or using AI, a DPIA. If you want ongoing support, the Fractional retainer. Or <a href=\"" + BOOK + "\" target=\"_blank\" rel=\"noopener noreferrer\">book a free call</a> and we'll recommend one."),
         ("Who will I be working with?",
-         "An experienced privacy practitioner with ten years of in-house experience at a major UK charity. The same person works on your engagement from start to finish."),
+         "An experienced privacy practitioner with ten years of in-house experience. The same person works on your engagement from start to finish."),
         ("Is this legal advice?",
          "No. The Privacy Blueprint provides practical privacy consultancy from an operational practitioner, not legal advice from a solicitor. If something needs formal legal advice, we'll tell you."),
         ("What happens on the free 20-minute call?",
@@ -582,7 +580,7 @@ def faqs():
     lede = ("Everything you might want to know about GDPR, working together and pricing. Can't find your answer? "
             f'<a href="mailto:{EMAIL}" style="color:var(--sage)">Email us</a>.')
     body = f'''
-    {page_hero("FAQs", "Questions, answered in <em>plain English</em>", lede)}
+    {page_hero("FAQs", "Your questions, <em>answered</em>", lede)}
 
     <section class="section"><div class="wrap narrow">{groups}</div></section>
 
@@ -590,7 +588,7 @@ def faqs():
 '''
     head = f'  <script type="application/ld+json">{schema}</script>\n'
     return page("/faqs/", "FAQs | The Privacy Blueprint",
-                "Plain English answers on UK GDPR, ICO registration, cookies, fines, pricing and working with The Privacy Blueprint.", body, head)
+                "Answers on UK GDPR, ICO registration, cookies, fines, pricing and working with The Privacy Blueprint.", body, head)
 
 
 def cookies():

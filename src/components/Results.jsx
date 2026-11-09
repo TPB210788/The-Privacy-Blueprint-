@@ -114,7 +114,7 @@ function EmailCapture({ answers }) {
             Formspree Gold (or higher) and configure an autoresponse template in the Formspree
             dashboard at formspree.io.
           */}
-          <p className="font-inter text-sm text-charcoal/80 leading-relaxed">
+          <p className="font-raleway text-sm text-ink/80 leading-relaxed">
             Thank you. I'll personally email your GDPR Fix-It Checklist within 1 working day, so keep an eye on your inbox (and your spam folder, just in case). If you'd like a plan built around your actual setup, the £75 Privacy Action Plan below is the quickest next step.
           </p>
         </div>
@@ -124,13 +124,13 @@ function EmailCapture({ answers }) {
 
   return (
     <div className="card no-print">
-      <h3 className="font-playfair text-xl text-charcoal mb-1">Save your results</h3>
-      <p className="font-inter text-sm text-charcoal/55 mb-5 leading-relaxed">
+      <h3 className="font-playfair text-xl text-ink mb-1">Save your results</h3>
+      <p className="font-raleway text-sm text-ink/55 mb-5 leading-relaxed">
         Enter your email and we'll send you a copy of your report.
       </p>
       <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3">
         <div>
-          <label htmlFor="save-email" className="font-inter text-xs font-medium text-charcoal/60 uppercase tracking-wide block mb-1.5">
+          <label htmlFor="save-email" className="font-raleway text-xs font-medium text-ink/60 uppercase tracking-wide block mb-1.5">
             Email address
           </label>
           <input
@@ -140,7 +140,7 @@ function EmailCapture({ answers }) {
             onChange={e => { setEmail(e.target.value); setError('') }}
             placeholder="jane@yourbusiness.com"
             autoComplete="email"
-            className="w-full px-4 py-3 rounded-xl border border-black/15 bg-cream font-inter text-sm text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:ring-2 focus:ring-warm-brown focus:border-transparent transition-all"
+            className="w-full px-4 py-3 rounded-none border border-black/15 bg-sand font-raleway text-sm text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-navy focus:border-transparent transition-all"
           />
         </div>
 
@@ -149,17 +149,17 @@ function EmailCapture({ answers }) {
             type="checkbox"
             checked={consent}
             onChange={e => { setConsent(e.target.checked); setError('') }}
-            className="mt-0.5 flex-shrink-0 w-4 h-4 rounded border-black/20 accent-warm-brown cursor-pointer"
+            className="mt-0.5 flex-shrink-0 w-4 h-4 rounded border-black/20 accent-navy cursor-pointer"
           />
-          <span className="font-inter text-xs text-charcoal/60 leading-relaxed">
+          <span className="font-raleway text-xs text-ink/60 leading-relaxed">
             I agree to receive my results report by email. See our{' '}
-            <Link to="/privacy-policy" className="underline hover:text-charcoal/80 transition-colors">
+            <Link to="/privacy-policy" className="underline hover:text-ink/80 transition-colors">
               privacy policy
             </Link>.
           </span>
         </label>
 
-        {error && <p className="font-inter text-xs text-rag-red" role="alert">{error}</p>}
+        {error && <p className="font-raleway text-xs text-rag-red" role="alert">{error}</p>}
         <button type="submit" disabled={loading} className="btn-primary mt-1">
           {loading ? 'Sending…' : 'Send My Report →'}
         </button>
@@ -192,10 +192,10 @@ const ctaCopy = {
 function BookCTA({ rating }) {
   const copy = ctaCopy[rating] || ctaCopy.amber
   return (
-    <div className="bg-cream rounded-xl p-5 border border-warm-brown/20">
-      <p className="font-inter text-sm font-semibold text-warm-brown mb-1">{copy.eyebrow}</p>
-      <p className="font-inter text-sm text-charcoal/70 mb-3 leading-relaxed">{copy.body}</p>
-      <p className="font-inter text-xs font-semibold uppercase tracking-wide text-charcoal/40 mb-2">Privacy Action Plan</p>
+    <div className="bg-sand rounded-none p-5 border border-navy/20">
+      <p className="font-raleway text-sm font-semibold text-sage-deep mb-1">{copy.eyebrow}</p>
+      <p className="font-raleway text-sm text-ink/70 mb-3 leading-relaxed">{copy.body}</p>
+      <p className="font-raleway text-xs font-semibold uppercase tracking-wide text-ink/40 mb-2">Privacy Action Plan</p>
       <ul className="flex flex-col gap-1 mb-4">
         {[
           'Manual review of your actual setup',
@@ -203,7 +203,7 @@ function BookCTA({ rating }) {
           '15-min follow-up call included',
           'Credited in full against a Gap Assessment within 30 days',
         ].map(item => (
-          <li key={item} className="flex items-center gap-2 font-inter text-xs text-charcoal/70">
+          <li key={item} className="flex items-center gap-2 font-raleway text-xs text-ink/70">
             <svg className="w-3.5 h-3.5 text-rag-green flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
@@ -211,14 +211,14 @@ function BookCTA({ rating }) {
           </li>
         ))}
       </ul>
-      <p className="font-inter text-xs text-charcoal/50 mb-4">Delivered within 5 working days.</p>
-      <p className="font-playfair text-3xl font-700 text-charcoal mb-4">£75</p>
+      <p className="font-raleway text-xs text-ink/50 mb-4">Delivered within 5 working days.</p>
+      <p className="font-playfair text-3xl font-700 text-ink mb-4">£75</p>
       <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
         <a href={ACTION_PLAN_URL} target="_blank" rel="noopener noreferrer" className="btn-primary inline-block text-sm text-center">
           Get Your Action Plan for £75 →
         </a>
         {copy.showCall && (
-          <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="font-inter text-sm text-warm-brown underline text-center">
+          <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="font-raleway text-sm text-sage-deep underline text-center">
             Or book a free 20-minute call
           </a>
         )}
@@ -237,53 +237,53 @@ export default function Results({ answers }) {
 
   return (
     <>
-    <div className="min-h-screen flex flex-col items-center px-4 py-12 bg-cream">
+    <div className="min-h-screen flex flex-col items-center px-4 py-12 bg-sand">
       <div className="w-full max-w-xl">
 
         {/* Print header — only visible when printing */}
         <div className="hidden print-show mb-8 pb-6 border-b border-black/10">
-          <p className="font-inter text-xs uppercase tracking-widest text-warm-brown mb-1">The Privacy Blueprint</p>
-          <h1 className="font-playfair text-2xl text-charcoal">Privacy Health Check Report</h1>
-          <p className="font-inter text-xs text-charcoal/40 mt-1">{reportDate}</p>
+          <p className="font-raleway text-xs uppercase tracking-widest text-sage-deep mb-1">The Privacy Blueprint</p>
+          <h1 className="font-playfair text-2xl text-ink">Privacy Health Check Report</h1>
+          <p className="font-raleway text-xs text-ink/40 mt-1">{reportDate}</p>
         </div>
 
         {/* Screen header */}
-        <p className="font-inter text-sm font-medium tracking-widest uppercase text-warm-brown mb-4 text-center no-print">
+        <p className="font-raleway text-sm font-medium tracking-widest uppercase text-sage-deep mb-4 text-center no-print">
           The Privacy Blueprint
         </p>
-        <h2 className="font-playfair text-3xl sm:text-4xl text-charcoal text-center mb-8 no-print">
+        <h2 className="font-playfair text-3xl sm:text-4xl text-ink text-center mb-8 no-print">
           Your Privacy Health Check
         </h2>
 
         {/* ── Section 1: Score summary ── */}
         <div className="card mb-5 text-center">
-          <p className="font-inter text-xs font-medium uppercase tracking-widest text-charcoal/40 mb-3">Overall Score</p>
-          <p className="font-playfair text-7xl font-700 text-charcoal leading-none mb-1">
-            {total}<span className="text-3xl text-charcoal/25 font-400">/{maxScore}</span>
+          <p className="font-raleway text-xs font-medium uppercase tracking-widest text-ink/40 mb-3">Overall Score</p>
+          <p className="font-playfair text-7xl font-700 text-ink leading-none mb-1">
+            {total}<span className="text-3xl text-ink/25 font-400">/{maxScore}</span>
           </p>
-          <div className={`inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full border font-inter text-sm font-semibold ${styles.badge}`}>
+          <div className={`inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full border font-raleway text-sm font-semibold ${styles.badge}`}>
             <span className={`w-2.5 h-2.5 rounded-full ${styles.dot}`} />
             {rag.label} Rating
           </div>
-          <p className="font-inter text-sm sm:text-base text-charcoal/65 leading-relaxed mt-4">{rag.message}</p>
+          <p className="font-raleway text-sm sm:text-base text-ink/65 leading-relaxed mt-4">{rag.message}</p>
         </div>
 
         {/* ── Section 2: Full breakdown ── */}
         <div className="card mb-5">
-          <h3 className="font-playfair text-xl text-charcoal mb-4">Results Breakdown</h3>
+          <h3 className="font-playfair text-xl text-ink mb-4">Results Breakdown</h3>
           <div className="flex flex-col gap-2">
             {questions.map((q, i) => {
               const score = answers[i]
               const color = scoreToRag(score)
               const s = ragStyles[color]
               return (
-                <div key={q.id} className={`flex items-center gap-3 px-4 py-3 rounded-xl ${s.row}`}>
+                <div key={q.id} className={`flex items-center gap-3 px-4 py-3 rounded-none ${s.row}`}>
                   <span className={`flex-shrink-0 w-2.5 h-2.5 rounded-full ${s.dot}`} />
-                  <span className="font-inter text-sm text-charcoal flex-1 leading-snug">{q.topic}</span>
-                  <span className={`font-inter text-xs font-semibold flex-shrink-0 ${s.label}`}>
+                  <span className="font-raleway text-sm text-ink flex-1 leading-snug">{q.topic}</span>
+                  <span className={`font-raleway text-xs font-semibold flex-shrink-0 ${s.label}`}>
                     {scoreToLabel(score)}
                   </span>
-                  <span className="font-inter text-xs text-charcoal/40 flex-shrink-0 w-8 text-right">
+                  <span className="font-raleway text-xs text-ink/40 flex-shrink-0 w-8 text-right">
                     {score}/2
                   </span>
                 </div>
@@ -295,17 +295,17 @@ export default function Results({ answers }) {
         {/* ── Section 3: Full action plan ── */}
         {allFixes.length > 0 ? (
           <div className="card mb-5">
-            <h3 className="font-playfair text-xl text-charcoal mb-1">Your Action Plan</h3>
-            <p className="font-inter text-xs text-charcoal/45 mb-4">
+            <h3 className="font-playfair text-xl text-ink mb-1">Your Action Plan</h3>
+            <p className="font-raleway text-xs text-ink/45 mb-4">
               {allFixes.length} area{allFixes.length !== 1 ? 's' : ''} to address. Red items are highest priority.
             </p>
             <div className="flex flex-col gap-3">
               {allFixes.map((fix, i) => (
-                <div key={i} className={`flex gap-3 p-4 rounded-xl border ${ragStyles[fix.color].border} bg-white`}>
+                <div key={i} className={`flex gap-3 p-4 rounded-none border ${ragStyles[fix.color].border} bg-white`}>
                   <span className={`flex-shrink-0 mt-1.5 w-2 h-2 rounded-full ${ragStyles[fix.color].dot}`} />
                   <div>
-                    <p className="font-inter text-xs font-semibold uppercase tracking-wide text-charcoal/40 mb-1">{fix.topic}</p>
-                    <p className="font-inter text-sm text-charcoal leading-relaxed">{fix.fix}</p>
+                    <p className="font-raleway text-xs font-semibold uppercase tracking-wide text-ink/40 mb-1">{fix.topic}</p>
+                    <p className="font-raleway text-sm text-ink leading-relaxed">{fix.fix}</p>
                   </div>
                 </div>
               ))}
@@ -318,8 +318,8 @@ export default function Results({ answers }) {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="font-playfair text-xl text-charcoal mb-2">Excellent. No critical gaps found.</h3>
-            <p className="font-inter text-sm text-charcoal/60 leading-relaxed">
+            <h3 className="font-playfair text-xl text-ink mb-2">Excellent. No critical gaps found.</h3>
+            <p className="font-raleway text-sm text-ink/60 leading-relaxed">
               You've scored full marks across all areas. Keep reviewing your policies annually to stay compliant.
             </p>
           </div>
@@ -331,9 +331,9 @@ export default function Results({ answers }) {
         </div>
 
         {/* Print CTA */}
-        <div className="hidden print-show mb-5 p-5 border border-warm-brown/20 rounded-xl">
-          <p className="font-inter text-sm font-semibold text-warm-brown mb-1">Not sure what actually needs fixing?</p>
-          <p className="font-inter text-sm text-charcoal/70 leading-relaxed">
+        <div className="hidden print-show mb-5 p-5 border border-navy/20 rounded-none">
+          <p className="font-raleway text-sm font-semibold text-sage-deep mb-1">Not sure what actually needs fixing?</p>
+          <p className="font-raleway text-sm text-ink/70 leading-relaxed">
             Get a personalised Action Plan: manual review, 30/60/90-day priorities, 15-min call included. £75 at shop.beacons.ai/theprivacyblueprint
           </p>
         </div>
@@ -342,7 +342,7 @@ export default function Results({ answers }) {
         <div className="flex justify-center mb-5 no-print">
           <button
             onClick={() => window.print()}
-            className="inline-flex items-center gap-2 font-inter text-sm font-medium text-warm-brown border border-warm-brown/30 px-6 py-3 rounded-xl hover:bg-warm-brown/5 transition-all"
+            className="inline-flex items-center gap-2 font-raleway text-sm font-medium text-sage-deep border border-navy/30 px-6 py-3 rounded-none hover:bg-sage/15 transition-all"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12v9m0-9l-3 3m3-3l3 3M12 3v9" />

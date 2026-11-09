@@ -4,8 +4,8 @@ import Footer from './Footer.jsx'
 function Section({ title, children }) {
   return (
     <section className="mb-8">
-      <div className="bg-warm-brown/8 rounded-xl px-5 py-3 mb-4">
-        <h2 className="font-playfair text-xl text-warm-brown-dark">{title}</h2>
+      <div className="bg-sage/25 rounded-none px-5 py-3 mb-4">
+        <h2 className="font-playfair text-xl text-navy-deep">{title}</h2>
       </div>
       <div className="space-y-3 px-1">{children}</div>
     </section>
@@ -13,14 +13,14 @@ function Section({ title, children }) {
 }
 
 function P({ children }) {
-  return <p className="font-inter text-sm text-charcoal/75 leading-relaxed">{children}</p>
+  return <p className="font-raleway text-sm text-ink/75 leading-relaxed">{children}</p>
 }
 
 function Ul({ items }) {
   return (
     <ul className="space-y-1.5 pl-4">
       {items.map((item, i) => (
-        <li key={i} className="font-inter text-sm text-charcoal/75 leading-relaxed list-disc">{item}</li>
+        <li key={i} className="font-raleway text-sm text-ink/75 leading-relaxed list-disc">{item}</li>
       ))}
     </ul>
   )
@@ -28,8 +28,8 @@ function Ul({ items }) {
 
 function Bold({ label, children }) {
   return (
-    <p className="font-inter text-sm text-charcoal/75 leading-relaxed">
-      <span className="font-semibold text-charcoal">{label}:</span> {children}
+    <p className="font-raleway text-sm text-ink/75 leading-relaxed">
+      <span className="font-semibold text-ink">{label}:</span> {children}
     </p>
   )
 }
@@ -40,7 +40,7 @@ function ExtLink({ href, children }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-warm-brown underline hover:text-warm-brown-dark transition-colors"
+      className="text-sage-deep underline hover:text-navy-deep transition-colors"
     >
       {children}
     </a>
@@ -49,12 +49,12 @@ function ExtLink({ href, children }) {
 
 function Processor({ name, description, location, policyUrl }) {
   return (
-    <div className="border border-black/8 rounded-xl p-4 bg-white space-y-1">
-      <p className="font-inter text-sm font-semibold text-charcoal">{name}</p>
-      <p className="font-inter text-sm text-charcoal/70 leading-relaxed">{description}</p>
-      <p className="font-inter text-xs text-charcoal/50">Based in {location}.</p>
-      <p className="font-inter text-xs">
-        <span className="text-charcoal/50">Privacy policy: </span>
+    <div className="border border-black/8 rounded-none p-4 bg-white space-y-1">
+      <p className="font-raleway text-sm font-semibold text-ink">{name}</p>
+      <p className="font-raleway text-sm text-ink/70 leading-relaxed">{description}</p>
+      <p className="font-raleway text-xs text-ink/50">Based in {location}.</p>
+      <p className="font-raleway text-xs">
+        <span className="text-ink/50">Privacy policy: </span>
         <ExtLink href={policyUrl}>{policyUrl}</ExtLink>
       </p>
     </div>
@@ -63,14 +63,14 @@ function Processor({ name, description, location, policyUrl }) {
 
 export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen flex flex-col bg-cream">
+    <div className="min-h-screen flex flex-col bg-sand">
       <div className="flex-1 px-4 py-12">
         <div className="max-w-2xl mx-auto">
 
           {/* Back link */}
           <Link
             to="/"
-            className="inline-flex items-center gap-1.5 font-inter text-xs text-warm-brown hover:text-warm-brown-dark transition-colors mb-8"
+            className="inline-flex items-center gap-1.5 font-raleway text-xs text-sage-deep hover:text-navy-deep transition-colors mb-8"
           >
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -80,9 +80,9 @@ export default function PrivacyPolicy() {
 
           {/* Header */}
           <div className="card mb-8 text-center">
-            <p className="font-inter text-xs uppercase tracking-widest text-warm-brown mb-3">The Privacy Blueprint</p>
-            <h1 className="font-playfair text-3xl sm:text-4xl text-charcoal mb-3">Privacy Policy</h1>
-            <p className="font-inter text-xs text-charcoal/40">Effectivity date: 19 April 2026</p>
+            <p className="font-raleway text-xs uppercase tracking-widest text-sage-deep mb-3">The Privacy Blueprint</p>
+            <h1 className="font-playfair text-3xl sm:text-4xl text-ink mb-3">Privacy Policy</h1>
+            <p className="font-raleway text-xs text-ink/40">Effectivity date: 19 April 2026</p>
           </div>
 
           {/* 1 ── Introduction */}
@@ -196,7 +196,7 @@ export default function PrivacyPolicy() {
             <P>We may share your data in the following situations:</P>
 
             <div className="space-y-2">
-              <p className="font-inter text-sm font-semibold text-charcoal">With Third-Party Service Providers</p>
+              <p className="font-raleway text-sm font-semibold text-ink">With Third-Party Service Providers</p>
               <P>
                 We use a small number of tools to operate our business. Where these tools process personal data on our behalf, they act as our data processors and are bound by contractual obligations to protect your data. The tools we currently use are:
               </P>
@@ -290,7 +290,7 @@ export default function PrivacyPolicy() {
             <P>You can control and manage cookies at any time through your browser settings. Please note that disabling certain cookies may affect the functionality of our website.</P>
             <P>
               For full details of the specific cookies we use, please refer to our{' '}
-              <Link to="/cookie-policy" className="text-warm-brown underline hover:text-warm-brown-dark transition-colors">Cookie Policy</Link>.
+              <Link to="/cookie-policy" className="text-sage-deep underline hover:text-navy-deep transition-colors">Cookie Policy</Link>.
             </P>
           </Section>
 
@@ -337,11 +337,11 @@ export default function PrivacyPolicy() {
             <P>If you are based in the United Kingdom and are unhappy with how we have handled your personal data, you have the right to lodge a complaint with the Information Commissioner's Office (ICO), the UK's supervisory authority for data protection.</P>
             <P>ICO contact details:</P>
             <ul className="space-y-1.5 pl-4">
-              <li className="font-inter text-sm text-charcoal/75 leading-relaxed list-disc">
+              <li className="font-raleway text-sm text-ink/75 leading-relaxed list-disc">
                 Website: <ExtLink href="https://ico.org.uk">www.ico.org.uk</ExtLink>
               </li>
-              <li className="font-inter text-sm text-charcoal/75 leading-relaxed list-disc">Helpline: 0303 123 1113</li>
-              <li className="font-inter text-sm text-charcoal/75 leading-relaxed list-disc">Address: Information Commissioner's Office, Wycliffe House, Water Lane, Wilmslow, Cheshire, SK9 5AF</li>
+              <li className="font-raleway text-sm text-ink/75 leading-relaxed list-disc">Helpline: 0303 123 1113</li>
+              <li className="font-raleway text-sm text-ink/75 leading-relaxed list-disc">Address: Information Commissioner's Office, Wycliffe House, Water Lane, Wilmslow, Cheshire, SK9 5AF</li>
             </ul>
             <P>
               If you are based in the European Economic Area (EEA), you have the right to lodge a complaint with your local data protection supervisory authority. A full list of EEA supervisory authorities can be found at{' '}
@@ -382,10 +382,10 @@ export default function PrivacyPolicy() {
           <Section title="Contact Us">
             <P>If you have any questions about this Privacy Policy, please contact us:</P>
             <ul className="space-y-1.5 pl-4">
-              <li className="font-inter text-sm text-charcoal/75 leading-relaxed list-disc">
+              <li className="font-raleway text-sm text-ink/75 leading-relaxed list-disc">
                 By email: <ExtLink href="mailto:hello@theprivacyblueprint.co.uk">hello@theprivacyblueprint.co.uk</ExtLink>
               </li>
-              <li className="font-inter text-sm text-charcoal/75 leading-relaxed list-disc">
+              <li className="font-raleway text-sm text-ink/75 leading-relaxed list-disc">
                 Platform: <ExtLink href="https://www.beacons.ai/theprivacyblueprint">www.beacons.ai/theprivacyblueprint</ExtLink>
               </li>
             </ul>
