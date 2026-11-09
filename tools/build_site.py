@@ -623,7 +623,7 @@ if __name__ == "__main__":
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(html, encoding="utf-8")
         print("wrote", p.relative_to(OUT.parent))
-    (OUT / "assets" / "favicon.svg").write_text(FAVICON, encoding="utf-8")
+    # favicon.svg and logo files are made by tools/make_logo.py
     urls = ["/", "/services/", "/about/", "/resources/", "/faqs/", "/cookie-policy/"]
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
