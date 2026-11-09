@@ -32,7 +32,7 @@ def ic(name):
 
 
 # Logo: a simple keyhole inside a blueprint style square frame
-LOGO = '<img src="/assets/logo.svg" alt="" width="34" height="34">'
+LOGO = '<img src="/assets/logo.svg" alt="" width="46" height="46">'
 
 NAV = [("Services", "/services/"), ("About", "/about/"), ("Resources", "/resources/"), ("FAQs", "/faqs/")]
 
@@ -80,7 +80,7 @@ def page(slug, title, desc, body, extra_head=""):
     <div class="wrap">
       <div class="footer-inner">
         <div>
-          <a href="/" class="brand" style="margin-bottom:14px">{LOGO}The Privacy Blueprint</a>
+          <a href="/" class="footer-logo"><img src="/assets/logo-full.svg" alt="The Privacy Blueprint" width="260" height="104"></a>
           <p>Independent privacy and UK GDPR consultancy for founders, SMEs, agencies and charities.</p>
           <p style="margin-top:8px">ICO registration C1883894</p>
         </div>

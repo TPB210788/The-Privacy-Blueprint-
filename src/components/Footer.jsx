@@ -13,9 +13,8 @@ export default function Footer() {
       <div className="max-w-[1160px] mx-auto px-5 sm:px-8">
         <div className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr_1fr] gap-8 md:gap-12 py-14">
           <div>
-            <a href={`${SITE}/`} className="flex items-center gap-3 font-playfair font-semibold text-[19px] text-navy mb-3">
-              <img src="/logo.svg" alt="" width="34" height="34" className="w-[34px] h-[34px] object-contain" />
-              The Privacy Blueprint
+            <a href={`${SITE}/`} className="inline-block mb-4">
+              <img src="/logo-full.svg" alt="The Privacy Blueprint" width="240" height="96" className="w-[240px] h-auto" />
             </a>
             <p className="font-raleway text-sm text-ink/75 leading-relaxed">
               Independent privacy and UK GDPR consultancy for founders, SMEs, agencies and charities.
