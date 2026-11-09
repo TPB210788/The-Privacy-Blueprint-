@@ -7,11 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        cream: '#F5F0EB',
-        charcoal: '#2C2C2C',
-        'warm-brown': '#8B7355',
-        'warm-brown-light': '#A0896A',
-        'warm-brown-dark': '#6B5840',
+        // Matches theprivacyblueprint.co.uk
+        sand: '#F6F2EB',
+        'sand-2': '#EDE6DA',
+        ink: '#1C2B4A',
+        navy: '#1C2B4A',
+        'navy-deep': '#121D33',
+        sage: '#9DBFB9',
+        'sage-light': '#C5DAD5',
+        'sage-deep': '#4F8279',
+        brass: '#B68A4C',
+        line: '#D9D2C5',
         'rag-green': '#2D7A4F',
         'rag-green-bg': '#D6EFE1',
         'rag-amber': '#B45309',
@@ -21,7 +27,7 @@ export default {
       },
       fontFamily: {
         playfair: ['"Playfair Display"', 'Georgia', 'serif'],
-        inter: ['Inter', 'system-ui', 'sans-serif'],
+        raleway: ['Raleway', 'system-ui', 'sans-serif'],
       },
     },
   },

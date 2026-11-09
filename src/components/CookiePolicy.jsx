@@ -4,8 +4,8 @@ import Footer from './Footer.jsx'
 function Section({ title, children }) {
   return (
     <section className="mb-8">
-      <div className="bg-warm-brown/8 rounded-xl px-5 py-3 mb-4">
-        <h2 className="font-playfair text-xl text-warm-brown-dark">{title}</h2>
+      <div className="bg-sage/25 rounded-none px-5 py-3 mb-4">
+        <h2 className="font-playfair text-xl text-navy-deep">{title}</h2>
       </div>
       <div className="space-y-3 px-1">{children}</div>
     </section>
@@ -13,7 +13,7 @@ function Section({ title, children }) {
 }
 
 function P({ children }) {
-  return <p className="font-inter text-sm text-charcoal/75 leading-relaxed">{children}</p>
+  return <p className="font-raleway text-sm text-ink/75 leading-relaxed">{children}</p>
 }
 
 function CookieRow({ name, purpose, duration, type }) {
@@ -22,28 +22,28 @@ function CookieRow({ name, purpose, duration, type }) {
     : 'bg-rag-amber-bg text-rag-amber'
 
   return (
-    <div className="border border-black/8 rounded-xl p-4 bg-white space-y-2">
+    <div className="border border-black/8 rounded-none p-4 bg-white space-y-2">
       <div className="flex items-start justify-between gap-3">
-        <p className="font-inter text-sm font-semibold text-charcoal">{name}</p>
-        <span className={`flex-shrink-0 font-inter text-xs font-medium px-2.5 py-1 rounded-full ${typeColor}`}>
+        <p className="font-raleway text-sm font-semibold text-ink">{name}</p>
+        <span className={`flex-shrink-0 font-raleway text-xs font-medium px-2.5 py-1 rounded-full ${typeColor}`}>
           {type}
         </span>
       </div>
-      <p className="font-inter text-xs text-charcoal/65 leading-relaxed"><span className="font-medium">Purpose:</span> {purpose}</p>
-      <p className="font-inter text-xs text-charcoal/65"><span className="font-medium">Duration:</span> {duration}</p>
+      <p className="font-raleway text-xs text-ink/65 leading-relaxed"><span className="font-medium">Purpose:</span> {purpose}</p>
+      <p className="font-raleway text-xs text-ink/65"><span className="font-medium">Duration:</span> {duration}</p>
     </div>
   )
 }
 
 export default function CookiePolicy() {
   return (
-    <div className="min-h-screen flex flex-col bg-cream">
+    <div className="min-h-screen flex flex-col bg-sand">
       <div className="flex-1 px-4 py-12">
         <div className="max-w-2xl mx-auto">
 
           <Link
             to="/"
-            className="inline-flex items-center gap-1.5 font-inter text-xs text-warm-brown hover:text-warm-brown-dark transition-colors mb-8"
+            className="inline-flex items-center gap-1.5 font-raleway text-xs text-sage-deep hover:text-navy-deep transition-colors mb-8"
           >
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -52,9 +52,9 @@ export default function CookiePolicy() {
           </Link>
 
           <div className="card mb-8 text-center">
-            <p className="font-inter text-xs uppercase tracking-widest text-warm-brown mb-3">The Privacy Blueprint</p>
-            <h1 className="font-playfair text-3xl sm:text-4xl text-charcoal mb-3">Cookie Policy</h1>
-            <p className="font-inter text-xs text-charcoal/40">Last reviewed: April 2026</p>
+            <p className="font-raleway text-xs uppercase tracking-widest text-sage-deep mb-3">The Privacy Blueprint</p>
+            <h1 className="font-playfair text-3xl sm:text-4xl text-ink mb-3">Cookie Policy</h1>
+            <p className="font-raleway text-xs text-ink/40">Last reviewed: April 2026</p>
           </div>
 
           <Section title="What Are Cookies">
@@ -98,9 +98,9 @@ export default function CookiePolicy() {
               />
             </div>
 
-            <div className="bg-rag-green-bg border border-rag-green/20 rounded-xl p-4 mt-2">
-              <p className="font-inter text-sm font-semibold text-rag-green mb-1">Summary</p>
-              <p className="font-inter text-sm text-charcoal/70 leading-relaxed">
+            <div className="bg-rag-green-bg border border-rag-green/20 rounded-none p-4 mt-2">
+              <p className="font-raleway text-sm font-semibold text-rag-green mb-1">Summary</p>
+              <p className="font-raleway text-sm text-ink/70 leading-relaxed">
                 This app sets <strong>no first-party cookies</strong>. The only third-party data transfer is Google Fonts. If you wish to eliminate this entirely, fonts can be self-hosted. Contact us if you would like this change made.
               </p>
             </div>
@@ -117,7 +117,7 @@ export default function CookiePolicy() {
                 { name: 'Safari (iPhone/iPad)', url: 'support.apple.com/en-gb/guide/safari/sfri11471' },
                 { name: 'Firefox', url: 'support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer' },
               ].map(b => (
-                <li key={b.name} className="font-inter text-sm text-charcoal/75 leading-relaxed list-disc">
+                <li key={b.name} className="font-raleway text-sm text-ink/75 leading-relaxed list-disc">
                   {b.name}: {b.url}
                 </li>
               ))}
@@ -133,13 +133,13 @@ export default function CookiePolicy() {
           <Section title="Contact Us">
             <P>
               If you have any questions about how we use cookies, please contact us at{' '}
-              <a href="mailto:hello@theprivacyblueprint.co.uk" className="text-warm-brown underline">
+              <a href="mailto:hello@theprivacyblueprint.co.uk" className="text-sage-deep underline">
                 hello@theprivacyblueprint.co.uk
               </a>.
             </P>
             <P>
               You also have the right to complain to the ICO at{' '}
-              <a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer" className="text-warm-brown underline">
+              <a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer" className="text-sage-deep underline">
                 ico.org.uk
               </a>{' '}
               if you believe we have not handled your data correctly.

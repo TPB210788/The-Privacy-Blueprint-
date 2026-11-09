@@ -100,7 +100,7 @@ export const questions = [
   {
     id: 8,
     topic: "ICO Registration",
-    question: "Are you registered with the ICO and paying your annual data protection fee (£40–£60 for most small businesses)?",
+    question: "Are you registered with the ICO and paying your annual data protection fee (from £52 a year for most small businesses)?",
     options: [
       { text: "Yes", score: 2, color: "green" },
       { text: "I'm not sure if I need to", score: 1, color: "amber" },
