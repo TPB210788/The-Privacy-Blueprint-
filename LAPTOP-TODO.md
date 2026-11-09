@@ -8,11 +8,25 @@ Saved for when you're at your laptop. All changes are on the branch `ccr-6699872
 
 Tell Claude your answers and it will update the wording.
 
-## 2. Publish the main website (10 min)
+## 2. Publish the main website and move it to theprivacyblueprint.co.uk (15 min)
+First, check the screenshot `updated-homepage-preview.png` from the chat looks like glittering-cocada-3b4fc5.netlify.app (plum button, serif headline). If it does:
+
+**Upload the updates**
 - [ ] Download `theprivacyblueprint-site.zip` from the branch on GitHub
-- [ ] Netlify > your site > Deploys > drag and drop the zip
-- [ ] Check the live About page has no photo or name
-- [ ] Click the Privacy Policy and Cookie Policy footer links to check they open
+- [ ] Netlify > open the **glittering-cocada** site > Deploys > drag and drop the zip
+- [ ] Open glittering-cocada-3b4fc5.netlify.app and check it looks right
+
+**Move your domain to it**
+- [ ] In Netlify, open the **old** site that currently uses theprivacyblueprint.co.uk
+- [ ] Domain management > remove theprivacyblueprint.co.uk (and www) from it
+- [ ] Open the **glittering-cocada** site > Domain management > Add a domain > theprivacyblueprint.co.uk
+- [ ] If your DNS is managed by Netlify, that's it. If it's at your domain registrar (e.g. GoDaddy, 123 Reg), make sure the `www` record points to `glittering-cocada-3b4fc5.netlify.app` and not the old site's address
+- [ ] Wait up to an hour, then check https://theprivacyblueprint.co.uk shows the new design and the padlock (HTTPS)
+
+**Final checks**
+- [ ] Live About page has no photo or name
+- [ ] Privacy Policy and Cookie Policy footer links open
+- [ ] Optional: rename the site in Netlify (Site configuration > Change site name) to something like `theprivacyblueprint`
 
 ## 3. Publish the Health Check quiz (5 min)
 - [ ] Merge the branch into `main` on GitHub (or ask Claude to open the pull request)
