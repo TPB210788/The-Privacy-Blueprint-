@@ -280,12 +280,6 @@ def home():
       </div>
     </section>
 
-    <div class="strip"><ul>
-      <li><strong>10 years</strong>in-house experience</li>
-      <li><strong>16 areas</strong>risk-weighted assessment</li>
-      <li><strong>DUAA 2025</strong>ready and up to date</li>
-      <li><strong>C1883894</strong>ICO registered</li>
-    </ul></div>
 
     <section class="section"><div class="wrap">
       <div class="split split-top" style="margin-bottom:48px">
@@ -357,6 +351,13 @@ def about():
     pr = "".join(f'<div class="tile"><p class="kick">Promise {n:02d}</p><h3>{t}</h3><p>{d}</p></div>' for n, (t, d) in enumerate(promises, 1))
     body = f'''
     {page_hero("About", "A consultancy built on <em>operational</em> experience", "Not advisory distance. Ten years of running privacy inside a real organisation, now applied to yours.")}
+
+    <div class="strip"><ul>
+      <li><strong>10 years</strong>in-house experience</li>
+      <li><strong>16 areas</strong>risk-weighted assessment</li>
+      <li><strong>DUAA 2025</strong>ready and up to date</li>
+      <li><strong>C1883894</strong>ICO registered</li>
+    </ul></div>
 
     <section class="section"><div class="wrap split">
       {figure("desk-review", "Reviewing compliance documents at a desk", "Privacy compliance should be enabling, not obstructing.", "The Privacy Blueprint")}
