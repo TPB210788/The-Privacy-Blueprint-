@@ -4,7 +4,7 @@ Saved for when you're at your laptop. All changes are on the branch `ccr-6699872
 
 ## 1. Read and approve the new content (15 min)
 - [ ] Read the new FAQs page (`/faqs/`). Check every answer is true for your business, especially: "same person works on your engagement start to finish", "this is not legal advice", and the timelines
-- [ ] Check the new homepage headline: "GDPR compliance that's practical, documented and jargon free"
+- [ ] Check the new homepage headline: "UK GDPR made practical for growing businesses"
 - [ ] Check you're happy with the 7 stock photos (all faceless, free Unsplash licence, no credit needed)
 
 ## 1b. Decide two wording points (5 min)
@@ -14,7 +14,7 @@ Saved for when you're at your laptop. All changes are on the branch `ccr-6699872
 Tell Claude your answers and it will update the wording.
 
 ## 2. Publish the main website and move it to theprivacyblueprint.co.uk (15 min)
-The site has a new forest green and sand design, so it will look different from glittering-cocada. That's expected. Preview: `updated-homepage-preview.png`.
+The site has a new navy, sage and sand design (inspired by Clarionet, with its own blueprint grid detail), so it will look different from glittering-cocada. That's expected. Preview: `updated-homepage-preview.png`.
 
 **Upload the updates**
 - [ ] Download `theprivacyblueprint-site.zip` from the branch on GitHub
