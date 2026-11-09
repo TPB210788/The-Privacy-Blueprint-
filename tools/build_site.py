@@ -10,12 +10,12 @@ from pathlib import Path
 
 OUT = Path(__file__).resolve().parent.parent / "netlify-site"
 SITE = "https://theprivacyblueprint.co.uk"
-QUIZ = "https://the-privacy-blueprint.vercel.app/"
+QUIZ = "/health-check/"
 BOOK = "https://calendar.app.google/XFwWHg2UYvFwZjiEA"
 ACTION = "https://shop.beacons.ai/theprivacyblueprint/107a12ce-2d3d-4edd-ae25-ed67a79b2ab6"
 LINKEDIN = "https://linkedin.com/company/the-privacy-blueprint"
 EMAIL = "hello@theprivacyblueprint.co.uk"
-PRIVACY = "https://the-privacy-blueprint.vercel.app/privacy-policy"
+PRIVACY = "/privacy-policy/"
 EXT = 'target="_blank" rel="noopener noreferrer"'
 
 _P = {
@@ -65,7 +65,7 @@ def page(slug, title, desc, body, extra_head=""):
       <a href="/" class="brand">{LOGO}The Privacy Blueprint</a>
       <div class="nav-links" id="nav-links">
         {links}
-        <a href="{QUIZ}" {EXT} class="nav-link">Health Check</a>
+        <a href="{QUIZ}" class="nav-link">Health Check</a>
         <a href="{BOOK}" {EXT} class="btn btn-solid nav-cta">Book a call</a>
       </div>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">{ic("menu")}</button>
@@ -91,7 +91,7 @@ def page(slug, title, desc, body, extra_head=""):
             <li><a href="/about/">About</a></li>
             <li><a href="/resources/">Resources</a></li>
             <li><a href="/faqs/">FAQs</a></li>
-            <li><a href="{QUIZ}" {EXT}>Free Privacy Health Check</a></li>
+            <li><a href="{QUIZ}">Free Privacy Health Check</a></li>
           </ul>
         </div>
         <div>
@@ -105,7 +105,7 @@ def page(slug, title, desc, body, extra_head=""):
       </div>
       <div class="footer-legal">
         <span>© <span id="year">2026</span> The Privacy Blueprint</span>
-        <a href="{PRIVACY}" {EXT}>Privacy Policy</a>
+        <a href="{PRIVACY}">Privacy Policy</a>
         <a href="/cookie-policy/">Cookie Policy</a>
       </div>
     </div>
@@ -167,7 +167,7 @@ def contact_block(title="Let's <em>talk</em>",
         </ol>
         <div class="btn-row">
           <a href="{BOOK}" {EXT} class="btn btn-solid">Book your free call</a>
-          <a href="{QUIZ}" {EXT} class="btn">Take the Health Check first</a>
+          <a href="{QUIZ}" class="btn">Take the Health Check first</a>
         </div>
       </div>
     </section>
@@ -195,7 +195,7 @@ def path_section(bg="bg-white"):
         <p class="lede">Start free, see exactly where you stand, and only pay for what your business actually needs.</p>
       </div>
       <ol class="path">{steps}</ol>
-      <div class="center" style="margin-top:48px"><a href="{QUIZ}" {EXT} class="btn btn-solid">Start with the free Health Check</a></div>
+      <div class="center" style="margin-top:48px"><a href="{QUIZ}" class="btn btn-solid">Start with the free Health Check</a></div>
     </div></section>
 '''
 
@@ -248,7 +248,7 @@ def tiles():
     return f'''
     <section class="section bg-navy blueprint"><div class="wrap">
       <div class="tiles">
-        <div class="tile"><p class="kick">Free tool</p><h3>Privacy Health Check</h3><p>Ten questions, an instant Red, Amber or Green rating and your top priorities. No sign up.</p><a href="{QUIZ}" {EXT} class="btn">Take the check</a></div>
+        <div class="tile"><p class="kick">Free tool</p><h3>Privacy Health Check</h3><p>Ten questions, an instant Red, Amber or Green rating and your top priorities. No sign up.</p><a href="{QUIZ}" class="btn">Take the check</a></div>
         <div class="tile"><p class="kick">Next step</p><h3>Privacy Action Plan</h3><p>Turn your results into a personal 30/60/90 day plan, with a 15 minute follow up call. £75.</p><a href="{ACTION}" {EXT} class="btn">Get your plan</a></div>
         <div class="tile"><p class="kick">Common questions</p><h3>FAQs</h3><p>Answers on ICO registration, cookies, fines, pricing and working together.</p><a href="/faqs/" class="btn">Read the FAQs</a></div>
       </div>
@@ -270,7 +270,7 @@ def home():
         <h1>UK GDPR made <em>practical</em> for growing businesses</h1>
         <p class="lede">Gap assessments, DPIAs and ongoing privacy support for founders, SMEs, agencies and charities. Led by a practitioner with ten years of in-house privacy experience.</p>
         <div class="btn-row">
-          <a href="{QUIZ}" {EXT} class="btn btn-sage">Free Health Check</a>
+          <a href="{QUIZ}" class="btn btn-sage">Free Health Check</a>
           <a href="{BOOK}" {EXT} class="btn btn-light">Book a free call</a>
         </div>
       </div>
@@ -435,7 +435,7 @@ def services():
         <p>Not ready for a full engagement? Take the free Health Check, then get a personal review of your results and a prioritised plan built for your business.</p>
         <p class="sub">What's included</p>
         {ticks(["Manual review of your Health Check results and current setup", "Prioritised 30/60/90 day action plan", "15 minute follow up call", "Delivered within 5 working days"])}
-        <p style="margin-top:24px"><a href="{QUIZ}" {EXT} class="link">Haven't taken the Health Check yet? Start here</a></p>
+        <p style="margin-top:24px"><a href="{QUIZ}" class="link">Haven't taken the Health Check yet? Start here</a></p>
       </div>
       {aside("£75", [("Delivery", "Within 5 working days"), ("Format", "Written plan plus a 15 minute call")], "Credited in full against a Gap Assessment booked within 30 days.", "Get your Action Plan", ACTION)}
     </div></section>
@@ -506,7 +506,7 @@ def resources():
         <h2>The Privacy <em>Health Check</em></h2>
         <p>Not sure where your business stands? Answer ten questions about the most common compliance gaps and get an instant Red, Amber or Green rating, a full breakdown and a prioritised action plan.</p>
         {ticks(["Takes under 5 minutes", "No sign up required", "Instant results you can save or print"])}
-        <a href="{QUIZ}" {EXT} class="btn btn-solid" style="margin-top:24px">Take the free Health Check</a>
+        <a href="{QUIZ}" class="btn btn-solid" style="margin-top:24px">Take the free Health Check</a>
       </div>
       {figure("checklist-notebook", "Working through a checklist in a notebook")}
     </div></section>
@@ -527,7 +527,7 @@ FAQS = [
         ("Does UK GDPR apply to my small business?",
          "Almost certainly. UK GDPR applies to any business that handles personal data about people, whatever its size. That includes customer names and emails, mailing lists, staff records, enquiry forms and payment details. A few record keeping rules are lighter for smaller organisations, but the core duties apply to everyone."),
         ("Do I need to register with the ICO?",
-         "Most businesses that handle personal data must pay the ICO's annual data protection fee, unless they're exempt. For most micro businesses it starts at £52 a year (£47 by direct debit). The ICO has a short online self assessment to check whether you need to pay. It's also question 8 of our <a href=\"" + QUIZ + "\" target=\"_blank\" rel=\"noopener noreferrer\">free Health Check</a>."),
+         "Most businesses that handle personal data must pay the ICO's annual data protection fee, unless they're exempt. For most micro businesses it starts at £52 a year (£47 by direct debit). The ICO has a short online self assessment to check whether you need to pay. It's also question 8 of our <a href=\"" + QUIZ + "\">free Health Check</a>."),
         ("What happens if I get it wrong?",
          "The ICO can issue reprimands, enforcement notices and fines of up to £17.5 million or 4% of global annual turnover. For small businesses, the more common risks are customer complaints, subject access requests you can't answer in time, and losing contracts with larger clients who ask for evidence of compliance."),
         ("Do I need a cookie banner?",
@@ -537,7 +537,7 @@ FAQS = [
     ]),
     ("Working with us", [
         ("Which service is right for me?",
-         "If you're not sure where you stand, start with the <a href=\"" + QUIZ + "\" target=\"_blank\" rel=\"noopener noreferrer\">free Health Check</a>. If you want a personal plan you can work through yourself, choose the £75 Action Plan. For a full professional audit, choose the Gap Assessment. If you're launching something new or using AI, a DPIA. If you want ongoing support, the Fractional retainer. Or <a href=\"" + BOOK + "\" target=\"_blank\" rel=\"noopener noreferrer\">book a free call</a> and we'll recommend one."),
+         "If you're not sure where you stand, start with the <a href=\"" + QUIZ + "\">free Health Check</a>. If you want a personal plan you can work through yourself, choose the £75 Action Plan. For a full professional audit, choose the Gap Assessment. If you're launching something new or using AI, a DPIA. If you want ongoing support, the Fractional retainer. Or <a href=\"" + BOOK + "\" target=\"_blank\" rel=\"noopener noreferrer\">book a free call</a> and we'll recommend one."),
         ("Who will I be working with?",
          "An experienced privacy practitioner with ten years of in-house experience. The same person works on your engagement from start to finish."),
         ("Is this legal advice?",
@@ -545,7 +545,7 @@ FAQS = [
         ("What happens on the free 20-minute call?",
          "We talk through your business, the data you handle, your current setup and what you want to achieve. You'll leave with a clear recommended next step. No obligation and no sales pitch."),
         ("Is what I share kept confidential?",
-         "Yes. Everything you share is treated as confidential and only used to deliver your engagement, in line with our <a href=\"" + PRIVACY + "\" target=\"_blank\" rel=\"noopener noreferrer\">privacy policy</a>."),
+         "Yes. Everything you share is treated as confidential and only used to deliver your engagement, in line with our <a href=\"" + PRIVACY + "\">privacy policy</a>."),
     ]),
     ("Pricing and timelines", [
         ("How much does it cost?",
@@ -563,7 +563,7 @@ FAQS = [
         ("Is the Health Check really free?",
          "Yes. Ten questions, no sign up, and your results appear instantly on screen. You can save or print them."),
         ("What happens to my answers?",
-         "Your answers stay in your browser unless you choose to email yourself a copy of your results. If you do, we use your email address only to send your report, as set out in our <a href=\"" + PRIVACY + "\" target=\"_blank\" rel=\"noopener noreferrer\">privacy policy</a>."),
+         "Your answers stay in your browser unless you choose to email yourself a copy of your results. If you do, we use your email address only to send your report, as set out in our <a href=\"" + PRIVACY + "\">privacy policy</a>."),
     ]),
 ]
 
@@ -601,7 +601,7 @@ def cookies():
       <h2 style="font-size:1.6rem;margin-top:40px">No third party requests</h2>
       <p>Fonts and images on this site are hosted on our own server, so loading a page doesn't send your details to font or image providers.</p>
       <h2 style="font-size:1.6rem;margin-top:40px">Links to other services</h2>
-      <p>Some links take you to other services: our free Health Check, our booking calendar (Google Calendar), our shop (Beacons) and LinkedIn. Those services have their own privacy and cookie policies, which apply once you're on their sites.</p>
+      <p>Some links take you to other services: our booking calendar (Google Calendar), our shop (Beacons) and LinkedIn. If you choose to email yourself your Health Check results, the form is processed by Formspree. Those services have their own privacy and cookie policies, which apply once you're on their sites.</p>
       <h2 style="font-size:1.6rem;margin-top:40px">Changes and contact</h2>
       <p>If we ever add analytics or other non-essential cookies, we'll update this policy and ask for your consent first. Questions? Email <a href="mailto:{EMAIL}" class="link">{EMAIL}</a>.</p>
       <p style="margin-top:28px;font-size:13px;color:var(--muted)">Last updated: November 2026</p>
@@ -611,20 +611,39 @@ def cookies():
                 "The Privacy Blueprint does not use tracking or advertising cookies. Here's exactly what this site stores.", body)
 
 
+
+def privacy():
+    """Privacy policy content lives in tools/privacy_policy.json (copied from the Health Check)."""
+    d = json.loads((Path(__file__).resolve().parent / "privacy_policy.json").read_text(encoding="utf-8"))
+    secs = "".join(f'<section class="policy-sec"><h2>{s["title"]}</h2>{s["html"]}</section>' for s in d["secs"])
+    toc = "".join(f'<li><a href="#s{i}">{s["title"]}</a></li>' for i, s in enumerate(d["secs"], 1))
+    secs = "".join(f'<section class="policy-sec" id="s{i}"><h2>{s["title"]}</h2>{s["html"]}</section>' for i, s in enumerate(d["secs"], 1))
+    body = f'''
+    {page_hero("Privacy policy", "Privacy <em>policy</em>", d["eff"].replace("Effectivity", "Effective"))}
+    <section class="section"><div class="wrap policy">
+      <nav class="policy-toc" aria-label="Contents"><p class="label">Contents</p><ol>{toc}</ol></nav>
+      <div class="policy-body">{secs}</div>
+    </div></section>
+'''
+    return page("/privacy-policy/", "Privacy Policy | The Privacy Blueprint",
+                "How The Privacy Blueprint collects, uses and protects personal data under UK GDPR.", body)
+
+
 FAVICON = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect x="1" y="1" width="30" height="30" fill="#1C2B4A"/>'
            '<rect x="4.5" y="4.5" width="23" height="23" fill="none" stroke="#9DBFB9" stroke-width=".8"/>'
            '<circle cx="16" cy="13.5" r="3.3" fill="#9DBFB9"/><path d="M14.4 16h3.2l1 7h-5.2z" fill="#9DBFB9"/></svg>')
 
 if __name__ == "__main__":
     pages = {"index.html": home(), "about/index.html": about(), "services/index.html": services(),
-             "resources/index.html": resources(), "faqs/index.html": faqs(), "cookie-policy/index.html": cookies()}
+             "resources/index.html": resources(), "faqs/index.html": faqs(), "cookie-policy/index.html": cookies(),
+             "privacy-policy/index.html": privacy()}
     for path, html in pages.items():
         p = OUT / path
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(html, encoding="utf-8")
         print("wrote", p.relative_to(OUT.parent))
     # favicon.svg and logo files are made by tools/make_logo.py
-    urls = ["/", "/services/", "/about/", "/resources/", "/faqs/", "/cookie-policy/"]
+    urls = ["/", "/services/", "/about/", "/resources/", "/faqs/", "/health-check/", "/privacy-policy/", "/cookie-policy/"]
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{SITE}{u}</loc></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")

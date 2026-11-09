@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:site": "HEALTH_CHECK_BASE=/health-check/ vite build --outDir netlify-site/health-check --emptyOutDir"
   },
   "dependencies": {
     "react": "^18.2.0",

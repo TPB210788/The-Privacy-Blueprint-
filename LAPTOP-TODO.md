@@ -36,7 +36,10 @@ The site has a new navy, sage and sand design (inspired by Clarionet, with its o
 - [ ] Open the site on your phone and scroll every page
 - [ ] Optional: rename the site in Netlify (Site configuration > Change site name) to something like `theprivacyblueprint`
 
-## 3. Publish the Health Check quiz (5 min)
+## 3. Health Check (done)
+The Health Check now lives inside your main site at theprivacyblueprint.co.uk/health-check/ and the privacy policy at /privacy-policy/. Both go live with the Netlify zip. The old Vercel address still works.
+
+## 3b. Old notes
 - [ ] Merge the branch into `main` on GitHub (or ask Claude to open the pull request)
 - [ ] Vercel updates automatically. Take the quiz once and check the results page
 

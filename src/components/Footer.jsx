@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-
 // Matches the footer on theprivacyblueprint.co.uk
 const SITE = 'https://theprivacyblueprint.co.uk'
 const BOOK = 'https://calendar.app.google/XFwWHg2UYvFwZjiEA'
@@ -14,7 +12,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr_1fr] gap-8 md:gap-12 py-14">
           <div>
             <a href={`${SITE}/`} className="inline-block mb-4">
-              <img src="/logo-full.svg" alt="The Privacy Blueprint" width="240" height="96" className="w-[240px] h-auto" />
+              <img src={`${import.meta.env.BASE_URL}logo-full.svg`} alt="The Privacy Blueprint" width="240" height="96" className="w-[240px] h-auto" />
             </a>
             <p className="font-raleway text-sm text-ink/75 leading-relaxed">
               Independent privacy and UK GDPR consultancy for founders, SMEs, agencies and charities.
@@ -41,8 +39,8 @@ export default function Footer() {
         </div>
         <div className="border-t border-line py-6 flex flex-wrap gap-x-7 gap-y-2 font-raleway text-xs text-ink/60 tracking-wide">
           <span>© {new Date().getFullYear()} The Privacy Blueprint</span>
-          <Link to="/privacy-policy" className="hover:text-navy">Privacy Policy</Link>
-          <Link to="/cookie-policy" className="hover:text-navy">Cookie Policy</Link>
+          <a href={`${SITE}/privacy-policy/`} className="hover:text-navy">Privacy Policy</a>
+          <a href={`${SITE}/cookie-policy/`} className="hover:text-navy">Cookie Policy</a>
         </div>
       </div>
     </footer>

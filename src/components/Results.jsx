@@ -153,9 +153,7 @@ function EmailCapture({ answers }) {
           />
           <span className="font-raleway text-xs text-ink/60 leading-relaxed">
             I agree to receive my results report by email. See our{' '}
-            <Link to="/privacy-policy" className="underline hover:text-ink/80 transition-colors">
-              privacy policy
-            </Link>.
+            <a href="https://theprivacyblueprint.co.uk/privacy-policy/" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink/80 transition-colors">privacy policy</a>.
           </span>
         </label>
 

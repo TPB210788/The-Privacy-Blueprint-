@@ -1,0 +1,2 @@
+# Health Check is a single page app: send its routes to its index page
+/health-check/*  /health-check/index.html  200

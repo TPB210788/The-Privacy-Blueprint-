@@ -281,3 +281,24 @@ details.faq .a a { color:var(--sage-deep); font-weight:600; }
 @media (prefers-reduced-motion:reduce){ html { scroll-behavior:auto; } }
 .head-note { margin:0; padding-top:44px; }
 @media (max-width:900px){ .head-note { padding-top:0; } }
+
+/* Privacy policy */
+.policy { display:grid; grid-template-columns:240px 1fr; gap:64px; align-items:start; }
+.policy-toc { position:sticky; top:100px; font-size:13.5px; }
+.policy-toc ol { counter-reset:t; }
+.policy-toc li { counter-increment:t; padding:5px 0; }
+.policy-toc li::before { content:counter(t, decimal-leading-zero) "  "; font-family:var(--serif); font-style:italic; color:var(--brass); }
+.policy-toc a { color:var(--body); text-decoration:none; }
+.policy-toc a:hover { color:var(--navy); text-decoration:underline; }
+.policy-body { max-width:760px; }
+.policy-sec { padding:0 0 36px; margin-bottom:36px; border-bottom:1px solid var(--line); scroll-margin-top:100px; }
+.policy-sec h2 { font-size:1.6rem; margin-bottom:16px; }
+.policy-sec p { font-size:15.5px; }
+.policy-sec ul { list-style:disc; padding-left:22px; margin:0 0 16px; }
+.policy-sec li { padding:3px 0; font-size:15.5px; }
+.policy-sec strong { color:var(--navy); font-weight:600; }
+.policy-sec a { color:var(--sage-deep); font-weight:500; word-break:break-word; }
+.policy-sec [data-k="processor"] { background:var(--white); border-left:3px solid var(--sage); padding:16px 20px; margin:0 0 12px; }
+.policy-sec [data-k="processor"] p { margin:0 0 4px; font-size:14.5px; }
+.policy-sec div:not([data-k]) > p { margin-bottom:12px; }
+@media (max-width:900px){ .policy { grid-template-columns:1fr; gap:32px; } .policy-toc { position:static; } }

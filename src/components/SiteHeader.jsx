@@ -14,7 +14,7 @@ export default function SiteHeader() {
     <header className="sticky top-0 z-50 bg-white border-b border-line no-print">
       <div className="max-w-[1160px] mx-auto h-[76px] px-5 sm:px-8 flex items-center justify-between gap-4">
         <a href={`${SITE}/`} className="flex items-center gap-3 font-playfair font-semibold text-[19px] text-navy no-underline whitespace-nowrap">
-          <img src="/logo.svg" alt="" width="46" height="46" className="w-[46px] h-[46px] object-contain -mr-1" />
+          <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="" width="46" height="46" className="w-[46px] h-[46px] object-contain -mr-1" />
           The Privacy Blueprint
         </a>
         <nav className="flex items-center gap-1" aria-label="Main">
